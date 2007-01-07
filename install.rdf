@@ -5,7 +5,7 @@
 
   <Description about="urn:mozilla:install-manifest">
   
-  <em:id>{1eba6e43-b925-6509-d417-2e1aaf83ec87}</em:id>
+  <em:id>elemhidehelper@adblockplus.org</em:id>
   <em:version>{{VERSION}}</em:version>
   
   <!-- Target Application this extension can install into, 
