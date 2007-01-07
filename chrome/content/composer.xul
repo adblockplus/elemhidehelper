@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Adblock Plus Element Hiding Helper.
+   -
+   - The Initial Developer of the Original Code is
+   - Wladimir Palant.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE overlay SYSTEM "chrome://elemhidehelper/locale/composer.dtd">
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://elemhidehelper/skin/composer.css" type="text/css"?>
+
+<dialog id="ehh-composer"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    title="&dialog.title;"
+    onload="init()"
+    ondialogaccept="addExpression()"
+    buttons="accept,cancel"
+    width="600px"
+    height="400px"
+    persist="screenX screenY width height sizemode"
+    buttonlabelaccept="&accept.label;"
+    windowtype="ehh:composer">
+  <script type="application/x-javascript" src="composer.js"/>  
+  
+  <vbox id="expressionBox">
+    <label control="expression" value="&expression.label;"/>
+    <textbox id="expression" readonly="true"/>
+  </vbox>
+
+  <hbox id="choices" flex="1">
+    <groupbox id="domain" flex="1">
+      <caption label="&domain.label;"/>
+      <scrollbox flex="1" orient="vertical">
+        <radiogroup id="domainGroup">
+          <radio id="domain-template" label="&domain.none.label;" value="" oncommand="changeDomain(this)"/>
+        </radiogroup>
+      </scrollbox>
+    </groupbox>
+    <groupbox id="attributes" flex="1">
+      <caption label="&attributes.label;"/>
+      <scrollbox flex="1" orient="vertical">
+        <checkbox id="attribute-template" label="&attributes.tagname.label;" hidden="true" oncommand="toggleAttr(this)"/>
+      </scrollbox>
+    </groupbox>
+  </hbox>
+</dialog>
