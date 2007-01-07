@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://elemhidehelper/skin/overlay.css" type="text/css"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Adblock Plus Element Hiding Helper.
+   -
+   - The Initial Developer of the Original Code is
+   - Wladimir Palant.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!DOCTYPE overlay SYSTEM "chrome://elemhidehelper/locale/overlay.dtd">
+
+<overlay id="ehh-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="overlay.js"/>  
+  <script type="application/x-javascript" src="aardvark.js"/>
+  
+  <popupset id="abp-popupset">
+    <tooltip id="ehh-helpbox" noautohide="true" orient="vertical">
+      <description id="ehh-helpbox-title" value="&helpbox.title;"/>
+
+      <grid flex="1">
+        <columns>
+          <column/>
+          <column flex="1"/>
+        </columns>
+        <rows id="ehh-helpbox-rows"/>
+      </grid>
+    </tooltip>
+    <tooltip id="ehh-commandlabel" noautohide="true"  orient="horizontal">
+      <description id="ehh-commandlabel-key"/>
+      <description id="ehh-commandlabel-label"/>
+    </tooltip>
+  </popupset>
+
+  <popup id="abp-status-popup">
+    <menuitem id="abp-status-ehh-selectelement" insertbefore="abp-status-options" label="&selectelement.label;" accesskey="&selectelement.accesskey;" key="abp-key-ehh-selectelement" oncommand="ehhSelectElement()"/>
+    <menuitem id="abp-status-ehh-stopselection" insertbefore="abp-status-options" label="&stopselection.label;" accesskey="&selectelement.accesskey;" key="abp-key-ehh-selectelement" oncommand="ehhSelectElement()"/>
+  </popup>
+
+  <commandset id="abp-commandset">
+    <command id="abp-command-ehh-selectelement" oncommand="ehhSelectElement()"/>
+  </commandset>
+</overlay>
