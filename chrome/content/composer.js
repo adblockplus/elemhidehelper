@@ -235,7 +235,6 @@ function fillDomains(domainData) {
 function fillNodes(nodeData) {
   var curContainer = document.createElement("treechildren");
   var curChildren = null;
-  var selectedItem = null;
   while (nodeData) {
     var id = "";
     var className = "";
@@ -262,8 +261,7 @@ function fillNodes(nodeData) {
 
     item.appendChild(row);
     item.nodeData = nodeData;
-    if (!selectedItem)
-      selectedItem = item;
+    nodeData.treeItem = item;
 
     if (curChildren) {
       item.appendChild(curChildren);
@@ -292,25 +290,23 @@ function fillNodes(nodeData) {
   var body = document.getElementById("nodes-tree-children");
   while (curContainer.firstChild)
     body.appendChild(curContainer.firstChild);
-
-  // Select current item
-  if (selectedItem) {
-    var selectedIndex = tree.view.getIndexOfItem(selectedItem);
-    tree.treeBoxObject.ensureRowIsVisible(selectedIndex);
-    tree.view.selection.select(selectedIndex);
-  }
 }
 
 function fillAttributes(nodeData) {
   var template = document.getElementById("attribute-template");
+  var customCSS = document.getElementById("attribute-custom");
+  var customCSSCheck = document.getElementById("attribute-custom-check");
+  var customCSSField = document.getElementById("attribute-custom-field");
   selectedNode = nodeData;
 
-  // Remove everything but our template
-  var child = template.parentNode.firstChild;
+  // Remove everything between our template and the custom CSS field
+  var child = template.nextSibling;
   while (child) {
     var nextChild = child.nextSibling;
-    if (child != template)
-      template.parentNode.removeChild(child);
+    if (child == customCSS)
+      break;
+
+    child.parentNode.removeChild(child);
     child = nextChild;
   }
 
@@ -319,7 +315,7 @@ function fillAttributes(nodeData) {
   node.hidden = false;
   node.setAttribute("label", node.getAttribute("label") + " " + nodeData.tagName.value);
   node.setAttribute("checked", nodeData.tagName.checked);
-  template.parentNode.appendChild(node);
+  template.parentNode.insertBefore(node, customCSS);
 
   // Add attribute checkboxes
   for (var i = 0; i < nodeData.attributes.length; i++) {
@@ -330,8 +326,12 @@ function fillAttributes(nodeData) {
     node.setAttribute("label", attr.name + ": " + attr.value);
     node.setAttribute("checked", attr.checked);
     node.setAttribute("value", attr.name);
-    template.parentNode.appendChild(node);
+    template.parentNode.insertBefore(node, customCSS);
   }
+
+  // Initialize custom CSS field
+  customCSSCheck.setAttribute("checked", nodeData.customCSS.checked);
+  customCSSField.value = nodeData.customCSS.selected;
 }
 
 function changeDomain(node) {
@@ -355,6 +355,23 @@ function toggleAttr(node) {
   updateExpression();
 }
 
+function toggleCustomCSS(node) {
+  if (selectedNode == null)
+    return;
+
+  selectedNode.customCSS.checked = node.checked;
+  updateExpression();
+}
+
+function setCustomCSS(customCSS) {
+  if (selectedNode == null)
+    return;
+
+  selectedNode.customCSS.selected = customCSS;
+  if (selectedNode.customCSS.checked)
+    updateExpression();
+}
+
 function setAdvancedMode(mode) {
   advancedMode = mode;
 
@@ -365,6 +382,12 @@ function setAdvancedMode(mode) {
   button.setAttribute("label", dialog.getAttribute(advancedMode ? "buttonlabeldisclosure_off" : "buttonlabeldisclosure_on"));
 
   fillAttributes(nodeData);
+
+  if (advancedMode && selectedNode) {
+    var tree = document.getElementById("nodes-tree");
+    var index = tree.view.getIndexOfItem(selectedNode.treeItem);
+    tree.view.selection.select(index);
+  }
 }
 
 function updateNodeSelection() {

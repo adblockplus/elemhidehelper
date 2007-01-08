@@ -76,6 +76,10 @@
       <splitter id="nodes-tree-splitter"/>
       <scrollbox flex="1" orient="vertical">
         <checkbox id="attribute-template" label="&attributes.tagname.label;" hidden="true" oncommand="toggleAttr(this)"/>
+        <hbox id="attribute-custom">
+          <checkbox id="attribute-custom-check" label="&attributes.custom.label;" oncommand="toggleCustomCSS(this)"/>
+          <textbox id="attribute-custom-field" flex="1" oninput="setCustomCSS(this.value)"/>
+        </hbox>
       </scrollbox>
     </groupbox>
   </hbox>

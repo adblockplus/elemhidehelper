@@ -30,7 +30,8 @@ scrollbox
 }
 
 dialog:not([advancedMode=true]) #nodes-tree,
-dialog:not([advancedMode=true]) #nodes-tree-splitter
+dialog:not([advancedMode=true]) #nodes-tree-splitter,
+dialog:not([advancedMode=true]) #attribute-custom
 {
   display: none;
 }
