@@ -348,10 +348,10 @@ ehhAardvark.commands = [
 //------------------------------------------------------------
 ehhAardvark.wider = function (elem)
 {
-  if (elem && elem.parentNode)
+  if (elem)
   {
     var newElem = elem.parentNode;
-    if (!newElem)
+    if (!newElem || newElem.nodeType != newElem.ELEMENT_NODE)
       return false;
     
     if (this.widerStack && this.widerStack.length>0 && 
