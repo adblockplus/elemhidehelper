@@ -33,18 +33,29 @@ function ehhInit() {
   getBrowser().addEventListener("select", ehhStop, false);
 
   // Make sure we configure the shortcut key even if the default pref isn't there
+  var prefService = Components.classes["@mozilla.org/preferences-service;1"]
+                              .getService(Components.interfaces.nsIPrefService);
+  var branch = prefService.getBranch("extensions.adblockplus.");
   if (window.abpConfigureKey) {
-    var prefService = Components.classes["@mozilla.org/preferences-service;1"]
-                                .getService(Components.interfaces.nsIPrefService);
     var defaultBranch = prefService.getDefaultBranch("extensions.adblockplus.");
-    if (!defaultBranch.prefHasUserValue("ehh-selectelement_key")) {
+    try {
+      // Seems to be the only way to test whether the pref really exists in the default branch
+      defaultBranch.getCharPref("ehh-selectelement_key");
+    }
+    catch(e) {
       var key = "Accel Shift H";
       try {
-        key = prefService.getBranch("extensions.adblockplus.")
-                        .getCharPref("ehh-selectelement_key");
-      } catch(e) {}
+        key = branch.getCharPref("ehh-selectelement_key");
+      } catch(e2) {}
       abpConfigureKey("ehh-selectelement", key);
     }
+  }
+
+  // Make sure chrome protection works in SeaMonkey
+  if (branch.getPrefType("protectchrome.ehh") != branch.PREF_STRING) {
+    try {
+      key = branch.setCharPref("protectchrome.ehh", "elemhidehelper");
+    } catch(e) {}
   }
 }
 
