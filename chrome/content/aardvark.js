@@ -51,11 +51,11 @@ ehhAardvark.start = function(wnd) {
 ehhAardvark.doCommand = function(command, event) {
   if (this[command](this.selectedElem)) {
     this.showCommandLabel(this.commands[command + "_key"], this.commands[command + "_label"]);
-    if (event) {
+    if (event)
       event.stopPropagation();
-      event.preventDefault();
-    }
   }
+  if (event)
+    event.preventDefault();
 }
 
 ehhAardvark.showCommandLabel = function(key, label) {
