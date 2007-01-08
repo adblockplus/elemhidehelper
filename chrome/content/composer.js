@@ -91,8 +91,8 @@ function init() {
   domainData = {value: domain, selected: selectedDomain};
 
   fillNodes(nodeData);
-  updateExpression();
   setAdvancedMode(document.documentElement.getAttribute("advancedMode") == "true");
+  updateExpression();
 
   setTimeout(function() {
     fillDomains(domainData);
@@ -135,6 +135,15 @@ function updateExpression() {
 
     curNode.expressionSimple = expressionSimple;
     curNode.expressionRaw = expressionRaw;
+
+    var cells = curNode.treeCells;
+    var row = curNode.treeRow;
+    var properties = (expressionRaw != "*" || curNode == nodeData ? "anchor" : "");
+    if (properties != "" && curNode != selectedNode)
+      properties += " selected-false";
+    for (var i = 0; i < cells.length; i++)
+      cells[i].setAttribute("properties", properties);
+    row.setAttribute("properties", properties);
 
     if (expressionSimple == null || (expressionRaw != "*" && curNode != nodeData))
       simpleMode = false;
@@ -244,23 +253,29 @@ function fillNodes(nodeData) {
     if (nodeData.attributes.length > i && nodeData.attributes[i].name == "class")
       className = nodeData.attributes[i++].value;
 
+    nodeData.treeCells = [];
+
     var item = document.createElement("treeitem");
     var row = document.createElement("treerow");
 
     var cell = document.createElement("treecell");
     cell.setAttribute("label", nodeData.tagName.value);
     row.appendChild(cell);
+    nodeData.treeCells.push(cell);
 
     var cell = document.createElement("treecell");
     cell.setAttribute("label", id);
     row.appendChild(cell);
+    nodeData.treeCells.push(cell);
 
     var cell = document.createElement("treecell");
     cell.setAttribute("label", className);
     row.appendChild(cell);
+    nodeData.treeCells.push(cell);
 
     item.appendChild(row);
     item.nodeData = nodeData;
+    nodeData.treeRow = row;
     nodeData.treeItem = item;
 
     if (curChildren) {
@@ -403,7 +418,28 @@ function updateNodeSelection() {
   if (!item || !item.nodeData)
     return;
 
+  if (selectedNode != null) {
+    // HACKHACK: Adjust selected-false property
+    var cells = selectedNode.treeCells;
+    for (var i = 0; i < cells.length; i++)
+      if (cells[i].getAttribute("properties"))
+        cells[i].setAttribute("properties", cells[i].getAttribute("properties") + " selected-false");
+
+    var row = selectedNode.treeRow;
+    if (row.getAttribute("properties"))
+      row.setAttribute("properties", row.getAttribute("properties") + " selected-false");
+  }
+
   fillAttributes(item.nodeData);
+
+  cells = selectedNode.treeCells;
+  for (i = 0; i < cells.length; i++)
+    if (cells[i].getAttribute("properties"))
+      cells[i].setAttribute("properties", cells[i].getAttribute("properties").replace(/ selected-false$/, ''));
+
+  row = selectedNode.treeRow;
+  if (row.getAttribute("properties"))
+    row.setAttribute("properties", row.getAttribute("properties").replace(/ selected-false$/, ''));
 }
 
 function addExpression() {
