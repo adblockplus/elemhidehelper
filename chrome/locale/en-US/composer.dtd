@@ -27,5 +27,8 @@
 <!ENTITY expression.label         "Filter rule">
 <!ENTITY domain.label             "Bind to domain">
 <!ENTITY domain.none.label        "Any domain (not recommended)">
+<!ENTITY nodes-tree.node.label    "Node">
+<!ENTITY nodes-tree.id.label      "id">
+<!ENTITY nodes-tree.class.label   "class">
 <!ENTITY attributes.label         "Require attributes">
 <!ENTITY attributes.tagname.label "Tag name:">
