@@ -36,3 +36,9 @@ dialog:not([advancedMode=true]) #attribute-custom
   display: none;
 }
 
+treechildren::-moz-tree-cell-text(anchor) {
+  font-weight: bold;
+}
+treechildren::-moz-tree-row(anchor, selected-false) {
+  background-color: #FFC0C0;
+}
