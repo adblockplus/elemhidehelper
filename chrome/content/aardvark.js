@@ -260,7 +260,8 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
     this.labelElem.style.MozBorderRadiusTopright = "";
     delete (this.labelDrawnHigh); 
   }
-  this.moveElem (this.labelElem, pos.x+2, y);
+  this.labelElem.style.left = (pos.x + 2) + "px";
+  this.labelElem.style.top = y + "px";
   this.labelElem.style.visibility = "visible";
 }
 
@@ -307,15 +308,6 @@ ehhAardvark.getWindowDimensions = function ()
     out.height = doc.documentElement.clientHeight;
   }
   return out;
-}
-
-// move a div (or whatever) to an x y location
-ehhAardvark.moveElem = function (elem, x, y)
-{
-  elem = elem.style;
-  
-  elem.left = x + "px";
-  elem.top = y + "px";     
 }
 
 ehhAardvark.setElementStyleDefault = function (elem, bgColor)
