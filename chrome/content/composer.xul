@@ -37,7 +37,8 @@
     buttons="accept,cancel"
     width="600px"
     height="400px"
-    persist="screenX screenY width height sizemode"
+    persist="screenX screenY width height sizemode advancedMode"
+    advancedMode="false"
     buttonlabelaccept="&accept.label;"
     windowtype="ehh:composer">
   <script type="application/x-javascript" src="composer.js"/>  
@@ -48,7 +49,7 @@
   </vbox>
 
   <hbox id="choices" flex="1">
-    <groupbox id="domain" flex="1">
+    <groupbox id="domain" orient="vertical">
       <caption label="&domain.label;"/>
       <scrollbox flex="1" orient="vertical">
         <radiogroup id="domainGroup">
@@ -56,8 +57,19 @@
         </radiogroup>
       </scrollbox>
     </groupbox>
-    <groupbox id="attributes" flex="1">
+    <groupbox id="attributes" flex="2" orient="horizontal">
       <caption label="&attributes.label;"/>
+      <tree id="nodes-tree" width="300" seltype="single" enableColumnDrag="true" onselect="updateNodeSelection()" persist="width">
+        <treecols>
+          <treecol id="nodes-tree-node" label="&nodes-tree.node.label;" primary="true" flex="2" persist="width ordinal hidden"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="nodes-tree-id" label="&nodes-tree.id.label;" flex="1" persist="width ordinal hidden"/>
+          <splitter class="tree-splitter"/>
+          <treecol id="nodes-tree-class" label="&nodes-tree.class.label;" flex="1" persist="width ordinal hidden"/>
+        </treecols>
+        <treechildren/>
+      </tree>
+      <splitter/>
       <scrollbox flex="1" orient="vertical">
         <checkbox id="attribute-template" label="&attributes.tagname.label;" hidden="true" oncommand="toggleAttr(this)"/>
       </scrollbox>

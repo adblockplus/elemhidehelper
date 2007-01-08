@@ -33,9 +33,9 @@ function NodeData(node, parentNode) {
     parentNode = (node.parentNode && node.parentNode.nodeType == node.ELEMENT_NODE ? new NodeData(node.parentNode) : null);
   this.parentNode = parentNode;
 
-  var prevSibling = node.prevSibling;
+  var prevSibling = node.previousSibling;
   while (prevSibling && prevSibling.nodeType != node.ELEMENT_NODE)
-    prevSibling = prevSibling.prevSibling;
+    prevSibling = prevSibling.previousSibling;
   this.prevSibling = (prevSibling ? new NodeData(prevSibling, this.parentNode) : null);
 
   this.attributes = [];
@@ -88,6 +88,8 @@ function init() {
   var domain = wnd.location.host;
   var selectedDomain = domain.replace(/^www\./, "");
   domainData = {value: domain, selected: selectedDomain};
+
+  fillNodes(nodeData);
 
   updateExpression();
 
@@ -147,8 +149,60 @@ function updateExpression() {
   if (simpleMode)
     expression = domainData.selected + "#" + nodeData.expressionSimple;
   else {
-    expression = domainData.selected + "##" + nodeData.expressionRaw;
-    // TBD
+    expression = nodeData.expressionRaw;
+
+    var isParent = false;
+    var isRemoteParent = false;
+    var siblingCount = 0;
+    var firstRun = true;
+
+    var curData = nodeData;
+    while (curData) {
+      if (!firstRun && curData.expressionRaw != "*") {
+        var parentRelation = "";
+        if (isRemoteParent)
+          parentRelation = " ";
+        else if (isParent)
+          parentRelation = " > ";
+
+        var siblingRelation = "";
+        for (var i = 0; i < siblingCount; i++)
+          siblingRelation += "* + ";
+        siblingRelation = siblingRelation.replace(/^\*/, '');
+
+        var relation;
+        if (parentRelation != "" && siblingRelation != "")
+          relation = siblingRelation + "*" + parentRelation;
+        else if (parentRelation != "")
+          relation = parentRelation;
+        else
+          relation = siblingRelation;
+
+        expression = curData.expressionRaw + relation + expression;
+
+        isParent = false;
+        isRemoteParent = false;
+        siblingCount = 0;
+      }
+      firstRun = false;
+
+      if (curData.prevSibling) {
+        siblingCount++;
+        curData = curData.prevSibling;
+      }
+      else if (curData.parentNode) {
+        siblingCount = 0;
+        if (isParent)
+          isRemoteParent = true;
+        else
+          isParent = true;
+        curData = curData.parentNode;
+      }
+      else
+        curData = null;
+    }
+
+    expression = domainData.selected + "##" + expression;
   }
 
   document.getElementById("expression").value = expression;
@@ -175,6 +229,75 @@ function fillDomains(domainData) {
       node.setAttribute("selected", "true");
 
     template.parentNode.appendChild(node);
+  }
+}
+
+function fillNodes(nodeData) {
+  var curContainer = document.createElement("treechildren");
+  var curChildren = null;
+  var selectedItem = null;
+  while (nodeData) {
+    var id = "";
+    var className = "";
+    var i = 0;
+    if (nodeData.attributes.length > i && nodeData.attributes[i].name == "id")
+      id = nodeData.attributes[i++].value;
+    if (nodeData.attributes.length > i && nodeData.attributes[i].name == "class")
+      className = nodeData.attributes[i++].value;
+
+    var item = document.createElement("treeitem");
+    var row = document.createElement("treerow");
+
+    var cell = document.createElement("treecell");
+    cell.setAttribute("label", nodeData.tagName.value);
+    row.appendChild(cell);
+
+    var cell = document.createElement("treecell");
+    cell.setAttribute("label", id);
+    row.appendChild(cell);
+
+    var cell = document.createElement("treecell");
+    cell.setAttribute("label", className);
+    row.appendChild(cell);
+
+    item.appendChild(row);
+    item.nodeData = nodeData;
+    if (!selectedItem)
+      selectedItem = item;
+
+    if (curChildren) {
+      item.appendChild(curChildren);
+      item.setAttribute("container", "true");
+      item.setAttribute("open", "true");
+    }
+    curChildren = null;
+
+    if (curContainer.firstChild)
+      curContainer.insertBefore(item, curContainer.firstChild);
+    else
+      curContainer.appendChild(item);
+
+    if (nodeData.prevSibling)
+      nodeData = nodeData.prevSibling;
+    else if (nodeData.parentNode) {
+      curChildren = curContainer;
+      curContainer = document.createElement("treechildren");
+      nodeData = nodeData.parentNode;
+    }
+    else
+      nodeData = null;
+  }
+
+  var tree = document.getElementById("nodes-tree");
+  var body = tree.treeBoxObject.treeBody;
+  while (curContainer.firstChild)
+    body.appendChild(curContainer.firstChild);
+
+  // Select current item
+  if (selectedItem) {
+    var selectedIndex = tree.view.getIndexOfItem(selectedItem);
+    tree.treeBoxObject.ensureRowIsVisible(selectedIndex);
+    tree.view.selection.select(selectedIndex);
   }
 }
 
@@ -230,6 +353,22 @@ function toggleAttr(node) {
     selectedNode.tagName.checked = node.checked;
 
   updateExpression();
+}
+
+function updateNodeSelection() {
+  var tree = document.getElementById("nodes-tree");
+  var selection = tree.view.selection;
+  if (selection.count < 1)
+    return;
+
+  var min = {};
+  selection.getRangeAt(0, min, {});
+
+  var item = tree.view.getItemAtIndex(min.value);
+  if (!item || !item.nodeData)
+    return;
+
+  fillAttributes(item.nodeData);
 }
 
 function addExpression() {
