@@ -24,6 +24,14 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-scrollbox {
+scrollbox
+{
   overflow: auto;
 }
+
+dialog:not([advancedMode=true]) #nodes-tree,
+dialog:not([advancedMode=true]) #nodes-tree-splitter
+{
+  display: none;
+}
+

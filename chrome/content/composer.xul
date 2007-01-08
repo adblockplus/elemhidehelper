@@ -34,12 +34,16 @@
     title="&dialog.title;"
     onload="init()"
     ondialogaccept="addExpression()"
-    buttons="accept,cancel"
+    ondialogdisclosure="setAdvancedMode(!advancedMode)"
+    buttons="accept,cancel,disclosure"
     width="600px"
     height="400px"
     persist="screenX screenY width height sizemode advancedMode"
     advancedMode="false"
     buttonlabelaccept="&accept.label;"
+    buttonlabeldisclosure="&advanced.label;"
+    buttonlabeldisclosure_on="&advanced.label;"
+    buttonlabeldisclosure_off="&basic.label;"
     windowtype="ehh:composer">
   <script type="application/x-javascript" src="composer.js"/>  
   
@@ -67,9 +71,9 @@
           <splitter class="tree-splitter"/>
           <treecol id="nodes-tree-class" label="&nodes-tree.class.label;" flex="1" persist="width ordinal hidden"/>
         </treecols>
-        <treechildren/>
+        <treechildren id="nodes-tree-children"/>
       </tree>
-      <splitter/>
+      <splitter id="nodes-tree-splitter"/>
       <scrollbox flex="1" orient="vertical">
         <checkbox id="attribute-template" label="&attributes.tagname.label;" hidden="true" oncommand="toggleAttr(this)"/>
       </scrollbox>

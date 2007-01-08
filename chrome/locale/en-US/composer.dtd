@@ -24,6 +24,8 @@
 
 <!ENTITY dialog.title             "Compose element hiding rule">
 <!ENTITY accept.label             "Add filter rule">
+<!ENTITY advanced.label           "Advanced view">
+<!ENTITY basic.label              "Basic view">
 <!ENTITY expression.label         "Filter rule">
 <!ENTITY domain.label             "Bind to domain">
 <!ENTITY domain.none.label        "Any domain (not recommended)">

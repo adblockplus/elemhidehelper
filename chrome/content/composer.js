@@ -25,6 +25,7 @@
 var domainData;
 var nodeData;
 var selectedNode = null;
+var advancedMode = false;
 
 function NodeData(node, parentNode) {
   this.tagName = {value: node.tagName, checked: false};
@@ -90,11 +91,10 @@ function init() {
   domainData = {value: domain, selected: selectedDomain};
 
   fillNodes(nodeData);
-
   updateExpression();
+  setAdvancedMode(document.documentElement.getAttribute("advancedMode") == "true");
 
   setTimeout(function() {
-    fillAttributes(nodeData);
     fillDomains(domainData);
     document.getElementById("domainGroup").selectedItem.focus();
   }, 0);
@@ -289,7 +289,7 @@ function fillNodes(nodeData) {
   }
 
   var tree = document.getElementById("nodes-tree");
-  var body = tree.treeBoxObject.treeBody;
+  var body = document.getElementById("nodes-tree-children");
   while (curContainer.firstChild)
     body.appendChild(curContainer.firstChild);
 
@@ -353,6 +353,18 @@ function toggleAttr(node) {
     selectedNode.tagName.checked = node.checked;
 
   updateExpression();
+}
+
+function setAdvancedMode(mode) {
+  advancedMode = mode;
+
+  var dialog = document.documentElement;
+  dialog.setAttribute("advancedMode", advancedMode);
+
+  var button = dialog.getButton("disclosure");
+  button.setAttribute("label", dialog.getAttribute(advancedMode ? "buttonlabeldisclosure_off" : "buttonlabeldisclosure_on"));
+
+  fillAttributes(nodeData);
 }
 
 function updateNodeSelection() {
