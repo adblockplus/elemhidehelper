@@ -25,10 +25,27 @@
 window.addEventListener("load", ehhInit, false);
 
 function ehhInit() {
-  document.getElementById("abp-status-popup").addEventListener("popupshowing", ehhFillPopup, false);
-  document.getElementById("abp-toolbar-popup").addEventListener("popupshowing", ehhFillPopup, false);
+  if (document.getElementById("abp-status-popup"))
+    document.getElementById("abp-status-popup").addEventListener("popupshowing", ehhFillPopup, false);
+  if (document.getElementById("abp-toolbar-popup"))
+    document.getElementById("abp-toolbar-popup").addEventListener("popupshowing", ehhFillPopup, false);
   window.addEventListener("blur", ehhHideTooltips, true);
   getBrowser().addEventListener("select", ehhStop, false);
+
+  // Make sure we configure the shortcut key even if the default pref isn't there
+  if (window.abpConfigureKey) {
+    var prefService = Components.classes["@mozilla.org/preferences-service;1"]
+                                .getService(Components.interfaces.nsIPrefService);
+    var defaultBranch = prefService.getDefaultBranch("extensions.adblockplus.");
+    if (!defaultBranch.prefHasUserValue("ehh-selectelement_key")) {
+      var key = "Accel Shift H";
+      try {
+        key = prefService.getBranch("extensions.adblockplus.")
+                        .getCharPref("ehh-selectelement_key");
+      } catch(e) {}
+      abpConfigureKey("ehh-selectelement", key);
+    }
+  }
 }
 
 function ehhHideTooltips() {
@@ -36,18 +53,31 @@ function ehhHideTooltips() {
   document.getElementById("ehh-commandlabel").hidePopup();
 }
 
-function ehhFillPopup() {
+function ehhDisableElement(id, disable) {
+  var element = document.getElementById();
+  if (element)
+    element.setAttribute("disabled", disable);
+}
+
+function ehhHideElement(id, hide) {
+  var element = document.getElementById();
+  if (element)
+    element.hidden = hide;
+}
+
+function ehhFillPopup(event) {
+  var popup = event.target.getAttribute("id");
+  if (popup.match(/-/g).length != 2)
+    return;
+
+  popup = popup.replace(/popup$/, '');
+
   var enabled = (window.content && content.document instanceof HTMLDocument && content.location.href != "about:blank");
   var running = (enabled && window.content == ehhAardvark.wnd);
 
-  document.getElementById("abp-status-ehh-selectelement").setAttribute("disabled", !enabled);
-  document.getElementById("abp-toolbar-ehh-selectelement").setAttribute("disabled", !enabled);
-
-  document.getElementById("abp-status-ehh-selectelement").hidden = running;
-  document.getElementById("abp-toolbar-ehh-selectelement").hidden = running;
-
-  document.getElementById("abp-status-ehh-stopselection").hidden = !running;
-  document.getElementById("abp-toolbar-ehh-stopselection").hidden = !running;
+  document.getElementById(popup + "ehh-selectelement").setAttribute("disabled", !enabled);
+  document.getElementById(popup + "ehh-selectelement").hidden = running;
+  document.getElementById(popup + "ehh-stopselection").hidden = !running;
 }
 
 function ehhSelectElement() {
