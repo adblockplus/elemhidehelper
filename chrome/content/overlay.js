@@ -83,7 +83,10 @@ function ehhFillPopup(event) {
 
   popup = popup.replace(/popup$/, '');
 
-  var enabled = (window.content && content.document instanceof HTMLDocument && content.location.href != "about:blank");
+  var enabled = (window.content && 
+                 content.document instanceof HTMLDocument &&
+                 content.document.body &&
+                 content.location.href != "about:blank");
   var running = (enabled && window.content == ehhAardvark.wnd);
 
   document.getElementById(popup + "ehh-selectelement").setAttribute("disabled", !enabled);

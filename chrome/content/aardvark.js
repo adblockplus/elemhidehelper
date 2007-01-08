@@ -36,6 +36,9 @@ var ehhAardvark = {
 };
 
 ehhAardvark.start = function(wnd) {
+  if (!wnd || !(wnd.document instanceof HTMLDocument) || !wnd.document.body || wnd.location.href == "about:blank")
+    return;
+
   wnd.addEventListener("click", this.mouseClick, false);
   wnd.addEventListener("mouseover", this.mouseOver, false);
   wnd.addEventListener("keypress", this.keyPress, false);
