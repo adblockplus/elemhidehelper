@@ -59,7 +59,7 @@
     </groupbox>
     <groupbox id="attributes" flex="2" orient="horizontal">
       <caption label="&attributes.label;"/>
-      <tree id="nodes-tree" width="300" seltype="single" enableColumnDrag="true" onselect="updateNodeSelection()" persist="width">
+      <tree id="nodes-tree" width="200" seltype="single" enableColumnDrag="true" onselect="updateNodeSelection()" persist="width">
         <treecols>
           <treecol id="nodes-tree-node" label="&nodes-tree.node.label;" primary="true" flex="2" persist="width ordinal hidden"/>
           <splitter class="tree-splitter"/>
