@@ -24,21 +24,72 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-#ehh-helpbox, #ehh-commandlabel {
+#ehh-helpbox, #ehh-commandlabel, #ehh-viewsource
+{
   margin: 10px;
   padding: 5px;
 }
 
-#ehh-helpbox .key {
+#ehh-helpbox .key
+{
   font-weight: bold;
   margin-right: 10px;
 }
 
-#ehh-helpbox-title {
+#ehh-helpbox-title
+{
   font-size: 130%;
   margin-bottom: 10px;
 }
 
-#ehh-commandlabel-key {
+#ehh-commandlabel
+{
+  font-size: 200%;
+}
+
+#ehh-commandlabel-key
+{
   font-weight: bold;
+}
+
+#ehh-viewsource description,
+#ehh-viewsource hbox,
+#ehh-viewsource vbox
+{
+  margin: 0px;
+}
+
+#ehh-viewsource .elementBox
+{
+  border: 1px solid #CCCCCC;
+  margin: 5px;
+}
+
+#ehh-viewsource .text,
+#ehh-viewsource .cdata,
+#ehh-viewsource .comment
+{
+  margin: 0px 5px;
+}
+
+#ehh-viewsource .tagName
+{
+  font-weight: bold;
+  color: #FF0000;
+}
+
+#ehh-viewsource .attrName
+{
+  margin-left: 5px;
+  color: #00FF00;
+}
+
+#ehh-viewsource .attrValue
+{
+  color: #0000FF;
+}
+
+#ehh-viewsource .comment
+{
+  color: #808080;
 }
