@@ -43,10 +43,11 @@
         <rows id="ehh-helpbox-rows"/>
       </grid>
     </tooltip>
-    <tooltip id="ehh-commandlabel" noautohide="true"  orient="horizontal">
+    <tooltip id="ehh-commandlabel" noautohide="true" orient="horizontal">
       <description id="ehh-commandlabel-key"/>
       <description id="ehh-commandlabel-label"/>
     </tooltip>
+    <tooltip id="ehh-viewsource" noautohide="true" orient="vertical"/>
   </popupset>
 
   <popup id="abp-status-popup">

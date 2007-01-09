@@ -30,6 +30,7 @@
 var ehhAardvark = {
   wnd: null,
   selectedElem: null,
+  commentElem : null,
   mouseX: -1,
   mouseY: -1,
   commandLabelTimeout: 0
@@ -38,6 +39,29 @@ var ehhAardvark = {
 ehhAardvark.start = function(wnd) {
   if (!wnd || !(wnd.document instanceof HTMLDocument) || !wnd.document.body || wnd.location.href == "about:blank" || wnd.location.hostname == "")
     return;
+
+  if (!("viewSourceURL" in this)) {
+    // Firefox/Thunderbird and SeaMonkey have different viewPartialSource URLs
+    var urls = [
+      "chrome://global/content/viewPartialSource.xul",
+      "chrome://navigator/content/viewPartialSource.xul"
+    ];
+    this.viewSourceURL = null;
+    for (var i = 0; i < urls.length && !this.viewSourceURL; i++) {
+      var request = new XMLHttpRequest();
+      request.open("GET", urls[i], false);
+      try {
+        request.send(null);
+        this.viewSourceURL = urls[i];
+      } catch (e) {}
+    }
+
+    if (!this.viewSourceURL) {
+      for (i = 0; i < this.commands.length; i++)
+        if (this.commands[i] == "viewSourceWindow")
+          this.commands.splice(i--, 1);
+    }
+  }
 
   wnd.addEventListener("click", this.mouseClick, false);
   wnd.addEventListener("mouseover", this.mouseOver, false);
@@ -146,6 +170,14 @@ ehhAardvark.generateEventHandlers = function(handlers) {
   }
 }
 ehhAardvark.generateEventHandlers(["mouseClick", "mouseOver", "keyPress", "pageHide", "mouseMove"]);
+
+ehhAardvark.appendDescription = function(node, value, className) {
+  var descr = document.createElement("description");
+  descr.setAttribute("value", value);
+  if (className)
+    descr.setAttribute("class", className);
+  node.appendChild(descr);
+}
 
 /***************************
  * Highlight frame display *
@@ -345,7 +377,8 @@ ehhAardvark.commands = [
   "narrower",
   "quit",
   "blinkElement",
-  //"viewSource",
+  "viewSource",
+  "viewSourceWindow",
   "showMenu"
 ];
 
@@ -399,7 +432,7 @@ ehhAardvark.quit = function ()
     return false;
 
   this.clearBox();
-  document.getElementById("ehh-helpbox").hidePopup();
+  ehhHideTooltips();
   
   this.wnd.removeEventListener("click", this.mouseClick, false);
   this.wnd.removeEventListener("mouseover", this.mouseOver, false);
@@ -409,6 +442,7 @@ ehhAardvark.quit = function ()
 
   this.selectedElem = null;
   this.wnd = null;
+  this.commentElem = null;
   delete this.widerStack;
   delete this.borderElems;
   delete this.labelElem;
@@ -462,91 +496,116 @@ ehhAardvark.viewSource = function (elem)
   if (!elem)
     return false;
 
-  var dbox = new DBox ("#fff", true);
-  dbox.innerContainer.innerHTML = this.getOuterHtmlFormatted(elem);
-  dbox.show ();
+  var sourceBox = document.getElementById("ehh-viewsource");
+  if (sourceBox.getAttribute("_moz-menuactive") == "true" && this.commentElem == elem) {
+    sourceBox.hidePopup();
+    return true;
+  }
+  sourceBox.hidePopup();
+
+  while (sourceBox.firstChild)
+    sourceBox.removeChild(sourceBox.firstChild);
+  this.getOuterHtmlFormatted(elem, sourceBox);
+  this.commentElem = elem;
+
+  var x = this.mouseX;
+  var y = this.mouseY;
+  var browser = getBrowser();
+  setTimeout(function() {
+    sourceBox.showPopup(browser, x, y, "tooltip", "topleft", "topleft");
+  }, 500);
   return true;
 }
 
 //--------------------------------------------------------
-ehhAardvark.getOuterHtmlFormatted = function (node)
+ehhAardvark.viewSourceWindow = function(elem) {
+  if (!elem || !this.viewSourceURL)
+    return false;
+
+  var range = elem.ownerDocument.createRange();
+  range.selectNodeContents(elem);
+  var selection = {rangeCount: 1, getRangeAt: function() {return range}};
+
+  // SeaMonkey uses a different 
+  window.openDialog(this.viewSourceURL, "_blank", "scrollbars,resizable,chrome,dialog=no",
+                    null, null, selection, "selection");
+  return true;
+}
+
+//--------------------------------------------------------
+ehhAardvark.getOuterHtmlFormatted = function (node, container)
 {
-  var str = "";
-  
-  if (document.all)
-  {
-    return "<textarea style='width:100%; height:100%'>" + node.outerHTML + "</textarea>"; 
+  var type = null;
+  switch (node.nodeType) {
+    case node.ELEMENT_NODE:
+      var box = document.createElement("vbox");
+      box.className = "elementBox";
+
+      var startTag = document.createElement("hbox");
+      startTag.className = "elementStartTag";
+      if (!node.firstChild);
+        startTag.className += "elementEndTag";
+
+      this.appendDescription(startTag, "<", null);
+      this.appendDescription(startTag, node.tagName, "tagName");
+
+      for (var i = 0; i < node.attributes.length; i++) {
+        var attr = node.attributes[i];
+        this.appendDescription(startTag, attr.name, "attrName");
+        if (attr.value != "") {
+          this.appendDescription(startTag, "=", null);
+          this.appendDescription(startTag, '"' + attr.value.replace(/"/, "&quot;") + '"', "attrValue");
+        }
+      }
+
+      this.appendDescription(startTag, node.firstChild ? ">" : " />", null);
+      box.appendChild(startTag);
+
+      if (node.firstChild) {
+        for (var child = node.firstChild; child; child = child.nextSibling)
+          this.getOuterHtmlFormatted(child, box);
+
+        var endTag = document.createElement("hbox");
+        endTag.className = "elementEndTag";
+        this.appendDescription(endTag, "<", null);
+        this.appendDescription(endTag, "/" + node.tagName, "tagName");
+        this.appendDescription(endTag, ">", null);
+        box.appendChild(endTag);
+      }
+      container.appendChild(box);
+      return;
+
+    case node.TEXT_NODE:
+      type = "text";
+      break;
+    case node.CDATA_SECTION_NODE:
+      type = "cdata";
+      break;
+    case node.COMMENT_NODE:
+      type = "comment";
+      break;
+    default:
+      return;
   }
 
-  switch (node.nodeType)
-  {
-    case 1: // ELEMENT_NODE
-    {
-      if (node.style.display == 'none')
-        break;
-      var isLeaf = (node.childNodes.length == 0 && leafElems[node.nodeName]);
-      var isTbody = (node.nodeName == "TBODY" && node.attributes.length == 0);
-      
-      if (isTbody)
-      {
-        for (var i=0; i<node.childNodes.length; i++)
-          str += this.getOuterHtmlFormatted(node.childNodes.item(i));
-      }
-      else
-      {
-        if (!isLeaf)
-          str += "<div style='border: 1px solid #cccccc; border-right: 0;" +
-            "margin-left: 10px; margin-right: 0; overflow: hidden'>";
-        str += "&lt;<span style='color:red;font-weight:bold'>" +
-              node.nodeName.toLowerCase() + "</span>";
-        for (var i=0; i<node.attributes.length; i++) 
-        {
-          if (node.attributes.item(i).nodeValue != null &&
-            node.attributes.item(i).nodeValue != '')
-          {
-            str += " <span style='color:green;'>"
-            str += node.attributes.item(i).nodeName;
-            str += "</span>='<span style='color:blue;'>";
-            str += node.attributes.item(i).nodeValue;
-            str += "</span>'";
-          }
-        }
-        if (isLeaf)
-          str += " /&gt;<br>";
-        else 
-        {
-          str += "&gt;<br>";
-          
-          for (var i=0; i<node.childNodes.length; i++)
-            str += this.getOuterHtmlFormatted(node.childNodes.item(i));
-          
-          str += "&lt;/<span style='color:red;font-weight:bold'>" +
-            node.nodeName.toLowerCase() + "</span>&gt;</div>"
-        }
-      }
-    }
-    break;
-        
-    case 3: //TEXT_NODE
-      if (node.nodeValue != '' && node.nodeValue != '\n' 
-          && node.nodeValue != '\r\n' && node.nodeValue != ' ')
-        str += node.nodeValue + "<br>";
-      break;
-      
-    case 4: // CDATA_SECTION_NODE
-      str += "&lt;![CDATA[" + node.nodeValue + "]]><br>";
-      break;
-          
-    case 5: // ENTITY_REFERENCE_NODE
-      str += "&amp;" + node.nodeName + ";<br>"
-      break;
-  
-    case 8: // COMMENT_NODE
-      str += "&lt;!--" + node.nodeValue + "--><br>"
-      break;
+  var text = node.nodeValue.replace(/\r/g, '').replace(/^\s+/, '').replace(/\s+$/, '');
+  if (text == "")
+    return;
+
+  if (type != "cdata") {
+    text = text.replace(/&/g, "&amp;")
+               .replace(/</g, "&lt;")
+               .replace(/>/g, "&gt;")
   }
-  
-  return str;
+  text = text.replace(/\t/g, "  ");
+  if (type == "cdata")
+    text = "<![CDATA[" + text + "]]>";
+  else if (type == "comment")
+    text = "<!--" + text + "-->";
+
+  var lines = text.split("\n");
+  for (var i = 0; i < lines.length; i++)
+    this.appendDescription(container, lines[i].replace(/^\s+/, '').replace(/\s+$/, ''), type);
 }
 
 //-------------------------------------------------

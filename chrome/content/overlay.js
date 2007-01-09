@@ -62,6 +62,7 @@ function ehhInit() {
 function ehhHideTooltips() {
   document.getElementById("ehh-helpbox").hidePopup();
   document.getElementById("ehh-commandlabel").hidePopup();
+  document.getElementById("ehh-viewsource").hidePopup();
 }
 
 function ehhDisableElement(id, disable) {
