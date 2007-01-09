@@ -42,6 +42,11 @@ function NodeData(node, parentNode) {
   this.attributes = [];
   for (var i = 0; i < node.attributes.length; i++) {
     var attribute = node.attributes[i];
+
+    // Ignore attribute names containing { or } - limitation of ABP
+    if (/[{}]/.test(attribute.name))
+      continue;
+
     var data = {name: attribute.name, value: attribute.value, selected: attribute.value, checked: false};
     if (data.name == "id" || data.name == "class")
       this.attributes.unshift(data);
@@ -119,12 +124,16 @@ function updateExpression() {
         else if (attr.value.substr(attr.value.length - attr.selected.length) == attr.selected)
           op = "$=";
 
-        if (/[()"]/.test(attr.value))
+        if (/[^\w\-]/.test(attr.name) || /[()"]/.test(attr.value))
           expressionSimple = null;
 
         if (expressionSimple != null)
           expressionSimple += "(" + attr.name + op + attr.value + ")";
-        expressionRaw += "[" + attr.name + op + '"' + attr.value.replace(/"/g, '\\"') + '"' + "]";
+        expressionRaw += "[" + attr.name.replace(/([^\w\-])/g, "\\$1") + op + '"' + attr.value.replace(/"/g, '\\"') + '"' + "]";
+      }
+      else if (attr.checked) {
+        expressionSimple = null;
+        expressionRaw += "[" + attr.name.replace(/([^\w\-])/g, "\\$1") + "]";
       }
     }
 
