@@ -42,11 +42,6 @@ function NodeData(node, parentNode) {
   this.attributes = [];
   for (var i = 0; i < node.attributes.length; i++) {
     var attribute = node.attributes[i];
-
-    // Ignore attribute names containing { or } - limitation of ABP
-    if (/[{}]/.test(attribute.name))
-      continue;
-
     var data = {name: attribute.name, value: attribute.value, selected: attribute.value, checked: false};
     if (data.name == "id" || data.name == "class")
       this.attributes.unshift(data);
@@ -129,7 +124,14 @@ function updateExpression() {
 
         if (expressionSimple != null)
           expressionSimple += "(" + attr.name + op + attr.value + ")";
-        expressionRaw += "[" + attr.name.replace(/([^\w\-])/g, "\\$1") + op + '"' + attr.value.replace(/"/g, '\\"') + '"' + "]";
+
+        var escapedName = attr.name.replace(/([^\w\-])/g, "\\$1")
+                                   .replace(/\\\{/g, "\\7B ")
+                                   .replace(/\\\}/g, "\\7D ");
+        var escapedValue = attr.value.replace(/"/g, '\\"')
+                                     .replace(/\{/, "\\7B ")
+                                     .replace(/\}/, "\\7D ");
+        expressionRaw += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
       }
       else if (attr.checked) {
         expressionSimple = null;
