@@ -86,10 +86,11 @@ ehhAardvark.onMouseClick = function(event) {
 
 ehhAardvark.onMouseOver = function(event) {
   var elem = event.target;
-  if (elem.ehhAardvarkLabel)
-    return;
+  var aardvarkLabel = elem;
+  while (aardvarkLabel && !("ehhAardvarkLabel" in aardvarkLabel))
+    aardvarkLabel = aardvarkLabel.parentNode;
 
-  if (elem == null)
+  if (elem == null || aardvarkLabel)
   {
     this.clearBox ();
     return;
