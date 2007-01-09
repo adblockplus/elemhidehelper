@@ -110,32 +110,34 @@ function updateExpression() {
     for (var i = 0; i < curNode.attributes.length; i++) {
       var attr = curNode.attributes[i];
 
-      if (attr.checked && attr.selected != "") {
-        var op = "*=";
-        if (attr.selected == attr.value)
-          op = "=";
-        else if (attr.value.substr(0, attr.selected.length) == attr.selected)
-          op = "^=";
-        else if (attr.value.substr(attr.value.length - attr.selected.length) == attr.selected)
-          op = "$=";
-
-        if (/[^\w\-]/.test(attr.name) || /[()"]/.test(attr.value))
-          expressionSimple = null;
-
-        if (expressionSimple != null)
-          expressionSimple += "(" + attr.name + op + attr.value + ")";
-
+      if (attr.checked) {
         var escapedName = attr.name.replace(/([^\w\-])/g, "\\$1")
                                    .replace(/\\\{/g, "\\7B ")
                                    .replace(/\\\}/g, "\\7D ");
-        var escapedValue = attr.value.replace(/"/g, '\\"')
-                                     .replace(/\{/, "\\7B ")
-                                     .replace(/\}/, "\\7D ");
-        expressionRaw += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
-      }
-      else if (attr.checked) {
-        expressionSimple = null;
-        expressionRaw += "[" + attr.name.replace(/([^\w\-])/g, "\\$1") + "]";
+        if (attr.selected != "") {
+          var op = "*=";
+          if (attr.selected == attr.value)
+            op = "=";
+          else if (attr.value.substr(0, attr.selected.length) == attr.selected)
+            op = "^=";
+          else if (attr.value.substr(attr.value.length - attr.selected.length) == attr.selected)
+            op = "$=";
+  
+          if (/[^\w\-]/.test(attr.name) || /[()"]/.test(attr.value))
+            expressionSimple = null;
+  
+          if (expressionSimple != null)
+            expressionSimple += "(" + attr.name + op + attr.value + ")";
+  
+          var escapedValue = attr.value.replace(/"/g, '\\"')
+                                      .replace(/\{/, "\\7B ")
+                                      .replace(/\}/, "\\7D ");
+          expressionRaw += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
+        }
+        else {
+          expressionSimple = null;
+          expressionRaw += "[" + escapedName + "]";
+        }
       }
     }
 
