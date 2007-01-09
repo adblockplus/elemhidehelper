@@ -86,7 +86,7 @@ function init() {
     }
   }
 
-  var domain = wnd.location.host;
+  var domain = wnd.location.hostname;
   var selectedDomain = domain.replace(/^www\./, "");
   domainData = {value: domain, selected: selectedDomain};
 
