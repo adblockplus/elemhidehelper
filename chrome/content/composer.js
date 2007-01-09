@@ -143,7 +143,9 @@ function updateExpression() {
 
     if (curNode.customCSS.checked && curNode.customCSS.selected != "") {
       expressionSimple = null;
-      expressionRaw += curNode.customCSS.selected;
+      expressionRaw += curNode.customCSS.selected
+                                        .replace(/\{/, "\\7B ")
+                                        .replace(/\}/, "\\7D ");
     }
 
     curNode.expressionSimple = expressionSimple;
