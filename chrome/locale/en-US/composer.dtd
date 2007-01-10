@@ -27,6 +27,7 @@
 <!ENTITY advanced.label           "Advanced view">
 <!ENTITY basic.label              "Basic view">
 <!ENTITY expression.label         "Filter rule">
+<!ENTITY preview.label            "Preview">
 <!ENTITY domain.label             "Bind to domain">
 <!ENTITY domain.none.label        "Any domain (not recommended)">
 <!ENTITY nodes-tree.node.label    "Node">
