@@ -75,7 +75,7 @@ function TreeView(tree) {
   this.getRowProperties = TreeView_getRowProperties;
   this.getCellProperties = TreeView_getCellProperties;
 
-  createQIProxy(this, origView)
+  createQIProxy(this, origView);
 
   for (var key in origView) {
     if (this.hasOwnProperty(key))
@@ -94,14 +94,14 @@ function createQIProxy(obj, orig) {
       throw Components.results.NS_ERROR_NO_INTERFACE;
 
     return obj;
-  }
+  };
 }
 
 function createPropertyProxy(obj, orig, key) {
   if (typeof orig[key] == "function") {
     obj[key] = function() {
       return orig[key].apply(orig, arguments);
-    }
+    };
   }
   else {
     obj.__defineGetter__(key, function() {
