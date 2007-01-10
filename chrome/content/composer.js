@@ -27,6 +27,10 @@ var nodeData;
 var selectedNode = null;
 var advancedMode = false;
 
+/*******************
+ * NodeData object *
+ *******************/
+
 function NodeData(node, parentNode) {
   this.tagName = {value: node.tagName, checked: false};
 
@@ -58,6 +62,75 @@ function NodeData(node, parentNode) {
 
   this.customCSS = {selected: "", checked: false};
 }
+
+/*******************
+ * TreeView object *
+ *******************/
+
+function TreeView(tree) {
+  var origView = tree.view;
+  this.getRowProperties = TreeView_getRowProperties;
+  this.getCellProperties = TreeView_getCellProperties;
+
+  createQIProxy(this, origView)
+
+  for (var key in origView) {
+    if (this.hasOwnProperty(key))
+      continue;
+
+    createPropertyProxy(this, origView, key);
+  }
+
+  tree.view = this;
+}
+
+function createQIProxy(obj, orig) {
+  obj.QueryInterface = function(iid) {
+    var impl = orig.QueryInterface(iid);
+    if (impl != orig)
+      throw Components.results.NS_ERROR_NO_INTERFACE;
+
+    return obj;
+  }
+}
+
+function createPropertyProxy(obj, orig, key) {
+  if (typeof orig[key] == "function") {
+    obj[key] = function() {
+      return orig[key].apply(orig, arguments);
+    }
+  }
+  else {
+    obj.__defineGetter__(key, function() {
+      return orig[key];
+    });
+    obj.__defineSetter__(key, function(value) {
+      orig[key] = value;
+    });
+  }
+}
+
+var atomService = Components.classes["@mozilla.org/atom-service;1"]
+                            .getService(Components.interfaces.nsIAtomService);
+var selectedAtom = atomService.getAtom("selected-false");
+var anchorAtom = atomService.getAtom("anchor");
+
+function TreeView_getRowProperties(row, properties) {
+  if (!this.selection.isSelected(row))
+    properties.AppendElement(selectedAtom);
+
+  var item = this.getItemAtIndex(row);
+  if (item && (item.nodeData.expressionRaw != "*" || item.nodeData == nodeData))
+    properties.AppendElement(anchorAtom);
+}
+
+function TreeView_getCellProperties(row, col, properties) {
+  this.getRowProperties(row, properties);
+}
+
+/*********************
+ * General functions *
+ *********************/
 
 function init() {
   var element = window.arguments[0];
@@ -93,6 +166,8 @@ function init() {
   fillNodes(nodeData);
   setAdvancedMode(document.documentElement.getAttribute("advancedMode") == "true");
   updateExpression();
+
+  new TreeView(document.getElementById("nodes-tree"));
 
   setTimeout(function() {
     fillDomains(domainData);
@@ -150,15 +225,6 @@ function updateExpression() {
 
     curNode.expressionSimple = expressionSimple;
     curNode.expressionRaw = expressionRaw;
-
-    var cells = curNode.treeCells;
-    var row = curNode.treeRow;
-    var properties = (expressionRaw != "*" || curNode == nodeData ? "anchor" : "");
-    if (properties != "" && curNode != selectedNode)
-      properties += " selected-false";
-    for (var i = 0; i < cells.length; i++)
-      cells[i].setAttribute("properties", properties);
-    row.setAttribute("properties", properties);
 
     if (expressionSimple == null || (expressionRaw != "*" && curNode != nodeData))
       simpleMode = false;
@@ -230,6 +296,9 @@ function updateExpression() {
   }
 
   document.getElementById("expression").value = expression;
+
+  var tree = document.getElementById("nodes-tree");
+  tree.boxObject.invalidateRow(tree.view.selection.currentIndex);
 }
 
 function fillDomains(domainData) {
@@ -268,30 +337,23 @@ function fillNodes(nodeData) {
     if (nodeData.attributes.length > i && nodeData.attributes[i].name == "class")
       className = nodeData.attributes[i++].value;
 
-    nodeData.treeCells = [];
-
     var item = document.createElement("treeitem");
     var row = document.createElement("treerow");
 
     var cell = document.createElement("treecell");
     cell.setAttribute("label", nodeData.tagName.value);
     row.appendChild(cell);
-    nodeData.treeCells.push(cell);
 
     var cell = document.createElement("treecell");
     cell.setAttribute("label", id);
     row.appendChild(cell);
-    nodeData.treeCells.push(cell);
 
     var cell = document.createElement("treecell");
     cell.setAttribute("label", className);
     row.appendChild(cell);
-    nodeData.treeCells.push(cell);
 
     item.appendChild(row);
     item.nodeData = nodeData;
-    nodeData.treeRow = row;
-    nodeData.treeItem = item;
 
     if (curChildren) {
       item.appendChild(curChildren);
@@ -415,8 +477,14 @@ function setAdvancedMode(mode) {
 
   if (advancedMode && selectedNode) {
     var tree = document.getElementById("nodes-tree");
-    var index = tree.view.getIndexOfItem(selectedNode.treeItem);
-    tree.view.selection.select(index);
+
+    // Expand all containers
+    var items = tree.getElementsByTagName("treeitem");
+    for (var i = 0; i < items.length; i++)
+      if (items[i].getAttribute("container") == "true")
+        items[i].setAttribute("open", "true");
+
+    tree.view.selection.select(tree.view.rowCount - 1);
   }
 }
 
@@ -429,32 +497,13 @@ function updateNodeSelection() {
   var min = {};
   selection.getRangeAt(0, min, {});
 
-  var item = tree.view.getItemAtIndex(min.value);
+  var item = tree.view
+                 .QueryInterface(Components.interfaces.nsITreeContentView)
+                 .getItemAtIndex(min.value);
   if (!item || !item.nodeData)
     return;
 
-  if (selectedNode != null) {
-    // HACKHACK: Adjust selected-false property
-    var cells = selectedNode.treeCells;
-    for (var i = 0; i < cells.length; i++)
-      if (cells[i].getAttribute("properties"))
-        cells[i].setAttribute("properties", cells[i].getAttribute("properties") + " selected-false");
-
-    var row = selectedNode.treeRow;
-    if (row.getAttribute("properties"))
-      row.setAttribute("properties", row.getAttribute("properties") + " selected-false");
-  }
-
   fillAttributes(item.nodeData);
-
-  cells = selectedNode.treeCells;
-  for (i = 0; i < cells.length; i++)
-    if (cells[i].getAttribute("properties"))
-      cells[i].setAttribute("properties", cells[i].getAttribute("properties").replace(/ selected-false$/, ''));
-
-  row = selectedNode.treeRow;
-  if (row.getAttribute("properties"))
-    row.setAttribute("properties", row.getAttribute("properties").replace(/ selected-false$/, ''));
 }
 
 function addExpression() {
