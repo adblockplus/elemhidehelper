@@ -93,7 +93,7 @@ ehhAardvark.showCommandLabel = function(key, label) {
   document.getElementById("ehh-commandlabel-label").setAttribute("value", label);
 
   var commandLabel = document.getElementById("ehh-commandlabel");
-  commandLabel.showPopup(getBrowser(), this.mouseX, this.mouseY, "tooltip", "topleft", "topleft");
+  commandLabel.showPopup(document.documentElement, this.mouseX, this.mouseY, "tooltip", "topleft", "topleft");
 
   this.commandLabelTimeout = setTimeout(function() {
     commandLabel.hidePopup();
@@ -510,9 +510,8 @@ ehhAardvark.viewSource = function (elem)
 
   var x = this.mouseX;
   var y = this.mouseY;
-  var browser = getBrowser();
   setTimeout(function() {
-    sourceBox.showPopup(browser, x, y, "tooltip", "topleft", "topleft");
+    sourceBox.showPopup(document.documentElement, x, y, "tooltip", "topleft", "topleft");
   }, 500);
   return true;
 }
