@@ -26,6 +26,9 @@ var domainData;
 var nodeData;
 var selectedNode = null;
 var advancedMode = false;
+var stylesheetURL;
+var previewStyle = null;
+var doc;
 
 /*******************
  * NodeData object *
@@ -134,7 +137,8 @@ function TreeView_getCellProperties(row, col, properties) {
 
 function init() {
   var element = window.arguments[0];
-  var wnd = element.ownerDocument.defaultView;
+  doc = element.ownerDocument;
+  var wnd = doc.defaultView;
 
   nodeData = new NodeData(element);
   nodeData.tagName.checked = true;
@@ -172,6 +176,8 @@ function init() {
   setTimeout(function() {
     fillDomains(domainData);
     document.getElementById("domainGroup").selectedItem.focus();
+    if (document.getElementById("preview").checked)
+      togglePreview(true);
   }, 0);
 }
 
@@ -236,8 +242,10 @@ function updateExpression() {
   }
 
   var expression;
-  if (simpleMode)
+  if (simpleMode) {
     expression = domainData.selected + "#" + nodeData.expressionSimple;
+    stylesheetURL = "data:text/css," + encodeURIComponent(nodeData.expressionRaw + "{display: none !important;}");
+  }
   else {
     expression = nodeData.expressionRaw;
 
@@ -292,6 +300,7 @@ function updateExpression() {
         curData = null;
     }
 
+    stylesheetURL = "data:text/css," + encodeURIComponent(expression + "{display: none !important;}");
     expression = domainData.selected + "##" + expression;
   }
 
@@ -299,6 +308,9 @@ function updateExpression() {
 
   var tree = document.getElementById("nodes-tree");
   tree.boxObject.invalidateRow(tree.view.selection.currentIndex);
+
+  if (previewStyle)
+    previewStyle.setAttribute("href", stylesheetURL);
 }
 
 function fillDomains(domainData) {
@@ -426,6 +438,23 @@ function fillAttributes(nodeData) {
   customCSSField.value = nodeData.customCSS.selected;
 }
 
+function togglePreview(preview) {
+  if (preview) {
+    if (!previewStyle || !previewStyle.parentNode) {
+      previewStyle = doc.createElement("link");
+      previewStyle.setAttribute("rel", "stylesheet");
+      previewStyle.setAttribute("type", "text/css");
+      doc.documentElement.appendChild(previewStyle);
+    }
+    previewStyle.setAttribute("href", stylesheetURL);
+  }
+  else {
+    if (previewStyle && previewStyle.parentNode)
+      previewStyle.parentNode.removeChild(previewStyle);
+    previewStyle = null;
+  }
+}
+
 function changeDomain(node) {
   domainData.selected = node.getAttribute("value");
   updateExpression();
@@ -510,4 +539,6 @@ function addExpression() {
   var abp = Components.classes["@mozilla.org/adblockplus;1"]
                       .createInstance(Components.interfaces.nsIAdblockPlus);
   abp.addPatterns([document.getElementById("expression").value], 1);
+
+  togglePreview(true);
 }

@@ -34,6 +34,7 @@
     title="&dialog.title;"
     onload="init()"
     ondialogaccept="addExpression()"
+    ondialogcancel="togglePreview(false)"
     ondialogdisclosure="setAdvancedMode(!advancedMode)"
     buttons="accept,cancel,disclosure"
     width="600px"
@@ -49,7 +50,10 @@
   
   <vbox id="expressionBox">
     <label control="expression" value="&expression.label;"/>
-    <textbox id="expression" readonly="true"/>
+    <hbox>
+      <textbox id="expression" flex="1" readonly="true"/>
+      <checkbox id="preview" label="&preview.label;" oncommand="togglePreview(this.checked)" persist="checked"/>
+    </hbox>
   </vbox>
 
   <hbox id="choices" flex="1">
