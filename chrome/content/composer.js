@@ -210,10 +210,23 @@ function updateExpression() {
           if (expressionSimple != null)
             expressionSimple += "(" + attr.name + op + attr.value + ")";
   
-          var escapedValue = attr.value.replace(/"/g, '\\"')
-                                      .replace(/\{/, "\\7B ")
-                                      .replace(/\}/, "\\7D ");
-          expressionRaw += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
+          if (attr.name == "id" && op == "=" && !/[^\w\-]/.test(attr.value))
+            expressionRaw += "#" + attr.value;
+          else if (attr.name == "class" && op == "=" && !/[^\w\-\s]/.test(attr.value) && /\S/.test(attr.value)) {
+            var classes = attr.value.split(/\s+/);
+            for (var j = 0; j < classes.length; j++) {
+              if (classes[j] == "")
+                continue;
+
+              expressionRaw += "." + classes[j];
+            }
+          }
+          else {
+            var escapedValue = attr.value.replace(/"/g, '\\"')
+                                        .replace(/\{/, "\\7B ")
+                                        .replace(/\}/, "\\7D ");
+            expressionRaw += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
+          }
         }
         else {
           expressionSimple = null;
