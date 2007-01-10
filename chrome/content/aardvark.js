@@ -646,6 +646,6 @@ ehhAardvark.showMenu = function ()
   }
 
   // Show help box
-  helpBox.showPopup(getBrowser().selectedBrowser, -1, -1, "tooltip", "topright", "topright");
+  helpBox.showPopup(getBrowser().selectedBrowser, -1, -1, "tooltip", "topleft", "topleft");
   return true;
 }
