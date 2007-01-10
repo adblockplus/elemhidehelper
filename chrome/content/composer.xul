@@ -67,9 +67,9 @@
         <treecols>
           <treecol id="nodes-tree-node" label="&nodes-tree.node.label;" primary="true" flex="2" persist="width ordinal hidden"/>
           <splitter class="tree-splitter"/>
-          <treecol id="nodes-tree-id" label="&nodes-tree.id.label;" flex="1" persist="width ordinal hidden"/>
+          <treecol id="nodes-tree-id" label="&nodes-tree.id.label;" flex="1" hidden="true" persist="width ordinal hidden"/>
           <splitter class="tree-splitter"/>
-          <treecol id="nodes-tree-class" label="&nodes-tree.class.label;" flex="1" persist="width ordinal hidden"/>
+          <treecol id="nodes-tree-class" label="&nodes-tree.class.label;" flex="1" hidden="true" persist="width ordinal hidden"/>
         </treecols>
         <treechildren id="nodes-tree-children"/>
       </tree>
