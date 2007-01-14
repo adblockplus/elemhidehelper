@@ -26,6 +26,7 @@ var domainData;
 var nodeData;
 var selectedNode = null;
 var advancedMode = false;
+var treeView = null;
 var stylesheetURL;
 var previewStyle = null;
 var doc;
@@ -167,14 +168,12 @@ function init() {
   var selectedDomain = domain.replace(/^www\./, "");
   domainData = {value: domain, selected: selectedDomain};
 
+  fillDomains(domainData);
   fillNodes(nodeData);
   setAdvancedMode(document.documentElement.getAttribute("advancedMode") == "true");
   updateExpression();
 
-  new TreeView(document.getElementById("nodes-tree"));
-
   setTimeout(function() {
-    fillDomains(domainData);
     document.getElementById("domainGroup").selectedItem.focus();
     if (document.getElementById("preview").checked)
       togglePreview(true);
@@ -204,16 +203,16 @@ function updateExpression() {
           else if (attr.value.substr(attr.value.length - attr.selected.length) == attr.selected)
             op = "$=";
   
-          if (/[^\w\-]/.test(attr.name) || /[()"]/.test(attr.value))
+          if (/[^\w\-]/.test(attr.name) || /[()"]/.test(attr.selected))
             expressionSimple = null;
   
           if (expressionSimple != null)
-            expressionSimple += "(" + attr.name + op + attr.value + ")";
+            expressionSimple += "(" + attr.name + op + attr.selected + ")";
   
-          if (attr.name == "id" && op == "=" && !/[^\w\-]/.test(attr.value))
-            expressionRaw += "#" + attr.value;
-          else if (attr.name == "class" && op == "=" && !/[^\w\-\s]/.test(attr.value) && /\S/.test(attr.value)) {
-            var classes = attr.value.split(/\s+/);
+          if (attr.name == "id" && op == "=" && !/[^\w\-]/.test(attr.selected))
+            expressionRaw += "#" + attr.selected;
+          else if (attr.name == "class" && op == "=" && !/[^\w\-\s]/.test(attr.selected) && /\S/.test(attr.selected)) {
+            var classes = attr.selected.split(/\s+/);
             for (var j = 0; j < classes.length; j++) {
               if (classes[j] == "")
                 continue;
@@ -222,9 +221,9 @@ function updateExpression() {
             }
           }
           else {
-            var escapedValue = attr.value.replace(/"/g, '\\"')
-                                        .replace(/\{/, "\\7B ")
-                                        .replace(/\}/, "\\7D ");
+            var escapedValue = attr.selected.replace(/"/g, '\\"')
+                                            .replace(/\{/, "\\7B ")
+                                            .replace(/\}/, "\\7D ");
             expressionRaw += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
           }
         }
@@ -320,7 +319,8 @@ function updateExpression() {
   document.getElementById("expression").value = expression;
 
   var tree = document.getElementById("nodes-tree");
-  tree.boxObject.invalidateRow(tree.view.selection.currentIndex);
+  if (tree.view && tree.view.selection)
+    tree.treeBoxObject.invalidateRow(tree.view.selection.currentIndex);
 
   if (previewStyle)
     previewStyle.setAttribute("href", stylesheetURL);
@@ -430,8 +430,11 @@ function fillAttributes(nodeData) {
   // Add tag name checkbox
   var node = template.cloneNode(true);
   node.hidden = false;
-  node.setAttribute("label", node.getAttribute("label") + " " + nodeData.tagName.value);
-  node.setAttribute("checked", nodeData.tagName.checked);
+  node.removeAttribute("id");
+  node.attr = nodeData.tagName;
+  var description = node.getElementsByTagName("description")[0];
+  description.setAttribute("value", description.getAttribute("value") + " " + nodeData.tagName.value);
+  node.getElementsByTagName("checkbox")[0].setAttribute("checked", nodeData.tagName.checked);
   template.parentNode.insertBefore(node, customCSS);
 
   // Add attribute checkboxes
@@ -440,13 +443,17 @@ function fillAttributes(nodeData) {
 
     node = template.cloneNode(true);
     node.hidden = false;
-    node.setAttribute("label", attr.name + ": " + attr.value);
-    node.setAttribute("checked", attr.checked);
-    node.setAttribute("value", attr.name);
+    node.removeAttribute("id");
+    node.attr = attr;
+    node.getElementsByTagName("description")[0].setAttribute("value", attr.name + ": " + attr.value);
+    node.getElementsByTagName("checkbox")[0].setAttribute("checked", attr.checked);
+    node.getElementsByTagName("textbox")[0].setAttribute("value", attr.selected);
+    node.getElementsByTagName("textbox")[0].hidden = false;
     template.parentNode.insertBefore(node, customCSS);
   }
 
   // Initialize custom CSS field
+  customCSS.attr = nodeData.customCSS;
   customCSSCheck.setAttribute("checked", nodeData.customCSS.checked);
   customCSSField.value = nodeData.customCSS.selected;
 }
@@ -473,36 +480,14 @@ function changeDomain(node) {
   updateExpression();
 }
 
-function toggleAttr(node) {
-  if (selectedNode == null)
-    return;
-
-  if (node.hasAttribute("value")) {
-    var attrName = node.getAttribute("value");
-    for (var i = 0; i < selectedNode.attributes.length; i++)
-      if (selectedNode.attributes[i].name == attrName)
-        selectedNode.attributes[i].checked = node.checked;
-  }
-  else
-    selectedNode.tagName.checked = node.checked;
-
+function toggleAttr(editor, node) {
+  editor.attr.checked = node.checked;
   updateExpression();
 }
 
-function toggleCustomCSS(node) {
-  if (selectedNode == null)
-    return;
-
-  selectedNode.customCSS.checked = node.checked;
-  updateExpression();
-}
-
-function setCustomCSS(customCSS) {
-  if (selectedNode == null)
-    return;
-
-  selectedNode.customCSS.selected = customCSS;
-  if (selectedNode.customCSS.checked)
+function setSelectedAttrValue(editor, node) {
+  editor.attr.selected = node.value;
+  if (editor.attr.checked)
     updateExpression();
 }
 
@@ -517,16 +502,24 @@ function setAdvancedMode(mode) {
 
   fillAttributes(nodeData);
 
-  if (advancedMode && selectedNode) {
-    var tree = document.getElementById("nodes-tree");
+  if (advancedMode) {
+    setTimeout(function() {
+      var tree = document.getElementById("nodes-tree");
 
-    // Expand all containers
-    var items = tree.getElementsByTagName("treeitem");
-    for (var i = 0; i < items.length; i++)
-      if (items[i].getAttribute("container") == "true")
-        items[i].setAttribute("open", "true");
+      if (!treeView)
+        treeView = new TreeView(tree);
 
-    tree.view.selection.select(tree.view.rowCount - 1);
+      if (selectedNode) {
+        // Expand all containers
+        var items = tree.getElementsByTagName("treeitem");
+        for (var i = 0; i < items.length; i++)
+          if (items[i].getAttribute("container") == "true")
+            items[i].setAttribute("open", "true");
+
+        tree.treeBoxObject.ensureRowIsVisible(tree.view.rowCount - 1);
+        tree.view.selection.select(tree.view.rowCount - 1);
+      }
+    }, 0);
   }
 }
 
