@@ -65,26 +65,37 @@
         </radiogroup>
       </scrollbox>
     </groupbox>
-    <groupbox id="attributes" flex="2" orient="horizontal">
+    <groupbox id="attributes" flex="2">
       <caption label="&attributes.label;"/>
-      <tree id="nodes-tree" width="200" seltype="single" enableColumnDrag="true" onselect="updateNodeSelection()" persist="width">
-        <treecols>
-          <treecol id="nodes-tree-node" label="&nodes-tree.node.label;" primary="true" flex="2" persist="width ordinal hidden"/>
-          <splitter class="tree-splitter"/>
-          <treecol id="nodes-tree-id" label="&nodes-tree.id.label;" flex="1" hidden="true" persist="width ordinal hidden"/>
-          <splitter class="tree-splitter"/>
-          <treecol id="nodes-tree-class" label="&nodes-tree.class.label;" flex="1" hidden="true" persist="width ordinal hidden"/>
-        </treecols>
-        <treechildren id="nodes-tree-children"/>
-      </tree>
-      <splitter id="nodes-tree-splitter"/>
-      <scrollbox flex="1" orient="vertical">
-        <checkbox id="attribute-template" label="&attributes.tagname.label;" hidden="true" oncommand="toggleAttr(this)"/>
-        <hbox id="attribute-custom">
-          <checkbox id="attribute-custom-check" label="&attributes.custom.label;" oncommand="toggleCustomCSS(this)"/>
-          <textbox id="attribute-custom-field" flex="1" oninput="setCustomCSS(this.value)"/>
-        </hbox>
-      </scrollbox>
+      <hbox flex="1">
+        <tree id="nodes-tree" width="200" seltype="single" enableColumnDrag="true" onselect="updateNodeSelection()" persist="width">
+          <treecols>
+            <treecol id="nodes-tree-node" label="&nodes-tree.node.label;" primary="true" flex="2" persist="width ordinal hidden"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="nodes-tree-id" label="&nodes-tree.id.label;" flex="1" hidden="true" persist="width ordinal hidden"/>
+            <splitter class="tree-splitter"/>
+            <treecol id="nodes-tree-class" label="&nodes-tree.class.label;" flex="1" hidden="true" persist="width ordinal hidden"/>
+          </treecols>
+          <treechildren id="nodes-tree-children"/>
+        </tree>
+        <splitter id="nodes-tree-splitter"/>
+        <scrollbox flex="1" orient="vertical">
+          <hbox id="attribute-template" class="attribute" hidden="true">
+            <checkbox oncommand="toggleAttr(this.parentNode, this)"/>
+            <vbox flex="1">
+              <description value="&attributes.tagname.label;"/>
+              <textbox oninput="setSelectedAttrValue(this.parentNode.parentNode, this)" hidden="true"/>
+            </vbox>
+          </hbox>
+          <hbox id="attribute-custom" class="attribute">
+            <checkbox id="attribute-custom-check" oncommand="toggleAttr(this.parentNode, this)"/>
+            <vbox flex="1">
+              <description value="&attributes.custom.label;"/>
+              <textbox id="attribute-custom-field" oninput="setSelectedAttrValue(this.parentNode.parentNode, this)"/>
+            </vbox>
+          </hbox>
+        </scrollbox>
+      </hbox>
     </groupbox>
   </hbox>
 </dialog>

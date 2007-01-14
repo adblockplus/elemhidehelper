@@ -31,7 +31,8 @@ scrollbox
 
 dialog:not([advancedMode=true]) #nodes-tree,
 dialog:not([advancedMode=true]) #nodes-tree-splitter,
-dialog:not([advancedMode=true]) #attribute-custom
+dialog:not([advancedMode=true]) #attribute-custom,
+dialog:not([advancedMode=true]) #attributes textbox
 {
   display: none;
 }
@@ -42,3 +43,17 @@ treechildren::-moz-tree-cell-text(anchor) {
 treechildren::-moz-tree-row(anchor, selected-false) {
   background-color: #FFC0C0;
 }
+
+#attributes .attribute {
+  margin-bottom: 10px;
+}
+#attributes checkbox .checkbox-label-box {
+  display: none;
+}
+#attributes checkbox + vbox {
+  border: 1px solid transparent;
+}
+#attributes checkbox:focus + vbox {
+  border: 1px dotted ThreeDDarkShadow;
+}
+
