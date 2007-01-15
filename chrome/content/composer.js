@@ -327,9 +327,19 @@ function updateExpression() {
 }
 
 function fillDomains(domainData) {
-  var template = document.getElementById("domain-template");
+  var list = document.getElementById("domainGroup");
+
+  var commandHandler = function() {
+    changeDomain(this);
+  }
+
+  var node = document.createElement("radio");
+  node.setAttribute("label", list.getAttribute("_labelnone"))
+  node.setAttribute("value", "");
+  node.addEventListener("command", commandHandler, false);
   if (domainData.selected == "")
     template.setAttribute("selected", "true");
+  list.appendChild(node);
 
   var parts = domainData.value.split(".");
   if (parts[0] == "")
@@ -338,15 +348,13 @@ function fillDomains(domainData) {
   for (var i = 1; i <= parts.length; i++) {
     var curDomain = parts.slice(parts.length - i).join(".");
 
-    var node = template.cloneNode(true);
-    node.removeAttribute("id");
-    node.setAttribute("label", curDomain);
+    var node = document.createElement("radio");
+    node.setAttribute("label", curDomain)
     node.setAttribute("value", curDomain);
-
+    node.addEventListener("command", commandHandler, false);
     if (domainData.selected == curDomain)
       node.setAttribute("selected", "true");
-
-    template.parentNode.appendChild(node);
+    list.appendChild(node);
   }
 }
 

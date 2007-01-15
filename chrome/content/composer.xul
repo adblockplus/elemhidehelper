@@ -60,9 +60,7 @@
     <groupbox id="domain" orient="vertical">
       <caption label="&domain.label;"/>
       <scrollbox flex="1" orient="vertical">
-        <radiogroup id="domainGroup">
-          <radio id="domain-template" label="&domain.none.label;" value="" oncommand="changeDomain(this)"/>
-        </radiogroup>
+        <radiogroup id="domainGroup" _labelnone="&domain.none.label;"/>
       </scrollbox>
     </groupbox>
     <groupbox id="attributes" flex="2">
