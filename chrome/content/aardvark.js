@@ -39,11 +39,7 @@ var ehhAardvark = {
 };
 
 ehhAardvark.start = function(browser) {
-  if (!browser || !browser.contentWindow || !(browser.contentDocument instanceof HTMLDocument) || !browser.contentDocument.body)
-    return;
-
-  var location = browser.contentWindow.location;
-  if (location.href == "about:blank" || location.hostname == "")
+  if (!ehhCanSelect(browser))
     return;
 
   if (!("viewSourceURL" in this)) {
@@ -74,6 +70,8 @@ ehhAardvark.start = function(browser) {
   browser.addEventListener("keypress", this.keyPress, false);
   browser.addEventListener("mousemove", this.mouseMove, false);
   browser.contentWindow.addEventListener("pagehide", this.pageHide, false);
+
+  browser.contentWindow.focus();
 
   this.browser = browser;
 
@@ -201,7 +199,6 @@ ehhAardvark.makeElems = function ()
   {
     d = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
     d.style.display = "none";
-    d.style.overflow = "hidden";
     d.style.position = "absolute";
     d.style.height = "0px";
     d.style.width = "0px";
@@ -246,6 +243,16 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
 
   this.selectedElem = elem;
 
+  for (var i = 0; i < 4; i++) {
+    try {
+      doc.adoptNode(this.borderElems[i]);
+    }
+    catch (e) {
+      // Gecko 1.8 doesn't implement adoptNode, ignore
+    }
+    doc.body.appendChild(this.borderElems[i]);
+  }
+
   var pos = this.getPos(elem)
   var dims = this.getWindowDimensions (doc);
   var y = pos.y;
@@ -276,13 +283,16 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
     = this.borderElems[3].style.display
     = "";
   
-  for (var i = 0; i < 4; i++) {
-    doc.adoptNode(this.borderElems[i]);
-    doc.body.appendChild(this.borderElems[i]);
-  }
-
   var y = pos.y + elem.offsetHeight + 1;
   
+  try {
+    doc.adoptNode(this.labelElem);
+  }
+  catch(e) {
+    // Gecko 1.8 doesn't implement adoptNode, ignore
+  }
+  doc.body.appendChild(this.labelElem);
+
   this.labelElem.innerHTML = string;
   this.labelElem.style.display = "";
 
@@ -311,9 +321,6 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
   }
   this.labelElem.style.left = (pos.x + 2) + "px";
   this.labelElem.style.top = y + "px";
-
-  doc.adoptNode(this.labelElem);
-  doc.body.appendChild(this.labelElem);
 }
 
 ehhAardvark.clearBox = function() {
@@ -661,6 +668,6 @@ ehhAardvark.showMenu = function ()
   }
 
   // Show help box
-  helpBox.showPopup(getBrowser().selectedBrowser, -1, -1, "tooltip", "topleft", "topleft");
+  helpBox.showPopup(this.browser, -1, -1, "tooltip", "topleft", "topleft");
   return true;
 }
