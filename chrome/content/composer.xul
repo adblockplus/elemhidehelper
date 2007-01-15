@@ -79,22 +79,7 @@
           <treechildren id="nodes-tree-children"/>
         </tree>
         <splitter id="nodes-tree-splitter"/>
-        <scrollbox flex="1" orient="vertical">
-          <hbox id="attribute-template" class="attribute" hidden="true">
-            <checkbox oncommand="toggleAttr(this.parentNode, this)"/>
-            <vbox flex="1">
-              <description value="&attributes.tagname.label;"/>
-              <textbox oninput="setSelectedAttrValue(this.parentNode.parentNode, this)" hidden="true"/>
-            </vbox>
-          </hbox>
-          <hbox id="attribute-custom" class="attribute">
-            <checkbox id="attribute-custom-check" oncommand="toggleAttr(this.parentNode, this)"/>
-            <vbox flex="1">
-              <description value="&attributes.custom.label;"/>
-              <textbox id="attribute-custom-field" oninput="setSelectedAttrValue(this.parentNode.parentNode, this)"/>
-            </vbox>
-          </hbox>
-        </scrollbox>
+        <scrollbox id="attributes-list" orient="vertical" flex="1" _labeltagname="&attributes.tagname.label;" _labelcustom="&attributes.custom.label;"/>
       </hbox>
     </groupbox>
   </hbox>

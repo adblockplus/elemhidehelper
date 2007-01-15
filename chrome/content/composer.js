@@ -410,52 +410,41 @@ function fillNodes(nodeData) {
 }
 
 function fillAttributes(nodeData) {
-  var template = document.getElementById("attribute-template");
-  var customCSS = document.getElementById("attribute-custom");
-  var customCSSCheck = document.getElementById("attribute-custom-check");
-  var customCSSField = document.getElementById("attribute-custom-field");
   selectedNode = nodeData;
 
-  // Remove everything between our template and the custom CSS field
-  var child = template.nextSibling;
-  while (child) {
-    var nextChild = child.nextSibling;
-    if (child == customCSS)
-      break;
+  var list = document.getElementById("attributes-list");
+  while(list.firstChild)
+    list.removeChild(list.firstChild);
 
-    child.parentNode.removeChild(child);
-    child = nextChild;
-  }
-
-  // Add tag name checkbox
-  var node = template.cloneNode(true);
-  node.hidden = false;
-  node.removeAttribute("id");
+  // Add tag name entry
+  var node = document.createElement("attribute");
   node.attr = nodeData.tagName;
-  var description = node.getElementsByTagName("description")[0];
-  description.setAttribute("value", description.getAttribute("value") + " " + nodeData.tagName.value);
-  node.getElementsByTagName("checkbox")[0].setAttribute("checked", nodeData.tagName.checked);
-  template.parentNode.insertBefore(node, customCSS);
+  node.setAttribute("notextbox", "true");
+  node.setAttribute("checked", nodeData.tagName.checked);
+  node.setAttribute("label", list.getAttribute("_labeltagname") + " " + nodeData.tagName.value);
+  list.appendChild(node);
 
-  // Add attribute checkboxes
+  // Add attribute entries
   for (var i = 0; i < nodeData.attributes.length; i++) {
     var attr = nodeData.attributes[i];
 
-    node = template.cloneNode(true);
-    node.hidden = false;
-    node.removeAttribute("id");
+    node = document.createElement("attribute");
     node.attr = attr;
-    node.getElementsByTagName("description")[0].setAttribute("value", attr.name + ": " + attr.value);
-    node.getElementsByTagName("checkbox")[0].setAttribute("checked", attr.checked);
-    node.getElementsByTagName("textbox")[0].setAttribute("value", attr.selected);
-    node.getElementsByTagName("textbox")[0].hidden = false;
-    template.parentNode.insertBefore(node, customCSS);
+    node.setAttribute("checked", attr.checked);
+    node.setAttribute("label", attr.name + ": " + attr.value);
+    node.setAttribute("value", attr.selected);
+    list.appendChild(node);
   }
 
-  // Initialize custom CSS field
-  customCSS.attr = nodeData.customCSS;
-  customCSSCheck.setAttribute("checked", nodeData.customCSS.checked);
-  customCSSField.value = nodeData.customCSS.selected;
+  if (advancedMode) {
+    // Add custom CSS entry
+    node = document.createElement("attribute");
+    node.attr = nodeData.customCSS;
+    node.setAttribute("checked", nodeData.customCSS.checked);
+    node.setAttribute("label", list.getAttribute("_labelcustom"));
+    node.setAttribute("value", nodeData.customCSS.selected);
+    list.appendChild(node);
+  }
 }
 
 function togglePreview(preview) {
@@ -480,14 +469,14 @@ function changeDomain(node) {
   updateExpression();
 }
 
-function toggleAttr(editor, node) {
-  editor.attr.checked = node.checked;
+function toggleAttr(node) {
+  node.attr.checked = node.checked;
   updateExpression();
 }
 
-function setSelectedAttrValue(editor, node) {
-  editor.attr.selected = node.value;
-  if (editor.attr.checked)
+function setSelectedAttrValue(node) {
+  node.attr.selected = node.value;
+  if (node.attr.checked)
     updateExpression();
 }
 

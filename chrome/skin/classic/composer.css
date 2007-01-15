@@ -30,30 +30,38 @@ scrollbox
 }
 
 dialog:not([advancedMode=true]) #nodes-tree,
-dialog:not([advancedMode=true]) #nodes-tree-splitter,
-dialog:not([advancedMode=true]) #attribute-custom,
-dialog:not([advancedMode=true]) #attributes textbox
+dialog:not([advancedMode=true]) #nodes-tree-splitter
 {
   display: none;
 }
 
-treechildren::-moz-tree-cell-text(anchor) {
+treechildren::-moz-tree-cell-text(anchor)
+{
   font-weight: bold;
 }
-treechildren::-moz-tree-row(anchor, selected-false) {
+treechildren::-moz-tree-row(anchor, selected-false)
+{
   background-color: #FFC0C0;
 }
 
-#attributes .attribute {
-  margin-bottom: 10px;
+attribute
+{
+  -moz-binding: url(chrome://elemhidehelper/content/attribute.xml#attributeBasic);
+  padding: 5px;
 }
-#attributes checkbox .checkbox-label-box {
-  display: none;
-}
-#attributes checkbox + vbox {
+attribute vbox
+{
   border: 1px solid transparent;
 }
-#attributes checkbox:focus + vbox {
+attribute[selected="true"] vbox
+{
   border: 1px dotted ThreeDDarkShadow;
 }
-
+dialog[advancedMode=true] attribute:not([notextbox])
+{
+  -moz-binding: url(chrome://elemhidehelper/content/attribute.xml#attributeAdvanced);
+}
+dialog[advancedMode=true] attribute:not([notextbox]) .checkbox-label-box
+{
+  display: none;
+}
