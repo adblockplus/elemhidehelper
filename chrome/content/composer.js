@@ -461,7 +461,7 @@ function fillAttributes(nodeData) {
 function togglePreview(preview) {
   if (preview) {
     if (!previewStyle || !previewStyle.parentNode) {
-      previewStyle = doc.createElement("link");
+      previewStyle = doc.createElementNS("http://www.w3.org/1999/xhtml", "link");
       previewStyle.setAttribute("rel", "stylesheet");
       previewStyle.setAttribute("type", "text/css");
       doc.documentElement.appendChild(previewStyle);

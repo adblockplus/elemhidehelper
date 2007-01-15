@@ -30,7 +30,7 @@ function ehhInit() {
   if (document.getElementById("abp-toolbar-popup"))
     document.getElementById("abp-toolbar-popup").addEventListener("popupshowing", ehhFillPopup, false);
   window.addEventListener("blur", ehhHideTooltips, true);
-  getBrowser().addEventListener("select", ehhStop, false);
+  ehhGetBrowser().addEventListener("select", ehhStop, false);
 
   // Make sure we configure the shortcut key even if the default pref isn't there
   var prefService = Components.classes["@mozilla.org/preferences-service;1"]
@@ -96,16 +96,32 @@ function ehhFillPopup(event) {
   popup = popup.replace(/popup$/, '');
 
   var browser = ehhGetBrowser();
-  var enabled = (browser && browser.contentWindow &&
-                 browser.contentDocument instanceof HTMLDocument &&
-                 browser.contentDocument.body &&
-                 browser.contentWindow.location.href != "about:blank" &&
-                 browser.contentWindow.location.hostname != "");
+  var enabled = ehhCanSelect(browser);
   var running = (enabled && browser == ehhAardvark.browser);
 
   document.getElementById(popup + "ehh-selectelement").setAttribute("disabled", !enabled);
   document.getElementById(popup + "ehh-selectelement").hidden = running;
   document.getElementById(popup + "ehh-stopselection").hidden = !running;
+}
+
+function ehhCanSelect(browser) {
+  if (!browser || !browser.contentWindow || 
+      !(browser.contentDocument instanceof HTMLDocument) ||
+      !browser.contentDocument.body)
+    return false;
+
+  var location = browser.contentWindow.location;
+  if (location.href == "about:blank")
+    return false;
+
+  if (location.hostname == "" &&
+      location.protocol != "mailbox:" &&
+      location.protocol != "imap:" &&
+      location.protocol != "news:" &&
+      location.protocol != "snews:")
+    return false;
+
+  return true;
 }
 
 function ehhSelectElement() {
