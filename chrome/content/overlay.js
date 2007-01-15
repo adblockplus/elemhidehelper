@@ -59,6 +59,17 @@ function ehhInit() {
   }
 }
 
+function ehhGetBrowser() {
+  if ("getBrowser" in window)
+    return getBrowser();
+  else if ("messageContent" in window)
+    return window.messageContent;
+  else if (document.getElementById("frame_main_pane"))
+    return document.getElementById("frame_main_pane");
+  else
+    return null;
+}
+
 function ehhHideTooltips() {
   document.getElementById("ehh-helpbox").hidePopup();
   document.getElementById("ehh-commandlabel").hidePopup();
@@ -84,12 +95,13 @@ function ehhFillPopup(event) {
 
   popup = popup.replace(/popup$/, '');
 
-  var enabled = (window.content && 
-                 content.document instanceof HTMLDocument &&
-                 content.document.body &&
-                 content.location.href != "about:blank" &&
-                 content.location.hostname != "");
-  var running = (enabled && window.content == ehhAardvark.wnd);
+  var browser = ehhGetBrowser();
+  var enabled = (browser && browser.contentWindow &&
+                 browser.contentDocument instanceof HTMLDocument &&
+                 browser.contentDocument.body &&
+                 browser.contentWindow.location.href != "about:blank" &&
+                 browser.contentWindow.location.hostname != "");
+  var running = (enabled && browser == ehhAardvark.browser);
 
   document.getElementById(popup + "ehh-selectelement").setAttribute("disabled", !enabled);
   document.getElementById(popup + "ehh-selectelement").hidden = running;
@@ -97,16 +109,16 @@ function ehhFillPopup(event) {
 }
 
 function ehhSelectElement() {
-  var wnd = window.content;
-  if (!content || !content.document)
+  var browser = ehhGetBrowser();
+  if (!browser.contentWindow || !browser.contentDocument)
     return;
 
-  if (wnd == ehhAardvark.wnd) {
+  if (browser == ehhAardvark.browser) {
     ehhStop();
     return;
   }
 
-  ehhAardvark.start(wnd);
+  ehhAardvark.start(browser);
 }
 
 function ehhStop() {
