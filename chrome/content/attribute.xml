@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Adblock Plus Element Hiding Helper.
+   -
+   - The Initial Developer of the Original Code is
+   - Wladimir Palant.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<bindings id="attributeBindings"
+   xmlns="http://www.mozilla.org/xbl"
+   xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+   xmlns:xbl="http://www.mozilla.org/xbl">
+
+  <binding id="attributeBasic">
+    <content>
+      <xul:checkbox anonid="checkbox" xbl:inherits="checked,label"/>
+    </content>
+    <implementation>
+      <property name="checked">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid", "checkbox").checked;
+        </getter>
+      </property>
+    </implementation>
+    <handlers>
+      <handler event="command" phase="bubble" action="toggleAttr(event.currentTarget);"/>
+      <handler event="focus" phase="bubble" action="event.currentTarget.setAttribute('selected', 'true');"/>
+      <handler event="blur" phase="bubble" action="event.currentTarget.removeAttribute('selected');"/>
+    </handlers>
+  </binding>
+
+  <binding id="attributeAdvanced" extends="chrome://elemhidehelper/content/attribute.xml#attributeBasic">
+    <content>
+      <xul:checkbox anonid="checkbox" xbl:inherits="checked"/>
+      <xul:vbox flex="1">
+        <xul:label anonid="label" xbl:inherits="value=label" onclick="document.getAnonymousElementByAttribute(this.parentNode.parentNode, 'anonid', 'checkbox').click();"/>
+        <xul:textbox anonid="textbox" xbl:inherits="value"/>
+      </xul:vbox>
+    </content>
+    <implementation>
+      <constructor>
+        var randID = new String(Math.random()).replace(/\D/g, "");
+        document.getAnonymousElementByAttribute(this, "anonid", "checkbox").setAttribute("id", randID);
+        document.getAnonymousElementByAttribute(this, "anonid", "label").setAttribute("control", randID);
+      </constructor>
+      <property name="value">
+        <getter>
+          return document.getAnonymousElementByAttribute(this, "anonid", "textbox").value;
+        </getter>
+      </property>
+    </implementation>
+    <handlers>
+      <handler event="input" phase="bubble" action="setSelectedAttrValue(event.currentTarget);"/>
+    </handlers>
+  </binding>
+</bindings>
