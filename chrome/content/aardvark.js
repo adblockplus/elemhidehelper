@@ -28,16 +28,22 @@
  **********************************/
 
 var ehhAardvark = {
-  wnd: null,
+  browser: null,
   selectedElem: null,
   commentElem : null,
   mouseX: -1,
   mouseY: -1,
-  commandLabelTimeout: 0
+  commandLabelTimeout: 0,
+  borderElems: null,
+  labelElem: null
 };
 
-ehhAardvark.start = function(wnd) {
-  if (!wnd || !(wnd.document instanceof HTMLDocument) || !wnd.document.body || wnd.location.href == "about:blank" || wnd.location.hostname == "")
+ehhAardvark.start = function(browser) {
+  if (!browser || !browser.contentWindow || !(browser.contentDocument instanceof HTMLDocument) || !browser.contentDocument.body)
+    return;
+
+  var location = browser.contentWindow.location;
+  if (location.href == "about:blank" || location.hostname == "")
     return;
 
   if (!("viewSourceURL" in this)) {
@@ -63,15 +69,16 @@ ehhAardvark.start = function(wnd) {
     }
   }
 
-  wnd.addEventListener("click", this.mouseClick, false);
-  wnd.addEventListener("mouseover", this.mouseOver, false);
-  wnd.addEventListener("keypress", this.keyPress, false);
-  wnd.addEventListener("pagehide", this.pageHide, false);
-  getBrowser().selectedBrowser.addEventListener("mousemove", this.mouseMove, false);
+  browser.addEventListener("click", this.mouseClick, false);
+  browser.addEventListener("mouseover", this.mouseOver, false);
+  browser.addEventListener("keypress", this.keyPress, false);
+  browser.addEventListener("mousemove", this.mouseMove, false);
+  browser.contentWindow.addEventListener("pagehide", this.pageHide, false);
 
-  this.wnd = wnd;
+  this.browser = browser;
 
-  this.makeElems();
+  if (!this.labelElem)
+    this.makeElems();
   this.showMenu();
 }
 
@@ -192,7 +199,7 @@ ehhAardvark.makeElems = function ()
 
   for (i=0; i<4; i++)
   {
-    d = this.wnd.document.createElement ("div");
+    d = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
     d.style.display = "none";
     d.style.overflow = "hidden";
     d.style.position = "absolute";
@@ -205,18 +212,15 @@ ehhAardvark.makeElems = function ()
       d.style.borderLeft = "2px solid #f00";
     d.ehhAardvarkLabel = true; // mark as ours
     this.borderElems[i] = d;
-    this.wnd.document.body.appendChild (d);
   }
 
-  d = this.wnd.document.createElement ("div");
+  d = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
   this.setElementStyleDefault (d, "#fff0cc");
-  d.ehhAardvarkLabel = true; // mark as ours
   d.style.borderTopWidth = "0";
   d.style.MozBorderRadiusBottomleft = "6px";
   d.style.MozBorderRadiusBottomright = "6px";
   d.style.zIndex = "65535";
-  d.style.visibility = "hidden";
-  this.wnd.document.body.appendChild (d);
+  d.ehhAardvarkLabel = true; // mark as ours
   this.labelElem = d;
 }
 
@@ -236,10 +240,14 @@ ehhAardvark.makeElementLabelString = function(elem) {
 }
 
 ehhAardvark.showBoxAndLabel = function(elem, string) {
+  var doc = elem.ownerDocument;
+  if (!doc || !doc.body)
+    return;
+
   this.selectedElem = elem;
 
   var pos = this.getPos(elem)
-  var dims = this.getWindowDimensions ();
+  var dims = this.getWindowDimensions (doc);
   var y = pos.y;
 
   this.borderElems[0].style.left
@@ -268,6 +276,11 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
     = this.borderElems[3].style.display
     = "";
   
+  for (var i = 0; i < 4; i++) {
+    doc.adoptNode(this.borderElems[i]);
+    doc.body.appendChild(this.borderElems[i]);
+  }
+
   var y = pos.y + elem.offsetHeight + 1;
   
   this.labelElem.innerHTML = string;
@@ -298,18 +311,20 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
   }
   this.labelElem.style.left = (pos.x + 2) + "px";
   this.labelElem.style.top = y + "px";
-  this.labelElem.style.visibility = "visible";
+
+  doc.adoptNode(this.labelElem);
+  doc.body.appendChild(this.labelElem);
 }
 
 ehhAardvark.clearBox = function() {
   this.selectedElem = null;
-  if ("borderElems" in this)
-  {
-    for (var i = 0; i < this.borderElems.length; i++)
-      this.borderElems[i].style.display = "none";
-    this.labelElem.style.display = "none";
-    this.labelElem.style.visibility = "hidden";
-  }
+
+  for (var i = 0; i < this.borderElems.length; i++)
+    if (this.borderElems[i].parentNode)
+      this.borderElems[i].parentNode.removeChild(this.borderElems[i]);
+
+  if (this.labelElem.parentNode)
+    this.labelElem.parentNode.removeChild(this.labelElem);
 }
 
 ehhAardvark.getPos = function (elem)
@@ -325,11 +340,10 @@ ehhAardvark.getPos = function (elem)
   return pos;
 }
 
-ehhAardvark.getWindowDimensions = function ()
+ehhAardvark.getWindowDimensions = function (doc)
 {
   var out = {};
 
-  var doc = this.wnd.document;
   out.scrollX = doc.body.scrollLeft + doc.documentElement.scrollLeft; 
   out.scrollY = doc.body.scrollTop + doc.documentElement.scrollTop;
 
@@ -388,6 +402,9 @@ ehhAardvark.wider = function (elem)
   if (elem)
   {
     var newElem = elem.parentNode;
+    if (newElem && newElem.nodeType == newElem.DOCUMENT_NODE && newElem.defaultView && !(newElem.defaultView.frameElement instanceof HTMLFrameElement))
+      newElem = newElem.defaultView.frameElement;
+
     if (!newElem || newElem.nodeType != newElem.ELEMENT_NODE)
       return false;
     
@@ -428,24 +445,22 @@ ehhAardvark.narrower = function (elem)
 //------------------------------------------------------------
 ehhAardvark.quit = function ()
 {
-  if (!this.wnd)
+  if (!this.browser)
     return false;
 
   this.clearBox();
   ehhHideTooltips();
   
-  this.wnd.removeEventListener("click", this.mouseClick, false);
-  this.wnd.removeEventListener("mouseover", this.mouseOver, false);
-  this.wnd.removeEventListener("keypress", this.keyPress, false);
-  this.wnd.removeEventListener("pagehide", this.pageHide, false);
-  getBrowser().selectedBrowser.removeEventListener("mousemove", this.mouseMove, false);
+  this.browser.removeEventListener("click", this.mouseClick, false);
+  this.browser.removeEventListener("mouseover", this.mouseOver, false);
+  this.browser.removeEventListener("keypress", this.keyPress, false);
+  this.browser.removeEventListener("mousemove", this.mouseMove, false);
+  this.browser.contentWindow.removeEventListener("pagehide", this.pageHide, false);
 
   this.selectedElem = null;
-  this.wnd = null;
+  this.browser = null;
   this.commentElem = null;
   delete this.widerStack;
-  delete this.borderElems;
-  delete this.labelElem;
   return true;
 }
 
