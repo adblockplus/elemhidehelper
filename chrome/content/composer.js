@@ -47,6 +47,9 @@ function NodeData(node, parentNode) {
     prevSibling = prevSibling.previousSibling;
   this.prevSibling = (prevSibling ? new NodeData(prevSibling, this.parentNode) : null);
 
+  if (!prevSibling)
+    this.firstChild = {checked: false};
+
   this.attributes = [];
   for (var i = 0; i < node.attributes.length; i++) {
     var attribute = node.attributes[i];
@@ -241,6 +244,11 @@ function updateExpression() {
                                         .replace(/\}/, "\\7D ");
     }
 
+    if ("firstChild" in curNode && curNode.firstChild.checked) {
+      expressionSimple = null;
+      expressionRaw += ":first-child";
+    }
+
     curNode.expressionSimple = expressionSimple;
     curNode.expressionRaw = expressionRaw;
 
@@ -431,6 +439,16 @@ function fillAttributes(nodeData) {
   node.setAttribute("checked", nodeData.tagName.checked);
   node.setAttribute("label", list.getAttribute("_labeltagname") + " " + nodeData.tagName.value);
   list.appendChild(node);
+
+  // Add first/last child entries
+  if (advancedMode && "firstChild" in nodeData) {
+    var node = document.createElement("attribute");
+    node.attr = nodeData.firstChild;
+    node.setAttribute("notextbox", "true");
+    node.setAttribute("checked", nodeData.firstChild.checked);
+    node.setAttribute("label", list.getAttribute("_labelfirstchild"));
+    list.appendChild(node);
+  }
 
   // Add attribute entries
   for (var i = 0; i < nodeData.attributes.length; i++) {
