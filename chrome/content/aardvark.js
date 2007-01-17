@@ -255,7 +255,6 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
 
   var pos = this.getPos(elem)
   var dims = this.getWindowDimensions (doc);
-  var y = pos.y;
 
   this.borderElems[0].style.left
     = this.borderElems[1].style.left
