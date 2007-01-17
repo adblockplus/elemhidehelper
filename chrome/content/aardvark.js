@@ -77,7 +77,17 @@ ehhAardvark.start = function(browser) {
 
   if (!this.labelElem)
     this.makeElems();
-  this.showMenu();
+
+  var prefService = Components.classes["@mozilla.org/preferences-service;1"]
+                              .getService(Components.interfaces.nsIPrefService);
+  var branch = prefService.getBranch("extensions.adblockplus.");
+  var showMenu = true;
+  try {
+    showMenu = branch.getBoolPref("ehh.showhelp");
+  } catch(e) {}
+
+  if (showMenu)
+    this.showMenu();
 }
 
 ehhAardvark.doCommand = function(command, event) {
