@@ -36,4 +36,5 @@
 <!ENTITY attributes.label         "Require attributes">
 <!ENTITY attributes.tagname.label "Tag name:">
 <!ENTITY attributes.firstchild.label  "First child">
+<!ENTITY attributes.lastchild.label   "Last child">
 <!ENTITY attributes.custom.label  "Custom CSS:">

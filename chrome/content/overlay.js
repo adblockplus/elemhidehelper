@@ -25,6 +25,72 @@
 window.addEventListener("load", ehhInit, false);
 
 function ehhInit() {
+  var prefService = Components.classes["@mozilla.org/preferences-service;1"]
+                              .getService(Components.interfaces.nsIPrefService);
+  var branch = prefService.getBranch("extensions.adblockplus.");
+
+  // Check whether ABP is installed and has at least the required version
+  var requiredVersion = "0.7.2.3";
+  var installedVersion = "0";
+  try {
+    var abp = Components.classes["@mozilla.org/adblockplus;1"]
+                        .createInstance(Components.interfaces.nsIAdblockPlus);
+    installedVersion = abp.getInstalledVersion();
+  } catch(e) {}
+
+  var parts1 = requiredVersion.split(".");
+  var parts2 = installedVersion.split(".");
+  var mustUpdate = false;
+  for (var i = 0; i < parts1.length; i++) {
+    if (parts2.length <= i || parseInt(parts1[i]) > parseInt(parts2[i])) {
+      mustUpdate = true;
+      break;
+    }
+    if (parseInt(parts1[i]) < parseInt(parts2[i]))
+      break;
+  }
+
+  // Show warning about required ABP update if necessary
+  if (mustUpdate) {
+    var noWarning = {value: false};
+    try {
+      noWarning.value = branch.getBoolPref("ehh.norequirementswarning");
+    } catch(e) {}
+
+    if (!noWarning.value) {
+      // Make sure we don't show the warning twice
+      var hiddenWnd = Components.classes["@mozilla.org/appshell/appShellService;1"]
+                                .getService(Components.interfaces.nsIAppShellService)
+                                .hiddenDOMWindow;
+      if ("ehhNoRequirementsWarning" in hiddenWnd)
+        noWarning.value = true;
+      else
+        hiddenWnd.ehhNoRequirementsWarning = true;
+    }
+
+    if (!noWarning.value) {
+      setTimeout(function() {
+        var stringService = Components.classes["@mozilla.org/intl/stringbundle;1"]
+                                      .getService(Components.interfaces.nsIStringBundleService);
+        var strings = stringService.createBundle("chrome://elemhidehelper/locale/global.properties");
+        var promptService = Components.classes['@mozilla.org/embedcomp/prompt-service;1']
+                                      .getService(Components.interfaces.nsIPromptService);
+        promptService.alertCheck(window,
+            strings.GetStringFromName("noabp_warning_title"),
+            strings.formatStringFromName("noabp_warning_text", [requiredVersion], 1),
+            strings.GetStringFromName("noabp_warning_disable"),
+            noWarning);
+
+        if (noWarning.value) {
+          try {
+            branch.setBoolPref("ehh.norequirementswarning", true);
+          } catch(e) {}
+        }
+      }, 0);
+    }
+    return;
+  }
+
   if (document.getElementById("abp-status-popup"))
     document.getElementById("abp-status-popup").addEventListener("popupshowing", ehhFillPopup, false);
   if (document.getElementById("abp-toolbar-popup"))
@@ -33,9 +99,6 @@ function ehhInit() {
   ehhGetBrowser().addEventListener("select", ehhStop, false);
 
   // Make sure we configure the shortcut key even if the default pref isn't there
-  var prefService = Components.classes["@mozilla.org/preferences-service;1"]
-                              .getService(Components.interfaces.nsIPrefService);
-  var branch = prefService.getBranch("extensions.adblockplus.");
   if (window.abpConfigureKey) {
     var defaultBranch = prefService.getDefaultBranch("extensions.adblockplus.");
     try {
@@ -54,7 +117,7 @@ function ehhInit() {
   // Make sure chrome protection works in SeaMonkey
   if (branch.getPrefType("protectchrome.ehh") != branch.PREF_STRING) {
     try {
-      key = branch.setCharPref("protectchrome.ehh", "elemhidehelper");
+      branch.setCharPref("protectchrome.ehh", "elemhidehelper");
     } catch(e) {}
   }
 }

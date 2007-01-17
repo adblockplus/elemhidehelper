@@ -80,6 +80,7 @@
         <scrollbox id="attributes-list" orient="vertical" flex="1"
             _labeltagname="&attributes.tagname.label;"
             _labelfirstchild="&attributes.firstchild.label;"
+            _labellastchild="&attributes.lastchild.label;"
             _labelcustom="&attributes.custom.label;"/>
       </hbox>
     </groupbox>
