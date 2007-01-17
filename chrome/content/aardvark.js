@@ -439,7 +439,7 @@ ehhAardvark.narrower = function (elem)
       this.widerStack[this.widerStack.length-1] == elem)
     {
       this.widerStack.pop();
-      newElem = this.widerStack[this.widerStack.length-1];
+      var newElem = this.widerStack[this.widerStack.length-1];
       this.showBoxAndLabel (newElem, 
           this.makeElementLabelString (newElem));
       return true;
@@ -563,7 +563,7 @@ ehhAardvark.getOuterHtmlFormatted = function (node, container)
 
       var startTag = document.createElement("hbox");
       startTag.className = "elementStartTag";
-      if (!node.firstChild);
+      if (!node.firstChild)
         startTag.className += "elementEndTag";
 
       this.appendDescription(startTag, "<", null);
@@ -615,7 +615,7 @@ ehhAardvark.getOuterHtmlFormatted = function (node, container)
   if (type != "cdata") {
     text = text.replace(/&/g, "&amp;")
                .replace(/</g, "&lt;")
-               .replace(/>/g, "&gt;")
+               .replace(/>/g, "&gt;");
   }
   text = text.replace(/\t/g, "  ");
   if (type == "cdata")
