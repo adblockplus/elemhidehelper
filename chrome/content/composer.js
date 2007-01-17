@@ -47,8 +47,14 @@ function NodeData(node, parentNode) {
     prevSibling = prevSibling.previousSibling;
   this.prevSibling = (prevSibling ? new NodeData(prevSibling, this.parentNode) : null);
 
-  if (!prevSibling)
+  if (parentNode && !prevSibling)
     this.firstChild = {checked: false};
+
+  var nextSibling = node.nextSibling;
+  while (nextSibling && nextSibling.nodeType != node.ELEMENT_NODE)
+    nextSibling = nextSibling.nextSibling;
+  if (parentNode && !nextSibling)
+    this.lastChild = {checked: false};
 
   this.attributes = [];
   for (var i = 0; i < node.attributes.length; i++) {
@@ -248,6 +254,10 @@ function updateExpression() {
       expressionSimple = null;
       expressionRaw += ":first-child";
     }
+    if ("lastChild" in curNode && curNode.lastChild.checked) {
+      expressionSimple = null;
+      expressionRaw += ":last-child";
+    }
 
     curNode.expressionSimple = expressionSimple;
     curNode.expressionRaw = expressionRaw;
@@ -339,14 +349,14 @@ function fillDomains(domainData) {
 
   var commandHandler = function() {
     changeDomain(this);
-  }
+  };
 
   var node = document.createElement("radio");
-  node.setAttribute("label", list.getAttribute("_labelnone"))
+  node.setAttribute("label", list.getAttribute("_labelnone"));
   node.setAttribute("value", "");
   node.addEventListener("command", commandHandler, false);
   if (domainData.selected == "")
-    template.setAttribute("selected", "true");
+    node.setAttribute("selected", "true");
   list.appendChild(node);
 
   var parts = domainData.value.split(".");
@@ -356,7 +366,7 @@ function fillDomains(domainData) {
   for (var i = 1; i <= parts.length; i++) {
     var curDomain = parts.slice(parts.length - i).join(".");
 
-    var node = document.createElement("radio");
+    node = document.createElement("radio");
     node.setAttribute("label", curDomain)
     node.setAttribute("value", curDomain);
     node.addEventListener("command", commandHandler, false);
@@ -385,11 +395,11 @@ function fillNodes(nodeData) {
     cell.setAttribute("label", nodeData.tagName.value);
     row.appendChild(cell);
 
-    var cell = document.createElement("treecell");
+    cell = document.createElement("treecell");
     cell.setAttribute("label", id);
     row.appendChild(cell);
 
-    var cell = document.createElement("treecell");
+    cell = document.createElement("treecell");
     cell.setAttribute("label", className);
     row.appendChild(cell);
 
@@ -442,11 +452,19 @@ function fillAttributes(nodeData) {
 
   // Add first/last child entries
   if (advancedMode && "firstChild" in nodeData) {
-    var node = document.createElement("attribute");
+    node = document.createElement("attribute");
     node.attr = nodeData.firstChild;
     node.setAttribute("notextbox", "true");
     node.setAttribute("checked", nodeData.firstChild.checked);
     node.setAttribute("label", list.getAttribute("_labelfirstchild"));
+    list.appendChild(node);
+  }
+  if (advancedMode && "lastChild" in nodeData) {
+    node = document.createElement("attribute");
+    node.attr = nodeData.lastChild;
+    node.setAttribute("notextbox", "true");
+    node.setAttribute("checked", nodeData.lastChild.checked);
+    node.setAttribute("label", list.getAttribute("_labellastchild"));
     list.appendChild(node);
   }
 
