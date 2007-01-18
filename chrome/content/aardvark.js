@@ -78,6 +78,8 @@ ehhAardvark.start = function(browser) {
   if (!this.labelElem)
     this.makeElems();
 
+  this.initHelpBox();
+
   var prefService = Components.classes["@mozilla.org/preferences-service;1"]
                               .getService(Components.interfaces.nsIPrefService);
   var branch = prefService.getBranch("extensions.adblockplus.");
@@ -114,6 +116,38 @@ ehhAardvark.showCommandLabel = function(key, label) {
     commandLabel.hidePopup();
     ehhAardvark.commandLabelTimeout = 0;
   }, 400);
+}
+
+ehhAardvark.initHelpBox = function() {
+  var helpBoxRows = document.getElementById("ehh-helpbox-rows");
+  if (helpBoxRows.firstChild)
+    return;
+
+  // Help box hasn't been filled yet, need to do it now
+  var stringService = Components.classes["@mozilla.org/intl/stringbundle;1"]
+                                .getService(Components.interfaces.nsIStringBundleService);
+  var strings = stringService.createBundle("chrome://elemhidehelper/locale/global.properties");
+
+  for (var i = 0; i < this.commands.length; i++) {
+    var command = this.commands[i];
+    var key = strings.GetStringFromName("command." + command + ".key");
+    var label = strings.GetStringFromName("command." + command + ".label");
+    this.commands[command + "_key"] = key.toLowerCase();
+    this.commands[command + "_label"] = label;
+
+    var row = document.createElement("row");
+    helpBoxRows.appendChild(row);
+
+    var element = document.createElement("description");
+    element.setAttribute("value", key);
+    element.className = "key";
+    row.appendChild(element);
+
+    element = document.createElement("description");
+    element.setAttribute("value", label);
+    element.className = "label";
+    row.appendChild(element);
+  }
 }
 
 ehhAardvark.onMouseClick = function(event) {
@@ -645,35 +679,6 @@ ehhAardvark.showMenu = function ()
   if (helpBox.getAttribute("_moz-menuactive") == "true") {
     helpBox.hidePopup();
     return true;
-  }
-
-  var helpBoxRows = document.getElementById("ehh-helpbox-rows");
-  if (!helpBoxRows.firstChild) {
-    // Help box hasn't been filled yet, need to do it now
-    var stringService = Components.classes["@mozilla.org/intl/stringbundle;1"]
-                                  .getService(Components.interfaces.nsIStringBundleService);
-    var strings = stringService.createBundle("chrome://elemhidehelper/locale/global.properties");
-
-    for (var i = 0; i < this.commands.length; i++) {
-      var command = this.commands[i];
-      var key = strings.GetStringFromName("command." + command + ".key");
-      var label = strings.GetStringFromName("command." + command + ".label");
-      this.commands[command + "_key"] = key.toLowerCase();
-      this.commands[command + "_label"] = label;
-
-      var row = document.createElement("row");
-      helpBoxRows.appendChild(row);
-
-      var element = document.createElement("description");
-      element.setAttribute("value", key);
-      element.className = "key";
-      row.appendChild(element);
-
-      element = document.createElement("description");
-      element.setAttribute("value", label);
-      element.className = "label";
-      row.appendChild(element);
-    }
   }
 
   // Show help box
