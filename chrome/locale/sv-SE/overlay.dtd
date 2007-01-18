@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Välj element att gömma">
+<!ENTITY selectelement.accesskey "ä">
+<!ENTITY stopselection.label "Avbryt">
+<!ENTITY stopselection.accesskey "v">
+<!ENTITY helpbox.title "Elementval - Snabbtangenter">
