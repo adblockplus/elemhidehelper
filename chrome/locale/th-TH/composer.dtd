@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "สร้างกฎการซ่อนส่วนประกอบ">
+<!ENTITY accept.label "เพิ่มกฎตัวกรอง">
+<!ENTITY advanced.label "มุมมองระดับสูง">
+<!ENTITY basic.label "มุมมองพื้นฐาน">
+<!ENTITY expression.label "กฎตัวกรอง">
+<!ENTITY preview.label "แสดงตัวอย่าง">
+<!ENTITY domain.label "ยึดเหนี่ยวกับโอเมน">
+<!ENTITY domain.none.label "โดเมนใดก็ได้(ไม่แนะนำ)">
+<!ENTITY nodes-tree.node.label "สถานีเชื่อมโยง">
+<!ENTITY nodes-tree.id.label "หมายเลข">
+<!ENTITY nodes-tree.class.label "กลุ่ม">
+<!ENTITY attributes.label "ต้องการลักษณะ">
+<!ENTITY attributes.tagname.label "ชื่อป้ายระบุ:">
+<!ENTITY attributes.firstchild.label "ลูกแรก">
+<!ENTITY attributes.lastchild.label "ลูกสุดท้าย">
+<!ENTITY attributes.custom.label "ซีเอสเอสกำหนดเอง:">
