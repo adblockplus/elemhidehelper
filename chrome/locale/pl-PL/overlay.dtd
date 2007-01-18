@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Wybierz elementy do zablokowania">
+<!ENTITY selectelement.accesskey "B">
+<!ENTITY stopselection.label "Usuń wybrane">
+<!ENTITY stopselection.accesskey "U">
+<!ENTITY helpbox.title "Wybór elementów - skróty klawiaturowe">
