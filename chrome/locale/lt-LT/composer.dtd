@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Sukurti elementų paslėpimo taisyklę">
+<!ENTITY accept.label "Pridėti filtro taisyklę">
+<!ENTITY advanced.label "Sudėtingesnis vaizdas">
+<!ENTITY basic.label "Įprastas vaizdas">
+<!ENTITY expression.label "Filtro taisyklė">
+<!ENTITY preview.label "Peržiūra">
+<!ENTITY domain.label "Susieti su domenu">
+<!ENTITY domain.none.label "Bet koks domenas (nerekomenduojama)">
+<!ENTITY nodes-tree.node.label "Mazgas">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Reikalauti savybių">
+<!ENTITY attributes.tagname.label "Žymės vardas:">
+<!ENTITY attributes.firstchild.label "Pirmasis „child“ elementas">
+<!ENTITY attributes.lastchild.label "Paskutinysis „child“ elementas">
+<!ENTITY attributes.custom.label "Pasirinktinas CSS:">
