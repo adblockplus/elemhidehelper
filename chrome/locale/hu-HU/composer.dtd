@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Elemhez tartozó elrejtési szabály létrehozása">
+<!ENTITY accept.label "Szűrő hozzáadása">
+<!ENTITY advanced.label "Haladó megjelenítés">
+<!ENTITY basic.label "Alapvető megjelenítés">
+<!ENTITY expression.label "Szűrő">
+<!ENTITY preview.label "Előnézet">
+<!ENTITY domain.label "Webhelyhez hozzácsatol">
+<!ENTITY domain.none.label "Tetszőleges webhely (nem javasolt)">
+<!ENTITY nodes-tree.node.label "Csomópont">
+<!ENTITY nodes-tree.id.label "azonosító">
+<!ENTITY nodes-tree.class.label "osztály">
+<!ENTITY attributes.label "Szükséges értékek">
+<!ENTITY attributes.tagname.label "Jelzőnév:">
+<!ENTITY attributes.firstchild.label "Első elem">
+<!ENTITY attributes.lastchild.label "Utolsó elem">
+<!ENTITY attributes.custom.label "Saját CSS:">
