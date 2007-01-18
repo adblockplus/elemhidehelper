@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Regel voor verbergen van elementen opstellen">
+<!ENTITY accept.label "Filter regel toevoegen">
+<!ENTITY advanced.label "Geavanceerd beeld">
+<!ENTITY basic.label "Basisbeeld">
+<!ENTITY expression.label "Filter regel">
+<!ENTITY preview.label "Voorbeeld">
+<!ENTITY domain.label "Aan domein koppelen">
+<!ENTITY domain.none.label "Elk domein (niet aanbevolen)">
+<!ENTITY nodes-tree.node.label "Node">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Attributen vereisen">
+<!ENTITY attributes.tagname.label "Tagnaam:">
+<!ENTITY attributes.firstchild.label "Eerste afgeleide">
+<!ENTITY attributes.lastchild.label "Laatste afgeleide">
+<!ENTITY attributes.custom.label "Aangepaste CSS:">
