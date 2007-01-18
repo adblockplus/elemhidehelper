@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Öğe gizleme kuralı yaz">
+<!ENTITY accept.label "Süzme kuralı ekle">
+<!ENTITY advanced.label "Gelişmiş görünüm">
+<!ENTITY basic.label "Temel görünüm">
+<!ENTITY expression.label "Süzme kuralı">
+<!ENTITY preview.label "Önizleme">
+<!ENTITY domain.label "Alan adına bağlama">
+<!ENTITY domain.none.label "Herhangi bir alan adı (önerilmez)">
+<!ENTITY nodes-tree.node.label "Düğüm">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Nitelik gereklilikleri">
+<!ENTITY attributes.tagname.label "Etiket adı:">
+<!ENTITY attributes.firstchild.label "İlk çocuk">
+<!ENTITY attributes.lastchild.label "Son çocuk">
+<!ENTITY attributes.custom.label "Özel CSS:">

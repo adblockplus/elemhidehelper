@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Gizlenecek öðeyi seç">
+<!ENTITY selectelement.accesskey "S">
+<!ENTITY stopselection.label "Öðe seçiminden vazgeç">
+<!ENTITY stopselection.accesskey "V">
+<!ENTITY helpbox.title "Öðe seçimi: Geçiþ tuþlarý">
