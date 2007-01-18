@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Elrejtendő elem kiválasztása">
+<!ENTITY selectelement.accesskey "k">
+<!ENTITY stopselection.label "Elemkiválasztás megszakítása">
+<!ENTITY stopselection.accesskey "m">
+<!ENTITY helpbox.title "Elemkiválasztás - Billentyűkombinációk">
