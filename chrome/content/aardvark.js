@@ -142,7 +142,7 @@ ehhAardvark.onMouseOver = function(event) {
 }
 
 ehhAardvark.onKeyPress = function(event) {
-  if (event.shiftKey || event.altKey || event.ctrlKey || event.metaKey)
+  if (event.altKey || event.ctrlKey || event.metaKey)
     return;
 
   var command = null;
