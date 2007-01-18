@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Tillverka regler för att gömma komponenter">
+<!ENTITY accept.label "Lägg till filterregel">
+<!ENTITY advanced.label "Avancerat">
+<!ENTITY basic.label "Standard">
+<!ENTITY expression.label "Filterregel">
+<!ENTITY preview.label "Förhandsvisa">
+<!ENTITY domain.label "Knyt till domän">
+<!ENTITY domain.none.label "Någon domän (rekommenderas ej)">
+<!ENTITY nodes-tree.node.label "Nod">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Kräver attribut">
+<!ENTITY attributes.tagname.label "Taggnamn:">
+<!ENTITY attributes.firstchild.label "Första instans">
+<!ENTITY attributes.lastchild.label "Sista instans">
+<!ENTITY attributes.custom.label "Egen CSS:">
