@@ -5,7 +5,7 @@
 <!ENTITY expression.label "Filtro taisyklė">
 <!ENTITY preview.label "Peržiūra">
 <!ENTITY domain.label "Susieti su domenu">
-<!ENTITY domain.none.label "Bet koks domenas (nerekomenduojama)">
+<!ENTITY domain.none.label "Bet kokiu domenu (nerekomenduojama)">
 <!ENTITY nodes-tree.node.label "Mazgas">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
