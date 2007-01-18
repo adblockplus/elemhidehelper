@@ -1,0 +1,40 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Adblock Plus Element Hiding Helper.
+   -
+   - The Initial Developer of the Original Code is
+   - Wladimir Palant.
+   - Portions created by the Initial Developer are Copyright (C) 2006
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<!ENTITY dialog.title             "Составление правила для скрытия элемента">
+<!ENTITY accept.label             "Добавить фильтр">
+<!ENTITY advanced.label           "Расширенный вид">
+<!ENTITY basic.label              "Стандартный вид">
+<!ENTITY expression.label         "Фильтр">
+<!ENTITY preview.label            "Предпросмотр">
+<!ENTITY domain.label             "Привязать к домену">
+<!ENTITY domain.none.label        "Любой домен (не рекомендуется)">
+<!ENTITY nodes-tree.node.label    "Узел">
+<!ENTITY nodes-tree.id.label      "id">
+<!ENTITY nodes-tree.class.label   "class">
+<!ENTITY attributes.label         "Требуемые атрибуты">
+<!ENTITY attributes.tagname.label "Имя тега:">
+<!ENTITY attributes.firstchild.label  "Первый дочерний узел">
+<!ENTITY attributes.lastchild.label   "Последний дочерний узел">
+<!ENTITY attributes.custom.label  "Произволное CSS-выражение:">
