@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Tworzenie reguł blokowania elementów">
+<!ENTITY accept.label "Dodaj regułę filtru">
+<!ENTITY advanced.label "Widok zaawansowany">
+<!ENTITY basic.label "Widok podstawowy">
+<!ENTITY expression.label "Reguła filtru">
+<!ENTITY preview.label "Podgląd">
+<!ENTITY domain.label "Przypisz do domeny">
+<!ENTITY domain.none.label "wszystkie domeny (nie zalecane)">
+<!ENTITY nodes-tree.node.label "Węzeł">
+<!ENTITY nodes-tree.id.label "ID">
+<!ENTITY nodes-tree.class.label "Klasa">
+<!ENTITY attributes.label "Atrybuty">
+<!ENTITY attributes.tagname.label "nazwa znacznika - ">
+<!ENTITY attributes.firstchild.label "pierwszy potomek">
+<!ENTITY attributes.lastchild.label "ostatni potomek">
+<!ENTITY attributes.custom.label "własny CSS">
