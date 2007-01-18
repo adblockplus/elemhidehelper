@@ -52,7 +52,7 @@
 
   <popup id="abp-status-popup">
     <menuitem id="abp-status-ehh-selectelement" hidden="true" insertbefore="abp-status-options" label="&selectelement.label;" accesskey="&selectelement.accesskey;" key="abp-key-ehh-selectelement" oncommand="ehhSelectElement()"/>
-    <menuitem id="abp-status-ehh-stopselection" hidden="true" insertbefore="abp-status-options" label="&stopselection.label;" accesskey="&selectelement.accesskey;" key="abp-key-ehh-selectelement" oncommand="ehhSelectElement()"/>
+    <menuitem id="abp-status-ehh-stopselection" hidden="true" insertbefore="abp-status-options" label="&stopselection.label;" accesskey="&stopselection.accesskey;" key="abp-key-ehh-selectelement" oncommand="ehhSelectElement()"/>
   </popup>
 
   <commandset id="abp-commandset">
