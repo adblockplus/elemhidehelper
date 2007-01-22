@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Συγγραφή κανόνα απόκρυψης στοιχείου">
+<!ENTITY accept.label "Προσθήκη κανόνα φίλτρου">
+<!ENTITY advanced.label "Λεπτομερής προβολή">
+<!ENTITY basic.label "Βασική προβολή">
+<!ENTITY expression.label "Κανόνας φίλτρου">
+<!ENTITY preview.label "Προεπισκόπηση">
+<!ENTITY domain.label "Προσκόλληση στο πεδίο">
+<!ENTITY domain.none.label "Οποιοδήποτε (δεν προτείνεται)">
+<!ENTITY nodes-tree.node.label "Κόμβος">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Απαίτηση ιδιοτήτων">
+<!ENTITY attributes.tagname.label "Ετικέτα:">
+<!ENTITY attributes.firstchild.label "Πρώτος απόγονος">
+<!ENTITY attributes.lastchild.label "Τελευταίος απόγονος">
+<!ENTITY attributes.custom.label "Προσαρμοσμένο CSS:">
