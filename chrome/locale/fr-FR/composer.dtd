@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Création de filtres pour masquer des éléments">
+<!ENTITY accept.label "Ajouter le filtre">
+<!ENTITY advanced.label "Affichage avancé">
+<!ENTITY basic.label "Affichage basique">
+<!ENTITY expression.label "Filtre">
+<!ENTITY preview.label "Aperçu">
+<!ENTITY domain.label "Associé au domaine">
+<!ENTITY domain.none.label "Tout domaine (non recommandé)">
+<!ENTITY nodes-tree.node.label "Noeud">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Attributs requis">
+<!ENTITY attributes.tagname.label "Nom de la balise :">
+<!ENTITY attributes.firstchild.label "Premier élément enfant">
+<!ENTITY attributes.lastchild.label "Dernier élément enfant">
+<!ENTITY attributes.custom.label "CSS personnalisée :">

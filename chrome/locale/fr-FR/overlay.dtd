@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Sélectionner un élément à masquer">
+<!ENTITY selectelement.accesskey "S">
+<!ENTITY stopselection.label "Quitter le mode &quot;sélection d&apos;élément&quot;">
+<!ENTITY stopselection.accesskey "Q">
+<!ENTITY helpbox.title "Sélection d&apos;élément - Raccourcis">

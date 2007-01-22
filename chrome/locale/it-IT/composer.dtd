@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Composizione della regola per nascondere elementi">
+<!ENTITY accept.label "Aggiungi regola del filtro">
+<!ENTITY advanced.label "Visualizzazione avanzata">
+<!ENTITY basic.label "Visualizzazione di base">
+<!ENTITY expression.label "Regola del filtro">
+<!ENTITY preview.label "Anteprima">
+<!ENTITY domain.label "Legame con il dominio">
+<!ENTITY domain.none.label "qualsiasi dominio (non raccomandato)">
+<!ENTITY nodes-tree.node.label "Nodo">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Attributi richiesti">
+<!ENTITY attributes.tagname.label "Nome del tag:">
+<!ENTITY attributes.firstchild.label "Primo elemento figlio">
+<!ENTITY attributes.lastchild.label "Ultimo elemento figlio">
+<!ENTITY attributes.custom.label "CSS personalizzato:">

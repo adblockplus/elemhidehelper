@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Vytvořit pravidlo pro skrývání elementu">
+<!ENTITY accept.label "Přidat pravidlo">
+<!ENTITY advanced.label "Rozšířené rozhraní">
+<!ENTITY basic.label "Základní rozhraní">
+<!ENTITY expression.label "Pravidlo">
+<!ENTITY preview.label "Náhled">
+<!ENTITY domain.label "Pro doménu">
+<!ENTITY domain.none.label "Jakákoli doména (nedoporučuje se)">
+<!ENTITY nodes-tree.node.label "Node">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Požadované atributy">
+<!ENTITY attributes.tagname.label "Jméno tagu:">
+<!ENTITY attributes.firstchild.label "První potomek">
+<!ENTITY attributes.lastchild.label "Poslední potomek">
+<!ENTITY attributes.custom.label "Vlastní CSS:">

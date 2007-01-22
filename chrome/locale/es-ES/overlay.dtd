@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Seleccionar elemento a ocultar">
+<!ENTITY selectelement.accesskey "S">
+<!ENTITY stopselection.label "Abortar la seleccion del elemento">
+<!ENTITY stopselection.accesskey "A">
+<!ENTITY helpbox.title "Selección de elementos - Teclas de acceso rápido">
