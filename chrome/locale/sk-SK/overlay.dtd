@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Vybrať prvok na skrytie">
+<!ENTITY selectelement.accesskey "V">
+<!ENTITY stopselection.label "Zrušiť výber prvku">
+<!ENTITY stopselection.accesskey "Z">
+<!ENTITY helpbox.title "Výber prvku - Klávesové skratky">

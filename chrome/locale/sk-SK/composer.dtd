@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Vytvoriť skryté pravidlo prvku">
+<!ENTITY accept.label "Pridať pravidlo filtra">
+<!ENTITY advanced.label "Pokročilé zobrazenie">
+<!ENTITY basic.label "Základné zobrazenie">
+<!ENTITY expression.label "Pravidlo filtra">
+<!ENTITY preview.label "Náhľad">
+<!ENTITY domain.label "Priradiť k doméne">
+<!ENTITY domain.none.label "Ľubovoľná doména (nedoporučené)">
+<!ENTITY nodes-tree.node.label "Uzol">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "trieda">
+<!ENTITY attributes.label "Požadované hodnoty">
+<!ENTITY attributes.tagname.label "Názov značky:">
+<!ENTITY attributes.firstchild.label "Prvý objekt">
+<!ENTITY attributes.lastchild.label "Posledný objekt">
+<!ENTITY attributes.custom.label "Vlastné CSS:">
