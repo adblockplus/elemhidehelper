@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Valitse piilotettava elementti">
+<!ENTITY selectelement.accesskey "S">
+<!ENTITY stopselection.label "Keskeytä elementin valinta">
+<!ENTITY stopselection.accesskey "S">
+<!ENTITY helpbox.title "Elementin valinta - Pikanäppäimet">
