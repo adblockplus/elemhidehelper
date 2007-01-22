@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Chọn phần tử để giấu">
+<!ENTITY selectelement.accesskey "p">
+<!ENTITY stopselection.label "Hủy bỏ chọn phần tử">
+<!ENTITY stopselection.accesskey "p">
+<!ENTITY helpbox.title "Chọn Phần tử - Phím nóng">
