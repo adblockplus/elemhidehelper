@@ -1,5 +1,5 @@
 <!ENTITY selectelement.label "Odaberite element za sakriti">
-<!ENTITY selectelement.accesskey "O">
+<!ENTITY selectelement.accesskey "d">
 <!ENTITY stopselection.label "Prekini odabiranje elementa">
-<!ENTITY stopselection.accesskey "P">
+<!ENTITY stopselection.accesskey "d">
 <!ENTITY helpbox.title "Odabiranje elementa - Tipkovničke kratice">
