@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Vybrat element ke skrytí">
+<!ENTITY selectelement.accesskey "V">
+<!ENTITY stopselection.label "Zrušit výběr elementu">
+<!ENTITY stopselection.accesskey "Z">
+<!ENTITY helpbox.title "Výběr elementu - Klávesové zkratky">

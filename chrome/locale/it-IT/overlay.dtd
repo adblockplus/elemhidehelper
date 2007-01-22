@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Seleziona con Element Hiding Helper">
+<!ENTITY selectelement.accesskey "T">
+<!ENTITY stopselection.label "Annulla la selezione dell&apos;elemento">
+<!ENTITY stopselection.accesskey "A">
+<!ENTITY helpbox.title "Tasti per Element Hiding Helper">

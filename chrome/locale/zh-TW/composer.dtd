@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "編寫元素隱藏條件">
+<!ENTITY accept.label "新增過濾條件">
+<!ENTITY advanced.label "進階檢視">
+<!ENTITY basic.label "基本檢視">
+<!ENTITY expression.label "過濾條件">
+<!ENTITY preview.label "預覽">
+<!ENTITY domain.label "網域限制">
+<!ENTITY domain.none.label "所有網域 (不建議)">
+<!ENTITY nodes-tree.node.label "節點">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "必要屬性">
+<!ENTITY attributes.tagname.label "標籤名稱:">
+<!ENTITY attributes.firstchild.label "First child">
+<!ENTITY attributes.lastchild.label "Last child">
+<!ENTITY attributes.custom.label "自訂 CSS:">
