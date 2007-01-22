@@ -6,11 +6,11 @@
 <!ENTITY preview.label "Pregled">
 <!ENTITY domain.label "Poveži na domenu">
 <!ENTITY domain.none.label "Bilo koja domena (nije preporučljivo)">
-<!ENTITY nodes-tree.node.label "Član (čvor)">
+<!ENTITY nodes-tree.node.label "Član">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
 <!ENTITY attributes.label "Potrebni atributi">
 <!ENTITY attributes.tagname.label "Naziv oznake:">
-<!ENTITY attributes.firstchild.label "Prvo dijete">
-<!ENTITY attributes.lastchild.label "Zadnje dijete">
+<!ENTITY attributes.firstchild.label "Prvi izdanak">
+<!ENTITY attributes.lastchild.label "Zadnji izdanak">
 <!ENTITY attributes.custom.label "Prilagođeni CSS:">
