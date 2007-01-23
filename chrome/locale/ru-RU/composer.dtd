@@ -37,4 +37,4 @@
 <!ENTITY attributes.tagname.label "Имя тега:">
 <!ENTITY attributes.firstchild.label  "Первый дочерний узел">
 <!ENTITY attributes.lastchild.label   "Последний дочерний узел">
-<!ENTITY attributes.custom.label  "Произволное CSS-выражение:">
+<!ENTITY attributes.custom.label  "Произвольное CSS-выражение:">
