@@ -65,11 +65,11 @@ ehhAardvark.start = function(browser) {
     }
   }
 
-  browser.addEventListener("click", this.mouseClick, false);
-  browser.addEventListener("mouseover", this.mouseOver, false);
-  browser.addEventListener("keypress", this.keyPress, false);
-  browser.addEventListener("mousemove", this.mouseMove, false);
-  browser.contentWindow.addEventListener("pagehide", this.pageHide, false);
+  browser.addEventListener("click", this.mouseClick, true);
+  browser.addEventListener("mouseover", this.mouseOver, true);
+  browser.addEventListener("keypress", this.keyPress, true);
+  browser.addEventListener("mousemove", this.mouseMove, true);
+  browser.contentWindow.addEventListener("pagehide", this.pageHide, true);
 
   browser.contentWindow.focus();
 
@@ -501,11 +501,11 @@ ehhAardvark.quit = function ()
   this.clearBox();
   ehhHideTooltips();
   
-  this.browser.removeEventListener("click", this.mouseClick, false);
-  this.browser.removeEventListener("mouseover", this.mouseOver, false);
-  this.browser.removeEventListener("keypress", this.keyPress, false);
-  this.browser.removeEventListener("mousemove", this.mouseMove, false);
-  this.browser.contentWindow.removeEventListener("pagehide", this.pageHide, false);
+  this.browser.removeEventListener("click", this.mouseClick, true);
+  this.browser.removeEventListener("mouseover", this.mouseOver, true);
+  this.browser.removeEventListener("keypress", this.keyPress, true);
+  this.browser.removeEventListener("mousemove", this.mouseMove, true);
+  this.browser.contentWindow.removeEventListener("pagehide", this.pageHide, true);
 
   this.selectedElem = null;
   this.browser = null;
