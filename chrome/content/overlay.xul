@@ -56,6 +56,6 @@
   </popup>
 
   <commandset id="abp-commandset">
-    <command id="abp-command-ehh-selectelement" oncommand="ehhSelectElement()"/>
+    <command id="abp-command-ehh-selectelement" oncommand="ehhSelectElement();"/>
   </commandset>
 </overlay>
