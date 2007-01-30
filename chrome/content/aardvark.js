@@ -158,7 +158,7 @@ ehhAardvark.onMouseClick = function(event) {
 }
 
 ehhAardvark.onMouseOver = function(event) {
-  var elem = event.target;
+  var elem = event.originalTarget;
   var aardvarkLabel = elem;
   while (aardvarkLabel && !("ehhAardvarkLabel" in aardvarkLabel))
     aardvarkLabel = aardvarkLabel.parentNode;
