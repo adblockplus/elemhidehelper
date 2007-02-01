@@ -22,19 +22,19 @@
 	 -
 	 - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY dialog.title "要素を隠すフィルタ作成">
+<!ENTITY dialog.title "非表示要素の作成">
 <!ENTITY accept.label "フィルタの追加">
 <!ENTITY advanced.label "詳細表示">
 <!ENTITY basic.label "標準表示">
 <!ENTITY expression.label "フィルタ">
 <!ENTITY preview.label "プレビュー">
-<!ENTITY domain.label "指定ドメイン">
-<!ENTITY domain.none.label "任意ドメイン (非推奨)">
-<!ENTITY nodes-tree.node.label "Node">
+<!ENTITY domain.label "ドメイン">
+<!ENTITY domain.none.label "すべてのドメイン （非推奨）">
+<!ENTITY nodes-tree.node.label "ノード">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
 <!ENTITY attributes.label "属性">
 <!ENTITY attributes.tagname.label "タグ名：">
-<!ENTITY attributes.firstchild.label "First child">
-<!ENTITY attributes.lastchild.label "Last child">
+<!ENTITY attributes.firstchild.label "最初の子ノード">
+<!ENTITY attributes.lastchild.label "最後の子ノード">
 <!ENTITY attributes.custom.label "カスタム CSS：">

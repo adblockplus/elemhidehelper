@@ -8,7 +8,7 @@
 
 	<RDF:Description about="urn:mozilla:locale:ja-JP"
 			chrome:displayName="Japanese(JP)"
-			chrome:author="Premier"
+			chrome:author="Premier,Norah"
 			chrome:name="ja-JP">
 		<chrome:packages>
 			<RDF:Seq about="urn:mozilla:locale:ja-JP:packages">
