@@ -1,8 +1,8 @@
 <!ENTITY dialog.title "Regel voor verbergen van elementen opstellen">
-<!ENTITY accept.label "Filter regel toevoegen">
-<!ENTITY advanced.label "Geavanceerd beeld">
-<!ENTITY basic.label "Basisbeeld">
-<!ENTITY expression.label "Filter regel">
+<!ENTITY accept.label "Filterregel toevoegen">
+<!ENTITY advanced.label "Geavanceerde weergave">
+<!ENTITY basic.label "Basisweergave">
+<!ENTITY expression.label "Filterregel">
 <!ENTITY preview.label "Voorbeeld">
 <!ENTITY domain.label "Aan domein koppelen">
 <!ENTITY domain.none.label "Elk domein (niet aanbevolen)">
