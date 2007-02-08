@@ -5,7 +5,7 @@
 <!ENTITY expression.label "Filterregel">
 <!ENTITY preview.label "Förhandsvisa">
 <!ENTITY domain.label "Knyt till domän">
-<!ENTITY domain.none.label "Någon domän (rekommenderas ej)">
+<!ENTITY domain.none.label "Varje domän (rekommenderas ej)">
 <!ENTITY nodes-tree.node.label "Nod">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">

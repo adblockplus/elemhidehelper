@@ -5,7 +5,7 @@
 <!ENTITY expression.label "Pravidlo filtra">
 <!ENTITY preview.label "Náhľad">
 <!ENTITY domain.label "Priradiť k doméne">
-<!ENTITY domain.none.label "Ľubovoľná doména (nedoporučené)">
+<!ENTITY domain.none.label "Ľubovoľná doména (neodporúčané)">
 <!ENTITY nodes-tree.node.label "Uzol">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "trieda">

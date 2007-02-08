@@ -4,11 +4,11 @@
 <!ENTITY basic.label "Βασική προβολή">
 <!ENTITY expression.label "Κανόνας φίλτρου">
 <!ENTITY preview.label "Προεπισκόπηση">
-<!ENTITY domain.label "Προσκόλληση στο πεδίο">
+<!ENTITY domain.label "Προσκόλληση στον τομέα">
 <!ENTITY domain.none.label "Οποιοδήποτε (δεν προτείνεται)">
 <!ENTITY nodes-tree.node.label "Κόμβος">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
+<!ENTITY nodes-tree.id.label "αναγνωριστικό">
+<!ENTITY nodes-tree.class.label "κλάση">
 <!ENTITY attributes.label "Απαίτηση ιδιοτήτων">
 <!ENTITY attributes.tagname.label "Ετικέτα:">
 <!ENTITY attributes.firstchild.label "Πρώτος απόγονος">
