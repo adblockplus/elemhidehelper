@@ -30,7 +30,7 @@ function ehhInit() {
   var branch = prefService.getBranch("extensions.adblockplus.");
 
   // Check whether ABP is installed and has at least the required version
-  var requiredVersion = "0.7.2.3";
+  var requiredVersion = "0.7.5";
   var installedVersion = "0";
   try {
     var abp = Components.classes["@mozilla.org/adblockplus;1"]
