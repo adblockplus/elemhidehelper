@@ -81,7 +81,7 @@
       <em:id>{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}</em:id>
       <em:name>Adblock Plus</em:name>
       <em:homepageURL>http://adblockplus.org/</em:homepageURL>
-      <em:minVersion>0.7.2.3</em:minVersion>
+      <em:minVersion>0.7.5</em:minVersion>
       <em:maxVersion>*</em:maxVersion>
     </Description>
   </em:requires>
