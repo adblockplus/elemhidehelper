@@ -22,7 +22,7 @@
 	 -
 	 - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY selectelement.label "隠す要素の選択">
+<!ENTITY selectelement.label "非表示要素の選択">
 <!ENTITY selectelement.accesskey "S">
 <!ENTITY stopselection.label "要素の選択を中止">
 <!ENTITY stopselection.accesskey "S">
