@@ -576,7 +576,7 @@ function updateNodeSelection() {
 
 function addExpression() {
   var abp = Components.classes["@mozilla.org/adblockplus;1"]
-                      .createInstance(Components.interfaces.nsIAdblockPlus);
+                      .createInstance().wrappedJSObject;
   abp.addPatterns([document.getElementById("expression").value], 1);
 
   togglePreview(true);

@@ -34,7 +34,7 @@ function ehhInit() {
   var installedVersion = "0";
   try {
     var abp = Components.classes["@mozilla.org/adblockplus;1"]
-                        .createInstance(Components.interfaces.nsIAdblockPlus);
+                        .createInstance().wrappedJSObject;
     installedVersion = abp.getInstalledVersion();
   } catch(e) {}
 
