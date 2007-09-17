@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Kombineeri elemendi peitmise reeglit">
+<!ENTITY accept.label "Lisa filtri reegel">
+<!ENTITY advanced.label "Arenenud vaade">
+<!ENTITY basic.label "Põhiline vaade">
+<!ENTITY expression.label "Filtri reegel">
+<!ENTITY preview.label "Eelvaade">
+<!ENTITY domain.label "Seo domeeniga">
+<!ENTITY domain.none.label "Iga domeeniga (pole soovitatav)">
+<!ENTITY nodes-tree.node.label "Sõlm">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "klass">
+<!ENTITY attributes.label "Nõua attribuute">
+<!ENTITY attributes.tagname.label "Märksõna nimi:">
+<!ENTITY attributes.firstchild.label "Esimene laps">
+<!ENTITY attributes.lastchild.label "Viimane laps">
+<!ENTITY attributes.custom.label "Kohandatud CSS">
