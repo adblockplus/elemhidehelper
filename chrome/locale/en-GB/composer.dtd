@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Compose element hiding rule">
+<!ENTITY accept.label "Add filter rule">
+<!ENTITY advanced.label "Advanced view">
+<!ENTITY basic.label "Basic view">
+<!ENTITY expression.label "Filter rule">
+<!ENTITY preview.label "Preview">
+<!ENTITY domain.label "Bind to domain">
+<!ENTITY domain.none.label "Any domain (not recommended)">
+<!ENTITY nodes-tree.node.label "Node">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Require attributes">
+<!ENTITY attributes.tagname.label "Tag name:">
+<!ENTITY attributes.firstchild.label "First child">
+<!ENTITY attributes.lastchild.label "Last child">
+<!ENTITY attributes.custom.label "Custom CSS:">
