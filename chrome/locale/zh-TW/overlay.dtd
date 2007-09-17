@@ -1,5 +1,5 @@
 <!ENTITY selectelement.label "選擇要隱藏的元素">
 <!ENTITY selectelement.accesskey "S">
-<!ENTITY stopselection.label "關於選擇元素">
+<!ENTITY stopselection.label "離開選擇元素模式">
 <!ENTITY stopselection.accesskey "S">
-<!ENTITY helpbox.title "選擇元素 - 快捷鍵">
+<!ENTITY helpbox.title "選擇元素模式 - 快捷鍵">
