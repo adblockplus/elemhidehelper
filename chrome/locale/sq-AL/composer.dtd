@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Harto rregull për fshehje elementi">
+<!ENTITY accept.label "Shto rregull filtri">
+<!ENTITY advanced.label "Pamje e përparuar">
+<!ENTITY basic.label "Pamje kryesore">
+<!ENTITY expression.label "Rregull filtri">
+<!ENTITY preview.label "Parashikim">
+<!ENTITY domain.label "Lidhe tek domejni">
+<!ENTITY domain.none.label "Çdo domejn (nuk rekomandohet)">
+<!ENTITY nodes-tree.node.label "Nyje">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "klasa">
+<!ENTITY attributes.label "Kërko atribute">
+<!ENTITY attributes.tagname.label "Emri etiketues:">
+<!ENTITY attributes.firstchild.label "Fëmija i parë">
+<!ENTITY attributes.lastchild.label "Fëmija i fundit">
+<!ENTITY attributes.custom.label "CSS me porosi:">

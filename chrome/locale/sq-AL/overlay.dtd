@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Zgjidhni elementet që do të fshihni">
+<!ENTITY selectelement.accesskey "S">
+<!ENTITY stopselection.label "Ndërpre zgjedhjen e elementit">
+<!ENTITY stopselection.accesskey "S">
+<!ENTITY helpbox.title "Zgjedhje elementi - Kode të Veçanta">
