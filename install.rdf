@@ -62,16 +62,27 @@
   <!-- Songbird -->
   <em:targetApplication>
     <Description>
-    <em:id>{758DAD28-FDE9-4ab8-A301-3FFFAB3A697A}</em:id>
-    <em:minVersion>0.1</em:minVersion>
+    <em:id>songbird@songbirdnest.com</em:id>
+    <em:minVersion>0.4</em:minVersion>
+    <em:maxVersion>0.5pre</em:maxVersion>
+    </Description>
+  </em:targetApplication>
+
+  <!-- Midbrowser -->
+  <em:targetApplication>
+    <Description>
+    <em:id>{aa5ca914-c309-495d-91cf-3141bbb04115}</em:id>
+    <em:minVersion>0.2</em:minVersion>
     <em:maxVersion>0.3</em:maxVersion>
     </Description>
   </em:targetApplication>
+
+  <!-- eMusic Remote -->
   <em:targetApplication>
     <Description>
-    <em:id>songbird@songbirdnest.com</em:id>
-    <em:minVersion>0.1</em:minVersion>
-    <em:maxVersion>0.3</em:maxVersion>
+      <em:id>dlm@emusic.com</em:id>
+      <em:minVersion>1.0</em:minVersion>
+      <em:maxVersion>1.0.0.*</em:maxVersion>
     </Description>
   </em:targetApplication>
 
