@@ -28,3 +28,8 @@ for my $locale (@locales)
 chdir('../..');
 system("cvs add downloads/elemhidehelper-$version.xpi");
 system(qq(cvs commit -m "Releasing Element Hiding Helper $version"));
+
+my $branch = $version;
+$branch =~ s/\./_/g;
+$branch = "ELEMENT_HIDING_HELPER_".$branch."_RELEASE";
+system(qq(cvs tag -R $branch src/elemhidehelper"));
