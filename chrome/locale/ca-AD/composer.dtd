@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Composa la norma per amagar">
+<!ENTITY accept.label "Afegeix norma de filtre">
+<!ENTITY advanced.label "Vista avançada">
+<!ENTITY basic.label "Vista bàsica">
+<!ENTITY expression.label "Norma de filtre">
+<!ENTITY preview.label "Vista prèvia">
+<!ENTITY domain.label "Encega per al domini">
+<!ENTITY domain.none.label "qualsevol domini (no recomanat)">
+<!ENTITY nodes-tree.node.label "Node">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Requereix atributs">
+<!ENTITY attributes.tagname.label "Nom de l&apos;etiqueta:">
+<!ENTITY attributes.firstchild.label "Primer atrib">
+<!ENTITY attributes.lastchild.label "Darrer atrib">
+<!ENTITY attributes.custom.label "CSS personalitzat:">

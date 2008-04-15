@@ -1,7 +1,7 @@
 <!ENTITY dialog.title "Vytvoriť skryté pravidlo prvku">
 <!ENTITY accept.label "Pridať pravidlo filtra">
-<!ENTITY advanced.label "Pokročilé zobrazenie">
-<!ENTITY basic.label "Základné zobrazenie">
+<!ENTITY advanced.label "Pokročilý náhľad">
+<!ENTITY basic.label "Základný náhľad">
 <!ENTITY expression.label "Pravidlo filtra">
 <!ENTITY preview.label "Náhľad">
 <!ENTITY domain.label "Priradiť k doméne">
