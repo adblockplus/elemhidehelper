@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Створіть правила приховування елементів">
+<!ENTITY accept.label "Додати правило фільтрування">
+<!ENTITY advanced.label "Складна форма">
+<!ENTITY basic.label "Проста форма">
+<!ENTITY expression.label "Правило фільтрування">
+<!ENTITY preview.label "Переглянути">
+<!ENTITY domain.label "Прив’язати до домену">
+<!ENTITY domain.none.label "Будь-який домен (не рекомендовано)">
+<!ENTITY nodes-tree.node.label "Вузол">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "клас">
+<!ENTITY attributes.label "Вимагає атрибутів">
+<!ENTITY attributes.tagname.label "Ім’я теґу:">
+<!ENTITY attributes.firstchild.label "Перший нащадок">
+<!ENTITY attributes.lastchild.label "Останній нащадок">
+<!ENTITY attributes.custom.label "Власний CSS:">

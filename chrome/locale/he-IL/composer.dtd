@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "הלחן חוק הסתרת אלמנט">
+<!ENTITY accept.label "הוסף חוק סינון">
+<!ENTITY advanced.label "תצוגה מתקדמת">
+<!ENTITY basic.label "תצוגה בסיסית">
+<!ENTITY expression.label "חוק סינון">
+<!ENTITY preview.label "תצוגה מקדימה">
+<!ENTITY domain.label "קשר למתחם">
+<!ENTITY domain.none.label "כל מתחם (לא מומלץ)">
+<!ENTITY nodes-tree.node.label "צומת">
+<!ENTITY nodes-tree.id.label "זהות">
+<!ENTITY nodes-tree.class.label "מחלקה">
+<!ENTITY attributes.label "דורש ייחוסים">
+<!ENTITY attributes.tagname.label "שם תווית:">
+<!ENTITY attributes.firstchild.label "ילד ראשון">
+<!ENTITY attributes.lastchild.label "ילד אחרון">
+<!ENTITY attributes.custom.label "CSS מותאם:">
