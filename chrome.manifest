@@ -2,7 +2,7 @@ overlay   chrome://adblockplus/content/overlayGeneral.xul chrome://elemhidehelpe
 overlay   chrome://browser/content/browser.xul chrome://elemhidehelper/content/overlayBasic.xul
 overlay   chrome://navigator/content/navigator.xul chrome://elemhidehelper/content/overlayBasic.xul
 overlay   chrome://messenger/content/mailWindowOverlay.xul chrome://elemhidehelper/content/overlayBasic.xul
-overlay   chrome://songbird/content/feathers/basic-layouts/xul/mainplayer.xul chrome://elemhidehelper/content/overlayBasic.xul
+overlay   chrome://songbird/content/xul/layoutWithBrowserOverlay.xul chrome://elemhidehelper/content/overlayBasic.xul
 overlay   chrome://midbrowser/content/midbrowser.xul chrome://elemhidehelper/content/overlayBasic.xul
 overlay   chrome://emusic/content/startup.xul chrome://elemhidehelper/content/overlayBasic.xul
 content   elemhidehelper jar:chrome/elemhidehelper.jar!/content/
