@@ -676,7 +676,7 @@ ehhAardvark.getOuterHtmlFormatted = function (node, container)
 ehhAardvark.showMenu = function ()
 {
   var helpBox = document.getElementById("ehh-helpbox");
-  if (helpBox.getAttribute("_moz-menuactive") == "true") {
+  if (helpBox.getAttribute("_moz-menuactive") == "true" || helpBox.state == "open") {
     helpBox.hidePopup();
     return true;
   }
