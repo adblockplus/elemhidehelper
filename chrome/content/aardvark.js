@@ -562,7 +562,7 @@ ehhAardvark.viewSource = function (elem)
     return false;
 
   var sourceBox = document.getElementById("ehh-viewsource");
-  if (sourceBox.getAttribute("_moz-menuactive") == "true" && this.commentElem == elem) {
+  if ((sourceBox.getAttribute("_moz-menuactive") == "true" || sourceBox.state == "open") && this.commentElem == elem) {
     sourceBox.hidePopup();
     return true;
   }
