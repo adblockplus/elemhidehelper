@@ -22,6 +22,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+var ehhHelpHidden = true;
+var ehhViewSourceHidden = true;
+
 // This will be called from overlayBasic - only if Adblock Plus is installed
 // and the version is correct
 function ehhInit2() {
@@ -72,6 +75,8 @@ function ehhGetBrowser() {
 }
 
 function ehhHideTooltips() {
+  ehhHelpHidden = true;
+  ehhViewSourceHidden = true;
   document.getElementById("ehh-helpbox").hidePopup();
   document.getElementById("ehh-commandlabel").hidePopup();
   document.getElementById("ehh-viewsource").hidePopup();
