@@ -32,10 +32,12 @@ for my $locale (@locales)
 }
 
 chdir('../..');
-system("cvs add downloads/elemhidehelper-$version.xpi");
-system(qq(cvs commit -m "Releasing Element Hiding Helper $version" downloads src/elemhidehelper));
+system("hg add downloads/elemhidehelper-$version.xpi");
+system(qq(hg commit -m "Releasing Element Hiding Helper $version" downloads src/elemhidehelper));
 
 my $branch = $version;
 $branch =~ s/\./_/g;
 $branch = "ELEMENT_HIDING_HELPER_".$branch."_RELEASE";
-system(qq(cvs tag -R $branch src/elemhidehelper"));
+system(qq(hg tag $branch"));
+
+system(qq(hg push"));
