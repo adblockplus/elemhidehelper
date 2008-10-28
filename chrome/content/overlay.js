@@ -54,13 +54,6 @@ function ehhInit2() {
       abpConfigureKey("ehh-selectelement", key);
     }
   }
-
-  // Make sure chrome protection works in SeaMonkey
-  if (branch.getPrefType("protectchrome.ehh") != branch.PREF_STRING) {
-    try {
-      branch.setCharPref("protectchrome.ehh", "elemhidehelper");
-    } catch(e) {}
-  }
 }
 
 function ehhGetBrowser() {
