@@ -61,10 +61,8 @@ function ehhGetBrowser() {
     return getBrowser();
   else if ("messageContent" in window)
     return window.messageContent;
-  else if (document.getElementById("frame_main_pane"))
-    return document.getElementById("frame_main_pane");
   else
-    return null;
+    return document.getElementById("frame_main_pane") || document.getElementById("browser_content");
 }
 
 function ehhHideTooltips() {
