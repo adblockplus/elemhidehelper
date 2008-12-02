@@ -38,6 +38,6 @@ system(qq(hg commit -m "Releasing Element Hiding Helper $version" downloads src/
 my $branch = $version;
 $branch =~ s/\./_/g;
 $branch = "ELEMENT_HIDING_HELPER_".$branch."_RELEASE";
-system(qq(hg tag $branch"));
+system(qq(hg tag $branch));
 
-system(qq(hg push"));
+system(qq(hg push));
