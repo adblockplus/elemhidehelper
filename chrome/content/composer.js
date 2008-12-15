@@ -150,6 +150,32 @@ function init() {
   doc = element.ownerDocument;
   var wnd = doc.defaultView;
 
+  var geckoVersion = "0.0";
+  if ("nsIXULAppInfo" in  Components.interfaces)
+      geckoVersion = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo).platformVersion;
+  var versionComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"]
+                                    .createInstance(Components.interfaces.nsIVersionComparator);
+  if (versionComparator.compare(geckoVersion, "1.9") < 0)
+  {
+    // Gecko 1.8 does not support horizontal scrolling for trees,
+    // change width attribute into flex for tree columns.
+    var nodeCol = document.getElementById("nodes-tree-node");
+    nodeCol.setAttribute("flex", "2");
+    nodeCol.nextSibling.removeAttribute("resizeafter");
+
+    var idCol = document.getElementById("nodes-tree-id");
+    idCol.setAttribute("flex", "1");
+    if (!idCol.hasAttribute("hidden"))
+      idCol.setAttribute("hidden", "true");
+    idCol.nextSibling.removeAttribute("resizeafter");
+
+    var classCol = document.getElementById("nodes-tree-class");
+    classCol.setAttribute("flex", "1");
+    if (!classCol.hasAttribute("hidden"))
+      classCol.setAttribute("hidden", "true");
+    classCol.parentNode.removeChild(classCol.nextSibling);
+  }
+
   nodeData = new NodeData(element);
   nodeData.tagName.checked = true;
   if (nodeData.attributes.length > 0) {
