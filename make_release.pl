@@ -17,7 +17,7 @@ open(VERSION, ">version");
 print VERSION $ARGV[0];
 close(VERSION);
 
-@ARGV = ("../../downloads/elemhidehelper-$version.xpi");
+@ARGV = ("../downloads/elemhidehelper-$version.xpi");
 do './create_xpi.pl';
 
 opendir(LOCALES, "chrome/locale");
@@ -27,11 +27,11 @@ closedir(LOCALES);
 # Create new single-locale builds
 for my $locale (@locales)
 {
-  @ARGV = ("../../downloads/elemhidehelper-$version-$locale.xpi", $locale);
+  @ARGV = ("../downloads/elemhidehelper-$version-$locale.xpi", $locale);
   do './create_xpi.pl';
 }
 
-chdir('../..');
+chdir('..');
 system("hg add downloads/elemhidehelper-$version.xpi");
 system(qq(hg commit -m "Releasing Element Hiding Helper $version" downloads src/elemhidehelper));
 
