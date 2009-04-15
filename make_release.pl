@@ -33,7 +33,7 @@ for my $locale (@locales)
 
 chdir('..');
 system("hg add downloads/elemhidehelper-$version.xpi");
-system(qq(hg commit -m "Releasing Element Hiding Helper $version" downloads src/elemhidehelper));
+system(qq(hg commit -m "Releasing Element Hiding Helper $version" downloads elemhidehelper));
 
 my $branch = $version;
 $branch =~ s/\./_/g;
