@@ -133,7 +133,7 @@ function TreeView_getRowProperties(row, properties) {
     properties.AppendElement(selectedAtom);
 
   var item = this.getItemAtIndex(row);
-  if (item && (item.nodeData.expressionRaw != "*" || item.nodeData == nodeData))
+  if (item && (item.nodeData.expression != "*" || item.nodeData == nodeData))
     properties.AppendElement(anchorAtom);
 }
 
@@ -217,10 +217,8 @@ function init() {
 
 function updateExpression() {
   var curNode = nodeData;
-  var simpleMode = true;
   while (curNode) {
-    var expressionSimple = (curNode.tagName.checked ? curNode.tagName.value : "*");
-    var expressionRaw = expressionSimple;
+    let expression = (curNode.tagName.checked ? curNode.tagName.value : "*");
 
     for (var i = 0; i < curNode.attributes.length; i++) {
       var attr = curNode.attributes[i];
@@ -238,58 +236,43 @@ function updateExpression() {
           else if (attr.value.substr(attr.value.length - attr.selected.length) == attr.selected)
             op = "$=";
   
-          if (/[^\w\-]/.test(attr.name) || /[()"]/.test(attr.selected))
-            expressionSimple = null;
-  
-          if (expressionSimple != null)
-            expressionSimple += "(" + attr.name + op + attr.selected + ")";
-  
           if (attr.name == "id" && op == "=" && !/[^\w\-]/.test(attr.selected))
-            expressionRaw += "#" + attr.selected;
+            expression += "#" + attr.selected;
           else if (attr.name == "class" && op == "=" && !/[^\w\-\s]/.test(attr.selected) && /\S/.test(attr.selected)) {
             var classes = attr.selected.split(/\s+/);
             for (var j = 0; j < classes.length; j++) {
               if (classes[j] == "")
                 continue;
 
-              expressionRaw += "." + classes[j];
+              expression += "." + classes[j];
             }
           }
           else {
             var escapedValue = attr.selected.replace(/"/g, '\\"')
                                             .replace(/\{/, "\\7B ")
                                             .replace(/\}/, "\\7D ");
-            expressionRaw += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
+            expression += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
           }
         }
         else {
-          expressionSimple = null;
-          expressionRaw += "[" + escapedName + "]";
+          expression += "[" + escapedName + "]";
         }
       }
     }
 
-    if (curNode.customCSS.checked && curNode.customCSS.selected != "") {
-      expressionSimple = null;
-      expressionRaw += curNode.customCSS.selected
+    if (curNode.customCSS.checked && curNode.customCSS.selected != "")
+    {
+      expression += curNode.customCSS.selected
                                         .replace(/\{/, "\\7B ")
                                         .replace(/\}/, "\\7D ");
     }
 
-    if ("firstChild" in curNode && curNode.firstChild.checked) {
-      expressionSimple = null;
-      expressionRaw += ":first-child";
-    }
-    if ("lastChild" in curNode && curNode.lastChild.checked) {
-      expressionSimple = null;
-      expressionRaw += ":last-child";
-    }
+    if ("firstChild" in curNode && curNode.firstChild.checked)
+      expression += ":first-child";
+    if ("lastChild" in curNode && curNode.lastChild.checked)
+      expression += ":last-child";
 
-    curNode.expressionSimple = expressionSimple;
-    curNode.expressionRaw = expressionRaw;
-
-    if (expressionSimple == null || (expressionRaw != "*" && curNode != nodeData))
-      simpleMode = false;
+    curNode.expression = expression;
 
     if (curNode.prevSibling)
       curNode = curNode.prevSibling;
@@ -297,68 +280,61 @@ function updateExpression() {
       curNode = curNode.parentNode;
   }
 
-  var expression;
-  if (simpleMode) {
-    expression = domainData.selected + "#" + nodeData.expressionSimple;
-    stylesheetURL = "data:text/css," + encodeURIComponent(nodeData.expressionRaw + "{display: none !important;}");
-  }
-  else {
-    expression = nodeData.expressionRaw;
+  let expression = nodeData.expression;
 
-    var isParent = false;
-    var isRemoteParent = false;
-    var siblingCount = 0;
-    var firstRun = true;
+  var isParent = false;
+  var isRemoteParent = false;
+  var siblingCount = 0;
+  var firstRun = true;
 
-    var curData = nodeData;
-    while (curData) {
-      if (!firstRun && curData.expressionRaw != "*") {
-        var parentRelation = "";
-        if (isRemoteParent)
-          parentRelation = " ";
-        else if (isParent)
-          parentRelation = " > ";
+  var curData = nodeData;
+  while (curData) {
+    if (!firstRun && curData.expression != "*") {
+      var parentRelation = "";
+      if (isRemoteParent)
+        parentRelation = " ";
+      else if (isParent)
+        parentRelation = " > ";
 
-        var siblingRelation = "";
-        for (var i = 0; i < siblingCount; i++)
-          siblingRelation += "* + ";
-        siblingRelation = siblingRelation.replace(/^\*/, '');
+      var siblingRelation = "";
+      for (var i = 0; i < siblingCount; i++)
+        siblingRelation += "* + ";
+      siblingRelation = siblingRelation.replace(/^\*/, '');
 
-        var relation;
-        if (parentRelation != "" && siblingRelation != "")
-          relation = siblingRelation + "*" + parentRelation;
-        else if (parentRelation != "")
-          relation = parentRelation;
-        else
-          relation = siblingRelation;
-
-        expression = curData.expressionRaw + relation + expression;
-
-        isParent = false;
-        isRemoteParent = false;
-        siblingCount = 0;
-      }
-      firstRun = false;
-
-      if (curData.prevSibling) {
-        siblingCount++;
-        curData = curData.prevSibling;
-      }
-      else if (curData.parentNode) {
-        siblingCount = 0;
-        if (isParent)
-          isRemoteParent = true;
-        else
-          isParent = true;
-        curData = curData.parentNode;
-      }
+      var relation;
+      if (parentRelation != "" && siblingRelation != "")
+        relation = siblingRelation + "*" + parentRelation;
+      else if (parentRelation != "")
+        relation = parentRelation;
       else
-        curData = null;
-    }
+        relation = siblingRelation;
 
-    stylesheetURL = "data:text/css," + encodeURIComponent(expression + "{display: none !important;}");
-    expression = domainData.selected + "##" + expression;
+      expression = curData.expression + relation + expression;
+
+      isParent = false;
+      isRemoteParent = false;
+      siblingCount = 0;
+    }
+    firstRun = false;
+
+    if (curData.prevSibling) {
+      siblingCount++;
+      curData = curData.prevSibling;
+    }
+    else if (curData.parentNode) {
+      siblingCount = 0;
+      if (isParent)
+        isRemoteParent = true;
+      else
+        isParent = true;
+      curData = curData.parentNode;
+    }
+    else
+      curData = null;
   }
+
+  stylesheetURL = "data:text/css," + encodeURIComponent(expression + "{display: none !important;}");
+  expression = domainData.selected + "##" + expression;
 
   document.getElementById("expression").value = expression;
 
