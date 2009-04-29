@@ -29,15 +29,13 @@
 
 var ehhAardvark = {
   browser: null,
-  currentElem: null,
   selectedElem: null,
   commentElem : null,
   mouseX: -1,
   mouseY: -1,
   commandLabelTimeout: 0,
   borderElems: null,
-  labelElem: null,
-  locked: false
+  labelElem: null
 };
 
 ehhAardvark.start = function(browser) {
@@ -167,15 +165,14 @@ ehhAardvark.onMouseOver = function(event) {
 
   if (elem == null || aardvarkLabel)
   {
-    this.currentElem = null;
-    if (!this.locked)
-        this.clearBox();
+    this.clearBox ();
     return;
   }
 
-  this.currentElem = elem;
-  if (!this.locked && this.currentElem != this.selectedElem)
-    this.showBoxAndLabel(this.currentElem, this.makeElementLabelString(this.currentElem));
+  if (elem == this.selectedElem)
+    return;
+  
+  this.showBoxAndLabel (elem, this.makeElementLabelString (elem));
 }
 
 ehhAardvark.onKeyPress = function(event) {
@@ -440,7 +437,6 @@ ehhAardvark.setElementStyleDefault = function (elem, bgColor)
 // 0: name, 1: needs element
 ehhAardvark.commands = [
   "select",
-  "lock",
   "wider",
   "narrower",
   "quit",
@@ -526,15 +522,6 @@ ehhAardvark.select = function (elem)
 
   window.openDialog("chrome://elemhidehelper/content/composer.xul", "_blank",
                     "chrome,centerscreen,resizable,dialog=no", elem);
-  return true;
-}
-
-//------------------------------------------------------------
-ehhAardvark.lock = function (elem)
-{
-  this.locked = !this.locked;
-  if (!this.locked && this.currentElem != this.selectedElem)
-    this.showBoxAndLabel(this.currentElem, this.makeElementLabelString(this.currentElem));
   return true;
 }
 
