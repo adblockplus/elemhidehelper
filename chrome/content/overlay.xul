@@ -32,7 +32,7 @@
   <script type="application/x-javascript" src="aardvark.js"/>
   
   <popupset id="abp-popupset">
-    <tooltip id="ehh-helpbox" orient="vertical" onpopuphiding="return ehhHelpHidden;">
+    <tooltip id="ehh-helpbox" noautohide="true" orient="vertical">
       <description id="ehh-helpbox-title" value="&helpbox.title;"/>
 
       <grid flex="1">
@@ -47,7 +47,7 @@
       <description id="ehh-commandlabel-key"/>
       <description id="ehh-commandlabel-label"/>
     </tooltip>
-    <tooltip id="ehh-viewsource" orient="vertical" onpopuphiding="return ehhViewSourceHidden;"/>
+    <tooltip id="ehh-viewsource" noautohide="true" orient="vertical"/>
   </popupset>
 
   <popup id="abp-status-popup">

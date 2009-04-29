@@ -563,11 +563,9 @@ ehhAardvark.viewSource = function (elem)
 
   var sourceBox = document.getElementById("ehh-viewsource");
   if ((sourceBox.getAttribute("_moz-menuactive") == "true" || sourceBox.state == "open") && this.commentElem == elem) {
-    ehhViewSourceHidden = true;
     sourceBox.hidePopup();
     return true;
   }
-  ehhViewSourceHidden = true;
   sourceBox.hidePopup();
 
   while (sourceBox.firstChild)
@@ -578,7 +576,6 @@ ehhAardvark.viewSource = function (elem)
   var x = this.mouseX;
   var y = this.mouseY;
   setTimeout(function() {
-    ehhViewSourceHidden = false;
     sourceBox.showPopup(document.documentElement, x, y, "tooltip", "topleft", "topleft");
   }, 500);
   return true;
@@ -680,13 +677,11 @@ ehhAardvark.showMenu = function ()
 {
   var helpBox = document.getElementById("ehh-helpbox");
   if (helpBox.getAttribute("_moz-menuactive") == "true" || helpBox.state == "open") {
-    ehhHelpHidden = true;
     helpBox.hidePopup();
     return true;
   }
 
   // Show help box
-  ehhHelpHidden = false;
   helpBox.showPopup(this.browser, -1, -1, "tooltip", "topleft", "topleft");
   return true;
 }
