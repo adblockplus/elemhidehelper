@@ -39,8 +39,9 @@ function ehhInit2() {
   window.addEventListener("blur", ehhHideTooltips, true);
   ehhGetBrowser().addEventListener("select", ehhStop, false);
 
-  // Make sure we configure the shortcut key even if the default pref isn't there
-  if (window.abpConfigureKey) {
+  // Make sure we configure the shortcut key even if the default pref isn't there.
+  // TODO: Remove once ABP 1.1 is minimal supported version.
+  if ("abpConfigureKey" in window) {
     var defaultBranch = prefService.getDefaultBranch("extensions.adblockplus.");
     try {
       // Seems to be the only way to test whether the pref really exists in the default branch
