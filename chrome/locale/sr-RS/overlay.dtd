@@ -1,0 +1,5 @@
+<!ENTITY selectelement.label "Изабери делове које желите да сакријете">
+<!ENTITY selectelement.accesskey "б">
+<!ENTITY stopselection.label "Прекини бирање делова">
+<!ENTITY stopselection.accesskey "б">
+<!ENTITY helpbox.title "Пречице за бирање делова">

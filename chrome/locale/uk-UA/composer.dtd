@@ -1,7 +1,7 @@
-<!ENTITY dialog.title "Створіть правила приховування елементів">
-<!ENTITY accept.label "Додати правило фільтрування">
-<!ENTITY advanced.label "Складна форма">
-<!ENTITY basic.label "Проста форма">
+<!ENTITY dialog.title "Додати правило фільтрування Adblock Plus">
+<!ENTITY accept.label "Додати фільтр">
+<!ENTITY advanced.label "Складний вигляд">
+<!ENTITY basic.label "Простий вигляд">
 <!ENTITY expression.label "Правило фільтрування">
 <!ENTITY preview.label "Переглянути">
 <!ENTITY domain.label "Прив’язати до домену">

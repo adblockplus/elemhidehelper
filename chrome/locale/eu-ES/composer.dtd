@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Sortu elementu ezkutatze araua">
+<!ENTITY accept.label "Gehitu iragazki ararua">
+<!ENTITY advanced.label "Ikuspegi hedatua">
+<!ENTITY basic.label "Ikuspegi soila">
+<!ENTITY expression.label "Iragazki araua">
+<!ENTITY preview.label "Aurreikusi">
+<!ENTITY domain.label "Batu domeinu batera">
+<!ENTITY domain.none.label "Edozein domeinu (ez da gomendatzen)">
+<!ENTITY nodes-tree.node.label "Nodoa">
+<!ENTITY nodes-tree.id.label "id-a">
+<!ENTITY nodes-tree.class.label "klasea">
+<!ENTITY attributes.label "Beharrezko atributua">
+<!ENTITY attributes.tagname.label "Etiketa izena:">
+<!ENTITY attributes.firstchild.label "Lehen kumea">
+<!ENTITY attributes.lastchild.label "Azken kumea">
+<!ENTITY attributes.custom.label "CSS pertsonlizatua:">

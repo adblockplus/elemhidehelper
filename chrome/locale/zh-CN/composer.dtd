@@ -1,40 +1,16 @@
-<!-- ***** BEGIN LICENSE BLOCK *****
-	 - Version: MPL 1.1
-	 -
-	 - The contents of this file are subject to the Mozilla Public License Version
-	 - 1.1 (the "License"); you may not use this file except in compliance with
-	 - the License. You may obtain a copy of the License at
-	 - http://www.mozilla.org/MPL/
-	 -
-	 - Software distributed under the License is distributed on an "AS IS" basis,
-	 - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-	 - for the specific language governing rights and limitations under the
-	 - License.
-	 -
-	 - The Original Code is Adblock Plus Element Hiding Helper.
-	 -
-	 - The Initial Developer of the Original Code is
-	 - Wladimir Palant.
-	 - Portions created by the Initial Developer are Copyright (C) 2006-2009
-	 - the Initial Developer. All Rights Reserved.
-	 -
-	 - Contributor(s):
-	 -
-	 - ***** END LICENSE BLOCK ***** -->
-
-<!ENTITY dialog.title             "编写元素隐藏规则">
-<!ENTITY accept.label             "添加过滤规则">
-<!ENTITY advanced.label           "高级视图">
-<!ENTITY basic.label              "基本视图">
-<!ENTITY expression.label         "过滤规则">
-<!ENTITY preview.label            "预览">
-<!ENTITY domain.label             "绑定至域">
-<!ENTITY domain.none.label        "任何域 (不推荐)">
-<!ENTITY nodes-tree.node.label    "节点">
-<!ENTITY nodes-tree.id.label      "id">
-<!ENTITY nodes-tree.class.label   "类别">
-<!ENTITY attributes.label         "要求属性">
-<!ENTITY attributes.tagname.label "Tag 名称:">
-<!ENTITY attributes.firstchild.label  "首 child">
-<!ENTITY attributes.lastchild.label   "末 child">
-<!ENTITY attributes.custom.label  "自定义 CSS:">
+<!ENTITY dialog.title "创建页面元素隐藏规则">
+<!ENTITY accept.label "添加过滤规则">
+<!ENTITY advanced.label "高级视图">
+<!ENTITY basic.label "基本视图">
+<!ENTITY expression.label "过滤规则">
+<!ENTITY preview.label "预览">
+<!ENTITY domain.label "规则应用到">
+<!ENTITY domain.none.label "任意域名（不推荐）">
+<!ENTITY nodes-tree.node.label "节点">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "命令属性">
+<!ENTITY attributes.tagname.label "标签：">
+<!ENTITY attributes.firstchild.label "First child">
+<!ENTITY attributes.lastchild.label "Last child">
+<!ENTITY attributes.custom.label "自定义 CSS：">

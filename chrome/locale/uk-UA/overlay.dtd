@@ -1,5 +1,5 @@
 <!ENTITY selectelement.label "Оберіть небажаний елемент">
-<!ENTITY selectelement.accesskey "S">
+<!ENTITY selectelement.accesskey "л">
 <!ENTITY stopselection.label "Скасувати вибір елементу">
-<!ENTITY stopselection.accesskey "S">
+<!ENTITY stopselection.accesskey "л">
 <!ENTITY helpbox.title "Вибір елементу — Гарячі клавіші">

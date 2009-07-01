@@ -1,16 +1,16 @@
-<!ENTITY dialog.title "Soạn thảo luật giấu phần tử">
+<!ENTITY dialog.title "Soạn quy luật ẩn phần tử">
 <!ENTITY accept.label "Thêm quy luật lọc">
 <!ENTITY advanced.label "Hiển thị nâng cao">
-<!ENTITY basic.label "Hiển thị thường">
+<!ENTITY basic.label "Hiển thị cơ bản">
 <!ENTITY expression.label "Quy luật lọc">
-<!ENTITY preview.label "Thử nghiệm">
-<!ENTITY domain.label "Gắn kết với miền">
-<!ENTITY domain.none.label "Bất kỳ miền nào (không khuyến khích làm vậy)">
+<!ENTITY preview.label "Xem trước">
+<!ENTITY domain.label "Gắn với tên miền">
+<!ENTITY domain.none.label "Bất kì tên miền nào (không khuyến khích)">
 <!ENTITY nodes-tree.node.label "Điểm nút">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Cần các thuộc tính">
+<!ENTITY attributes.label "Cần có thuộc tính">
 <!ENTITY attributes.tagname.label "Tên tag:">
-<!ENTITY attributes.firstchild.label "Con đầu tiên">
-<!ENTITY attributes.lastchild.label "Con cuối cùng">
-<!ENTITY attributes.custom.label "CSS tự định">
+<!ENTITY attributes.firstchild.label "Thuộc tính con đầu tiên">
+<!ENTITY attributes.lastchild.label "Thuộc tính con cuối cùng">
+<!ENTITY attributes.custom.label "CSS tùy biến:">
