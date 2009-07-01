@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "إنشاء قاعدة لإخفاء العناصر">
+<!ENTITY accept.label "إنشاء قاعدة فلتر">
+<!ENTITY advanced.label "عرض متقدم">
+<!ENTITY basic.label "عرض أساسي">
+<!ENTITY expression.label "قاعدة فلتر">
+<!ENTITY preview.label "عرض أولي">
+<!ENTITY domain.label "تثبيت للنطاق">
+<!ENTITY domain.none.label "أي نطاق (غير مستحسن)">
+<!ENTITY nodes-tree.node.label "فرع">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "فئة (class)">
+<!ENTITY attributes.label "طلب خصائص">
+<!ENTITY attributes.tagname.label "اسم الوسم (Tag)">
+<!ENTITY attributes.firstchild.label "الابن الأول">
+<!ENTITY attributes.lastchild.label "الابن الأخير">
+<!ENTITY attributes.custom.label "CSS مخصص">

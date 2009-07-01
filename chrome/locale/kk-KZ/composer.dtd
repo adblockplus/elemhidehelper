@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Элементті жасыру ережесін құрастыру">
+<!ENTITY accept.label "Фильтр ережесін қосу">
+<!ENTITY advanced.label "Кеңейтілген көрінісі">
+<!ENTITY basic.label "Негізгі көрінісі">
+<!ENTITY expression.label "Фильтр ережесі">
+<!ENTITY preview.label "Алдын-ала қарау">
+<!ENTITY domain.label "Доменмен байланыстыру">
+<!ENTITY domain.none.label "Кез-келген домен (ұсынылмайды)">
+<!ENTITY nodes-tree.node.label "Торап">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY attributes.label "Керек атрибуттар">
+<!ENTITY attributes.tagname.label "Тег аты:">
+<!ENTITY attributes.firstchild.label "Біріншілік қатысты домен">
+<!ENTITY attributes.lastchild.label "Соңғы қатысты домен">
+<!ENTITY attributes.custom.label "Пайдаланушы CSS:">

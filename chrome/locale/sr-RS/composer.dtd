@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Састави правило о сакривању делова">
+<!ENTITY accept.label "Додај правило о филтеру">
+<!ENTITY advanced.label "Напредни изглед">
+<!ENTITY basic.label "Једноставан изглед">
+<!ENTITY expression.label "Правило о филтеру">
+<!ENTITY preview.label "Преглед">
+<!ENTITY domain.label "Закачи за домен">
+<!ENTITY domain.none.label "Било који домен (није препоручљиво)">
+<!ENTITY nodes-tree.node.label "Чвор">
+<!ENTITY nodes-tree.id.label "ид">
+<!ENTITY nodes-tree.class.label "врста">
+<!ENTITY attributes.label "Потребне особине">
+<!ENTITY attributes.tagname.label "Име обелешке:">
+<!ENTITY attributes.firstchild.label "Први наследник">
+<!ENTITY attributes.lastchild.label "Последњи наследник">
+<!ENTITY attributes.custom.label "Прилагођени CSS:">
