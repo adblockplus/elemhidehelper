@@ -8,6 +8,6 @@ overlay   chrome://midbrowser/content/midbrowser.xul chrome://elemhidehelper/con
 overlay   chrome://emusic/content/startup.xul chrome://elemhidehelper/content/overlayBasic.xul
 overlay   chrome://webrunner/content/webrunner.xul chrome://elemhidehelper/content/overlayBasic.xul
 content   elemhidehelper jar:chrome/elemhidehelper.jar!/content/
-skin      elemhidehelper classic/1.0 jar:chrome/elemhidehelper.jar!/skin/classic/
+skin      elemhidehelper classic/1.0 jar:chrome/elemhidehelper.jar!/skin/
 locale    elemhidehelper {{LOCALE}} jar:chrome/elemhidehelper.jar!/locale/{{LOCALE}}/
 
