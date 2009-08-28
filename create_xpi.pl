@@ -40,7 +40,7 @@ chdir('chrome');
 $pkg->makeJAR("$baseName.jar", 'content', 'skin', 'locale', '-/tests', '-/mochitest', '-/.incomplete');
 chdir('..');
 
-my @files = grep {-e $_} ('components', 'defaults', 'install.js', 'install.rdf', 'chrome.manifest');
+my @files = grep {-e $_} ('components', 'defaults', 'install.rdf', 'chrome.manifest', 'icon.png');
 
 $pkg->makeXPI($xpiFile, "chrome/$baseName.jar", @files);
 unlink("chrome/$baseName.jar");
@@ -49,7 +49,7 @@ sub removeTimeLine
 {
   my ($file, $line) = @_;
 
-  return "\n" if $file =~ /\.js$/ && $line =~ /\btimeLine\.log\(/;
+  return "\n" if $file =~ /\.js$/ && $line =~ /\btimeLine\.(\w+)\(/;
 
   return $line;
 }
