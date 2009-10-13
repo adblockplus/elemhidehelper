@@ -555,5 +555,5 @@ function addExpression() {
                       .createInstance().wrappedJSObject;
   abp.addPatterns([document.getElementById("expression").value], 1);
 
-  togglePreview(true);
+  togglePreview(false);
 }
