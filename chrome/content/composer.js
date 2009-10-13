@@ -192,7 +192,7 @@ function init() {
 function updateExpression() {
   var curNode = nodeData;
   while (curNode) {
-    let expression = (curNode.tagName.checked ? curNode.tagName.value : "*");
+    let expression = (curNode.tagName.checked ? curNode.tagName.value : "");
 
     for (var i = 0; i < curNode.attributes.length; i++) {
       var attr = curNode.attributes[i];
@@ -245,6 +245,9 @@ function updateExpression() {
       expression += ":first-child";
     if ("lastChild" in curNode && curNode.lastChild.checked)
       expression += ":last-child";
+
+    if (expression == "")
+      expression = "*";
 
     curNode.expression = expression;
 
