@@ -210,18 +210,24 @@ function updateExpression() {
           else if (attr.value.substr(attr.value.length - attr.selected.length) == attr.selected)
             op = "$=";
   
+          let useFallback = false;
           if (attr.name == "id" && op == "=" && !/[^\w\-]/.test(attr.selected))
             expression += "#" + attr.selected;
-          else if (attr.name == "class" && op == "=" && !/[^\w\-\s]/.test(attr.selected) && /\S/.test(attr.selected)) {
-            var classes = attr.selected.split(/\s+/);
-            for (var j = 0; j < classes.length; j++) {
-              if (classes[j] == "")
-                continue;
+          else if (attr.name == "class" && !/[^\w\-\s]/.test(attr.selected) && /\S/.test(attr.selected)) {
+            let knownClasses = {};
+            for each (let cls in attr.value.split(/\s+/))
+              knownClasses[cls] = true;
 
-              expression += "." + classes[j];
-            }
+            let classes = attr.selected.split(/\s+/).filter(function(cls) cls != "");
+            if (classes.every(function(cls) knownClasses.hasOwnProperty(cls)))
+              expression += "." + classes.join(".");
+            else
+              useFallback = true;
           }
-          else {
+          else
+            useFallback = true;
+
+          if (useFallback) {
             var escapedValue = attr.selected.replace(/"/g, '\\"')
                                             .replace(/\{/, "\\7B ")
                                             .replace(/\}/, "\\7D ");
