@@ -23,10 +23,10 @@
    - ***** END LICENSE BLOCK ***** -->
 
 <!ENTITY dialog.title             "Compose element hiding rule">
-<!ENTITY accept.label             "Add filter rule">
+<!ENTITY accept.label             "Add element hiding rule">
 <!ENTITY advanced.label           "Advanced view">
 <!ENTITY basic.label              "Basic view">
-<!ENTITY expression.label         "Filter rule">
+<!ENTITY expression.label         "Element hiding rule">
 <!ENTITY preview.label            "Preview">
 <!ENTITY domain.label             "Bind to domain">
 <!ENTITY domain.none.label        "Any domain (not recommended)">
