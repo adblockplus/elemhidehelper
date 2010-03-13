@@ -22,8 +22,8 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
-<!ENTITY selectelement.label      "Select element to hide">
+<!ENTITY selectelement.label      "Select an element to hide">
 <!ENTITY selectelement.accesskey  "S">
 <!ENTITY stopselection.label      "Abort element selection">
 <!ENTITY stopselection.accesskey  "S">
-<!ENTITY helpbox.title            "Element selection - Hotkeys">
+<!ENTITY helpbox.title            "Element selection hotkeys">
