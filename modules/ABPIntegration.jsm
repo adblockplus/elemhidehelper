@@ -56,12 +56,6 @@ const minABPVersion = "1.3a";
 const myID = "elemhidehelper@adblockplus.org";
 
 /**
- * Location of this file to be reported to Adblock Plus (lazily initialized).
- * @type nsIURI
- */
-let moduleURI = null;
-
-/**
  * Timer used to delay checking for compatible Adblock Plus version.
  * @type nsITimer
  */
