@@ -7,6 +7,19 @@
   
   <em:id>elemhidehelper@adblockplus.org</em:id>
   <em:version>{{VERSION}}</em:version>
+  <em:name>{{NAME}}</em:name>
+  <em:description>{{DESCRIPTION}}</em:description>
+  <em:creator>Wladimir Palant</em:creator>
+  <em:homepageURL>http://adblockplus.org/</em:homepageURL>
+  <em:type>2</em:type>
+
+  <em:contributor>Rob Brown</em:contributor>
+
+{{LOCALIZED}}
+
+  <!-- Front End Integration Hooks (used by Extension Manager)-->
+  <em:iconURL>chrome://adblockplus/skin/adblockplus.png</em:iconURL>
+  <em:aboutURL>chrome://adblockplus/content/ui/about.xul</em:aboutURL>
   
   <!-- Target Application this extension can install into, 
     with minimum and maximum supported versions. --> 
@@ -86,16 +99,6 @@
       <em:maxVersion>1.0.*</em:maxVersion>
     </Description>
   </em:targetApplication>
-
-  <!-- Front End MetaData -->
-  <em:name>Adblock Plus: Element Hiding Helper</em:name>
-  <em:description>Helps you create element hiding rules for Adblock Plus to fight the text ads.</em:description>
-  <em:creator>Wladimir Palant</em:creator>
-  <em:homepageURL>http://adblockplus.org/</em:homepageURL>
-
-  <!-- Front End Integration Hooks (used by Extension Manager)-->
-  <em:iconURL>chrome://adblockplus/skin/adblockplus.png</em:iconURL>
-  <em:aboutURL>chrome://adblockplus/content/ui/about.xul</em:aboutURL>
 
   </Description>  
 </RDF>
