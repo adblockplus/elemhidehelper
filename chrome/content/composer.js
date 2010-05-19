@@ -22,6 +22,11 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+const Cr = Components.results;
+const Cu = Components.utils;
+
 var domainData;
 var nodeData;
 var selectedNode = null;
@@ -101,7 +106,7 @@ function createQIProxy(obj, orig) {
   obj.QueryInterface = function(iid) {
     var impl = orig.QueryInterface(iid);
     if (impl != orig)
-      throw Components.results.NS_ERROR_NO_INTERFACE;
+      throw Cr.NS_ERROR_NO_INTERFACE;
 
     return obj;
   };
@@ -123,8 +128,7 @@ function createPropertyProxy(obj, orig, key) {
   }
 }
 
-var atomService = Components.classes["@mozilla.org/atom-service;1"]
-                            .getService(Components.interfaces.nsIAtomService);
+var atomService = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
 var selectedAtom = atomService.getAtom("selected-false");
 var anchorAtom = atomService.getAtom("anchor");
 
@@ -551,7 +555,7 @@ function updateNodeSelection() {
   selection.getRangeAt(0, min, {});
 
   var item = tree.view
-                 .QueryInterface(Components.interfaces.nsITreeContentView)
+                 .QueryInterface(Ci.nsITreeContentView)
                  .getItemAtIndex(min.value);
   if (!item || !item.nodeData)
     return;
@@ -559,10 +563,11 @@ function updateNodeSelection() {
   fillAttributes(item.nodeData);
 }
 
-function addExpression() {
-  var abp = Components.classes["@mozilla.org/adblockplus;1"]
-                      .createInstance().wrappedJSObject;
-  abp.addPatterns([document.getElementById("expression").value], 1);
+function addExpression()
+{
+  let abpURL = Cc["@adblockplus.org/abp/public;1"].getService(Ci.nsIURI);
+  Cu.import(abpURL.spec);
+  AdblockPlus.addPatterns([document.getElementById("expression").value]);
 
   togglePreview(false);
 }

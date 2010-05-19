@@ -22,9 +22,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// This will be called from overlayBasic - only if Adblock Plus is installed
-// and the version is correct
-function ehhInit2() {
+window.addEventListener("load", ehhInit, false);
+
+function ehhInit() {
   var prefService = Components.classes["@mozilla.org/preferences-service;1"]
                               .getService(Components.interfaces.nsIPrefService);
   var branch = prefService.getBranch("extensions.adblockplus.");
@@ -35,23 +35,6 @@ function ehhInit2() {
     document.getElementById("abp-toolbar-popup").addEventListener("popupshowing", ehhFillPopup, false);
   window.addEventListener("blur", ehhHideTooltips, true);
   ehhGetBrowser().addEventListener("select", ehhStop, false);
-
-  // Make sure we configure the shortcut key even if the default pref isn't there.
-  // TODO: Remove once ABP 1.1 is minimal supported version.
-  if ("abpConfigureKey" in window) {
-    var defaultBranch = prefService.getDefaultBranch("extensions.adblockplus.");
-    try {
-      // Seems to be the only way to test whether the pref really exists in the default branch
-      defaultBranch.getCharPref("ehh-selectelement_key");
-    }
-    catch(e) {
-      var key = "Accel Shift H";
-      try {
-        key = branch.getCharPref("ehh-selectelement_key");
-      } catch(e2) {}
-      abpConfigureKey("ehh-selectelement", key);
-    }
-  }
 }
 
 function ehhGetBrowser() {
