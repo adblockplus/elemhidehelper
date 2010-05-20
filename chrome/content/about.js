@@ -50,8 +50,8 @@ function init()
   else
   {
     let extensionManager = Cc["@mozilla.org/extensions/manager;1"].getService(Ci.nsIExtensionManager);
-    let installLocation = extensionManager.getInstallLocation(Utils.addonID);
-    let installManifestFile = installLocation.getItemFile(Utils.addonID, "install.rdf");
+    let installLocation = extensionManager.getInstallLocation(addonID);
+    let installManifestFile = installLocation.getItemFile(addonID, "install.rdf");
     loadInstallManifest(ioService.newFileURI(installManifestFile));
   }
 }
