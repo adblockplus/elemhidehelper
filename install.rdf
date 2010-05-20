@@ -18,7 +18,7 @@
 {{LOCALIZED}}
 
   <!-- Front End Integration Hooks (used by Extension Manager)-->
-  <em:iconURL>chrome://adblockplus/skin/adblockplus.png</em:iconURL>
+  <em:iconURL>chrome://elemhidehelper-icon/skin/icon.png</em:iconURL>
   <em:aboutURL>chrome://elemhidehelper/content/about.xul</em:aboutURL>
   
   <!-- Target Application this extension can install into, 
