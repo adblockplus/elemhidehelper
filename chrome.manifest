@@ -3,3 +3,6 @@ content   elemhidehelper jar:chrome/elemhidehelper.jar!/content/
 skin      elemhidehelper classic/1.0 jar:chrome/elemhidehelper.jar!/skin/
 locale    elemhidehelper {{LOCALE}} jar:chrome/elemhidehelper.jar!/locale/{{LOCALE}}/
 content   elemhidehelper-modules modules/
+
+# Hack to allow the icon to be accessed via chrome URL
+skin      elemhidehelper-icon classic/1.0 ./
