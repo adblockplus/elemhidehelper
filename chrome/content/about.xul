@@ -1,0 +1,73 @@
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is Adblock Plus Element Hiding Helper.
+   -
+   - The Initial Developer of the Original Code is
+   - Wladimir Palant.
+   - Portions created by the Initial Developer are Copyright (C) 2006-2010
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://elemhidehelper/skin/about.css" type="text/css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://elemhidehelper/locale/about.dtd">
+
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  title="&dialog.title;"
+  id="ehhAboutWindow"
+  windowtype="ehh:about"
+  onload="init()"
+  buttons="accept">
+
+<script type="application/x-javascript;version=1.7" src="utils.js"/>
+<script type="application/x-javascript;version=1.7" src="about.js"/>
+
+<vbox id="mainBox">
+  <description id="title" value=" "/>
+  <hbox align="baseline">
+    <label control="version" value="&version.title;"/>
+    <textbox id="version" flex="1" class="plain" readonly="true" tabindex="-1"/>
+  </hbox>
+  
+  <groupbox id="mainGroup" flex="1">
+    <description id="description">
+      &description;
+    </description>
+  
+    <description id="homepageTitle" value="&homepage.label;"/>
+    <description id="homepage" class="text-link" onclick="Utils.loadInBrowser(this.getAttribute('value'))"/>
+  
+    <vbox id="authorsBox" align="top">
+      <label id="authorsTitle" control="authors" value="&author.label;"/>
+      <description id="authors"/>
+    </vbox>
+  
+    <vbox id="contributorsBox" align="top">
+      <label id="contributorsTitle" control="contributors" value="&contributors.label;"/>
+      <description id="contributors"/>
+    </vbox>
+  
+    <vbox id="translatorsBox">
+      <label id="translatorsTitle" control="translators" value="&translators.label;"/>
+      <description id="translators"/>
+    </vbox>
+  </groupbox>
+</vbox>
+
+</dialog>
