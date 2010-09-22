@@ -203,8 +203,7 @@ function updateExpression() {
 
       if (attr.checked) {
         var escapedName = attr.name.replace(/([^\w\-])/g, "\\$1")
-                                   .replace(/\\\{/g, "\\7B ")
-                                   .replace(/\\\}/g, "\\7D ");
+                                   .replace(/\\([\{\}])/g, escapeChar);
         if (attr.selected != "") {
           var op = "*=";
           if (attr.selected == attr.value)
@@ -233,8 +232,8 @@ function updateExpression() {
 
           if (useFallback) {
             var escapedValue = attr.selected.replace(/"/g, '\\"')
-                                            .replace(/\{/, "\\7B ")
-                                            .replace(/\}/, "\\7D ");
+                                            .replace(/([\{\}])/g, escapeChar)
+                                            .replace(/([^\S ])/g, escapeChar);
             expression += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
           }
         }
@@ -247,8 +246,8 @@ function updateExpression() {
     if (curNode.customCSS.checked && curNode.customCSS.selected != "")
     {
       expression += curNode.customCSS.selected
-                                        .replace(/\{/, "\\7B ")
-                                        .replace(/\}/, "\\7D ");
+                                      .replace(/([\{\}])/g, escapeChar)
+                                      .replace(/([^\S ])/g, escapeChar);
     }
 
     if ("firstChild" in curNode && curNode.firstChild.checked)
@@ -331,6 +330,14 @@ function updateExpression() {
 
   if (previewStyle)
     previewStyle.setAttribute("href", stylesheetURL);
+}
+
+function escapeChar(dummy, match)
+{
+  let code = match.charCodeAt(0).toString(16);
+  while (code.length < 6)
+    code = "0" + code;
+  return "\\" + code;
 }
 
 function fillDomains(domainData) {
