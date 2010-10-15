@@ -292,7 +292,8 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
       doc.adoptNode(this.borderElems[i]);
     }
     catch (e) {
-      // Gecko 1.8 doesn't implement adoptNode, ignore
+      // Temporary work-around for bug 604736, adoptNode fails
+      this.borderElems[i] = doc.importNode(this.borderElems[i], true);
     }
     doc.body.appendChild(this.borderElems[i]);
   }
@@ -332,7 +333,8 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
     doc.adoptNode(this.labelElem);
   }
   catch(e) {
-    // Gecko 1.8 doesn't implement adoptNode, ignore
+    // Temporary work-around for bug 604736, adoptNode fails
+    this.labelElem = doc.importNode(this.labelElem, true);
   }
   doc.body.appendChild(this.labelElem);
 
