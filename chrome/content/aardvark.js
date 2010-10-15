@@ -75,8 +75,9 @@ ehhAardvark.start = function(browser) {
 
   this.browser = browser;
 
-  if (!this.labelElem)
-    this.makeElems();
+  let doc = browser.contentDocument;
+  if (!this.labelElem || this.labelElem.ownerDocument != doc)
+    this.makeElems(doc);
 
   this.initHelpBox();
 
@@ -234,14 +235,14 @@ ehhAardvark.appendDescription = function(node, value, className) {
 
 //-------------------------------------------------
 // create the box and tag etc (done once and saved)
-ehhAardvark.makeElems = function ()
+ehhAardvark.makeElems = function (doc)
 {
   this.borderElems = [];
   var d, i;
 
   for (i=0; i<4; i++)
   {
-    d = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
+    d = doc.createElementNS("http://www.w3.org/1999/xhtml", "div");
     d.style.display = "none";
     d.style.position = "absolute";
     d.style.height = "0px";
@@ -255,7 +256,7 @@ ehhAardvark.makeElems = function ()
     this.borderElems[i] = d;
   }
 
-  d = document.createElementNS("http://www.w3.org/1999/xhtml", "div");
+  d = doc.createElementNS("http://www.w3.org/1999/xhtml", "div");
   this.setElementStyleDefault (d, "#fff0cc");
   d.style.borderTopWidth = "0";
   d.style.MozBorderRadiusBottomleft = "6px";
@@ -287,16 +288,8 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
 
   this.selectedElem = elem;
 
-  for (var i = 0; i < 4; i++) {
-    try {
-      doc.adoptNode(this.borderElems[i]);
-    }
-    catch (e) {
-      // Temporary work-around for bug 604736, adoptNode fails
-      this.borderElems[i] = doc.importNode(this.borderElems[i], true);
-    }
+  for (var i = 0; i < 4; i++)
     doc.body.appendChild(this.borderElems[i]);
-  }
 
   var pos = this.getPos(elem)
   var dims = this.getWindowDimensions (doc);
@@ -329,13 +322,6 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
   
   var y = pos.y + elem.offsetHeight + 1;
   
-  try {
-    doc.adoptNode(this.labelElem);
-  }
-  catch(e) {
-    // Temporary work-around for bug 604736, adoptNode fails
-    this.labelElem = doc.importNode(this.labelElem, true);
-  }
   doc.body.appendChild(this.labelElem);
 
   this.labelElem.innerHTML = string;
