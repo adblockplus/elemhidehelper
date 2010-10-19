@@ -1,0 +1,27 @@
+[general]
+id=elemhidehelper@adblockplus.org
+basename=elemhidehelper
+branchname=ELEMENT_HIDING_HELPER
+version=1.1a
+author=Wladimir Palant
+contributor=Rob Brown
+icon=chrome://elemhidehelper-icon/skin/icon.png
+about=chrome://elemhidehelper/content/about.xul
+
+[homepage]
+default=http://adblockplus.org/elemhidehelper
+de=http://adblockplus.org/de/elemhidehelper
+en=http://adblockplus.org/en/elemhidehelper
+es=http://adblockplus.org/es/elemhidehelper
+fr=http://adblockplus.org/fr/elemhidehelper
+ko=http://adblockplus.org/ko/elemhidehelper
+
+[compat]
+firefox=3.0.12/4.0b8pre
+seamonkey=2.0/2.1b2
+thunderbird=3.0/3.3a1pre
+songbird=1.4.0/1.9.0a
+midbrowser=0.2/0.3
+#emusic=1.0/1.0.0.*
+conkeror=0.1/100.0
+prism=1.0b1/1.0.*
