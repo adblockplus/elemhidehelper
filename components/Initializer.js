@@ -49,6 +49,7 @@ Initializer.prototype =
     switch (topic)
     {
       case "app-startup":
+      case "profile-after-change":
         observerService.addObserver(this, "final-ui-startup", true);
         break;
       case "final-ui-startup":
@@ -64,4 +65,7 @@ Initializer.prototype =
   }
 };
 
-var NSGetModule = XPCOMUtils.generateNSGetModule([Initializer]);
+if (XPCOMUtils.generateNSGetFactory)
+  var NSGetFactory = XPCOMUtils.generateNSGetFactory([Initializer]);
+else
+  var NSGetModule = XPCOMUtils.generateNSGetModule([Initializer]);
