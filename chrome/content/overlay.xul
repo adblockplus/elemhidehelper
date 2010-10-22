@@ -50,11 +50,11 @@
   </popupset>
 
   <popup id="abp-status-popup">
-    <menuitem id="abp-status-ehh-selectelement" hidden="true" insertbefore="abp-status-options" label="&selectelement.label;" accesskey="&selectelement.accesskey;" key="abp-key-ehh-selectelement"/>
-    <menuitem id="abp-status-ehh-stopselection" hidden="true" insertbefore="abp-status-options" label="&stopselection.label;" accesskey="&stopselection.accesskey;" key="abp-key-ehh-selectelement"/>
+    <menuitem id="abp-status-ehh-selectelement" hidden="true" insertbefore="abp-status-options" label="&selectelement.label;" accesskey="&selectelement.accesskey;" key="ehh-key-selectelement"/>
+    <menuitem id="abp-status-ehh-stopselection" hidden="true" insertbefore="abp-status-options" label="&stopselection.label;" accesskey="&stopselection.accesskey;" key="ehh-key-selectelement"/>
   </popup>
 
   <commandset id="abp-commandset">
-    <command id="abp-command-ehh-selectelement"/>
+    <command id="ehh-command-selectelement"/>
   </commandset>
 </overlay>

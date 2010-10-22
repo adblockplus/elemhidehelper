@@ -31,6 +31,7 @@ const Cu = Components.utils;
 
 let baseURI = Cc["@adblockplus.org/ehh/startup;1"].getService(Ci.nsIURI);
 Cu.import(baseURI.spec + "Aardvark.jsm");
+Cu.import(baseURI.spec + "Prefs.jsm");
 
 var AppIntegration =
 {
@@ -45,6 +46,7 @@ function WindowWrapper(wnd)
   this.window = wnd;
 
   this.registerEventListeners();
+  this.configureKeys();
 }
 WindowWrapper.prototype =
 {
@@ -84,6 +86,68 @@ WindowWrapper.prototype =
 
     this.window.addEventListener("blur", this._bindMethod(this.hideTooltips), true);
     this.browser.addEventListener("select", this._bindMethod(this.stopSelection), false);
+  },
+
+  configureKeys: function()
+  {
+    for (let pref in Prefs)
+    {
+      if (/_key$/.test(pref) && typeof Prefs[pref] == "string")
+      {
+        try
+        {
+          this.configureKey(RegExp.leftContext, Prefs[pref]);
+        }
+        catch (e)
+        {
+          Cu.reportError(e);
+        }
+      }
+    }
+  },
+
+  configureKey: function(id, value)
+  {
+    let validModifiers =
+    {
+      accel: "accel",
+      ctrl: "control",
+      control: "control",
+      shift: "shift",
+      alt: "alt",
+      meta: "meta"
+    };
+
+    let command = this.E("ehh-command-" + id);
+    if (!command)
+      return;
+
+    let modifiers = [];
+    let keychar = null;
+    let keycode = null;
+    for each (let part in value.split(/\s+/))
+    {
+      if (part.toLowerCase() in validModifiers)
+        modifiers.push(validModifiers[part.toLowerCase()]);
+      else if (part.length == 1)
+        keychar = part;
+      else if ("DOM_VK_" + part.toUpperCase() in Ci.nsIDOMKeyEvent)
+        keycode = "VK_" + part.toUpperCase();
+    }
+  
+    if (keychar || keycode)
+    {
+      let element = this.window.document.createElement("key");
+      element.setAttribute("id", "ehh-key-" + id);
+      element.setAttribute("command", "ehh-command-" + id);
+      if (keychar)
+        element.setAttribute("key", keychar);
+      else
+        element.setAttribute("keycode", keycode);
+      element.setAttribute("modifiers", modifiers.join(","));
+  
+      this.E("abp-keyset").appendChild(element);
+    }
   },
 
   hideTooltips: function()
