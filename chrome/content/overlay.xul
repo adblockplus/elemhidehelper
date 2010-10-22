@@ -29,7 +29,6 @@
 
 <overlay id="ehh-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="overlay.js"/>  
-  <script type="application/x-javascript" src="aardvark.js"/>
   
   <popupset id="abp-popupset">
     <tooltip id="ehh-helpbox" noautohide="true" orient="vertical">
@@ -51,11 +50,11 @@
   </popupset>
 
   <popup id="abp-status-popup">
-    <menuitem id="abp-status-ehh-selectelement" hidden="true" insertbefore="abp-status-options" label="&selectelement.label;" accesskey="&selectelement.accesskey;" key="abp-key-ehh-selectelement" oncommand="ehhSelectElement()"/>
-    <menuitem id="abp-status-ehh-stopselection" hidden="true" insertbefore="abp-status-options" label="&stopselection.label;" accesskey="&stopselection.accesskey;" key="abp-key-ehh-selectelement" oncommand="ehhSelectElement()"/>
+    <menuitem id="abp-status-ehh-selectelement" hidden="true" insertbefore="abp-status-options" label="&selectelement.label;" accesskey="&selectelement.accesskey;" key="abp-key-ehh-selectelement"/>
+    <menuitem id="abp-status-ehh-stopselection" hidden="true" insertbefore="abp-status-options" label="&stopselection.label;" accesskey="&stopselection.accesskey;" key="abp-key-ehh-selectelement"/>
   </popup>
 
   <commandset id="abp-commandset">
-    <command id="abp-command-ehh-selectelement" oncommand="ehhSelectElement();"/>
+    <command id="abp-command-ehh-selectelement"/>
   </commandset>
 </overlay>
