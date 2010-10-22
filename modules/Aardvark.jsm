@@ -51,29 +51,6 @@ Aardvark.start = function(wrapper) {
   if (!wrapper.canSelect())
     return;
 
-  if (!("viewSourceURL" in this)) {
-    // Firefox/Thunderbird and SeaMonkey have different viewPartialSource URLs
-    var urls = [
-      "chrome://global/content/viewPartialSource.xul",
-      "chrome://navigator/content/viewPartialSource.xul"
-    ];
-    this.viewSourceURL = null;
-    for (var i = 0; i < urls.length && !this.viewSourceURL; i++) {
-      var request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIJSXMLHttpRequest);
-      request.open("GET", urls[i], false);
-      try {
-        request.send(null);
-        this.viewSourceURL = urls[i];
-      } catch (e) {}
-    }
-
-    if (!this.viewSourceURL) {
-      for (i = 0; i < this.commands.length; i++)
-        if (this.commands[i] == "viewSourceWindow")
-          this.commands.splice(i--, 1);
-    }
-  }
-
   this.windowWrapper = wrapper;
   this.browser = wrapper.browser;
 
@@ -600,14 +577,14 @@ Aardvark.viewSource = function (elem)
 
 //--------------------------------------------------------
 Aardvark.viewSourceWindow = function(elem) {
-  if (!elem || !this.viewSourceURL)
+  if (!elem)
     return false;
 
   var range = elem.ownerDocument.createRange();
   range.selectNodeContents(elem);
   var selection = {rangeCount: 1, getRangeAt: function() {return range}};
 
-  this.windowWrapper.window.openDialog(this.viewSourceURL, "_blank", "scrollbars,resizable,chrome,dialog=no",
+  this.windowWrapper.window.openDialog("chrome://global/content/viewPartialSource.xul", "_blank", "scrollbars,resizable,chrome,dialog=no",
                                        null, null, selection, "selection");
   return true;
 }
