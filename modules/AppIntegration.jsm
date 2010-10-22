@@ -183,43 +183,50 @@ WindowWrapper.prototype =
     if (!command)
       return;
 
-    let modifiers = [];
-    let seenModifier = {__proto__: null};
-    let keychar = null;
-    let keycode = null;
-    for each (let part in value.split(/\s+/))
+    for each (let variant in value.split(/\s*,\s*/))
     {
-      if (part.toLowerCase() in validModifiers)
-      {
-        if (part in seenModifier)
-          continue;
+      if (!variant)
+        continue;
 
-        seenModifier[part] = true;
-        modifiers.push(validModifiers[part.toLowerCase()]);
-      }
-      else if (part.length == 1)
-        keychar = part.toUpperCase();
-      else if ("DOM_VK_" + part.toUpperCase() in Ci.nsIDOMKeyEvent)
-        keycode = "VK_" + part.toUpperCase();
-    }
+      let modifiers = [];
+      let seenModifier = {__proto__: null};
+      let keychar = null;
+      let keycode = null;
+      for each (let part in variant.split(/\s+/))
+      {
+        if (part.toLowerCase() in validModifiers)
+        {
+          if (part in seenModifier)
+            continue;
   
-    if (keychar || keycode)
-    {
+          seenModifier[part] = true;
+          modifiers.push(validModifiers[part.toLowerCase()]);
+        }
+        else if (part.length == 1)
+          keychar = part.toUpperCase();
+        else if ("DOM_VK_" + part.toUpperCase() in Ci.nsIDOMKeyEvent)
+          keycode = "VK_" + part.toUpperCase();
+      }
+    
+      if (!keychar && !keycode)
+        continue;
+
       modifiers.sort();
       let canonical = modifiers.concat([keychar || keycode]).join(" ");
-      if (!(canonical in existing))
-      {
-        let element = this.window.document.createElement("key");
-        element.setAttribute("id", "ehh-key-" + id);
-        element.setAttribute("command", "ehh-command-" + id);
-        if (keychar)
-          element.setAttribute("key", keychar);
-        else
-          element.setAttribute("keycode", keycode);
-        element.setAttribute("modifiers", modifiers.join(","));
-    
-        this.E("abp-keyset").appendChild(element);
-      }
+      if (canonical in existing)
+        continue;
+
+      let element = this.window.document.createElement("key");
+      element.setAttribute("id", "ehh-key-" + id);
+      element.setAttribute("command", "ehh-command-" + id);
+      if (keychar)
+        element.setAttribute("key", keychar);
+      else
+        element.setAttribute("keycode", keycode);
+      element.setAttribute("modifiers", modifiers.join(","));
+  
+      this.E("abp-keyset").appendChild(element);
+      return;
     }
   },
 
