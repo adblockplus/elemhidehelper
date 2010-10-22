@@ -48,6 +48,8 @@
     windowtype="ehh:composer">
   <script type="application/x-javascript" src="composer.js"/>  
   
+  <description id="groupDisabledWarning" hidden="true">&groupDisabled.warning;</description>
+
   <vbox id="expressionBox">
     <label control="expression" value="&expression.label;"/>
     <hbox>

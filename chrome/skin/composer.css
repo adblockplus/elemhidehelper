@@ -29,6 +29,11 @@ scrollbox
   overflow: auto;
 }
 
+#groupDisabledWarning
+{
+  color: red;
+}
+
 dialog:not([advancedMode=true]) #nodes-tree,
 dialog:not([advancedMode=true]) #nodes-tree-splitter
 {
