@@ -62,6 +62,7 @@ Aardvark.start = function(wrapper) {
   E = function(id) wrapper.E(id);
 
   this.browser.addEventListener("click", this.mouseClick, true);
+  this.browser.addEventListener("DOMMouseScroll", this.mouseScroll, true);
   this.browser.addEventListener("mouseover", this.mouseOver, true);
   this.browser.addEventListener("keypress", this.keyPress, true);
   this.browser.addEventListener("mousemove", this.mouseMove, true);
@@ -145,6 +146,18 @@ Aardvark.onMouseClick = function(event) {
   this.doCommand("select", event);
 }
 
+Aardvark.onMouseScroll = function(event)
+{
+  if (!event.shiftKey || event.altKey || event.ctrlKey || event.metaKey)
+    return;
+
+  if ("axis" in event && event.axis != event.VERTICAL_AXIS)
+    return;
+
+  for (let i = 0; i < Math.abs(event.detail); i++)
+    this.doCommand(event.detail > 0 ? "wider" : "narrower", event);
+}
+
 Aardvark.onMouseOver = function(event) {
   var elem = event.originalTarget;
   var aardvarkLabel = elem;
@@ -206,7 +219,7 @@ Aardvark.generateEventHandlers = function(handlers) {
     this[handlers[i]] = generator(handler);
   }
 }
-Aardvark.generateEventHandlers(["mouseClick", "mouseOver", "keyPress", "pageHide", "mouseMove"]);
+Aardvark.generateEventHandlers(["mouseClick", "mouseScroll", "mouseOver", "keyPress", "pageHide", "mouseMove"]);
 
 Aardvark.appendDescription = function(node, value, className) {
   var descr = this.window.document.createElement("description");
