@@ -39,7 +39,6 @@ let branch = prefService.getBranch(prefRoot);
 var Prefs =
 {
   initialized: false,
-  branch: null,
 
   startup: function()
   {
