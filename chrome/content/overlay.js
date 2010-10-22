@@ -22,97 +22,10 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-window.addEventListener("load", ehhInit, false);
-
-function ehhInit() {
-  var prefService = Components.classes["@mozilla.org/preferences-service;1"]
-                              .getService(Components.interfaces.nsIPrefService);
-  var branch = prefService.getBranch("extensions.adblockplus.");
-
-  if (document.getElementById("abp-status-popup"))
-    document.getElementById("abp-status-popup").addEventListener("popupshowing", ehhFillPopup, false);
-  if (document.getElementById("abp-toolbar-popup"))
-    document.getElementById("abp-toolbar-popup").addEventListener("popupshowing", ehhFillPopup, false);
-  window.addEventListener("blur", ehhHideTooltips, true);
-  ehhGetBrowser().addEventListener("select", ehhStop, false);
-}
-
-function ehhGetBrowser() {
-  if ("getBrowser" in window)
-    return getBrowser();
-  else if ("messageContent" in window)
-    return window.messageContent;
-  else
-    return document.getElementById("frame_main_pane") || document.getElementById("browser_content");
-}
-
-function ehhHideTooltips() {
-  document.getElementById("ehh-helpbox").hidePopup();
-  document.getElementById("ehh-commandlabel").hidePopup();
-  document.getElementById("ehh-viewsource").hidePopup();
-}
-
-function ehhDisableElement(id, disable) {
-  var element = document.getElementById();
-  if (element)
-    element.setAttribute("disabled", disable);
-}
-
-function ehhHideElement(id, hide) {
-  var element = document.getElementById();
-  if (element)
-    element.hidden = hide;
-}
-
-function ehhFillPopup(event) {
-  var popup = event.target.getAttribute("id");
-  if (popup.match(/-/g).length != 2)
-    return;
-
-  popup = popup.replace(/popup$/, '');
-
-  var browser = ehhGetBrowser();
-  var enabled = ehhCanSelect(browser);
-  var running = (enabled && browser == ehhAardvark.browser);
-
-  document.getElementById(popup + "ehh-selectelement").setAttribute("disabled", !enabled);
-  document.getElementById(popup + "ehh-selectelement").hidden = running;
-  document.getElementById(popup + "ehh-stopselection").hidden = !running;
-}
-
-function ehhCanSelect(browser) {
-  if (!browser || !browser.contentWindow || 
-      !(browser.contentDocument instanceof HTMLDocument) ||
-      !browser.contentDocument.body)
-    return false;
-
-  var location = browser.contentWindow.location;
-  if (location.href == "about:blank")
-    return false;
-
-  if (location.hostname == "" &&
-      location.protocol != "mailbox:" &&
-      location.protocol != "imap:" &&
-      location.protocol != "news:" &&
-      location.protocol != "snews:")
-    return false;
-
-  return true;
-}
-
-function ehhSelectElement() {
-  var browser = ehhGetBrowser();
-  if (!browser.contentWindow || !browser.contentDocument)
-    return;
-
-  if (browser == ehhAardvark.browser) {
-    ehhStop();
-    return;
-  }
-
-  ehhAardvark.start(browser);
-}
-
-function ehhStop() {
-  ehhAardvark.quit();
-}
+window.addEventListener("load", function()
+{
+  let baseURI = Components.classes["@adblockplus.org/ehh/startup;1"].getService(Components.interfaces.nsIURI);
+  let scope = {};
+  Components.utils.import(baseURI.spec + "AppIntegration.jsm", scope);
+  scope.AppIntegration.addWindow(window);
+}, false);

@@ -23,23 +23,32 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+var EXPORTED_SYMBOLS = ["Aardvark"];
+
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+const Cr = Components.results;
+const Cu = Components.utils;
+
 /**********************************
  * General element selection code *
  **********************************/
 
-var ehhAardvark = {
+var Aardvark = {
+  windowWrapper: null,
   browser: null,
   selectedElem: null,
   commentElem : null,
   mouseX: -1,
   mouseY: -1,
-  commandLabelTimeout: 0,
+  commandLabelTimer: null,
+  viewSourceTimer: null,
   borderElems: null,
   labelElem: null
 };
 
-ehhAardvark.start = function(browser) {
-  if (!ehhCanSelect(browser))
+Aardvark.start = function(wrapper) {
+  if (!wrapper.canSelect())
     return;
 
   if (!("viewSourceURL" in this)) {
@@ -50,7 +59,7 @@ ehhAardvark.start = function(browser) {
     ];
     this.viewSourceURL = null;
     for (var i = 0; i < urls.length && !this.viewSourceURL; i++) {
-      var request = new XMLHttpRequest();
+      var request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIJSXMLHttpRequest);
       request.open("GET", urls[i], false);
       try {
         request.send(null);
@@ -65,24 +74,24 @@ ehhAardvark.start = function(browser) {
     }
   }
 
-  browser.addEventListener("click", this.mouseClick, true);
-  browser.addEventListener("mouseover", this.mouseOver, true);
-  browser.addEventListener("keypress", this.keyPress, true);
-  browser.addEventListener("mousemove", this.mouseMove, true);
-  browser.contentWindow.addEventListener("pagehide", this.pageHide, true);
+  this.windowWrapper = wrapper;
+  this.browser = wrapper.browser;
 
-  browser.contentWindow.focus();
+  this.browser.addEventListener("click", this.mouseClick, true);
+  this.browser.addEventListener("mouseover", this.mouseOver, true);
+  this.browser.addEventListener("keypress", this.keyPress, true);
+  this.browser.addEventListener("mousemove", this.mouseMove, true);
+  this.browser.contentWindow.addEventListener("pagehide", this.pageHide, true);
 
-  this.browser = browser;
+  this.browser.contentWindow.focus();
 
-  let doc = browser.contentDocument;
+  let doc = this.browser.contentDocument;
   if (!this.labelElem || this.labelElem.ownerDocument != doc)
     this.makeElems(doc);
 
   this.initHelpBox();
 
-  var prefService = Components.classes["@mozilla.org/preferences-service;1"]
-                              .getService(Components.interfaces.nsIPrefService);
+  var prefService = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
   var branch = prefService.getBranch("extensions.adblockplus.");
   var showMenu = true;
   try {
@@ -93,7 +102,7 @@ ehhAardvark.start = function(browser) {
     this.showMenu();
 }
 
-ehhAardvark.doCommand = function(command, event) {
+Aardvark.doCommand = function(command, event) {
   if (this[command](this.selectedElem)) {
     this.showCommandLabel(this.commands[command + "_key"], this.commands[command + "_label"]);
     if (event)
@@ -103,30 +112,31 @@ ehhAardvark.doCommand = function(command, event) {
     event.preventDefault();
 }
 
-ehhAardvark.showCommandLabel = function(key, label) {
-  if (this.commandLabelTimeout)
-    clearTimeout(this.commandLabelTimeout);
+Aardvark.showCommandLabel = function(key, label) {
+  if (this.commandLabelTimer)
+    this.commandLabelTimer.cancel();
 
-  document.getElementById("ehh-commandlabel-key").setAttribute("value", key);
-  document.getElementById("ehh-commandlabel-label").setAttribute("value", label);
+  this.windowWrapper.E("ehh-commandlabel-key").setAttribute("value", key);
+  this.windowWrapper.E("ehh-commandlabel-label").setAttribute("value", label);
 
-  var commandLabel = document.getElementById("ehh-commandlabel");
-  commandLabel.showPopup(document.documentElement, this.mouseX, this.mouseY, "tooltip", "topleft", "topleft");
+  var commandLabel = this.windowWrapper.E("ehh-commandlabel");
+  commandLabel.showPopup(this.windowWrapper.window.document.documentElement, this.mouseX, this.mouseY, "tooltip", "topleft", "topleft");
 
-  this.commandLabelTimeout = setTimeout(function() {
+  this.commandLabelTimer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+  this.commandLabelTimer.initWithCallback(function()
+  {
     commandLabel.hidePopup();
-    ehhAardvark.commandLabelTimeout = 0;
-  }, 400);
+    Aardvark.commandLabelTimer = null;
+  }, 400, Ci.nsITimer.TYPE_ONE_SHOT);
 }
 
-ehhAardvark.initHelpBox = function() {
-  var helpBoxRows = document.getElementById("ehh-helpbox-rows");
+Aardvark.initHelpBox = function() {
+  var helpBoxRows = this.windowWrapper.E("ehh-helpbox-rows");
   if (helpBoxRows.firstChild)
     return;
 
   // Help box hasn't been filled yet, need to do it now
-  var stringService = Components.classes["@mozilla.org/intl/stringbundle;1"]
-                                .getService(Components.interfaces.nsIStringBundleService);
+  var stringService = Cc["@mozilla.org/intl/stringbundle;1"].getService(Ci.nsIStringBundleService);
   var strings = stringService.createBundle("chrome://elemhidehelper/locale/global.properties");
 
   for (var i = 0; i < this.commands.length; i++) {
@@ -136,32 +146,32 @@ ehhAardvark.initHelpBox = function() {
     this.commands[command + "_key"] = key.toLowerCase();
     this.commands[command + "_label"] = label;
 
-    var row = document.createElement("row");
+    var row = this.windowWrapper.window.document.createElement("row");
     helpBoxRows.appendChild(row);
 
-    var element = document.createElement("description");
+    var element = this.windowWrapper.window.document.createElement("description");
     element.setAttribute("value", key);
     element.className = "key";
     row.appendChild(element);
 
-    element = document.createElement("description");
+    element = this.windowWrapper.window.document.createElement("description");
     element.setAttribute("value", label);
     element.className = "label";
     row.appendChild(element);
   }
 }
 
-ehhAardvark.onMouseClick = function(event) {
+Aardvark.onMouseClick = function(event) {
   if (event.button != 0 || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey)
     return;
 
   this.doCommand("select", event);
 }
 
-ehhAardvark.onMouseOver = function(event) {
+Aardvark.onMouseOver = function(event) {
   var elem = event.originalTarget;
   var aardvarkLabel = elem;
-  while (aardvarkLabel && !("ehhAardvarkLabel" in aardvarkLabel))
+  while (aardvarkLabel && !("AardvarkLabel" in aardvarkLabel))
     aardvarkLabel = aardvarkLabel.parentNode;
 
   if (elem == null || aardvarkLabel)
@@ -176,7 +186,7 @@ ehhAardvark.onMouseOver = function(event) {
   this.showBoxAndLabel (elem, this.makeElementLabelString (elem));
 }
 
-ehhAardvark.onKeyPress = function(event) {
+Aardvark.onKeyPress = function(event) {
   if (event.altKey || event.ctrlKey || event.metaKey)
     return;
 
@@ -197,21 +207,21 @@ ehhAardvark.onKeyPress = function(event) {
     this.doCommand(command, event);
 }
 
-ehhAardvark.onPageHide = function(event) {
+Aardvark.onPageHide = function(event) {
   this.doCommand("quit", null);
 }
 
-ehhAardvark.onMouseMove = function(event) {
+Aardvark.onMouseMove = function(event) {
   this.mouseX = event.screenX;
   this.mouseY = event.screenY;
 }
 
-// Makes sure event handlers like ehhAardvark.keyPress redirect
-// to the real handlers (ehhAardvark.onKeyPress in this case) with
+// Makes sure event handlers like Aardvark.keyPress redirect
+// to the real handlers (Aardvark.onKeyPress in this case) with
 // correct this pointer.
-ehhAardvark.generateEventHandlers = function(handlers) {
+Aardvark.generateEventHandlers = function(handlers) {
   var generator = function(handler) {
-    return function(event) {ehhAardvark[handler](event)};
+    return function(event) {Aardvark[handler](event)};
   };
 
   for (var i = 0; i < handlers.length; i++) {
@@ -219,10 +229,10 @@ ehhAardvark.generateEventHandlers = function(handlers) {
     this[handlers[i]] = generator(handler);
   }
 }
-ehhAardvark.generateEventHandlers(["mouseClick", "mouseOver", "keyPress", "pageHide", "mouseMove"]);
+Aardvark.generateEventHandlers(["mouseClick", "mouseOver", "keyPress", "pageHide", "mouseMove"]);
 
-ehhAardvark.appendDescription = function(node, value, className) {
-  var descr = document.createElement("description");
+Aardvark.appendDescription = function(node, value, className) {
+  var descr = this.windowWrapper.window.document.createElement("description");
   descr.setAttribute("value", value);
   if (className)
     descr.setAttribute("class", className);
@@ -235,7 +245,7 @@ ehhAardvark.appendDescription = function(node, value, className) {
 
 //-------------------------------------------------
 // create the box and tag etc (done once and saved)
-ehhAardvark.makeElems = function (doc)
+Aardvark.makeElems = function (doc)
 {
   this.borderElems = [];
   var d, i;
@@ -252,7 +262,7 @@ ehhAardvark.makeElems = function (doc)
       d.style.borderTop = "2px solid #f00";
     else
       d.style.borderLeft = "2px solid #f00";
-    d.ehhAardvarkLabel = true; // mark as ours
+    d.AardvarkLabel = true; // mark as ours
     this.borderElems[i] = d;
   }
 
@@ -264,11 +274,11 @@ ehhAardvark.makeElems = function (doc)
   d.style.borderBottomLeftRadius = "6px";
   d.style.borderBottomRightRadius = "6px";
   d.style.zIndex = "65535";
-  d.ehhAardvarkLabel = true; // mark as ours
+  d.AardvarkLabel = true; // mark as ours
   this.labelElem = d;
 }
 
-ehhAardvark.makeElementLabelString = function(elem) {
+Aardvark.makeElementLabelString = function(elem) {
   var s = "<b style='color:#000'>" + elem.tagName.toLowerCase() + "</b>";
   if (elem.id != '')
     s += ", id: " + elem.id;
@@ -283,7 +293,7 @@ ehhAardvark.makeElementLabelString = function(elem) {
   return s;
 }
 
-ehhAardvark.showBoxAndLabel = function(elem, string) {
+Aardvark.showBoxAndLabel = function(elem, string) {
   var doc = elem.ownerDocument;
   if (!doc || !doc.body)
     return;
@@ -356,7 +366,7 @@ ehhAardvark.showBoxAndLabel = function(elem, string) {
   this.labelElem.style.top = y + "px";
 }
 
-ehhAardvark.clearBox = function() {
+Aardvark.clearBox = function() {
   this.selectedElem = null;
 
   for (var i = 0; i < this.borderElems.length; i++)
@@ -367,7 +377,7 @@ ehhAardvark.clearBox = function() {
     this.labelElem.parentNode.removeChild(this.labelElem);
 }
 
-ehhAardvark.getPos = function (elem)
+Aardvark.getPos = function (elem)
 {
   var pos = {x: 0, y: 0};
 
@@ -380,7 +390,7 @@ ehhAardvark.getPos = function (elem)
   return pos;
 }
 
-ehhAardvark.getWindowDimensions = function (doc)
+Aardvark.getWindowDimensions = function (doc)
 {
   var out = {};
 
@@ -400,7 +410,7 @@ ehhAardvark.getWindowDimensions = function (doc)
   return out;
 }
 
-ehhAardvark.setElementStyleDefault = function (elem, bgColor)
+Aardvark.setElementStyleDefault = function (elem, bgColor)
 {
   var s = elem.style;
   s.display = "none";
@@ -425,7 +435,7 @@ ehhAardvark.setElementStyleDefault = function (elem, bgColor)
 
 //------------------------------------------------------------
 // 0: name, 1: needs element
-ehhAardvark.commands = [
+Aardvark.commands = [
   "select",
   "wider",
   "narrower",
@@ -437,7 +447,7 @@ ehhAardvark.commands = [
 ];
 
 //------------------------------------------------------------
-ehhAardvark.wider = function (elem)
+Aardvark.wider = function (elem)
 {
   if (elem)
   {
@@ -465,7 +475,7 @@ ehhAardvark.wider = function (elem)
 } 
 
 //------------------------------------------------------------
-ehhAardvark.narrower = function (elem)
+Aardvark.narrower = function (elem)
 {
   if (elem)
   {
@@ -483,13 +493,23 @@ ehhAardvark.narrower = function (elem)
 }
   
 //------------------------------------------------------------
-ehhAardvark.quit = function ()
+Aardvark.quit = function ()
 {
   if (!this.browser)
     return false;
 
+  if ("blinkTimer" in this)
+    this.stopBlinking();
+
+  if (this.commandLabelTimer)
+    this.commandLabelTimer.cancel();
+  if (this.viewSourceTimer)
+    this.viewSourceTimer.cancel();
+  this.commandLabelTimer = null;
+  this.viewSourceTimer = null;
+
   this.clearBox();
-  ehhHideTooltips();
+  this.windowWrapper.hideTooltips();
   
   this.browser.removeEventListener("click", this.mouseClick, true);
   this.browser.removeEventListener("mouseover", this.mouseOver, true);
@@ -505,53 +525,56 @@ ehhAardvark.quit = function ()
 }
 
 //------------------------------------------------------------
-ehhAardvark.select = function (elem)
+Aardvark.select = function (elem)
 {
   if (!elem || !this.quit())
     return false;
 
-  window.openDialog("chrome://elemhidehelper/content/composer.xul", "_blank",
-                    "chrome,centerscreen,resizable,dialog=no", elem);
+  this.windowWrapper.window.openDialog("chrome://elemhidehelper/content/composer.xul", "_blank",
+                                       "chrome,centerscreen,resizable,dialog=no", elem);
   return true;
 }
 
 //------------------------------------------------------------
-ehhAardvark.blinkElement = function (elem)
+Aardvark.blinkElement = function (elem)
 {
   if (!elem)
     return false;
 
-  if ("blinkInterval" in this)
+  if ("blinkTimer" in this)
     this.stopBlinking();
 
-  var counter = 0;
+  let counter = 0;
   this.blinkElem = elem;
   this.blinkOrigValue = elem.style.visibility;
-  this.blinkInterval = setInterval(function() {
+  this.blinkTimer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+  this.blinkTimer.initWithCallback(function()
+  {
     counter++;
     elem.style.visibility = (counter % 2 == 0 ? "visible" : "hidden");
     if (counter == 6)
-      ehhAardvark.stopBlinking();
-  }, 250);
+      Aardvark.stopBlinking();
+  }, 250, Ci.nsITimer.TYPE_REPEATING_SLACK);
 
   return true;
 }
-ehhAardvark.stopBlinking = function() {
-  clearInterval(this.blinkInterval);
+Aardvark.stopBlinking = function()
+{
+  this.blinkTimer.cancel();
   this.blinkElem.style.visibility = this.blinkOrigValue;
 
   delete this.blinkElem;
   delete this.blinkOrigValue;
-  delete this.blinkInterval;
+  delete this.blinkTimer;
 }
 
 //------------------------------------------------------------
-ehhAardvark.viewSource = function (elem)
+Aardvark.viewSource = function (elem)
 {
   if (!elem)
     return false;
 
-  var sourceBox = document.getElementById("ehh-viewsource");
+  var sourceBox = this.windowWrapper.E("ehh-viewsource");
   if ((sourceBox.getAttribute("_moz-menuactive") == "true" || sourceBox.state == "open") && this.commentElem == elem) {
     sourceBox.hidePopup();
     return true;
@@ -563,16 +586,20 @@ ehhAardvark.viewSource = function (elem)
   this.getOuterHtmlFormatted(elem, sourceBox);
   this.commentElem = elem;
 
-  var x = this.mouseX;
-  var y = this.mouseY;
-  setTimeout(function() {
-    sourceBox.showPopup(document.documentElement, x, y, "tooltip", "topleft", "topleft");
-  }, 500);
+  let anchor = this.windowWrapper.window.document.documentElement;
+  let x = this.mouseX;
+  let y = this.mouseY;
+  this.viewSourceTimer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
+  this.viewSourceTimer.initWithCallback(function()
+  {
+    sourceBox.showPopup(anchor, x, y, "tooltip", "topleft", "topleft");
+    Aardvark.viewSourceTimer = null;
+  }, 500, Ci.nsITimer.TYPE_ONE_SHOT);
   return true;
 }
 
 //--------------------------------------------------------
-ehhAardvark.viewSourceWindow = function(elem) {
+Aardvark.viewSourceWindow = function(elem) {
   if (!elem || !this.viewSourceURL)
     return false;
 
@@ -580,22 +607,21 @@ ehhAardvark.viewSourceWindow = function(elem) {
   range.selectNodeContents(elem);
   var selection = {rangeCount: 1, getRangeAt: function() {return range}};
 
-  // SeaMonkey uses a different 
-  window.openDialog(this.viewSourceURL, "_blank", "scrollbars,resizable,chrome,dialog=no",
-                    null, null, selection, "selection");
+  this.windowWrapper.window.openDialog(this.viewSourceURL, "_blank", "scrollbars,resizable,chrome,dialog=no",
+                                       null, null, selection, "selection");
   return true;
 }
 
 //--------------------------------------------------------
-ehhAardvark.getOuterHtmlFormatted = function (node, container)
+Aardvark.getOuterHtmlFormatted = function (node, container)
 {
   var type = null;
   switch (node.nodeType) {
     case node.ELEMENT_NODE:
-      var box = document.createElement("vbox");
+      var box = this.windowWrapper.window.document.createElement("vbox");
       box.className = "elementBox";
 
-      var startTag = document.createElement("hbox");
+      var startTag = this.windowWrapper.window.document.createElement("hbox");
       startTag.className = "elementStartTag";
       if (!node.firstChild)
         startTag.className += "elementEndTag";
@@ -619,7 +645,7 @@ ehhAardvark.getOuterHtmlFormatted = function (node, container)
         for (var child = node.firstChild; child; child = child.nextSibling)
           this.getOuterHtmlFormatted(child, box);
 
-        var endTag = document.createElement("hbox");
+        var endTag = this.windowWrapper.window.document.createElement("hbox");
         endTag.className = "elementEndTag";
         this.appendDescription(endTag, "<", null);
         this.appendDescription(endTag, "/" + node.tagName, "tagName");
@@ -663,9 +689,9 @@ ehhAardvark.getOuterHtmlFormatted = function (node, container)
 }
 
 //-------------------------------------------------
-ehhAardvark.showMenu = function ()
+Aardvark.showMenu = function ()
 {
-  var helpBox = document.getElementById("ehh-helpbox");
+  var helpBox = this.windowWrapper.E("ehh-helpbox");
   if (helpBox.getAttribute("_moz-menuactive") == "true" || helpBox.state == "open") {
     helpBox.hidePopup();
     return true;
