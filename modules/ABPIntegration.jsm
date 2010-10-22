@@ -22,13 +22,14 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-var EXPORTED_SYMBOLS = ["EHH"];
+var EXPORTED_SYMBOLS = [];
 
 const Cc = Components.classes;
 const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
+let baseURI = Cc["@adblockplus.org/ehh/startup;1"].getService(Ci.nsIURI);
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
 /**
@@ -61,20 +62,6 @@ const myID = "elemhidehelper@adblockplus.org";
  */
 let timer = null;
 
-/**
- * Exported symbol of the module, will be triggered by Adblock Plus.
- * @class
- */
-var EHH =
-{
-  initialized: false,
-
-  startup: function()
-  {
-    EHH.initialized = true;
-  }
-};
-
 let extensionManager = null;
 
 /**
@@ -83,9 +70,7 @@ let extensionManager = null;
  */
 function init()
 {
-  let baseURI = Cc["@adblockplus.org/ehh/startup;1"].getService(Ci.nsIURI);
-  let moduleLocation = baseURI.spec + "ABPIntegration.jsm";
-
+  let moduleLocation = baseURI.spec + "Prefs.jsm";
   let categoryManager = Cc["@mozilla.org/categorymanager;1"].getService(Ci.nsICategoryManager);
   categoryManager.addCategoryEntry("adblock-plus-module-location", moduleLocation, moduleLocation, false, true);
 
@@ -100,7 +85,8 @@ function init()
 function startABPCheck()
 {
   timer = null;
-  if (!EHH.initialized)
+  Cu.import(baseURI.spec + "Prefs.jsm");
+  if (!Prefs.initialized)
   {
     // Adblock Plus didn't initialize us - what's wrong?
     checkDependencies();
