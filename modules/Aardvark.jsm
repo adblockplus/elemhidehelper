@@ -30,6 +30,9 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
+let baseURI = Cc["@adblockplus.org/ehh/startup;1"].getService(Ci.nsIURI);
+Cu.import(baseURI.spec + "Prefs.jsm");
+
 // To be replaced when selection starts
 function E(id) {return null;}
 
@@ -72,14 +75,7 @@ Aardvark.start = function(wrapper) {
 
   this.initHelpBox();
 
-  var prefService = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
-  var branch = prefService.getBranch("extensions.adblockplus.");
-  var showMenu = true;
-  try {
-    showMenu = branch.getBoolPref("ehh.showhelp");
-  } catch(e) {}
-
-  if (showMenu)
+  if (Prefs.showhelp)
     this.showMenu();
 }
 
