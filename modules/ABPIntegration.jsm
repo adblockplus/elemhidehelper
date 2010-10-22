@@ -72,25 +72,6 @@ var EHH =
   startup: function()
   {
     EHH.initialized = true;
-  },
-
-  shutdown: function(/**Boolean*/ cleanup)
-  {
-    if (cleanup)
-    {
-      EHH.initialized = false;
-
-      // Close all our windows
-      let enumerator = Cc["@mozilla.org/appshell/window-mediator;1"]
-                         .getService(Ci.nsIWindowMediator)
-                         .getEnumerator("ehh:composer");
-      while (enumerator.hasMoreElements())
-      {
-        let wnd = enumerator.getNext();
-        if (wnd instanceof Ci.nsIDOMWindowInternal && !wnd.closed)
-          wnd.close();
-      }
-    }
   }
 };
 
