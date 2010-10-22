@@ -173,6 +173,7 @@ function init() {
     if (nodeData.attributes[0].name == "id" || nodeData.attributes[0].name == "class") {
       nodeData.attributes[0].selected = nodeData.attributes[0].value;
       nodeData.attributes[0].checked = true;
+      nodeData.tagName.checked = false;
     }
     else {
       var maxLen = 0;
