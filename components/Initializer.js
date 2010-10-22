@@ -53,13 +53,13 @@ Initializer.prototype =
         observerService.addObserver(this, "final-ui-startup", true);
         break;
       case "final-ui-startup":
+        observerService.removeObserver(this, "final-ui-startup");
+
         // Load the module
         let chromeRegistry = Cc["@mozilla.org/chrome/chrome-registry;1"].getService(Ci.nsIChromeRegistry);
         let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
         let moduleURL = chromeRegistry.convertChromeURL(ioService.newURI("chrome://elemhidehelper-modules/content/ABPIntegration.jsm", null, null));
         Cu.import(moduleURL.spec);
-
-        observerService.removeObserver(this, "final-ui-startup");
         break;
     }
   }
