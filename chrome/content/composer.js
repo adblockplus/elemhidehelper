@@ -36,6 +36,9 @@ var stylesheetURL;
 var previewStyle = null;
 var doc;
 
+let abpURL = Cc["@adblockplus.org/abp/public;1"].getService(Ci.nsIURI);
+Cu.import(abpURL.spec);
+
 /*******************
  * NodeData object *
  *******************/
@@ -153,6 +156,16 @@ function init() {
   var element = window.arguments[0];
   doc = element.ownerDocument;
   var wnd = doc.defaultView;
+
+  // Check whether element hiding group is disabled
+  let subscription = AdblockPlus.getSubscription("~eh~");
+  if (subscription && subscription.disabled)
+  {
+    let warning = document.getElementById("groupDisabledWarning");
+    if (/\?1\?/.test(warning.textContent))
+      warning.textContent = warning.textContent.replace(/\?1\?/g, subscription.title);
+    warning.hidden = false;
+  }
 
   nodeData = new NodeData(element);
   nodeData.tagName.checked = true;
@@ -572,8 +585,6 @@ function updateNodeSelection() {
 
 function addExpression()
 {
-  let abpURL = Cc["@adblockplus.org/abp/public;1"].getService(Ci.nsIURI);
-  Cu.import(abpURL.spec);
   AdblockPlus.addPatterns([document.getElementById("expression").value]);
 
   togglePreview(false);
