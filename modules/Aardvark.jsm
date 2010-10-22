@@ -30,12 +30,15 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
+// To be replaced when selection starts
+function E(id) {return null;}
+
 /**********************************
  * General element selection code *
  **********************************/
 
 var Aardvark = {
-  windowWrapper: null,
+  window: null,
   browser: null,
   selectedElem: null,
   commentElem : null,
@@ -48,11 +51,12 @@ var Aardvark = {
 };
 
 Aardvark.start = function(wrapper) {
-  if (!wrapper.canSelect())
-    return;
+  if (this.browser)
+    this.quit();
 
-  this.windowWrapper = wrapper;
+  this.window = wrapper.window;
   this.browser = wrapper.browser;
+  E = function(id) wrapper.E(id);
 
   this.browser.addEventListener("click", this.mouseClick, true);
   this.browser.addEventListener("mouseover", this.mouseOver, true);
@@ -93,11 +97,11 @@ Aardvark.showCommandLabel = function(key, label) {
   if (this.commandLabelTimer)
     this.commandLabelTimer.cancel();
 
-  this.windowWrapper.E("ehh-commandlabel-key").setAttribute("value", key);
-  this.windowWrapper.E("ehh-commandlabel-label").setAttribute("value", label);
+  E("ehh-commandlabel-key").setAttribute("value", key);
+  E("ehh-commandlabel-label").setAttribute("value", label);
 
-  var commandLabel = this.windowWrapper.E("ehh-commandlabel");
-  commandLabel.showPopup(this.windowWrapper.window.document.documentElement, this.mouseX, this.mouseY, "tooltip", "topleft", "topleft");
+  var commandLabel = E("ehh-commandlabel");
+  commandLabel.showPopup(this.window.document.documentElement, this.mouseX, this.mouseY, "tooltip", "topleft", "topleft");
 
   this.commandLabelTimer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
   this.commandLabelTimer.initWithCallback(function()
@@ -108,7 +112,7 @@ Aardvark.showCommandLabel = function(key, label) {
 }
 
 Aardvark.initHelpBox = function() {
-  var helpBoxRows = this.windowWrapper.E("ehh-helpbox-rows");
+  var helpBoxRows = E("ehh-helpbox-rows");
   if (helpBoxRows.firstChild)
     return;
 
@@ -123,15 +127,15 @@ Aardvark.initHelpBox = function() {
     this.commands[command + "_key"] = key.toLowerCase();
     this.commands[command + "_label"] = label;
 
-    var row = this.windowWrapper.window.document.createElement("row");
+    var row = this.window.document.createElement("row");
     helpBoxRows.appendChild(row);
 
-    var element = this.windowWrapper.window.document.createElement("description");
+    var element = this.window.document.createElement("description");
     element.setAttribute("value", key);
     element.className = "key";
     row.appendChild(element);
 
-    element = this.windowWrapper.window.document.createElement("description");
+    element = this.window.document.createElement("description");
     element.setAttribute("value", label);
     element.className = "label";
     row.appendChild(element);
@@ -209,7 +213,7 @@ Aardvark.generateEventHandlers = function(handlers) {
 Aardvark.generateEventHandlers(["mouseClick", "mouseOver", "keyPress", "pageHide", "mouseMove"]);
 
 Aardvark.appendDescription = function(node, value, className) {
-  var descr = this.windowWrapper.window.document.createElement("description");
+  var descr = this.window.document.createElement("description");
   descr.setAttribute("value", value);
   if (className)
     descr.setAttribute("class", className);
@@ -354,6 +358,13 @@ Aardvark.clearBox = function() {
     this.labelElem.parentNode.removeChild(this.labelElem);
 }
 
+Aardvark.hideTooltips = function()
+{
+  E("ehh-helpbox").hidePopup();
+  E("ehh-commandlabel").hidePopup();
+  E("ehh-viewsource").hidePopup();
+}
+
 Aardvark.getPos = function (elem)
 {
   var pos = {x: 0, y: 0};
@@ -486,7 +497,7 @@ Aardvark.quit = function ()
   this.viewSourceTimer = null;
 
   this.clearBox();
-  this.windowWrapper.hideTooltips();
+  this.hideTooltips();
   
   this.browser.removeEventListener("click", this.mouseClick, true);
   this.browser.removeEventListener("mouseover", this.mouseOver, true);
@@ -495,21 +506,24 @@ Aardvark.quit = function ()
   this.browser.contentWindow.removeEventListener("pagehide", this.pageHide, true);
 
   this.selectedElem = null;
+  this.window = null;
   this.browser = null;
   this.commentElem = null;
+  E = function(id) null;
   delete this.widerStack;
-  return true;
+  return false;
 }
 
 //------------------------------------------------------------
 Aardvark.select = function (elem)
 {
-  if (!elem || !this.quit())
+  if (!elem)
     return false;
 
-  this.windowWrapper.window.openDialog("chrome://elemhidehelper/content/composer.xul", "_blank",
-                                       "chrome,centerscreen,resizable,dialog=no", elem);
-  return true;
+  this.window.openDialog("chrome://elemhidehelper/content/composer.xul", "_blank",
+                         "chrome,centerscreen,resizable,dialog=no", elem);
+  this.quit();
+  return false;
 }
 
 //------------------------------------------------------------
@@ -551,7 +565,7 @@ Aardvark.viewSource = function (elem)
   if (!elem)
     return false;
 
-  var sourceBox = this.windowWrapper.E("ehh-viewsource");
+  var sourceBox = E("ehh-viewsource");
   if ((sourceBox.getAttribute("_moz-menuactive") == "true" || sourceBox.state == "open") && this.commentElem == elem) {
     sourceBox.hidePopup();
     return true;
@@ -563,7 +577,7 @@ Aardvark.viewSource = function (elem)
   this.getOuterHtmlFormatted(elem, sourceBox);
   this.commentElem = elem;
 
-  let anchor = this.windowWrapper.window.document.documentElement;
+  let anchor = this.window.document.documentElement;
   let x = this.mouseX;
   let y = this.mouseY;
   this.viewSourceTimer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
@@ -584,8 +598,8 @@ Aardvark.viewSourceWindow = function(elem) {
   range.selectNodeContents(elem);
   var selection = {rangeCount: 1, getRangeAt: function() {return range}};
 
-  this.windowWrapper.window.openDialog("chrome://global/content/viewPartialSource.xul", "_blank", "scrollbars,resizable,chrome,dialog=no",
-                                       null, null, selection, "selection");
+  this.window.openDialog("chrome://global/content/viewPartialSource.xul", "_blank", "scrollbars,resizable,chrome,dialog=no",
+                         null, null, selection, "selection");
   return true;
 }
 
@@ -595,10 +609,10 @@ Aardvark.getOuterHtmlFormatted = function (node, container)
   var type = null;
   switch (node.nodeType) {
     case node.ELEMENT_NODE:
-      var box = this.windowWrapper.window.document.createElement("vbox");
+      var box = this.window.document.createElement("vbox");
       box.className = "elementBox";
 
-      var startTag = this.windowWrapper.window.document.createElement("hbox");
+      var startTag = this.window.document.createElement("hbox");
       startTag.className = "elementStartTag";
       if (!node.firstChild)
         startTag.className += "elementEndTag";
@@ -622,7 +636,7 @@ Aardvark.getOuterHtmlFormatted = function (node, container)
         for (var child = node.firstChild; child; child = child.nextSibling)
           this.getOuterHtmlFormatted(child, box);
 
-        var endTag = this.windowWrapper.window.document.createElement("hbox");
+        var endTag = this.window.document.createElement("hbox");
         endTag.className = "elementEndTag";
         this.appendDescription(endTag, "<", null);
         this.appendDescription(endTag, "/" + node.tagName, "tagName");
@@ -668,7 +682,7 @@ Aardvark.getOuterHtmlFormatted = function (node, container)
 //-------------------------------------------------
 Aardvark.showMenu = function ()
 {
-  var helpBox = this.windowWrapper.E("ehh-helpbox");
+  var helpBox = E("ehh-helpbox");
   if (helpBox.getAttribute("_moz-menuactive") == "true" || helpBox.state == "open") {
     helpBox.hidePopup();
     return true;

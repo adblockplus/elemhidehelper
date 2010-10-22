@@ -88,9 +88,8 @@ WindowWrapper.prototype =
 
   hideTooltips: function()
   {
-    this.E("ehh-helpbox").hidePopup();
-    this.E("ehh-commandlabel").hidePopup();
-    this.E("ehh-viewsource").hidePopup();
+    if (Aardvark.window == this.window)
+      Aardvark.hideTooltips();
   },
 
   fillPopup: function(event)
@@ -146,6 +145,9 @@ WindowWrapper.prototype =
 
   startSelection: function()
   {
+    if (!this.canSelect())
+      return;
+
     Aardvark.start(this);
   },
 
