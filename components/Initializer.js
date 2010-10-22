@@ -41,7 +41,30 @@ Initializer.prototype =
   classID: Components.ID("{2d53b96c-1dd2-11b2-94ad-dedbdb99852f}"),
   _xpcom_categories: [{ category: "app-startup", service: true }],
 
-  QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference]),
+  get _baseURI()
+  {
+    let chromeRegistry = Cc["@mozilla.org/chrome/chrome-registry;1"].getService(Ci.nsIChromeRegistry);
+    let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
+
+    let baseURI = chromeRegistry.convertChromeURL(ioService.newURI("chrome://elemhidehelper-modules/content/nada", null, null));
+    baseURI.QueryInterface(Ci.nsIURL);
+    baseURI.fileName = "";
+    if (baseURI instanceof Ci.nsIMutable)
+      baseURI.mutable = false;
+
+    this.__defineGetter__("_baseURI", function() baseURI);
+    return this._baseURI;
+  },
+
+  _QueryInterface: XPCOMUtils.generateQI([Ci.nsIObserver, Ci.nsISupportsWeakReference]),
+
+  QueryInterface: function(iid)
+  {
+    if (iid.equals(Ci.nsIURI) || iid.equals(Ci.nsIURL))
+      return this._baseURI;
+    else
+      return this._QueryInterface.apply(this, arguments);
+  },
 
   observe: function(subject, topic, data)
   {
@@ -54,12 +77,7 @@ Initializer.prototype =
         break;
       case "final-ui-startup":
         observerService.removeObserver(this, "final-ui-startup");
-
-        // Load the module
-        let chromeRegistry = Cc["@mozilla.org/chrome/chrome-registry;1"].getService(Ci.nsIChromeRegistry);
-        let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
-        let moduleURL = chromeRegistry.convertChromeURL(ioService.newURI("chrome://elemhidehelper-modules/content/ABPIntegration.jsm", null, null));
-        Cu.import(moduleURL.spec);
+        Cu.import(this._baseURI.spec + "ABPIntegration.jsm");
         break;
     }
   }

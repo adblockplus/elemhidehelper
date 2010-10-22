@@ -83,11 +83,11 @@ let extensionManager = null;
  */
 function init()
 {
-  let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
-  let uri = ioService.newFileURI(__LOCATION__);
+  let baseURI = Cc["@adblockplus.org/ehh/startup;1"].getService(Ci.nsIURI);
+  let moduleLocation = baseURI.spec + "ABPIntegration.jsm";
 
   let categoryManager = Cc["@mozilla.org/categorymanager;1"].getService(Ci.nsICategoryManager);
-  categoryManager.addCategoryEntry("adblock-plus-module-location", uri.spec, uri.spec, false, true);
+  categoryManager.addCategoryEntry("adblock-plus-module-location", moduleLocation, moduleLocation, false, true);
 
   // Wait a minute before checking, just in case...
   timer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
