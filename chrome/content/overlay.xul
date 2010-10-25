@@ -27,7 +27,9 @@
 
 <!DOCTYPE overlay SYSTEM "chrome://elemhidehelper/locale/overlay.dtd">
 
-<overlay id="ehh-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<overlay id="ehh-overlay"
+    xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    xmlns:html="http://www.w3.org/1999/xhtml">
   <script type="application/x-javascript" src="overlay.js"/>  
   
   <popupset id="abp-popupset">
@@ -47,6 +49,12 @@
       <description id="ehh-commandlabel-label"/>
     </tooltip>
     <tooltip id="ehh-viewsource" noautohide="true" orient="vertical"/>
+    <tooltip id="ehh-elementmarker">
+      <html:div style="position: absolute; z-index: 65534;">
+        <html:div class="border" style="border: 2px solid #FF0000;"/>
+        <html:div class="label" style="float:left; border: 2px solid #FF0000; background-color: #fff0cc; border-color: #000000; border-width: 0px 2px 1px 2px; -moz-border-radius-bottomleft: 6px; -moz-border-radius-bottomright: 6px; border-style solid; font-family: Arial; text-align: left; color: #000000; font-size: 12px; padding: 2px 5px;"/>
+      </html:div>
+    </tooltip>
   </popupset>
 
   <popup id="abp-status-popup">
