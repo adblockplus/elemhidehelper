@@ -1,0 +1,116 @@
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Adblock Plus Element Hiding Helper.
+ *
+ * The Initial Developer of the Original Code is
+ * Wladimir Palant.
+ * Portions created by the Initial Developer are Copyright (C) 2006-2010
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+@namespace url("http://www.w3.org/1999/xhtml");
+
+.%%CLASS%%,
+.%%CLASS%% > .label,
+.%%CLASS%% > .label > b,
+.%%CLASS%% > .border
+{
+  display: block !important;
+  position: static !important;
+  float: none !important;
+  clear: none !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: 65535 !important;
+
+  background: transparent !important;
+  border: none !important;
+  clip: auto !important;
+  cursor: auto !important;
+  margin: 0px !important;
+  max-width: none !important;
+  max-height: none !important;
+  min-width: 0px !important;
+  min-height: 0px !important;
+  opacity: 1 !important;
+  outline: none !important;
+  padding: 0px !important;
+  visibility: visible !important;
+  -moz-binding: none !important;
+  -moz-border-radius: 0px !important;
+  -moz-user-focus: none !important;
+  -moz-user-input: none !important;
+  -moz-user-select: none !important;
+}
+
+.%%CLASS%%
+{
+  position: absolute !important;
+
+  width: auto !important;
+  height: auto !important;
+}
+
+.%%CLASS%% > .border
+{
+  border: 2px solid #ff0000 !important;
+}
+
+.%%CLASS%% > .label,
+.%%CLASS%% > .label > b
+{
+  font-family: Arial !important;
+  font-size: 12px !important;
+  color: #000000 !important;
+
+  width: auto !important;
+  height: auto !important;
+  direction: ltr !important;
+  font-size-adjust: none !important;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  font-weight: normal !important;
+  letter-spacing: normal !important;
+  line-height: normal !important;
+  text-align: start !important;
+  text-decoration: none !important;
+  text-indent: 0px !important;
+  text-shadow: none !important;
+  text-transform: none !important;
+  text-transform: none !important;
+  white-space: normal !important;
+  word-spacing: 0px !important;
+}
+
+.%%CLASS%% > .label
+{
+  float: left !important;
+  background-color: #fff0cc !important;
+  border-color: #000000 !important;
+  border-width: 0px 2px 1px 2px !important;
+  border-style: solid !important;
+  -moz-border-radius-bottomleft: 6px !important;
+  -moz-border-radius-bottomright: 6px !important;
+  padding: 2px 5px !important;
+}
+
+.%%CLASS%% > .label > b
+{
+  display: inline !important;
+  font-weight: bold !important;
+}

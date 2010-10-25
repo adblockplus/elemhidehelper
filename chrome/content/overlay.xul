@@ -50,9 +50,9 @@
     </tooltip>
     <tooltip id="ehh-viewsource" noautohide="true" orient="vertical"/>
     <tooltip id="ehh-elementmarker">
-      <html:div style="position: absolute; z-index: 65534;">
-        <html:div class="border" style="border: 2px solid #FF0000;"/>
-        <html:div class="label" style="float:left; border: 2px solid #FF0000; background-color: #fff0cc; border-color: #000000; border-width: 0px 2px 1px 2px; -moz-border-radius-bottomleft: 6px; -moz-border-radius-bottomright: 6px; border-style solid; font-family: Arial; text-align: left; color: #000000; font-size: 12px; padding: 2px 5px;"/>
+      <html:div>
+        <html:div class="border"/>
+        <html:div class="label"/>
       </html:div>
     </tooltip>
   </popupset>

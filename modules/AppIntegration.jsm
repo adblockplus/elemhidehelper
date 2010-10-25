@@ -35,6 +35,42 @@ Cu.import(baseURI.spec + "Prefs.jsm");
 
 var AppIntegration =
 {
+  elementMarkerClass: null,
+
+  startup: function()
+  {
+    // Use random marker class
+    let rnd = [];
+    let offset = "a".charCodeAt(0);
+    for (let i = 0; i < 20; i++)
+      rnd.push(offset + Math.random() * 26);
+
+    this.elementMarkerClass = String.fromCharCode.apply(String, rnd);
+
+    // Load CSS asynchronously
+    try
+    {
+      let request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIJSXMLHttpRequest);
+      request.open("GET", "chrome://elemhidehelper/content/elementmarker.css");
+      request.overrideMimeType("text/plain");
+
+      let me = this;
+      request.onload = function()
+      {
+        let data = request.responseText.replace(/%%CLASS%%/g, me.elementMarkerClass);
+        let styleService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+        let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
+        let url = ioService.newURI("data:text/css," + encodeURIComponent(data), null, null);
+        styleService.loadAndRegisterSheet(url, Ci.nsIStyleSheetService.USER_SHEET);
+      }
+      request.send(null);
+    }
+    catch (e)
+    {
+      Cu.reportError(e);
+    }
+  },
+
   addWindow: function(wnd)
   {
     new WindowWrapper(wnd);
@@ -44,6 +80,8 @@ var AppIntegration =
 function WindowWrapper(wnd)
 {
   this.window = wnd;
+
+  this.E("ehh-elementmarker").firstChild.className = AppIntegration.elementMarkerClass;
 
   this.registerEventListeners();
 
@@ -306,3 +344,5 @@ WindowWrapper.prototype.eventHandlers = [
   ["abp-toolbar-popup", "popupshowing", WindowWrapper.prototype.fillPopup],
   ["ehh-command-selectelement", "command", WindowWrapper.prototype.toggleSelection],
 ];
+
+AppIntegration.startup();
