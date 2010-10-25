@@ -49,8 +49,7 @@ var Aardvark = {
   mouseY: -1,
   commandLabelTimer: null,
   viewSourceTimer: null,
-  borderElems: null,
-  labelElem: null
+  boxElem: null,
 };
 
 Aardvark.start = function(wrapper) {
@@ -63,7 +62,6 @@ Aardvark.start = function(wrapper) {
 
   this.browser.addEventListener("click", this.mouseClick, true);
   this.browser.addEventListener("DOMMouseScroll", this.mouseScroll, true);
-  this.browser.addEventListener("mouseover", this.mouseOver, true);
   this.browser.addEventListener("keypress", this.keyPress, true);
   this.browser.addEventListener("mousemove", this.mouseMove, true);
   this.browser.contentWindow.addEventListener("pagehide", this.pageHide, true);
@@ -71,8 +69,8 @@ Aardvark.start = function(wrapper) {
   this.browser.contentWindow.focus();
 
   let doc = this.browser.contentDocument;
-  if (!this.labelElem || this.labelElem.ownerDocument != doc)
-    this.makeElems(doc);
+  if (!this.boxElem)
+    this.boxElem = E("ehh-elementmarker").firstChild;
 
   this.initHelpBox();
 
@@ -158,24 +156,6 @@ Aardvark.onMouseScroll = function(event)
     this.doCommand(event.detail > 0 ? "wider" : "narrower", event);
 }
 
-Aardvark.onMouseOver = function(event) {
-  var elem = event.originalTarget;
-  var aardvarkLabel = elem;
-  while (aardvarkLabel && !("AardvarkLabel" in aardvarkLabel))
-    aardvarkLabel = aardvarkLabel.parentNode;
-
-  if (elem == null || aardvarkLabel)
-  {
-    this.clearBox ();
-    return;
-  }
-
-  if (elem == this.selectedElem)
-    return;
-  
-  this.showBoxAndLabel (elem, this.makeElementLabelString (elem));
-}
-
 Aardvark.onKeyPress = function(event) {
   if (event.altKey || event.ctrlKey || event.metaKey)
     return;
@@ -204,6 +184,33 @@ Aardvark.onPageHide = function(event) {
 Aardvark.onMouseMove = function(event) {
   this.mouseX = event.screenX;
   this.mouseY = event.screenY;
+
+  this.clearBox();
+
+  let x = event.clientX;
+  let y = event.clientY;
+
+  // We might have coordinates relative to a frame, recalculate relative to top window
+  let node = event.target;
+  while (node && node.ownerDocument && node.ownerDocument.defaultView && node.ownerDocument.defaultView.frameElement)
+  {
+    node = node.ownerDocument.defaultView.frameElement;
+    let rect = node.getBoundingClientRect();
+    x += rect.left;
+    y += rect.top;
+  }
+
+  let elem = this.browser.contentDocument.elementFromPoint(x, y);
+  while (elem && "contentDocument" in elem)
+  {
+    let rect = elem.getBoundingClientRect();
+    x -= rect.left;
+    y -= rect.top;
+    elem = elem.contentDocument.elementFromPoint(x, y);
+  }
+
+  if (elem)
+    this.showBoxAndLabel(elem, this.makeElementLabelString(elem));
 }
 
 // Makes sure event handlers like Aardvark.keyPress redirect
@@ -219,7 +226,7 @@ Aardvark.generateEventHandlers = function(handlers) {
     this[handlers[i]] = generator(handler);
   }
 }
-Aardvark.generateEventHandlers(["mouseClick", "mouseScroll", "mouseOver", "keyPress", "pageHide", "mouseMove"]);
+Aardvark.generateEventHandlers(["mouseClick", "mouseScroll", "keyPress", "pageHide", "mouseMove"]);
 
 Aardvark.appendDescription = function(node, value, className) {
   var descr = this.window.document.createElement("description");
@@ -233,50 +240,12 @@ Aardvark.appendDescription = function(node, value, className) {
  * Highlight frame display *
  ***************************/
 
-//-------------------------------------------------
-// create the box and tag etc (done once and saved)
-Aardvark.makeElems = function (doc)
-{
-  this.borderElems = [];
-  var d, i;
-
-  for (i=0; i<4; i++)
-  {
-    d = doc.createElementNS("http://www.w3.org/1999/xhtml", "div");
-    d.style.display = "none";
-    d.style.position = "absolute";
-    d.style.height = "0px";
-    d.style.width = "0px";
-    d.style.zIndex = "65534";
-    if (i < 2)
-      d.style.borderTop = "2px solid #f00";
-    else
-      d.style.borderLeft = "2px solid #f00";
-    d.AardvarkLabel = true; // mark as ours
-    this.borderElems[i] = d;
-  }
-
-  d = doc.createElementNS("http://www.w3.org/1999/xhtml", "div");
-  this.setElementStyleDefault (d, "#fff0cc");
-  d.style.borderTopWidth = "0";
-  d.style.MozBorderRadiusBottomleft = "6px";
-  d.style.MozBorderRadiusBottomright = "6px";
-  d.style.borderBottomLeftRadius = "6px";
-  d.style.borderBottomRightRadius = "6px";
-  d.style.zIndex = "65535";
-  d.AardvarkLabel = true; // mark as ours
-  this.labelElem = d;
-}
-
 Aardvark.makeElementLabelString = function(elem) {
   var s = "<b style='color:#000'>" + elem.tagName.toLowerCase() + "</b>";
   if (elem.id != '')
     s += ", id: " + elem.id;
   if (elem.className != '')
     s += ", class: " + elem.className;
-  /*for (var i in elem.style)
-    if (elem.style[i] != '')
-      s += "<br> " + i + ": " + elem.style[i]; */
   if (elem.style.cssText != '')
     s += ", style: " + elem.style.cssText;
     
@@ -290,81 +259,29 @@ Aardvark.showBoxAndLabel = function(elem, string) {
 
   this.selectedElem = elem;
 
-  for (var i = 0; i < 4; i++)
-    doc.body.appendChild(this.borderElems[i]);
+  if (this.boxElem.ownerDocument != doc)
+    this.boxElem = doc.importNode(this.boxElem, true);
 
   var pos = this.getPos(elem)
   var dims = this.getWindowDimensions (doc);
 
-  this.borderElems[0].style.left
-    = this.borderElems[1].style.left
-    = this.borderElems[2].style.left
-    = (pos.x - 1) + "px";
-  this.borderElems[3].style.left = (pos.x + elem.offsetWidth - 1) + "px";
+  let border = this.boxElem.getElementsByClassName("border")[0];
+  let label = this.boxElem.getElementsByClassName("label")[0];
 
-  this.borderElems[0].style.width
-    = this.borderElems[1].style.width
-    = (elem.offsetWidth + 2) + "px";
+  this.boxElem.style.left = (pos.x - 1) + "px";
+  this.boxElem.style.top = (pos.y - 1) + "px";
+  border.style.width = (elem.offsetWidth - 2) + "px";
+  border.style.height = (elem.offsetHeight - 2) + "px";
 
-  this.borderElems[2].style.height
-    = this.borderElems[3].style.height
-    = (elem.offsetHeight + 2) + "px";
+  label.innerHTML = string;
 
-  this.borderElems[0].style.top
-    = this.borderElems[2].style.top
-    = this.borderElems[3].style.top
-    = (pos.y - 1) + "px";
-  this.borderElems[1].style.top = (pos.y + elem.offsetHeight - 1) + "px";
-  
-  this.borderElems[0].style.display
-    = this.borderElems[1].style.display
-    = this.borderElems[2].style.display
-    = this.borderElems[3].style.display
-    = "";
-  
-  var y = pos.y + elem.offsetHeight + 1;
-  
-  doc.body.appendChild(this.labelElem);
-
-  this.labelElem.innerHTML = string;
-  this.labelElem.style.display = "";
-
-  // adjust the label as necessary to make sure it is within screen and
-  // the border is pretty
-  if ((y + this.labelElem.offsetHeight) >= dims.scrollY + dims.height)
-  {
-    this.labelElem.style.borderTopWidth = "1px";
-    this.labelElem.style.MozBorderRadiusTopleft = "6px";
-    this.labelElem.style.MozBorderRadiusTopright = "6px";
-    this.labelDrawnHigh = true;
-    y = (dims.scrollY + dims.height) - this.labelElem.offsetHeight;
-  }
-  else if (this.labelElem.offsetWidth > elem.offsetWidth)
-  {
-    this.labelElem.style.borderTopWidth = "1px";
-    this.labelElem.style.MozBorderRadiusTopright = "6px";
-    this.labelDrawnHigh = true;
-  }
-  else if (this.labelDrawnHigh)
-  {
-    this.labelElem.style.borderTopWidth = "0";
-    this.labelElem.style.MozBorderRadiusTopleft = "";
-    this.labelElem.style.MozBorderRadiusTopright = "";
-    delete (this.labelDrawnHigh); 
-  }
-  this.labelElem.style.left = (pos.x + 2) + "px";
-  this.labelElem.style.top = y + "px";
+  doc.body.appendChild(this.boxElem);
 }
 
 Aardvark.clearBox = function() {
   this.selectedElem = null;
-
-  for (var i = 0; i < this.borderElems.length; i++)
-    if (this.borderElems[i].parentNode)
-      this.borderElems[i].parentNode.removeChild(this.borderElems[i]);
-
-  if (this.labelElem.parentNode)
-    this.labelElem.parentNode.removeChild(this.labelElem);
+  if (this.boxElem.parentNode)
+    this.boxElem.parentNode.removeChild(this.boxElem);
 }
 
 Aardvark.hideTooltips = function()
@@ -407,25 +324,6 @@ Aardvark.getWindowDimensions = function (doc)
   return out;
 }
 
-Aardvark.setElementStyleDefault = function (elem, bgColor)
-{
-  var s = elem.style;
-  s.display = "none";
-  s.backgroundColor = bgColor;
-  s.borderColor = "black";
-  s.borderWidth = "1px 2px 2px 1px";
-  s.borderStyle = "solid";
-  s.fontFamily = "arial";
-  s.textAlign = "left";
-  s.color = "#000";
-  s.fontSize = "12px";
-  s.position = "absolute";
-  s.paddingTop = "2px";
-  s.paddingBottom = "2px";
-  s.paddingLeft = "5px";
-  s.paddingRight = "5px";
-}
-
 /*********************************
  * Code from aardvarkCommands.js *
  *********************************/
@@ -449,7 +347,7 @@ Aardvark.wider = function (elem)
   if (elem)
   {
     var newElem = elem.parentNode;
-    if (newElem && newElem.nodeType == newElem.DOCUMENT_NODE && newElem.defaultView && !(newElem.defaultView.frameElement instanceof HTMLFrameElement))
+    if (newElem && newElem.nodeType == newElem.DOCUMENT_NODE && newElem.defaultView && newElem.defaultView.frameElement)
       newElem = newElem.defaultView.frameElement;
 
     if (!newElem || newElem.nodeType != newElem.ELEMENT_NODE)
@@ -509,7 +407,6 @@ Aardvark.quit = function ()
   this.hideTooltips();
   
   this.browser.removeEventListener("click", this.mouseClick, true);
-  this.browser.removeEventListener("mouseover", this.mouseOver, true);
   this.browser.removeEventListener("keypress", this.keyPress, true);
   this.browser.removeEventListener("mousemove", this.mouseMove, true);
   this.browser.contentWindow.removeEventListener("pagehide", this.pageHide, true);
