@@ -68,6 +68,8 @@
 .%%CLASS%% > .border
 {
   border: 2px solid #ff0000 !important;
+  top: auto !important;
+  left: auto !important;
 }
 
 .%%CLASS%% > .label
@@ -80,8 +82,19 @@
   -moz-border-radius-bottomleft: 6px !important;
   -moz-border-radius-bottomright: 6px !important;
   padding: 2px 5px !important;
+  top: auto !important;
+  left: auto !important;
   width: auto !important;
   height: auto !important;
+}
+
+.%%CLASS%% > .label.onTop
+{
+  position: relative !important;
+  left: 5px !important;
+  top: -25px !important;
+  border-top-width: 1px !important;
+  -moz-border-radius: 6px !important;
 }
 
 .%%CLASS%% > .label > .labelTag,
@@ -92,6 +105,8 @@
   font-size: 12px !important;
   color: #000000 !important;
 
+  top: auto !important;
+  left: auto !important;
   width: auto !important;
   height: auto !important;
   direction: ltr !important;
