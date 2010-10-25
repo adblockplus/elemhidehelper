@@ -78,6 +78,14 @@ Aardvark.start = function(wrapper) {
 
   if (Prefs.showhelp)
     this.showMenu();
+
+  // Make sure to select some element immeditely (whichever is in the center of the browser window)
+  let wndWidth = doc.documentElement.clientWidth;
+  let wndHeight = doc.documentElement.clientHeight;
+  if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
+    wndHeight = doc.documentElement.offsetHeight - doc.defaultView.scrollMaxY;
+  this.isUserSelected = false;
+  this.onMouseMove({clientX: wndWidth / 2, clientY: wndHeight / 2, screenX: -1, screenY: -1, target: null});
 }
 
 Aardvark.doCommand = function(command, event) {
@@ -483,7 +491,6 @@ Aardvark.quit = function ()
   this.window = null;
   this.browser = null;
   this.commentElem = null;
-  this.isUserSelected = false;
   E = function(id) null;
   return false;
 }
