@@ -259,6 +259,7 @@ Aardvark.showBoxAndLabel = function(elem, string)
   this.selectedElem = elem;
 
   let border = this.boxElem.getElementsByClassName("border")[0];
+  let label = this.boxElem.getElementsByClassName("label")[0];
   let labelTag = this.boxElem.getElementsByClassName("labelTag")[0];
   let labelAddition = this.boxElem.getElementsByClassName("labelAddition")[0];
 
@@ -268,9 +269,19 @@ Aardvark.showBoxAndLabel = function(elem, string)
   border.style.width = (pos.right - pos.left - 2) + "px";
   border.style.height = (pos.bottom - pos.top - 2) + "px";
 
+  let doc = this.browser.contentDocument;
+
   [labelTag.textContent, labelAddition.textContent] = this.makeElementLabelString(elem);
 
-  let doc = this.browser.contentDocument;
+  // If there is not enough space to show the label move it up a little
+  let wndHeight = doc.documentElement.clientHeight;
+  if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
+    wndHeight = doc.documentElement.offsetHeight - doc.defaultView.scrollMaxY;
+  if (pos.bottom < wndHeight - 25)
+    label.className = "label";
+  else
+    label.className = "label onTop";
+  
   if (this.boxElem.ownerDocument != doc)
     this.boxElem = doc.importNode(this.boxElem, true);
   doc.documentElement.appendChild(this.boxElem);
