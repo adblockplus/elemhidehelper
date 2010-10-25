@@ -59,7 +59,7 @@
 
 .%%CLASS%%
 {
-  position: absolute !important;
+  position: fixed !important;
 
   width: auto !important;
   height: auto !important;
@@ -70,9 +70,24 @@
   border: 2px solid #ff0000 !important;
 }
 
-.%%CLASS%% > .label,
-.%%CLASS%% > .label > b
+.%%CLASS%% > .label
 {
+  float: left !important;
+  background-color: #fff0cc !important;
+  border-color: #000000 !important;
+  border-width: 0px 2px 1px 2px !important;
+  border-style: solid !important;
+  -moz-border-radius-bottomleft: 6px !important;
+  -moz-border-radius-bottomright: 6px !important;
+  padding: 2px 5px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.%%CLASS%% > .label > .labelTag,
+.%%CLASS%% > .label > .labelAddition
+{
+  display: inline !important;
   font-family: Arial !important;
   font-size: 12px !important;
   color: #000000 !important;
@@ -97,20 +112,7 @@
   word-spacing: 0px !important;
 }
 
-.%%CLASS%% > .label
+.%%CLASS%% > .label > .labelTag
 {
-  float: left !important;
-  background-color: #fff0cc !important;
-  border-color: #000000 !important;
-  border-width: 0px 2px 1px 2px !important;
-  border-style: solid !important;
-  -moz-border-radius-bottomleft: 6px !important;
-  -moz-border-radius-bottomright: 6px !important;
-  padding: 2px 5px !important;
-}
-
-.%%CLASS%% > .label > b
-{
-  display: inline !important;
   font-weight: bold !important;
 }

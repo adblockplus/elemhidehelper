@@ -52,7 +52,7 @@
     <tooltip id="ehh-elementmarker">
       <html:div>
         <html:div class="border"/>
-        <html:div class="label"/>
+        <html:div class="label"><html:span class="labelTag"/><html:span class="labelAddition"/></html:div>
       </html:div>
     </tooltip>
   </popupset>

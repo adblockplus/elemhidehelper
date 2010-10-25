@@ -210,7 +210,7 @@ Aardvark.onMouseMove = function(event) {
   }
 
   if (elem)
-    this.showBoxAndLabel(elem, this.makeElementLabelString(elem));
+    this.showBoxAndLabel(elem);
 }
 
 // Makes sure event handlers like Aardvark.keyPress redirect
@@ -240,42 +240,40 @@ Aardvark.appendDescription = function(node, value, className) {
  * Highlight frame display *
  ***************************/
 
-Aardvark.makeElementLabelString = function(elem) {
-  var s = "<b style='color:#000'>" + elem.tagName.toLowerCase() + "</b>";
-  if (elem.id != '')
-    s += ", id: " + elem.id;
-  if (elem.className != '')
-    s += ", class: " + elem.className;
-  if (elem.style.cssText != '')
-    s += ", style: " + elem.style.cssText;
+Aardvark.makeElementLabelString = function(elem)
+{
+  let tagName = elem.tagName.toLowerCase();
+  let addition = "";
+  if (elem.id != "")
+    addition += ", id: " + elem.id;
+  if (elem.className != "")
+    addition += ", class: " + elem.className;
+  if (elem.style.cssText != "")
+    addition += ", style: " + elem.style.cssText;
     
-  return s;
+  return [tagName, addition];
 }
 
-Aardvark.showBoxAndLabel = function(elem, string) {
-  var doc = elem.ownerDocument;
-  if (!doc || !doc.body)
-    return;
-
+Aardvark.showBoxAndLabel = function(elem, string)
+{
   this.selectedElem = elem;
 
+  let border = this.boxElem.getElementsByClassName("border")[0];
+  let labelTag = this.boxElem.getElementsByClassName("labelTag")[0];
+  let labelAddition = this.boxElem.getElementsByClassName("labelAddition")[0];
+
+  let pos = this.getElementPosition(elem);
+  this.boxElem.style.left = (pos.left - 1) + "px";
+  this.boxElem.style.top = (pos.top - 1) + "px";
+  border.style.width = (pos.right - pos.left - 2) + "px";
+  border.style.height = (pos.bottom - pos.top - 2) + "px";
+
+  [labelTag.textContent, labelAddition.textContent] = this.makeElementLabelString(elem);
+
+  let doc = this.browser.contentDocument;
   if (this.boxElem.ownerDocument != doc)
     this.boxElem = doc.importNode(this.boxElem, true);
-
-  var pos = this.getPos(elem)
-  var dims = this.getWindowDimensions (doc);
-
-  let border = this.boxElem.getElementsByClassName("border")[0];
-  let label = this.boxElem.getElementsByClassName("label")[0];
-
-  this.boxElem.style.left = (pos.x - 1) + "px";
-  this.boxElem.style.top = (pos.y - 1) + "px";
-  border.style.width = (elem.offsetWidth - 2) + "px";
-  border.style.height = (elem.offsetHeight - 2) + "px";
-
-  label.innerHTML = string;
-
-  doc.body.appendChild(this.boxElem);
+  doc.documentElement.appendChild(this.boxElem);
 }
 
 Aardvark.clearBox = function() {
@@ -291,17 +289,51 @@ Aardvark.hideTooltips = function()
   E("ehh-viewsource").hidePopup();
 }
 
-Aardvark.getPos = function (elem)
+Aardvark.getElementPosition = function(element)
 {
-  var pos = {x: 0, y: 0};
-
-  while (elem)
+  // Restrict rectangle coordinates by the boundaries of a window's client area
+  function intersectRect(rect, wnd)
   {
-    pos.x += elem.offsetLeft;
-    pos.y += elem.offsetTop;
-    elem = elem.offsetParent;
+    let doc = wnd.document;
+    let wndWidth = doc.documentElement.clientWidth;
+    let wndHeight = doc.documentElement.clientHeight;
+    if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
+      wndHeight = doc.documentElement.offsetHeight - wnd.scrollMaxY;
+
+    rect.left = Math.max(rect.left, 0);
+    rect.top = Math.max(rect.top, 0);
+    rect.right = Math.min(rect.right, wndWidth);
+    rect.bottom = Math.min(rect.bottom, wndHeight);
   }
-  return pos;
+
+  let rect = element.getBoundingClientRect();
+  let wnd = element.ownerDocument.defaultView;
+
+  rect = {left: rect.left, top: rect.top,
+          right: rect.right, bottom: rect.bottom};
+  while (true)
+  {
+    intersectRect(rect, wnd);
+
+    if (!wnd.frameElement)
+      break;
+
+    // Recalculate coordinates to be relative to frame's parent window
+    let frameElement = wnd.frameElement;
+    wnd = frameElement.ownerDocument.defaultView;
+
+    let frameRect = frameElement.getBoundingClientRect();
+    let frameStyle = wnd.getComputedStyle(frameElement, null);
+    let relLeft = frameRect.left + parseFloat(frameStyle.borderLeftWidth) + parseFloat(frameStyle.paddingLeft);
+    let relTop = frameRect.top + parseFloat(frameStyle.borderTopWidth) + parseFloat(frameStyle.paddingTop);
+
+    rect.left += relLeft;
+    rect.right += relLeft;
+    rect.top += relTop;
+    rect.bottom += relTop;
+  }
+
+  return rect;
 }
 
 Aardvark.getWindowDimensions = function (doc)
@@ -362,8 +394,7 @@ Aardvark.wider = function (elem)
     {
       this.widerStack = [elem, newElem];
     }
-    this.showBoxAndLabel (newElem, 
-        this.makeElementLabelString (newElem));
+    this.showBoxAndLabel(newElem);
     return true;
   }
   return false;
@@ -379,8 +410,7 @@ Aardvark.narrower = function (elem)
     {
       this.widerStack.pop();
       var newElem = this.widerStack[this.widerStack.length-1];
-      this.showBoxAndLabel (newElem, 
-          this.makeElementLabelString (newElem));
+      this.showBoxAndLabel(newElem);
       return true;
     }
   }
