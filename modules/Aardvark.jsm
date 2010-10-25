@@ -43,8 +43,10 @@ function E(id) {return null;}
 var Aardvark = {
   window: null,
   browser: null,
+  anchorElem: null,
   selectedElem: null,
-  commentElem : null,
+  isUserSelected: false,
+  commentElem: null,
   mouseX: -1,
   mouseY: -1,
   commandLabelTimer: null,
@@ -210,7 +212,25 @@ Aardvark.onMouseMove = function(event) {
   }
 
   if (elem)
+  {
+    this.anchorElem = elem;
+
+    if (this.isUserSelected)
+    {
+      // User chose an element via wider/narrower commands, keep the selection if
+      // out new anchor is still a child of that element
+      let e = elem;
+      while (e && e != this.selectedElem)
+        e = this.getParentElement(e);
+
+      if (e)
+        elem = this.selectedElem;
+      else
+        this.isUserSelected = false;
+    }
+
     this.showBoxAndLabel(elem);
+  }
 }
 
 // Makes sure event handlers like Aardvark.keyPress redirect
@@ -288,7 +308,7 @@ Aardvark.showBoxAndLabel = function(elem, string)
 }
 
 Aardvark.clearBox = function() {
-  this.selectedElem = null;
+  this.anchorElem = null;
   if (this.boxElem.parentNode)
     this.boxElem.parentNode.removeChild(this.boxElem);
 }
@@ -367,6 +387,18 @@ Aardvark.getWindowDimensions = function (doc)
   return out;
 }
 
+Aardvark.getParentElement = function(elem)
+{
+  let result = elem.parentNode;
+  if (result && result.nodeType == Ci.nsIDOMElement.DOCUMENT_NODE && result.defaultView && result.defaultView.frameElement)
+    result = result.defaultView.frameElement;
+
+  if (result && result.nodeType != Ci.nsIDOMElement.ELEMENT_NODE)
+    return null;
+
+  return result;
+}
+
 /*********************************
  * Code from aardvarkCommands.js *
  *********************************/
@@ -387,28 +419,16 @@ Aardvark.commands = [
 //------------------------------------------------------------
 Aardvark.wider = function (elem)
 {
-  if (elem)
-  {
-    var newElem = elem.parentNode;
-    if (newElem && newElem.nodeType == newElem.DOCUMENT_NODE && newElem.defaultView && newElem.defaultView.frameElement)
-      newElem = newElem.defaultView.frameElement;
+  if (!elem)
+    return false;
 
-    if (!newElem || newElem.nodeType != newElem.ELEMENT_NODE)
-      return false;
-    
-    if (this.widerStack && this.widerStack.length>0 && 
-      this.widerStack[this.widerStack.length-1] == elem)
-    {
-      this.widerStack.push (newElem);
-    }
-    else
-    {
-      this.widerStack = [elem, newElem];
-    }
-    this.showBoxAndLabel(newElem);
-    return true;
-  }
-  return false;
+  let newElem = this.getParentElement(elem);
+  if (!newElem)
+    return false;
+  
+  this.isUserSelected = true;
+  this.showBoxAndLabel(newElem);
+  return true;
 } 
 
 //------------------------------------------------------------
@@ -416,14 +436,21 @@ Aardvark.narrower = function (elem)
 {
   if (elem)
   {
-    if (this.widerStack && this.widerStack.length>1 && 
-      this.widerStack[this.widerStack.length-1] == elem)
+    // Search selected element in the parent chain, starting with the anchor element.
+    // We need to select the element just before the selected one.
+    let e = this.anchorElem;
+    let newElem = null;
+    while (e && e != elem)
     {
-      this.widerStack.pop();
-      var newElem = this.widerStack[this.widerStack.length-1];
-      this.showBoxAndLabel(newElem);
-      return true;
+      newElem = e;
+      e = this.getParentElement(e);
     }
+
+    if (!e || !newElem)
+      return false;
+
+    this.isUserSelected = true;
+    this.showBoxAndLabel(newElem);
   }
   return false;
 }
@@ -456,8 +483,8 @@ Aardvark.quit = function ()
   this.window = null;
   this.browser = null;
   this.commentElem = null;
+  this.isUserSelected = false;
   E = function(id) null;
-  delete this.widerStack;
   return false;
 }
 
