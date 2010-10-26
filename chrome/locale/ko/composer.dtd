@@ -1,16 +1,16 @@
-<!ENTITY dialog.title "요소 감춤 규칙 작성">
-<!ENTITY accept.label "필터 규칙 추가">
+<!ENTITY dialog.title "필터 작성">
+<!ENTITY accept.label "추가">
 <!ENTITY advanced.label "고급 보기">
 <!ENTITY basic.label "기본 보기">
-<!ENTITY expression.label "필터 규칙">
+<!ENTITY expression.label "새 필터">
 <!ENTITY preview.label "미리보기">
-<!ENTITY domain.label "도메인에 묶음">
-<!ENTITY domain.none.label "아무 도메인 (권장 안 함)">
+<!ENTITY domain.label "도메인 지정">
+<!ENTITY domain.none.label "모든 도메인 (권장 안 함)">
 <!ENTITY nodes-tree.node.label "노드">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
 <!ENTITY attributes.label "속성 요구">
-<!ENTITY attributes.tagname.label "태그 이름:">
+<!ENTITY attributes.tagname.label "태그 이름 :">
 <!ENTITY attributes.firstchild.label "첫째 자식">
 <!ENTITY attributes.lastchild.label "막내 자식">
-<!ENTITY attributes.custom.label "사용자 정의 CSS:">
+<!ENTITY attributes.custom.label "사용자 정의 CSS">

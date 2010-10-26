@@ -1,5 +1,5 @@
 <!ENTITY selectelement.label "Velg element som skal skjules">
-<!ENTITY selectelement.accesskey "g">
+<!ENTITY selectelement.accesskey "S">
 <!ENTITY stopselection.label "Avbryt valg av elementer">
-<!ENTITY stopselection.accesskey "g">
+<!ENTITY stopselection.accesskey "S">
 <!ENTITY helpbox.title "Valg av elementer - Hurtigtaster">

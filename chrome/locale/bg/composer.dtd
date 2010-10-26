@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Съставяне на правило за скриване на елемент">
+<!ENTITY accept.label "Добавяне на правило за филтриране">
+<!ENTITY advanced.label "Разширен изглед">
+<!ENTITY basic.label "Основен изглед">
+<!ENTITY expression.label "Правило за филтриране">
+<!ENTITY preview.label "Преглед">
+<!ENTITY domain.label "Свързване с домейн">
+<!ENTITY domain.none.label "Всеки домейн (не се препоръчва)">
+<!ENTITY nodes-tree.node.label "Точка">
+<!ENTITY nodes-tree.id.label "идентификатор">
+<!ENTITY nodes-tree.class.label "клас">
+<!ENTITY attributes.label "Изисква атрибути">
+<!ENTITY attributes.tagname.label "Име на тага:">
+<!ENTITY attributes.firstchild.label "Първи наследник">
+<!ENTITY attributes.lastchild.label "Последен наслрдник">
+<!ENTITY attributes.custom.label "Custom CSS:">
