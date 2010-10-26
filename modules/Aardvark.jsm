@@ -51,9 +51,11 @@ var Aardvark =
   commentElem: null,
   mouseX: -1,
   mouseY: -1,
+  prevSelectionUpdate: -1,
   commandLabelTimer: null,
   viewSourceTimer: null,
   boxElem: null,
+  paintNode: null,
 
   start: function(wrapper)
   {
@@ -288,6 +290,13 @@ var Aardvark =
     }
   },
 
+  onAfterPaint: function()
+  {
+    // Don't update position too often
+    if (this.selectedElem && Date.now() - this.prevSelectionUpdate > 20)
+      this.selectElement(this.selectedElem);
+  },
+
   setAnchorElement: function(anchor)
   {
     this.anchorElem = anchor;
@@ -346,6 +355,7 @@ var Aardvark =
   selectElement: function(elem)
   {
     this.selectedElem = elem;
+    this.prevSelectionUpdate = Date.now();
   
     let border = this.boxElem.getElementsByClassName("border")[0];
     let label = this.boxElem.getElementsByClassName("label")[0];
@@ -374,12 +384,20 @@ var Aardvark =
     if (this.boxElem.ownerDocument != doc)
       this.boxElem = doc.importNode(this.boxElem, true);
     doc.documentElement.appendChild(this.boxElem);
+
+    this.paintNode = doc.defaultView;
+    if (this.paintNode)
+      this.paintNode.addEventListener("MozAfterPaint", this.onAfterPaint, false);
   },
 
   hideSelection: function()
   {
     if (this.boxElem.parentNode)
       this.boxElem.parentNode.removeChild(this.boxElem);
+
+    if (this.paintNode)
+      this.paintNode.removeEventListener("MozAfterPaint", this.onAfterPaint, false);
+    this.paintNode = null;
   },
 
   getElementPosition: function(element)
@@ -730,5 +748,5 @@ var Aardvark =
 
 // Makes sure event handlers like Aardvark.onKeyPress always have the correct
 // this pointer set.
-for each (let method in ["onMouseClick", "onMouseScroll", "onKeyPress", "onPageHide", "onMouseMove"])
+for each (let method in ["onMouseClick", "onMouseScroll", "onKeyPress", "onPageHide", "onMouseMove", "onAfterPaint"])
   Aardvark[method] = Aardvark.bindMethod(Aardvark[method]);
