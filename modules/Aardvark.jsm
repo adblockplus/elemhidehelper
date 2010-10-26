@@ -106,7 +106,8 @@ Aardvark.canSelect = function(browser)
     return false;
   }
 
-  if (location.hostname == "" &&
+  if (!Prefs.acceptlocalfiles &&
+      location.hostname == "" &&
       location.protocol != "mailbox:" &&
       location.protocol != "imap:" &&
       location.protocol != "news:" &&
