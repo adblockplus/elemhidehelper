@@ -36,6 +36,9 @@ var stylesheetURL;
 var previewStyle = null;
 var doc;
 
+let baseURI = Cc["@adblockplus.org/ehh/startup;1"].getService(Ci.nsIURI);
+Cu.import(baseURI.spec + "Prefs.jsm");
+
 let abpURL = Cc["@adblockplus.org/abp/public;1"].getService(Ci.nsIURI);
 Cu.import(abpURL.spec);
 
@@ -191,8 +194,32 @@ function init() {
     }
   }
 
-  var domain = wnd.location.hostname;
-  var selectedDomain = domain.replace(/^www\./, "");
+  let domain = wnd.location.hostname;
+  let selectedDomain;
+  switch (Prefs.composer_defaultDomain)
+  {
+    case 0:
+      selectedDomain = "";
+      break;
+    case 1:
+    {
+      let effectiveTLD = Cc["@mozilla.org/network/effective-tld-service;1"].getService(Ci.nsIEffectiveTLDService);
+      selectedDomain = effectiveTLD.getPublicSuffixFromHost(domain);
+      break;
+    }
+    case 2:
+    {
+      let effectiveTLD = Cc["@mozilla.org/network/effective-tld-service;1"].getService(Ci.nsIEffectiveTLDService);
+      selectedDomain = effectiveTLD.getBaseDomainFromHost(domain);
+      break;
+    }
+    case 3:
+      selectedDomain = domain.replace(/^www\./, "");
+      break;
+    default:
+      selectedDomain = domain;
+      break;
+  }
   domainData = {value: domain, selected: selectedDomain};
 
   fillDomains(domainData);
