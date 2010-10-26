@@ -158,8 +158,10 @@ Aardvark.initHelpBox = function() {
   for (var i = 0; i < this.commands.length; i++) {
     var command = this.commands[i];
     var key = strings.GetStringFromName("command." + command + ".key");
+    var alternativeKey = strings.GetStringFromName("command." + command + ".alternativeKey");
     var label = strings.GetStringFromName("command." + command + ".label");
     this.commands[command + "_key"] = key.toLowerCase();
+    this.commands[command + "_altkey"] = alternativeKey.toLowerCase();
     this.commands[command + "_label"] = label;
 
     var row = this.window.document.createElement("row");
@@ -167,6 +169,11 @@ Aardvark.initHelpBox = function() {
 
     var element = this.window.document.createElement("description");
     element.setAttribute("value", key);
+    element.className = "key";
+    row.appendChild(element);
+
+    var element = this.window.document.createElement("description");
+    element.setAttribute("value", alternativeKey);
     element.className = "key";
     row.appendChild(element);
 
@@ -209,7 +216,7 @@ Aardvark.onKeyPress = function(event) {
     var key = String.fromCharCode(event.charCode).toLowerCase();
     var commands = this.commands;
     for (var i = 0; i < commands.length; i++)
-      if (commands[commands[i] + "_key"] == key)
+      if (commands[commands[i] + "_key"] == key || commands[commands[i] + "_altkey"] == key)
         command = commands[i];
   }
 
