@@ -55,6 +55,9 @@ var Aardvark = {
 };
 
 Aardvark.start = function(wrapper) {
+  if (!this.canSelect(wrapper.browser))
+    return;
+
   if (this.browser)
     this.quit();
 
@@ -87,6 +90,32 @@ Aardvark.start = function(wrapper) {
   this.isUserSelected = false;
   this.onMouseMove({clientX: wndWidth / 2, clientY: wndHeight / 2, screenX: -1, screenY: -1, target: null});
 }
+
+Aardvark.canSelect = function(browser)
+{
+  if (!browser || !browser.contentWindow || 
+      !(browser.contentDocument instanceof Ci.nsIDOMHTMLDocument))
+  {
+    return false;
+  }
+
+  let location = browser.contentWindow.location;
+  if (location.href == "about:blank")
+  {
+    return false;
+  }
+
+  if (location.hostname == "" &&
+      location.protocol != "mailbox:" &&
+      location.protocol != "imap:" &&
+      location.protocol != "news:" &&
+      location.protocol != "snews:")
+  {
+    return false;
+  }
+
+  return true;
+},
 
 Aardvark.doCommand = function(command, event) {
   if (this[command](this.selectedElem)) {
@@ -211,7 +240,7 @@ Aardvark.onMouseMove = function(event) {
   }
 
   let elem = this.browser.contentDocument.elementFromPoint(x, y);
-  while (elem && "contentDocument" in elem)
+  while (elem && "contentDocument" in elem && this.canSelect(elem))
   {
     let rect = elem.getBoundingClientRect();
     x -= rect.left;
