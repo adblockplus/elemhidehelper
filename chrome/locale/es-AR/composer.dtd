@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Redactar regla ocultadora de elementos">
+<!ENTITY accept.label "Agregar regla de filtros">
+<!ENTITY advanced.label "Vista avanzada">
+<!ENTITY basic.label "Vista básica">
+<!ENTITY expression.label "Regla de filtro">
+<!ENTITY preview.label "Previsualización">
+<!ENTITY domain.label "Unido al dominio">
+<!ENTITY domain.none.label "Cualquier dominio (no recomendado)">
+<!ENTITY nodes-tree.node.label "Nodo">
+<!ENTITY nodes-tree.id.label "identificación">
+<!ENTITY nodes-tree.class.label "clase">
+<!ENTITY attributes.label "Requiere atributos">
+<!ENTITY attributes.tagname.label "Nombre de etiqueta:">
+<!ENTITY attributes.firstchild.label "Primer hijo">
+<!ENTITY attributes.lastchild.label "Último hijo">
+<!ENTITY attributes.custom.label "CSS personalizado:">

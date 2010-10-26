@@ -10,7 +10,7 @@
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
 <!ENTITY attributes.label "Requereix atributs">
-<!ENTITY attributes.tagname.label "Nom de l&apos;etiqueta:">
+<!ENTITY attributes.tagname.label "Nom de l'etiqueta:">
 <!ENTITY attributes.firstchild.label "Primer atrib">
 <!ENTITY attributes.lastchild.label "Darrer atrib">
 <!ENTITY attributes.custom.label "CSS personalitzat:">

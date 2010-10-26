@@ -23,7 +23,9 @@
    - ***** END LICENSE BLOCK ***** -->
 
 <!ENTITY selectelement.label      "Select an element to hide">
+<!-- Note: This access key should usually be the same as stopselection.accesskey. It is the same menu item with different label depending on whether the user is currently selecting.-->
 <!ENTITY selectelement.accesskey  "S">
 <!ENTITY stopselection.label      "Abort element selection">
+<!-- Note: This access key should usually be the same as selectelement.accesskey. It is the same menu item with different label depending on whether the user is currently selecting.-->
 <!ENTITY stopselection.accesskey  "S">
 <!ENTITY helpbox.title            "Element selection hotkeys">

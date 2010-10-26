@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "Sestavi pravila za skrivanje elementov">
+<!ENTITY accept.label "Dodaj pravilo filtriranja">
+<!ENTITY advanced.label "Napredni pogled">
+<!ENTITY basic.label "Osnovni pogled">
+<!ENTITY expression.label "Pravilo filtriranja">
+<!ENTITY preview.label "Predogled">
+<!ENTITY domain.label "Veži na domeno">
+<!ENTITY domain.none.label "Katerakoli domena (ni priporočljivo)">
+<!ENTITY nodes-tree.node.label "Vozel">
+<!ENTITY nodes-tree.id.label "oznaka">
+<!ENTITY nodes-tree.class.label "razred">
+<!ENTITY attributes.label "Zahtevaj atribute">
+<!ENTITY attributes.tagname.label "Ime oznake:">
+<!ENTITY attributes.firstchild.label "Prvi dedovani">
+<!ENTITY attributes.lastchild.label "Zadnji dedovani">
+<!ENTITY attributes.custom.label "Prikrojen CSS:">

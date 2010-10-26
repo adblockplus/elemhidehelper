@@ -1,0 +1,16 @@
+<!ENTITY dialog.title "نوشت قانون پنهان کردن">
+<!ENTITY accept.label "اضافه قانون صافی">
+<!ENTITY advanced.label "دیده پیشرفته">
+<!ENTITY basic.label "دیده اساسی‌">
+<!ENTITY expression.label "قانون صافی">
+<!ENTITY preview.label "پيش ديد">
+<!ENTITY domain.label "مقید به دومین">
+<!ENTITY domain.none.label "(هر دومین (توصیه نمی‌شود">
+<!ENTITY nodes-tree.node.label "گره یا ند">
+<!ENTITY nodes-tree.id.label "نشانی‌">
+<!ENTITY nodes-tree.class.label "گروه">
+<!ENTITY attributes.label "نشان را مستلزم کن">
+<!ENTITY attributes.tagname.label "اسم علامت">
+<!ENTITY attributes.firstchild.label "بچه اول">
+<!ENTITY attributes.lastchild.label "بچه آخر">
+<!ENTITY attributes.custom.label "سفارشی CSS">
