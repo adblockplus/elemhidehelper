@@ -281,40 +281,12 @@ WindowWrapper.prototype =
       return;
     let prefix = RegExp.$1;
   
-    let enabled = this.canSelect(this.browser);
+    let enabled = Aardvark.canSelect(this.browser);
     let running = (enabled && this.browser == Aardvark.browser);
   
     this.E(prefix + "ehh-selectelement").setAttribute("disabled", !enabled);
     this.E(prefix + "ehh-selectelement").hidden = running;
     this.E(prefix + "ehh-stopselection").hidden = !running;
-  },
-
-  canSelect: function()
-  {
-    let browser = this.browser;
-    if (!browser || !browser.contentWindow || 
-        !(browser.contentDocument instanceof Ci.nsIDOMHTMLDocument) ||
-        !browser.contentDocument.body)
-    {
-      return false;
-    }
-  
-    let location = browser.contentWindow.location;
-    if (location.href == "about:blank")
-    {
-      return false;
-    }
-  
-    if (location.hostname == "" &&
-        location.protocol != "mailbox:" &&
-        location.protocol != "imap:" &&
-        location.protocol != "news:" &&
-        location.protocol != "snews:")
-    {
-      return false;
-    }
-  
-    return true;
   },
 
   toggleSelection: function()
@@ -327,9 +299,6 @@ WindowWrapper.prototype =
 
   startSelection: function()
   {
-    if (!this.canSelect())
-      return;
-
     Aardvark.start(this);
   },
 
