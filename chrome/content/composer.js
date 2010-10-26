@@ -234,18 +234,28 @@ function init() {
   }, 0);
 }
 
-function updateExpression() {
+function updateExpression()
+{
   var curNode = nodeData;
-  while (curNode) {
+
+  function escapeName(name)
+  {
+    return name.replace(/([^\w\-])/g, "\\$1")
+               .replace(/\\([\{\}])/g, escapeChar);
+  }
+
+  while (curNode)
+  {
     let expression = (curNode.tagName.checked ? curNode.tagName.value : "");
 
-    for (var i = 0; i < curNode.attributes.length; i++) {
+    for (var i = 0; i < curNode.attributes.length; i++)
+    {
       var attr = curNode.attributes[i];
 
       if (attr.checked) {
-        var escapedName = attr.name.replace(/([^\w\-])/g, "\\$1")
-                                   .replace(/\\([\{\}])/g, escapeChar);
-        if (attr.selected != "") {
+        var escapedName = escapeName(attr.name);
+        if (attr.selected != "")
+        {
           var op = "*=";
           if (attr.selected == attr.value)
             op = "=";
@@ -255,30 +265,33 @@ function updateExpression() {
             op = "$=";
   
           let useFallback = false;
-          if (attr.name == "id" && op == "=" && !/[^\w\-]/.test(attr.selected))
-            expression += "#" + attr.selected;
-          else if (attr.name == "class" && !/[^\w\-\s]/.test(attr.selected) && /\S/.test(attr.selected)) {
+          if (attr.name == "id" && op == "=")
+            expression += "#" + escapeName(attr.selected).replace(/^([^a-zA-Z])/, escapeChar);
+          else if (attr.name == "class" && /\S/.test(attr.selected))
+          {
             let knownClasses = {};
             for each (let cls in attr.value.split(/\s+/))
               knownClasses[cls] = true;
 
             let classes = attr.selected.split(/\s+/).filter(function(cls) cls != "");
             if (classes.every(function(cls) knownClasses.hasOwnProperty(cls)))
-              expression += "." + classes.join(".");
+              expression += "." + classes.map(escapeName).join(".");
             else
               useFallback = true;
           }
           else
             useFallback = true;
 
-          if (useFallback) {
+          if (useFallback)
+          {
             var escapedValue = attr.selected.replace(/"/g, '\\"')
                                             .replace(/([\{\}])/g, escapeChar)
                                             .replace(/([^\S ])/g, escapeChar);
             expression += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
           }
         }
-        else {
+        else
+        {
           expression += "[" + escapedName + "]";
         }
       }
