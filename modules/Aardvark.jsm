@@ -46,6 +46,7 @@ var Aardvark = {
   anchorElem: null,
   selectedElem: null,
   isUserSelected: false,
+  lockedAnchor: null,
   commentElem: null,
   mouseX: -1,
   mouseY: -1,
@@ -250,24 +251,36 @@ Aardvark.onMouseMove = function(event) {
 
   if (elem)
   {
-    this.anchorElem = elem;
-
-    if (this.isUserSelected)
+    if (!this.lockedAnchor)
+      this.setAnchorElement(elem);
+    else
     {
-      // User chose an element via wider/narrower commands, keep the selection if
-      // out new anchor is still a child of that element
-      let e = elem;
-      while (e && e != this.selectedElem)
-        e = this.getParentElement(e);
-
-      if (e)
-        elem = this.selectedElem;
-      else
-        this.isUserSelected = false;
+      this.lockedAnchor = elem;
+      this.showBoxAndLabel(this.selectedElem);
     }
-
-    this.showBoxAndLabel(elem);
   }
+}
+
+Aardvark.setAnchorElement = function(anchor)
+{
+  this.anchorElem = anchor;
+
+  let newSelection = anchor;
+  if (this.isUserSelected)
+  {
+    // User chose an element via wider/narrower commands, keep the selection if
+    // out new anchor is still a child of that element
+    let e = newSelection;
+    while (e && e != this.selectedElem)
+      e = this.getParentElement(e);
+
+    if (e)
+      newSelection = this.selectedElem;
+    else
+      this.isUserSelected = false;
+  }
+
+  this.showBoxAndLabel(newSelection);
 }
 
 // Makes sure event handlers like Aardvark.keyPress redirect
@@ -345,7 +358,6 @@ Aardvark.showBoxAndLabel = function(elem, string)
 }
 
 Aardvark.clearBox = function() {
-  this.anchorElem = null;
   if (this.boxElem.parentNode)
     this.boxElem.parentNode.removeChild(this.boxElem);
 }
@@ -446,6 +458,7 @@ Aardvark.commands = [
   "select",
   "wider",
   "narrower",
+  "lock",
   "quit",
   "blinkElement",
   "viewSource",
@@ -491,6 +504,24 @@ Aardvark.narrower = function (elem)
   }
   return false;
 }
+
+//------------------------------------------------------------
+
+Aardvark.lock = function (elem)
+{
+  if (!elem)
+    return false;
+
+  if (this.lockedAnchor)
+  {
+    this.setAnchorElement(this.lockedAnchor);
+    this.lockedAnchor = null;
+  }
+  else
+    this.lockedAnchor = this.anchorElem;
+
+  return true;
+}
   
 //------------------------------------------------------------
 Aardvark.quit = function ()
@@ -516,10 +547,12 @@ Aardvark.quit = function ()
   this.browser.removeEventListener("mousemove", this.mouseMove, true);
   this.browser.contentWindow.removeEventListener("pagehide", this.pageHide, true);
 
+  this.anchorElem = null;
   this.selectedElem = null;
   this.window = null;
   this.browser = null;
   this.commentElem = null;
+  this.lockedAnchor = null;
   E = function(id) null;
   return false;
 }
