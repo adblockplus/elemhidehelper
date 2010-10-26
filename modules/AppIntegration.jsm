@@ -284,7 +284,7 @@ WindowWrapper.prototype =
     let enabled = Aardvark.canSelect(this.browser);
     let running = (enabled && this.browser == Aardvark.browser);
   
-    this.E(prefix + "ehh-selectelement").setAttribute("disabled", !enabled);
+    this.E("ehh-command-selectelement").setAttribute("disabled", !enabled);
     this.E(prefix + "ehh-selectelement").hidden = running;
     this.E(prefix + "ehh-stopselection").hidden = !running;
   },
