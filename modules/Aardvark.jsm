@@ -94,6 +94,9 @@ Aardvark.start = function(wrapper) {
 
 Aardvark.canSelect = function(browser)
 {
+  if (!Prefs.initialized)
+    return false;
+
   if (!browser || !browser.contentWindow || 
       !(browser.contentDocument instanceof Ci.nsIDOMHTMLDocument))
   {
@@ -102,9 +105,7 @@ Aardvark.canSelect = function(browser)
 
   let location = browser.contentWindow.location;
   if (location.href == "about:blank")
-  {
     return false;
-  }
 
   if (!Prefs.acceptlocalfiles &&
       location.hostname == "" &&
