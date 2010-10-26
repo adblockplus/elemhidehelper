@@ -84,19 +84,11 @@ function WindowWrapper(wnd)
   this.E("ehh-elementmarker").firstChild.className = AppIntegration.elementMarkerClass;
 
   this.registerEventListeners();
-
-  let me = this;
-  this.configureTimer = Cc["@mozilla.org/timer;1"].createInstance(Ci.nsITimer);
-  this.configureTimer.initWithCallback(function()
-  {
-    me.configureTimer = null;
-    me.configureKeys();
-  }, 1000, Ci.nsITimer.TYPE_ONE_SHOT);
+  this.configureKeys();
 }
 WindowWrapper.prototype =
 {
   window: null,
-  configureTimer: null,
 
   _bindMethod: function(method)
   {
