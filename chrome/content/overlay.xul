@@ -58,11 +58,13 @@
   </popupset>
 
   <popup id="abp-status-popup">
-    <menuitem id="abp-status-ehh-selectelement" hidden="true" insertbefore="abp-status-options" label="&selectelement.label;" accesskey="&selectelement.accesskey;" command="ehh-command-selectelement" key="ehh-key-selectelement"/>
-    <menuitem id="abp-status-ehh-stopselection" hidden="true" insertbefore="abp-status-options" label="&stopselection.label;" accesskey="&stopselection.accesskey;" command="ehh-command-selectelement" key="ehh-key-selectelement"/>
+    <menuitem id="abp-status-ehh-selectelement" hidden="true" insertbefore="abp-status-options" label="&selectelement.label;" accesskey="&selectelement.accesskey;" command="ehh-command-selectelement2" key="ehh-key-selectelement"/>
+    <menuitem id="abp-status-ehh-stopselection" hidden="true" insertbefore="abp-status-options" label="&stopselection.label;" accesskey="&stopselection.accesskey;" command="ehh-command-selectelement2" key="ehh-key-selectelement"/>
   </popup>
 
   <commandset id="abp-commandset">
     <command id="ehh-command-selectelement" oncommand="//"/>
+    <!-- Use separate command for menu item, disabling menu item should not disable hotkey -->
+    <command id="ehh-command-selectelement2" oncommand="//"/>
   </commandset>
 </overlay>
