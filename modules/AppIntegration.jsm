@@ -276,7 +276,7 @@ WindowWrapper.prototype =
     let enabled = Aardvark.canSelect(this.browser);
     let running = (enabled && this.browser == Aardvark.browser);
   
-    this.E("ehh-command-selectelement").setAttribute("disabled", !enabled);
+    this.E("ehh-command-selectelement2").setAttribute("disabled", !enabled);
     this.E(prefix + "ehh-selectelement").hidden = running;
     this.E(prefix + "ehh-stopselection").hidden = !running;
   },
@@ -304,6 +304,7 @@ WindowWrapper.prototype.eventHandlers = [
   ["abp-status-popup", "popupshowing", WindowWrapper.prototype.fillPopup],
   ["abp-toolbar-popup", "popupshowing", WindowWrapper.prototype.fillPopup],
   ["ehh-command-selectelement", "command", WindowWrapper.prototype.toggleSelection],
+  ["ehh-command-selectelement2", "command", WindowWrapper.prototype.toggleSelection],
 ];
 
 AppIntegration.startup();
