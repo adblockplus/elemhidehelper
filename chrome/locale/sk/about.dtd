@@ -1,0 +1,7 @@
+<!ENTITY dialog.title "O rozšírení">
+<!ENTITY version.title "Verzia">
+<!ENTITY description "Element Hiding Helper je doplnkové rozšírenie pre Adblock Plus, určený na jednodnoduchšie vytváranie pravidiel pre skrývanie prvkov. Jednoducho vyberte prvok, ktorý chcete skryť a potom vyberte, ktorá vlastnosť tohto prvku bude uložená na skrytie do budúcna. Pravidlo skrývania prvkov je vytvárané a pridávané automaticky.">
+<!ENTITY homepage.label "Domovská stránka:">
+<!ENTITY author.label "Autor:">
+<!ENTITY contributors.label "Prispievatelia:">
+<!ENTITY translators.label "Prekladatelia:">

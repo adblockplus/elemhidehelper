@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "Elemhez tartozó elrejtési szabály létrehozása">
+<!ENTITY groupDisabled.warning "A(z) &quot;?1?&quot; szűrőcsoport jelenleg le van tiltva. Hozzáadhatja a szűrőt, de adig nem lesz használatban, amíg a szűrőcsoport nincs engedélyezve az Adblock Plus beállításaiban.">
 <!ENTITY accept.label "Szűrő hozzáadása">
 <!ENTITY advanced.label "Haladó megjelenítés">
 <!ENTITY basic.label "Alapvető megjelenítés">

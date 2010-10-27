@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "Regel voor verbergen van elementen opstellen">
+<!ENTITY groupDisabled.warning "De filtergroep ‘?1?’ waaraan dit filter wordt toegevoegd is momenteel uitgeschakeld. U kunt het filter nog steeds toevoegen, maar het wordt niet toegepast tenzij u de filtergroep in de Adblock Plus-voorkeuren inschakelt.">
 <!ENTITY accept.label "Filterregel toevoegen">
 <!ENTITY advanced.label "Geavanceerde weergave">
 <!ENTITY basic.label "Basisweergave">

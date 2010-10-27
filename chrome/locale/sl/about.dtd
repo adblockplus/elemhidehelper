@@ -1,0 +1,7 @@
+<!ENTITY dialog.title "O programu">
+<!ENTITY version.title "Različica">
+<!ENTITY description "Element Hiding Helper je dodatek za Adblock Plus namenjen lažjemu ustvarjanju pravil za prikrivanje oglasnih blokov. Enostavno izberete elemente, ki jih želite skriti in na podlagi katerih atributov jih želite skriti. Pravilo za skrivanje elementov se generira avtomatsko.">
+<!ENTITY homepage.label "Spletna stran programa:">
+<!ENTITY author.label "Avtor:">
+<!ENTITY contributors.label "Sodelujoči:">
+<!ENTITY translators.label "Prevajalci:">

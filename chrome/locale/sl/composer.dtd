@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "Sestavi pravila za skrivanje elementov">
+<!ENTITY groupDisabled.warning "Filtrirna skupina &quot;?1?&quot; h kateri dodajate trenutno pravilo je onemogočena. Vseeno lahko dodate nov filter, vendar ne bo upoštevan, dokler ne omogočite skupino v Adblock Plus nastavitvah.">
 <!ENTITY accept.label "Dodaj pravilo filtriranja">
 <!ENTITY advanced.label "Napredni pogled">
 <!ENTITY basic.label "Osnovni pogled">

@@ -1,5 +1,5 @@
-<!ENTITY selectelement.label "Жасырылатын элемент таңдау">
-<!ENTITY selectelement.accesskey "Ж">
+<!ENTITY selectelement.label "Жасырылатын элементті таңдау">
+<!ENTITY selectelement.accesskey "т">
 <!ENTITY stopselection.label "Элементтер таңдаудан бас тарту">
 <!ENTITY stopselection.accesskey "т">
 <!ENTITY helpbox.title "Элементтерді таңдау - пернелер комбинациясы">

@@ -1,4 +1,5 @@
-<!ENTITY dialog.title "Tworzenie reguł blokowania elementów">
+<!ENTITY dialog.title "Tworzenie reguł ukrywania elementów">
+<!ENTITY groupDisabled.warning "Grupa filtru „?1?”, do której ten filtr ma być dodany jest obecnie wyłączona. Możesz dodać do niej ten filtr, ale nie będzie on działał do czasu włączenia grupy w ustawieniach Adblock Plusa.">
 <!ENTITY accept.label "Dodaj regułę filtru">
 <!ENTITY advanced.label "Widok zaawansowany">
 <!ENTITY basic.label "Widok podstawowy">
@@ -10,7 +11,7 @@
 <!ENTITY nodes-tree.id.label "ID">
 <!ENTITY nodes-tree.class.label "Klasa">
 <!ENTITY attributes.label "Atrybuty">
-<!ENTITY attributes.tagname.label "nazwa znacznika - ">
+<!ENTITY attributes.tagname.label "nazwa znacznika -">
 <!ENTITY attributes.firstchild.label "pierwszy potomek">
 <!ENTITY attributes.lastchild.label "ostatni potomek">
 <!ENTITY attributes.custom.label "własny CSS">
