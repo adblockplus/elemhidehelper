@@ -363,8 +363,8 @@ var Aardvark =
     let pos = this.getElementPosition(elem);
     this.boxElem.style.left = (pos.left - 1) + "px";
     this.boxElem.style.top = (pos.top - 1) + "px";
-    border.style.width = (pos.right - pos.left - 2) + "px";
-    border.style.height = (pos.bottom - pos.top - 2) + "px";
+    border.style.width = Math.max(pos.right - pos.left - 2, 0) + "px";
+    border.style.height = Math.max(pos.bottom - pos.top - 2, 0) + "px";
   
     let doc = this.browser.contentDocument;
   
