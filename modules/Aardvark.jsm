@@ -56,6 +56,7 @@ var Aardvark =
   viewSourceTimer: null,
   boxElem: null,
   paintNode: null,
+  prevPos: null,
 
   start: function(wrapper)
   {
@@ -294,7 +295,15 @@ var Aardvark =
   {
     // Don't update position too often
     if (this.selectedElem && Date.now() - this.prevSelectionUpdate > 20)
-      this.selectElement(this.selectedElem);
+    {
+      let pos = this.getElementPosition(this.selectedElem);
+      if (!this.prevPos || this.prevPos.left != pos.left || this.prevPos.right != pos.right
+                        || this.prevPos.top != pos.top || this.prevPos.bottom != pos.bottom)
+      {
+        dump("Paint update\n");
+        this.selectElement(this.selectedElem);
+      }
+    }
   },
 
   setAnchorElement: function(anchor)
@@ -361,6 +370,9 @@ var Aardvark =
     let label = this.boxElem.getElementsByClassName("label")[0];
     let labelTag = this.boxElem.getElementsByClassName("labelTag")[0];
     let labelAddition = this.boxElem.getElementsByClassName("labelAddition")[0];
+
+    if (this.boxElem.parentNode)
+      this.boxElem.parentNode.removeChild(this.boxElem);
   
     let pos = this.getElementPosition(elem);
     this.boxElem.style.left = (pos.left - 1) + "px";
@@ -387,7 +399,10 @@ var Aardvark =
 
     this.paintNode = doc.defaultView;
     if (this.paintNode)
+    {
+      this.prevPos = pos;
       this.paintNode.addEventListener("MozAfterPaint", this.onAfterPaint, false);
+    }
   },
 
   hideSelection: function()
@@ -398,6 +413,7 @@ var Aardvark =
     if (this.paintNode)
       this.paintNode.removeEventListener("MozAfterPaint", this.onAfterPaint, false);
     this.paintNode = null;
+    this.prevPos = null;
   },
 
   getElementPosition: function(element)
