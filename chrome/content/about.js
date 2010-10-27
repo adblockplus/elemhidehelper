@@ -44,19 +44,36 @@ function init()
   {
     let addon = AddonManager.getAddonByID(addonID, function(addon)
     {
-      loadInstallManifest(addon.getResourceURI("install.rdf"));
+      loadInstallManifest(addon.getResourceURI("install.rdf"), addon.name, addon.homepageURL);
     });
   }
   else
   {
     let extensionManager = Cc["@mozilla.org/extensions/manager;1"].getService(Ci.nsIExtensionManager);
+    let rdf = Cc["@mozilla.org/rdf/rdf-service;1"].getService(Ci.nsIRDFService);
+    let root = rdf.GetResource("urn:mozilla:item:" + addonID);
+
+    function emResource(prop)
+    {
+      return rdf.GetResource("http://www.mozilla.org/2004/em-rdf#" + prop);
+    }
+  
+    function getTarget(prop)
+    {
+      let target = extensionManager.datasource.GetTarget(root, emResource(prop), true);
+      if (target)
+        return target.QueryInterface(Ci.nsIRDFLiteral).Value;
+      else
+        return null;
+    }
+    
     let installLocation = extensionManager.getInstallLocation(addonID);
     let installManifestFile = installLocation.getItemFile(addonID, "install.rdf");
-    loadInstallManifest(ioService.newFileURI(installManifestFile));
+    loadInstallManifest(ioService.newFileURI(installManifestFile), getTarget("name"), getTarget("homepageURL"));
   }
 }
 
-function loadInstallManifest(installManifestURI)
+function loadInstallManifest(installManifestURI, name, homepage)
 {
   let rdf = Cc["@mozilla.org/rdf/rdf-service;1"].getService(Ci.nsIRDFService);
   let ds = rdf.GetDataSource(installManifestURI.spec);
@@ -78,8 +95,8 @@ function loadInstallManifest(installManifestURI)
 
   function dataSourceLoaded()
   {
-    setExtensionData(getTargets("name")[0], getTargets("version")[0],
-                     getTargets("homepageURL")[0], getTargets("creator"),
+    setExtensionData(name, getTargets("version")[0],
+                     homepage, getTargets("creator"),
                      getTargets("contributor"), getTargets("translator"));
   }
 
