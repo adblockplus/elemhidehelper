@@ -87,8 +87,10 @@ var Aardvark =
       this.showMenu();
   
     // Make sure to select some element immeditely (whichever is in the center of the browser window)
-    let wndWidth = doc.defaultView.innerWidth;
-    let wndHeight = doc.defaultView.innerHeight;
+    let wndWidth = doc.documentElement.clientWidth;
+    let wndHeight = doc.documentElement.clientHeight;
+    if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
+      wndHeight = Math.max(doc.documentElement.offsetHeight, doc.body.offsetHeight) - doc.defaultView.scrollMaxY - 1;
     this.isUserSelected = false;
     this.onMouseMove({clientX: wndWidth / 2, clientY: wndHeight / 2, screenX: -1, screenY: -1, target: null});
   },
@@ -371,7 +373,10 @@ var Aardvark =
     [labelTag.textContent, labelAddition.textContent] = this.getElementLabel(elem);
   
     // If there is not enough space to show the label move it up a little
-    if (pos.bottom < doc.defaultView.innerHeight - 25)
+    let wndHeight = doc.documentElement.clientHeight;
+    if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
+      wndHeight = Math.max(doc.documentElement.offsetHeight, doc.body.offsetHeight) - doc.defaultView.scrollMaxY - 1;
+    if (pos.bottom < wndHeight - 25)
       label.className = "label";
     else
       label.className = "label onTop";
@@ -400,10 +405,17 @@ var Aardvark =
     // Restrict rectangle coordinates by the boundaries of a window's client area
     function intersectRect(rect, wnd)
     {
+      // Cannot use wnd.innerWidth/Height because they won't account for scrollbars
+      let doc = wnd.document;
+      let wndWidth = doc.documentElement.clientWidth;
+      let wndHeight = doc.documentElement.clientHeight;
+      if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
+        wndHeight = Math.max(doc.documentElement.offsetHeight, doc.body.offsetHeight) - wnd.scrollMaxY - 1;
+  
       rect.left = Math.max(rect.left, 0);
       rect.top = Math.max(rect.top, 0);
-      rect.right = Math.min(rect.right, wnd.innerWidth);
-      rect.bottom = Math.min(rect.bottom, wnd.innerHeight);
+      rect.right = Math.min(rect.right, wndWidth);
+      rect.bottom = Math.min(rect.bottom, wndHeight);
     }
   
     let rect = element.getBoundingClientRect();
