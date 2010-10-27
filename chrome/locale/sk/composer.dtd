@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "Vytvoriť skryté pravidlo prvku">
+<!ENTITY groupDisabled.warning "Skupina filtrov &quot;?1?&quot; do ktorého bude tento filter pridaný je aktuálne vypnutý. Môžete ešte filter pridať, ale nebude aplikovaný pokiaľ nezapnete skupinu filtrov v nastaveniach Adblock Plus.">
 <!ENTITY accept.label "Pridať pravidlo filtra">
 <!ENTITY advanced.label "Pokročilý náhľad">
 <!ENTITY basic.label "Základný náhľad">

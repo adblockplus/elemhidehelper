@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "필터 작성">
+<!ENTITY groupDisabled.warning "현재 &quot;?1?&quot; 그룹을 사용 안 함 : 필터 추가 가능 + 필터 적용 안 함 (그룹을 사용하면 필터가 적용됨)">
 <!ENTITY accept.label "추가">
 <!ENTITY advanced.label "고급 보기">
 <!ENTITY basic.label "기본 보기">
@@ -9,7 +10,7 @@
 <!ENTITY nodes-tree.node.label "노드">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "속성 요구">
+<!ENTITY attributes.label "속성 선택">
 <!ENTITY attributes.tagname.label "태그 이름 :">
 <!ENTITY attributes.firstchild.label "첫째 자식">
 <!ENTITY attributes.lastchild.label "막내 자식">

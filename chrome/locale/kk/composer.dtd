@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "Элементті жасыру ережесін құрастыру">
+<!ENTITY groupDisabled.warning "Бұл фильтр қосылатын &quot;?1?&quot; фильтрлер тобы қазір сөндірулі тұр. Оны қоса аласыз, бірақ Adblock Plus баптауларында ол фильтр тобы іске қоспасаңыз, ол қолданылмайды.">
 <!ENTITY accept.label "Фильтр ережесін қосу">
 <!ENTITY advanced.label "Кеңейтілген көрінісі">
 <!ENTITY basic.label "Негізгі көрінісі">

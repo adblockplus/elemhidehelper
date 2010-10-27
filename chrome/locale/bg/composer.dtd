@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "Съставяне на правило за скриване на елемент">
+<!ENTITY groupDisabled.warning "Филтриращата група &quot;?1?&quot; на този филтър които ще бъде добавен е моменто изключена. Вие пак можете да добавите филтъра, но няма да бъде приложен докато не активиране филтриращата група от Adblock Plus настройки.">
 <!ENTITY accept.label "Добавяне на правило за филтриране">
 <!ENTITY advanced.label "Разширен изглед">
 <!ENTITY basic.label "Основен изглед">
@@ -8,7 +9,7 @@
 <!ENTITY domain.none.label "Всеки домейн (не се препоръчва)">
 <!ENTITY nodes-tree.node.label "Точка">
 <!ENTITY nodes-tree.id.label "идентификатор">
-<!ENTITY nodes-tree.class.label "клас">
+<!ENTITY nodes-tree.class.label "Клас">
 <!ENTITY attributes.label "Изисква атрибути">
 <!ENTITY attributes.tagname.label "Име на тага:">
 <!ENTITY attributes.firstchild.label "Първи наследник">

@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "Criar regra para ocultar elementos">
+<!ENTITY groupDisabled.warning "O grupo de filtros &quot;?1?&quot; ao qual este filtro será adicionado está actualmente desactivado. Pode adicionar o filtro, no entanto, este não será aplicado até que o grupo de filtros seja activado nas preferências do Adblock Plus.">
 <!ENTITY accept.label "Adicionar regra de filtro">
 <!ENTITY advanced.label "Vista avançada">
 <!ENTITY basic.label "Vista básica">
