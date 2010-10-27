@@ -300,7 +300,6 @@ var Aardvark =
       if (!this.prevPos || this.prevPos.left != pos.left || this.prevPos.right != pos.right
                         || this.prevPos.top != pos.top || this.prevPos.bottom != pos.bottom)
       {
-        dump("Paint update\n");
         this.selectElement(this.selectedElem);
       }
     }
@@ -374,20 +373,21 @@ var Aardvark =
     if (this.boxElem.parentNode)
       this.boxElem.parentNode.removeChild(this.boxElem);
   
+    let doc = this.browser.contentDocument;
+    let wndWidth = doc.documentElement.clientWidth;
+    let wndHeight = doc.documentElement.clientHeight;
+    if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
+      wndHeight = Math.max(doc.documentElement.offsetHeight, doc.body.offsetHeight) - doc.defaultView.scrollMaxY - 1;
+
     let pos = this.getElementPosition(elem);
-    this.boxElem.style.left = (pos.left - 1) + "px";
-    this.boxElem.style.top = (pos.top - 1) + "px";
+    this.boxElem.style.left = Math.min(pos.left - 1, wndWidth - 2) + "px";
+    this.boxElem.style.top = Math.min(pos.top - 1, wndHeight - 2) + "px";
     border.style.width = Math.max(pos.right - pos.left - 2, 0) + "px";
     border.style.height = Math.max(pos.bottom - pos.top - 2, 0) + "px";
-  
-    let doc = this.browser.contentDocument;
   
     [labelTag.textContent, labelAddition.textContent] = this.getElementLabel(elem);
   
     // If there is not enough space to show the label move it up a little
-    let wndHeight = doc.documentElement.clientHeight;
-    if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
-      wndHeight = Math.max(doc.documentElement.offsetHeight, doc.body.offsetHeight) - doc.defaultView.scrollMaxY - 1;
     if (pos.bottom < wndHeight - 25)
       label.className = "label";
     else
