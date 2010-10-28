@@ -1,4 +1,24 @@
 <!ENTITY dialog.title "Composizione della regola per nascondere elementi">
+<!ENTITY groupDisabled.warning "
+
+
+
+
+
+
+	Il gruppo di filtri &quot;?1?&quot; al quale bisognerebbe aggiungere il filtro è attualmente 
+
+
+
+	disattivato. È comunque possibile aggiungere il filtro, ma questo verrà applicato solo dopo 
+
+
+
+	la riattivazione del gruppo di filtri nella finestra della impostazioni di Adblock Plus
+
+
+
+">
 <!ENTITY accept.label "Aggiungi regola del filtro">
 <!ENTITY advanced.label "Visualizzazione avanzata">
 <!ENTITY basic.label "Visualizzazione di base">
