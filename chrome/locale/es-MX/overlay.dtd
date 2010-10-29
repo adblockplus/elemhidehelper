@@ -1,5 +1,5 @@
 <!ENTITY selectelement.label "Seleccione un elemento para ocultar">
 <!ENTITY selectelement.accesskey "S">
 <!ENTITY stopselection.label "Deshacer selección de elemento">
-<!ENTITY stopselection.accesskey "D">
+<!ENTITY stopselection.accesskey "S">
 <!ENTITY helpbox.title "Teclas de atajo - Selección de elementos">

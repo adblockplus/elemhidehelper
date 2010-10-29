@@ -1,16 +1,17 @@
-<!ENTITY dialog.title "編寫元素隱藏條件">
-<!ENTITY accept.label "新增過濾條件">
+<!ENTITY dialog.title "撰寫元素隱藏規則">
+<!ENTITY groupDisabled.warning "要加入此隱藏規則的過濾群組『?1?』目前被停用。你仍然可以新增此規則，但在 Adblock Plus 偏好設定中未啟動這個群組前，這個規則是沒有作用的。">
+<!ENTITY accept.label "新增隱藏規則">
 <!ENTITY advanced.label "進階檢視">
 <!ENTITY basic.label "基本檢視">
-<!ENTITY expression.label "過濾條件">
+<!ENTITY expression.label "過濾規則">
 <!ENTITY preview.label "預覽">
 <!ENTITY domain.label "網域限制">
-<!ENTITY domain.none.label "所有網域 (不建議)">
+<!ENTITY domain.none.label "所有網域（不建議）">
 <!ENTITY nodes-tree.node.label "節點">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
+<!ENTITY nodes-tree.id.label "識別">
+<!ENTITY nodes-tree.class.label "分類">
 <!ENTITY attributes.label "必要屬性">
 <!ENTITY attributes.tagname.label "標籤名稱:">
-<!ENTITY attributes.firstchild.label "First child">
-<!ENTITY attributes.lastchild.label "Last child">
+<!ENTITY attributes.firstchild.label "第一個子節點">
+<!ENTITY attributes.lastchild.label "最後一個子節點">
 <!ENTITY attributes.custom.label "自訂 CSS:">
