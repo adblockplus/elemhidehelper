@@ -1,0 +1,7 @@
+<!ENTITY dialog.title "關於 Element Hiding Helper">
+<!ENTITY version.title "版本">
+<!ENTITY description "Element Hiding Helper 是一個讓你更容易建立 Adblock Plus 元素隱藏規則的共生附加元件。你只需點選要被隱藏的元素，然後選擇此元素的那些屬性需要一併考慮，就可以自動新增元素隱藏規則。">
+<!ENTITY homepage.label "Element Hiding Helper 首頁：">
+<!ENTITY author.label "作者：">
+<!ENTITY contributors.label "貢獻人員：">
+<!ENTITY translators.label "翻譯人員：">

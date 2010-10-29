@@ -1,5 +1,5 @@
 <!ENTITY selectelement.label "Izberite element, ki ga želite skriti">
-<!ENTITY selectelement.accesskey "S">
+<!ENTITY selectelement.accesskey "e">
 <!ENTITY stopselection.label "Prekliči izbor elementa">
-<!ENTITY stopselection.accesskey "S">
+<!ENTITY stopselection.accesskey "e">
 <!ENTITY helpbox.title "Izbor elementov - Bližnjice">
