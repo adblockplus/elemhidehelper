@@ -26,7 +26,8 @@
 
 .%%CLASS%%,
 .%%CLASS%% > .label,
-.%%CLASS%% > .label > b,
+.%%CLASS%% > .label > .labelTag,
+.%%CLASS%% > .label > .labelAddition,
 .%%CLASS%% > .border
 {
   display: block !important;
