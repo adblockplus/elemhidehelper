@@ -47,7 +47,7 @@
   font-size: 200%;
 }
 
-#ehh-commandlabel-key
+#ehh-commandlabel-key, #ehh-commandlabel-alternativeKey
 {
   font-weight: bold;
 }

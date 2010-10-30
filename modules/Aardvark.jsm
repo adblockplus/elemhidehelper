@@ -128,7 +128,7 @@ var Aardvark =
   {
     if (this[command](this.selectedElem))
     {
-      this.showCommandLabel(this.commands[command + "_key"], this.commands[command + "_label"]);
+      this.showCommandLabel(this.commands[command + "_key"], this.commands[command + "_altkey"], this.commands[command + "_label"]);
       if (event)
         event.stopPropagation();
     }
@@ -136,12 +136,13 @@ var Aardvark =
       event.preventDefault();
   },
 
-  showCommandLabel: function(key, label)
+  showCommandLabel: function(key, alternativeKey, label)
   {
     if (this.commandLabelTimer)
       this.commandLabelTimer.cancel();
   
     E("ehh-commandlabel-key").setAttribute("value", key);
+    E("ehh-commandlabel-alternativeKey").setAttribute("value", alternativeKey);
     E("ehh-commandlabel-label").setAttribute("value", label);
   
     var commandLabel = E("ehh-commandlabel");
