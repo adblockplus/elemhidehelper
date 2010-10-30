@@ -30,10 +30,22 @@
   padding: 5px;
 }
 
-#ehh-helpbox .key
+#ehh-helpbox row
+{
+  -moz-box-align: center;
+}
+
+#ehh-helpbox .key:not(:empty)
 {
   font-weight: bold;
-  margin-right: 10px;
+  margin: 2px 10px 2px 0px;
+  border: 1px solid black;
+  text-align: start;
+  width: 30px;
+  height: 30px;
+  padding: 2px;
+  background-color: white;
+  -moz-border-radius: 3px;
 }
 
 #ehh-helpbox-title
@@ -44,12 +56,20 @@
 
 #ehh-commandlabel
 {
-  font-size: 200%;
+  font-size: 150%;
 }
 
-#ehh-commandlabel-key, #ehh-commandlabel-alternativeKey
+#ehh-commandlabel-key:not(:empty), #ehh-commandlabel-alternativeKey:not(:empty)
 {
   font-weight: bold;
+  margin: 0px 10px 0px 0px;
+  border: 1px solid black;
+  text-align: start;
+  width: 45px;
+  height: 45px;
+  padding: 2px;
+  background-color: white;
+  -moz-border-radius: 4px;
 }
 
 #ehh-viewsource description,

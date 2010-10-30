@@ -141,8 +141,8 @@ var Aardvark =
     if (this.commandLabelTimer)
       this.commandLabelTimer.cancel();
   
-    E("ehh-commandlabel-key").setAttribute("value", key);
-    E("ehh-commandlabel-alternativeKey").setAttribute("value", alternativeKey);
+    E("ehh-commandlabel-key").textContent = key.toUpperCase();
+    E("ehh-commandlabel-alternativeKey").textContent = alternativeKey.toUpperCase();
     E("ehh-commandlabel-label").setAttribute("value", label);
   
     var commandLabel = E("ehh-commandlabel");
@@ -180,12 +180,12 @@ var Aardvark =
       helpBoxRows.appendChild(row);
   
       var element = this.window.document.createElement("description");
-      element.setAttribute("value", key);
+      element.textContent = key.toUpperCase();
       element.className = "key";
       row.appendChild(element);
   
       var element = this.window.document.createElement("description");
-      element.setAttribute("value", alternativeKey);
+      element.textContent = alternativeKey.toUpperCase();
       element.className = "key";
       row.appendChild(element);
   
