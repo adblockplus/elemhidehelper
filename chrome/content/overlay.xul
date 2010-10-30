@@ -44,10 +44,12 @@
         <rows id="ehh-helpbox-rows"/>
       </grid>
     </tooltip>
-    <tooltip id="ehh-commandlabel" noautohide="true" orient="horizontal">
-      <description id="ehh-commandlabel-key"/>
-      <description id="ehh-commandlabel-alternativeKey"/>
-      <description id="ehh-commandlabel-label"/>
+    <tooltip id="ehh-commandlabel" noautohide="true">
+      <hbox align="center">
+        <description id="ehh-commandlabel-key"/>
+        <description id="ehh-commandlabel-alternativeKey"/>
+        <description id="ehh-commandlabel-label"/>
+      </hbox>
     </tooltip>
     <tooltip id="ehh-viewsource" noautohide="true" orient="vertical"/>
     <tooltip id="ehh-elementmarker">
