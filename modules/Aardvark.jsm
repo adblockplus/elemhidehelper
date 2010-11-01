@@ -88,10 +88,7 @@ var Aardvark =
       this.showMenu();
   
     // Make sure to select some element immeditely (whichever is in the center of the browser window)
-    let wndWidth = doc.documentElement.clientWidth;
-    let wndHeight = doc.documentElement.clientHeight;
-    if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
-      wndHeight = Math.max(doc.documentElement.offsetHeight, doc.body.offsetHeight) - doc.defaultView.scrollMaxY - 1;
+    let [wndWidth, wndHeight] = this.getWindowSize(doc.defaultView);
     this.isUserSelected = false;
     this.onMouseMove({clientX: wndWidth / 2, clientY: wndHeight / 2, screenX: -1, screenY: -1, target: null});
   },
@@ -375,10 +372,7 @@ var Aardvark =
       this.boxElem.parentNode.removeChild(this.boxElem);
   
     let doc = this.browser.contentDocument;
-    let wndWidth = doc.documentElement.clientWidth;
-    let wndHeight = doc.documentElement.clientHeight;
-    if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
-      wndHeight = Math.max(doc.documentElement.offsetHeight, doc.body.offsetHeight) - doc.defaultView.scrollMaxY - 1;
+    let [wndWidth, wndHeight] = this.getWindowSize(doc.defaultView);
 
     let pos = this.getElementPosition(elem);
     this.boxElem.style.left = Math.min(pos.left - 1, wndWidth - 2) + "px";
@@ -417,18 +411,29 @@ var Aardvark =
     this.prevPos = null;
   },
 
+  getWindowSize: function(wnd)
+  {
+    // Cannot use wnd.innerWidth/Height because they won't account for scrollbars
+    let doc = wnd.document;
+    let wndWidth = doc.documentElement.clientWidth;
+    let wndHeight = doc.documentElement.clientHeight;
+    if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
+      wndHeight = Math.max(doc.documentElement.offsetHeight, doc.body.offsetHeight) - wnd.scrollMaxY - 1;
+
+    // Failsafe: document size will be meaningless if all elements use absolute positioning
+    if (wndWidth <= 0)
+      wndWidth = wnd.innerWidth;
+    if (wndHeight <= 0)
+      wndHeight = wnd.innerHeight;
+    return [wndWidth, wndHeight];
+  },
+
   getElementPosition: function(element)
   {
     // Restrict rectangle coordinates by the boundaries of a window's client area
     function intersectRect(rect, wnd)
     {
-      // Cannot use wnd.innerWidth/Height because they won't account for scrollbars
-      let doc = wnd.document;
-      let wndWidth = doc.documentElement.clientWidth;
-      let wndHeight = doc.documentElement.clientHeight;
-      if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
-        wndHeight = Math.max(doc.documentElement.offsetHeight, doc.body.offsetHeight) - wnd.scrollMaxY - 1;
-  
+      let [wndWidth, wndHeight] = this.getWindowSize(wnd);
       rect.left = Math.max(rect.left, 0);
       rect.top = Math.max(rect.top, 0);
       rect.right = Math.min(rect.right, wndWidth);
@@ -442,7 +447,7 @@ var Aardvark =
             right: rect.right, bottom: rect.bottom};
     while (true)
     {
-      intersectRect(rect, wnd);
+      intersectRect.call(this, rect, wnd);
   
       if (!wnd.frameElement)
         break;
