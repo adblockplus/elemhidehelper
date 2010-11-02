@@ -1,0 +1,7 @@
+<!ENTITY dialog.title "Element Hiding Helper について">
+<!ENTITY version.title "バージョン">
+<!ENTITY description "Element Hiding Helper は要素の非表示ルールを簡単に作成する Adblock Plus 用の支援拡張機能です。非表示にしたい要素を選択し、要素の属性を元に非表示にする要素の条件を選ぶだけで Element Hiding Helper は非表示ルールを作成し、自動的にリストへ追加します。">
+<!ENTITY homepage.label "Element Hiding Helper のホームページ:">
+<!ENTITY author.label "作成者:">
+<!ENTITY contributors.label "貢献者:">
+<!ENTITY translators.label "翻訳者:">

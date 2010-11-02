@@ -1,2 +1,7 @@
 <!ENTITY dialog.title "אודות Element Hiding Helper">
 <!ENTITY version.title "גרסה">
+<!ENTITY description "Element Hiding Helper היא הרחבת אחות של Adblock Plus  אשר נועדה לגרום ליצירת חוקי הסתרת האלמנטים להיות פשוטה. פשוט בוחרים אלמנט שרוצים להסתיר ובוחרים אילו תכונות של אלמנט זה יילקחו בחשבון בהסתרתו בעתיד. חוק הסתרת האלמנט מחולל ומתווסף בצורה אוטומטית.">
+<!ENTITY homepage.label "עמוד הבית של Element Hiding Helper:">
+<!ENTITY author.label "מחבר:">
+<!ENTITY contributors.label "תורמים:">
+<!ENTITY translators.label "מתרגמים:">

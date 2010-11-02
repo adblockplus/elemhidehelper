@@ -1,0 +1,7 @@
+<!ENTITY dialog.title "เกี่ยวกับ Element Hiding Helper">
+<!ENTITY version.title "รุ่น">
+<!ENTITY description "Element Hiding Helper เป็นส่วนเสริมที่คู่กับ Adblock Plus เพื่อช่วยให้สร้างกฎการซ่อนวัตถุง่ายขึ้น เพียงแค่เลือกวัตถุที่ต้องการซ่อนแล้วเลือกลักษณะของวัตถุนี้ที่จะเก็บไว้เวลาจะซ่อนอีกในอนาคต กฎการซ่อนได้สร้างและเพิ่มโดยอัตโนมัติ">
+<!ENTITY homepage.label "โฮมเพจ Element Hiding Helper:">
+<!ENTITY author.label "ผู้เขียน:">
+<!ENTITY contributors.label "ผู้สนับสนุน:">
+<!ENTITY translators.label "ผู้แปล:">

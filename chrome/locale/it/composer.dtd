@@ -20,8 +20,8 @@
 
 ">
 <!ENTITY accept.label "Aggiungi regola del filtro">
-<!ENTITY advanced.label "Visualizzazione avanzata">
-<!ENTITY basic.label "Visualizzazione di base">
+<!ENTITY advanced.label "Avanzate &gt;&gt;">
+<!ENTITY basic.label "&lt;&lt; Generali">
 <!ENTITY expression.label "Regola del filtro">
 <!ENTITY preview.label "Anteprima">
 <!ENTITY domain.label "Legame con il dominio">

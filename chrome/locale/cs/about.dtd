@@ -1,0 +1,7 @@
+<!ENTITY dialog.title "O Pomocníku skrývání prvků">
+<!ENTITY version.title "Verze">
+<!ENTITY description "Pomocník skrývání prvků je společník Adblocku Plus určený k zjednodušení tvorby pravidel na skrývání prvků. Jednoduše vyberete prvek stránky, který chcete skrýt a následně určíte, podle kterých vlastností bude prvek rozpoznáván v budoucnosti. Pravidlo na skrývání prvku je vytvořeno a přidáno automaticky.">
+<!ENTITY homepage.label "Domovská stránka Pomocníka skrývání prvků:">
+<!ENTITY author.label "Autor:">
+<!ENTITY contributors.label "Spoluautoři:">
+<!ENTITY translators.label "Překladatelé:">
