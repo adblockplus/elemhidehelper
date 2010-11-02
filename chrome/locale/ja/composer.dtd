@@ -1,16 +1,26 @@
-<!ENTITY dialog.title "非表示要素の作成">
-<!ENTITY accept.label "OK">
+<!ENTITY dialog.title "要素の非表示ルール">
+<!ENTITY groupDisabled.warning "
+
+
+	The filter group &quot;?1?&quot; that this filter will be added to is currently disabled.
+
+	You can still add the filter but it will not be applied unless you enable the filter group
+
+	in Adblock Plus preferences.
+
+">
+<!ENTITY accept.label "要素の非表示ルールを追加">
 <!ENTITY advanced.label "詳細表示">
 <!ENTITY basic.label "標準表示">
-<!ENTITY expression.label "フィルタ">
+<!ENTITY expression.label "要素の非表示ルール">
 <!ENTITY preview.label "プレビュー">
-<!ENTITY domain.label "ドメイン">
-<!ENTITY domain.none.label "すべてのドメイン （非推奨）">
+<!ENTITY domain.label "適用するドメイン">
+<!ENTITY domain.none.label "すべてのドメイン (非推奨)">
 <!ENTITY nodes-tree.node.label "ノード">
 <!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "属性">
+<!ENTITY nodes-tree.class.label "クラス">
+<!ENTITY attributes.label "非表示の条件">
 <!ENTITY attributes.tagname.label "タグの名前:">
-<!ENTITY attributes.firstchild.label "最初の子ノード">
-<!ENTITY attributes.lastchild.label "最後の子ノード">
+<!ENTITY attributes.firstchild.label "最初の直下要素">
+<!ENTITY attributes.lastchild.label "最後の直下要素">
 <!ENTITY attributes.custom.label "カスタム CSS:">

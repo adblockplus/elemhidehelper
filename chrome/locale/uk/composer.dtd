@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "Додати правило фільтрування Adblock Plus">
+<!ENTITY groupDisabled.warning "Група фільтрів «?1?», до якої буде додано цей фільтр, наразі вимкнена. Ви все одно можете додати фільтр, але він не буде застосований доки ви не увімкнете цю групу фільтрів у налаштуваннях Adblock Plus.">
 <!ENTITY accept.label "Додати фільтр">
 <!ENTITY advanced.label "Складний вигляд">
 <!ENTITY basic.label "Простий вигляд">

@@ -1,0 +1,7 @@
+<!ENTITY dialog.title "Про Element Hiding Helper">
+<!ENTITY version.title "Версія">
+<!ENTITY description "Element Hiding Helper є допоміжним розширенням до Adblock Plus. Воно допомогає легше створювати правили приховування. Ви просто вказуєте небажаний елемент на сторінці, а потім вибираєте за якими атрибутами такі елементи слід приховувати в майбутньому. Правило приховування створюється та додається автоматично.">
+<!ENTITY homepage.label "Домівка Element Hiding Helper:">
+<!ENTITY author.label "Автор:">
+<!ENTITY contributors.label "Помічники:">
+<!ENTITY translators.label "Перекладачі:">

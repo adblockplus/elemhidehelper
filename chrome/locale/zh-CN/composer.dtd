@@ -1,16 +1,17 @@
 <!ENTITY dialog.title "创建页面元素隐藏规则">
-<!ENTITY accept.label "添加过滤规则">
+<!ENTITY groupDisabled.warning "规则将要添加到的组 &quot;?1?&quot; 当前是禁用的, 你仍可继续添加, 但只有在 Adblock Plus选项中启用后, 规则才会生效.">
+<!ENTITY accept.label "添加规则">
 <!ENTITY advanced.label "高级视图">
 <!ENTITY basic.label "基本视图">
-<!ENTITY expression.label "过滤规则">
+<!ENTITY expression.label "规则">
 <!ENTITY preview.label "预览">
 <!ENTITY domain.label "规则应用到">
-<!ENTITY domain.none.label "任意域名（不推荐）">
+<!ENTITY domain.none.label "任意域名(不推荐)">
 <!ENTITY nodes-tree.node.label "节点">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "命令属性">
-<!ENTITY attributes.tagname.label "标签：">
+<!ENTITY attributes.label "属性">
+<!ENTITY attributes.tagname.label "标签:">
 <!ENTITY attributes.firstchild.label "First child">
 <!ENTITY attributes.lastchild.label "Last child">
-<!ENTITY attributes.custom.label "自定义 CSS：">
+<!ENTITY attributes.custom.label "自定义 CSS:">

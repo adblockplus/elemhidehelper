@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "הלחנת חוק הסתרת אלמנט">
+<!ENTITY groupDisabled.warning "קבוצת הסינון &quot;?1?&quot; שמסנן זה יוסיף מנוטרלת כרגע. ניתן עדיין להוסיף את המסנן אבל הוא לא יוחל אלא אם תאפשר קבוצת הסינון בהעדפות Adblock Plus.">
 <!ENTITY accept.label "הוספת חוק סינון">
 <!ENTITY advanced.label "תצוגה מתקדמת">
 <!ENTITY basic.label "תצוגה בסיסית">
@@ -9,8 +10,8 @@
 <!ENTITY nodes-tree.node.label "צומת">
 <!ENTITY nodes-tree.id.label "זהות">
 <!ENTITY nodes-tree.class.label "מחלקה">
-<!ENTITY attributes.label "דורש ייחוסים">
-<!ENTITY attributes.tagname.label "שם תווית:">
+<!ENTITY attributes.label "דורש תכונות">
+<!ENTITY attributes.tagname.label "שם התווית:">
 <!ENTITY attributes.firstchild.label "ילד ראשון">
 <!ENTITY attributes.lastchild.label "ילד אחרון">
 <!ENTITY attributes.custom.label "CSS מותאם:">
