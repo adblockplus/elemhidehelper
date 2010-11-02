@@ -1,5 +1,5 @@
 <!ENTITY selectelement.label "Изберете елемент за скриване">
-<!ENTITY selectelement.accesskey "И">
+<!ENTITY selectelement.accesskey "е">
 <!ENTITY stopselection.label "Прекъсване на избора на елемент">
-<!ENTITY stopselection.accesskey "С">
+<!ENTITY stopselection.accesskey "е">
 <!ENTITY helpbox.title "Избор на елемент - Горещи клавиши">
