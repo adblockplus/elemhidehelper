@@ -1,5 +1,5 @@
 <!ENTITY selectelement.label "Tria element a amagar">
-<!ENTITY selectelement.accesskey "S">
+<!ENTITY selectelement.accesskey "e">
 <!ENTITY stopselection.label "Avorta selecció d'elements">
-<!ENTITY stopselection.accesskey "S">
+<!ENTITY stopselection.accesskey "e">
 <!ENTITY helpbox.title "Dreceres de teclat en la selecció d'elements">
