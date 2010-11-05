@@ -51,7 +51,7 @@
     </description>
   
     <description id="homepageTitle" value="&homepage.label;"/>
-    <description id="homepage" class="text-link" onclick="Utils.loadInBrowser(this.getAttribute('value'))"/>
+    <description id="homepage" class="text-link" onclick="loadInBrowser(this.getAttribute('value'))"/>
   
     <vbox id="authorsBox" align="top">
       <label id="authorsTitle" control="authors" value="&author.label;"/>
