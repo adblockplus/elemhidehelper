@@ -145,3 +145,26 @@ function setExtensionData(name, version, homepage, authors, contributors, transl
 
   E("mainBox").setAttribute("loaded", "true");
 }
+
+function loadInBrowser(url)
+{
+  let windowMediator = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
+  let enumerator = windowMediator.getZOrderDOMWindowEnumerator(null, true);
+  let abpHooks = null;
+  while (enumerator.hasMoreElements())
+  {
+    let window = enumerator.getNext().QueryInterface(Ci.nsIDOMWindow);
+    abpHooks = window.document.getElementById("abp-hooks");
+    if (abpHooks && abpHooks.addTab)
+      break;
+  }
+
+  if (abpHooks && abpHooks.addTab)
+    abpHooks.addTab(url);
+  else
+  {
+    let protocolService = Cc["@mozilla.org/uriloader/external-protocol-service;1"].getService(Ci.nsIExternalProtocolService);
+    let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
+    protocolService.loadURI(ioService.newURI(url, null, null), null);
+  }
+}
