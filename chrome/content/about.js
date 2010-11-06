@@ -150,13 +150,21 @@ function loadInBrowser(url)
 {
   let windowMediator = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
   let enumerator = windowMediator.getZOrderDOMWindowEnumerator(null, true);
+  if (!enumerator.hasMoreElements())
+  {
+    // On Linux the list returned will be empty, see bug 156333. Fall back to random order.
+    enumerator = windowMediator.getEnumerator(null);
+  }
   let abpHooks = null;
   while (enumerator.hasMoreElements())
   {
     let window = enumerator.getNext().QueryInterface(Ci.nsIDOMWindow);
     abpHooks = window.document.getElementById("abp-hooks");
     if (abpHooks && abpHooks.addTab)
+    {
+      window.focus();
       break;
+    }
   }
 
   if (abpHooks && abpHooks.addTab)
