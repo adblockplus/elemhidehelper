@@ -61,7 +61,7 @@ var AppIntegration =
         let styleService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
         let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
         let url = ioService.newURI("data:text/css," + encodeURIComponent(data), null, null);
-        styleService.loadAndRegisterSheet(url, Ci.nsIStyleSheetService.AGENT_SHEET);
+        styleService.loadAndRegisterSheet(url, Ci.nsIStyleSheetService.USER_SHEET);
       }
       request.send(null);
     }
