@@ -388,10 +388,7 @@ function updateExpression()
 
 function escapeChar(dummy, match)
 {
-  let code = match.charCodeAt(0).toString(16);
-  while (code.length < 6)
-    code = "0" + code;
-  return "\\" + code;
+  return "\\" + match.charCodeAt(0).toString(16) + " ";
 }
 
 function fillDomains(domainData) {
