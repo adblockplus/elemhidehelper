@@ -373,7 +373,7 @@ function updateExpression()
       curData = null;
   }
 
-  stylesheetURL = "data:text/css," + encodeURIComponent(expression + "{display: none !important;}");
+  stylesheetURL = "data:text/css;charset=utf-8," + encodeURIComponent(expression + "{display: none !important;}");
   expression = domainData.selected + "##" + expression;
 
   document.getElementById("expression").value = expression;
