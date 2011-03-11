@@ -1,4 +1,4 @@
-<!ENTITY selectelement.label "숨길 요소 선택 (S)">
+<!ENTITY selectelement.label "숨기려는 요소 선택 (S)">
 <!ENTITY selectelement.accesskey "S">
 <!ENTITY stopselection.label "요소 선택 중지">
 <!ENTITY stopselection.accesskey "S">

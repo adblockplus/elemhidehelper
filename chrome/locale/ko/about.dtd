@@ -1,6 +1,6 @@
 <!ENTITY dialog.title "Element Hiding Helper 정보">
 <!ENTITY version.title "버전">
-<!ENTITY description "Element Hiding Helper(요소 숨김 도우미)로 Adblock Plus의 요소 숨김 필터를 더욱 쉽게 작성할 수 있습니다. 숨기려는 요소를 선택한 후 요소를 규정하는 속성을 선택하십시오. 그러면 요소 숨김 필터가 생성되고, 필터 목록에 자동으로 추가됩니다.">
+<!ENTITY description "요소 숨김 도우미로 애드블록 플러스의 요소 숨김 필터를 더욱 쉽게 작성할 수 있습니다. 숨기려는 요소를 선택한 후 요소를 규정하는 속성을 지정하십시오. 그러면 요소 숨김 필터가 생성되고, 필터 목록에 자동으로 추가됩니다.">
 <!ENTITY homepage.label "Element Hiding Helper 홈페이지">
 <!ENTITY author.label "개발자">
 <!ENTITY contributors.label "공헌자">

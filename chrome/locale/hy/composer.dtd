@@ -1,4 +1,20 @@
 <!ENTITY dialog.title "Ստեղծել տարրի թաքցման կանոն">
+<!ENTITY groupDisabled.warning "
+
+
+
+
+
+
+  Ֆիլտրերի &quot;?1?&quot; խումբը, որին պետք է ավելացվի այս ֆիլտրը այժմ անջատված է:
+
+
+
+  Դուք միևնույն է կարող եք այն ավելացնել, բայց այն կաշխատի միայն խումբը միացնելուց հետո:
+
+
+
+">
 <!ENTITY accept.label "Ավելացնել ֆիլտրման կանոն">
 <!ENTITY advanced.label "Ընդլայնված տեսք">
 <!ENTITY basic.label "Պարզ տեսք">
@@ -6,7 +22,7 @@
 <!ENTITY preview.label "Նախադիտում">
 <!ENTITY domain.label "Դոմեյնից կախված">
 <!ENTITY domain.none.label "Ցանկացած դոմեյն (անցանկալի)">
-<!ENTITY nodes-tree.node.label "Node">
+<!ENTITY nodes-tree.node.label "Տարր">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
 <!ENTITY attributes.label "Պարտադիր ատրիբուտներ">
