@@ -1,4 +1,5 @@
-<!ENTITY dialog.title "Compor elemento escondendo regra">
+<!ENTITY dialog.title "Compose element hiding rule">
+<!ENTITY groupDisabled.warning "O filtro do grupo &quot;?1?&quot; que esse filtro irá adicionar está desabilitado. Você pode adicionar o filtro mas não será possível aplicar se o filtro do grupo não estiver habilitado nas preferências do Adblock Plus.">
 <!ENTITY accept.label "Adicionar regra de filtro">
 <!ENTITY advanced.label "Visualização avançada">
 <!ENTITY basic.label "Visualização Básica">
