@@ -202,17 +202,21 @@ function init() {
       selectedDomain = "";
       break;
     case 1:
-    {
-      let effectiveTLD = Cc["@mozilla.org/network/effective-tld-service;1"].getService(Ci.nsIEffectiveTLDService);
-      selectedDomain = effectiveTLD.getPublicSuffixFromHost(domain);
-      break;
-    }
+      try
+      {
+        // EffectiveTLDService will throw for IP addresses, just go to the next case then
+        let effectiveTLD = Cc["@mozilla.org/network/effective-tld-service;1"].getService(Ci.nsIEffectiveTLDService);
+        selectedDomain = effectiveTLD.getPublicSuffixFromHost(domain);
+        break;
+      } catch (e) {}
     case 2:
-    {
-      let effectiveTLD = Cc["@mozilla.org/network/effective-tld-service;1"].getService(Ci.nsIEffectiveTLDService);
-      selectedDomain = effectiveTLD.getBaseDomainFromHost(domain);
-      break;
-    }
+      try
+      {
+        // EffectiveTLDService will throw for IP addresses, just go to the next case then
+        let effectiveTLD = Cc["@mozilla.org/network/effective-tld-service;1"].getService(Ci.nsIEffectiveTLDService);
+        selectedDomain = effectiveTLD.getBaseDomainFromHost(domain);
+        break;
+      } catch (e) {}
     case 3:
       selectedDomain = domain.replace(/^www\./, "");
       break;
