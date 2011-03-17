@@ -172,25 +172,28 @@ function init() {
 
   nodeData = new NodeData(element);
   nodeData.tagName.checked = true;
-  if (nodeData.attributes.length > 0) {
-    if (nodeData.attributes[0].name == "id" || nodeData.attributes[0].name == "class") {
-      nodeData.attributes[0].selected = nodeData.attributes[0].value;
-      nodeData.attributes[0].checked = true;
-      nodeData.tagName.checked = false;
+  if (nodeData.attributes.length > 0)
+  {
+    let maxLen = 0;
+    let bestAttr = null;
+    for (let i = 0; i < nodeData.attributes.length; i++)
+    {
+      let len = nodeData.attributes[i].value.length;
+      if ((nodeData.attributes[i].name == "id" || nodeData.attributes[i].name == "class") && len)
+      {
+        len = 0x7FFFFFFF;
+        nodeData.tagName.checked = false;
+      }
+      if (len > maxLen)
+      {
+        maxLen = len;
+        bestAttr = nodeData.attributes[i];
+      }
     }
-    else {
-      var maxLen = 0;
-      var bestAttr = null;
-      for (var i = 0; i < nodeData.attributes.length; i++) {
-        if (nodeData.attributes[i].value.length > maxLen) {
-          maxLen = nodeData.attributes[i].value.length;
-          bestAttr = nodeData.attributes[i];
-        }
-      }
-      if (bestAttr) {
-        bestAttr.selected = bestAttr.value;
-        bestAttr.checked = true;
-      }
+    if (bestAttr)
+    {
+      bestAttr.selected = bestAttr.value;
+      bestAttr.checked = true;
     }
   }
 
