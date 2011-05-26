@@ -19,7 +19,7 @@ fr=http://adblockplus.org/fr/elemhidehelper
 ko=http://adblockplus.org/ko/elemhidehelper
 
 [compat]
-firefox=3.5/6.0a2
+firefox=3.5/7.0a1
 seamonkey=2.0/2.2a1pre
 thunderbird=3.0/3.3a4pre
 songbird=1.9.0a/1.11.0a
