@@ -54,7 +54,7 @@
     <label control="expression" value="&expression.label;"/>
     <hbox>
       <textbox id="expression" flex="1" readonly="true"/>
-      <checkbox id="preview" label="&preview.label;" oncommand="togglePreview(this.checked)" persist="checked"/>
+      <checkbox id="preview" label="&preview.label;" checked="true" oncommand="togglePreview(this.checked)" persist="checked"/>
     </hbox>
   </vbox>
 
