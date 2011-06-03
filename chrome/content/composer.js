@@ -273,7 +273,7 @@ function updateExpression()
   
           let useFallback = false;
           if (attr.name == "id" && op == "=")
-            expression += "#" + escapeName(attr.selected).replace(/^([^a-zA-Z\\])/, escapeChar);
+            expression += "#" + escapeName(attr.selected).replace(/^([^a-zA-Z\\])/, escapeChar).replace(/\\(\s)$/, escapeChar);
           else if (attr.name == "class" && /\S/.test(attr.selected))
           {
             let knownClasses = {};
