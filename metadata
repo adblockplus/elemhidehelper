@@ -2,7 +2,7 @@
 id=elemhidehelper@adblockplus.org
 basename=elemhidehelper
 branchname=ELEMENT_HIDING_HELPER
-version=1.1.2a
+version=1.1.2
 author=Wladimir Palant
 icon=chrome://elemhidehelper-icon/skin/icon.png
 about=chrome://elemhidehelper/content/about.xul
