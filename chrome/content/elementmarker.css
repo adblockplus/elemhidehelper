@@ -36,7 +36,7 @@
   clear: none !important;
   right: auto !important;
   bottom: auto !important;
-  z-index: 65535 !important;
+  z-index: 2147483647 !important;
 
   background: transparent !important;
   border: none !important;
