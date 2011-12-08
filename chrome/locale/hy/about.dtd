@@ -1,26 +1,10 @@
 <!ENTITY dialog.title "About Element Hiding Helper">
 <!ENTITY version.title "Տարբերակ">
 <!ENTITY description "
-
-
-
-
 Element Hiding Helper-ը հավելյալ ընդլայնում է Adblock Plus-ի համար,
-
-
-
 որը թույլ է տալիս հեշտ ստեղծել տարրերի թաքցնելու կանոնները: Պարզապես ընտրեք տարրը, որը ցանկանում եք
-
-
-
 թաքցնել եւ ընրեք հատկանիշները որպես թաքցման պայման հաշվի առնելու համար:
-
-
-
 Տարրի թաքցման կանոնը գեներացվում է ավտոմատ:
-
-
-
 ">
 <!ENTITY homepage.label "Element Hiding Helper կայք՝">
 <!ENTITY author.label "Հեղինակ:">

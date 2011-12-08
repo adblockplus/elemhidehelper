@@ -14,4 +14,4 @@
 <!ENTITY attributes.tagname.label "태그 이름 :">
 <!ENTITY attributes.firstchild.label "첫 번째 자식">
 <!ENTITY attributes.lastchild.label "마지막 자식">
-<!ENTITY attributes.custom.label "사용자 정의 CSS">
+<!ENTITY attributes.custom.label "사용자 지정 CSS">
