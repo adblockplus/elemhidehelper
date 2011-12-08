@@ -1,4 +1,5 @@
 <!ENTITY dialog.title "Öğe gizleme kuralı yaz">
+<!ENTITY groupDisabled.warning "Bu süzgecin ekleneceğin &quot;?1?&quot; süzgeç grubu şu an devre dışı. Yine de süzgeci ekleyebilirsiniz, ancak Adblock Plus tercihlerinden bu süzgeç grubunu etkinleştirmedikçe uygulanmayacak.">
 <!ENTITY accept.label "Süzme kuralı ekle">
 <!ENTITY advanced.label "Gelişmiş görünüm">
 <!ENTITY basic.label "Temel görünüm">

@@ -1,5 +1,5 @@
-<!ENTITY selectelement.label "Pasirinkti norimą paslėpti elementą">
-<!ENTITY selectelement.accesskey "S">
+<!ENTITY selectelement.label "Pasirinkite elementą kurį norite slėpti">
+<!ENTITY selectelement.accesskey "s">
 <!ENTITY stopselection.label "Atsisakyti elemento pasirinkimo">
-<!ENTITY stopselection.accesskey "S">
-<!ENTITY helpbox.title "Elemento pasirinkimas - spartieji klavišai">
+<!ENTITY stopselection.accesskey "s">
+<!ENTITY helpbox.title "Elemento pasirinkimo spartieji klavišai">
