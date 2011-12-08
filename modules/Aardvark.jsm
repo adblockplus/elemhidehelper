@@ -79,7 +79,7 @@ var Aardvark =
     this.browser.contentWindow.focus();
   
     let doc = this.browser.contentDocument;
-    this.boxElem = doc.importNode(E("ehh-elementmarker").firstChild.cloneNode(true));
+    this.boxElem = doc.importNode(E("ehh-elementmarker").firstChild.cloneNode(true), true);
   
     this.initHelpBox();
   
