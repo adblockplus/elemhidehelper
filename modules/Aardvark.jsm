@@ -79,8 +79,7 @@ var Aardvark =
     this.browser.contentWindow.focus();
   
     let doc = this.browser.contentDocument;
-    if (!this.boxElem)
-      this.boxElem = E("ehh-elementmarker").firstChild;
+    this.boxElem = doc.importNode(E("ehh-elementmarker").firstChild.cloneNode(true));
   
     this.initHelpBox();
   
@@ -388,8 +387,6 @@ var Aardvark =
     else
       label.className = "label onTop";
     
-    if (this.boxElem.ownerDocument != doc)
-      this.boxElem = doc.importNode(this.boxElem, true);
     doc.documentElement.appendChild(this.boxElem);
 
     this.paintNode = doc.defaultView;
@@ -575,13 +572,14 @@ var Aardvark =
     this.browser.removeEventListener("keypress", this.onKeyPress, true);
     this.browser.removeEventListener("mousemove", this.onMouseMove, true);
     this.browser.contentWindow.removeEventListener("pagehide", this.onPageHide, true);
-  
+
     this.anchorElem = null;
     this.selectedElem = null;
     this.window = null;
     this.browser = null;
     this.commentElem = null;
     this.lockedAnchor = null;
+    this.boxElem = null;
     E = function(id) null;
     return false;
   },
