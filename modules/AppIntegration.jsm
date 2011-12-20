@@ -269,7 +269,7 @@ WindowWrapper.prototype =
   fillPopup: function(event)
   {
     // Submenu being opened - ignore
-    if (!/^(abp-(?:toolbar|status)-)popup$/.test(event.target.getAttribute("id")))
+    if (!/^(abp-(?:toolbar|status|menuitem)-)popup$/.test(event.target.getAttribute("id")))
       return;
     let prefix = RegExp.$1;
   
@@ -303,6 +303,7 @@ WindowWrapper.prototype =
 WindowWrapper.prototype.eventHandlers = [
   ["abp-status-popup", "popupshowing", WindowWrapper.prototype.fillPopup],
   ["abp-toolbar-popup", "popupshowing", WindowWrapper.prototype.fillPopup],
+  ["abp-menuitem-popup", "popupshowing", WindowWrapper.prototype.fillPopup],
   ["ehh-command-selectelement", "command", WindowWrapper.prototype.toggleSelection],
   ["ehh-command-selectelement2", "command", WindowWrapper.prototype.toggleSelection],
 ];
