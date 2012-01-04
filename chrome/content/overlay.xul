@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://elemhidehelper/skin/overlay.css" type="text/css"?>
 
 <!-- ***** BEGIN LICENSE BLOCK *****
    - Version: MPL 1.1
@@ -25,14 +24,14 @@
    -
    - ***** END LICENSE BLOCK ***** -->
 
+<?xml-stylesheet href="chrome://elemhidehelper/skin/overlay.css" type="text/css"?>
+
 <!DOCTYPE overlay SYSTEM "chrome://elemhidehelper/locale/overlay.dtd">
 
 <overlay id="ehh-overlay"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     xmlns:html="http://www.w3.org/1999/xhtml">
-  <script type="application/x-javascript" src="overlay.js"/>  
-  
-  <popupset id="abp-popupset">
+  <popupset id="ehh-popupset">
     <tooltip id="ehh-helpbox" noautohide="true" orient="vertical">
       <description id="ehh-helpbox-title" value="&helpbox.title;"/>
 
@@ -59,15 +58,4 @@
       </html:div>
     </tooltip>
   </popupset>
-
-  <popup id="abp-status-popup">
-    <menuitem id="abp-status-ehh-selectelement" hidden="true" insertbefore="abp-status-options" label="&selectelement.label;" accesskey="&selectelement.accesskey;" command="ehh-command-selectelement2" key="ehh-key-selectelement"/>
-    <menuitem id="abp-status-ehh-stopselection" hidden="true" insertbefore="abp-status-options" label="&stopselection.label;" accesskey="&stopselection.accesskey;" command="ehh-command-selectelement2" key="ehh-key-selectelement"/>
-  </popup>
-
-  <commandset id="abp-commandset">
-    <command id="ehh-command-selectelement" oncommand="//"/>
-    <!-- Use separate command for menu item, disabling menu item should not disable hotkey -->
-    <command id="ehh-command-selectelement2" oncommand="//"/>
-  </commandset>
 </overlay>

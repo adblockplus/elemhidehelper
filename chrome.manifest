@@ -1,13 +1,4 @@
-overlay   chrome://adblockplus/content/ui/overlayGeneral.xul chrome://elemhidehelper/content/overlay.xul
-content   elemhidehelper jar:chrome/elemhidehelper.jar!/content/
-skin      elemhidehelper classic/1.0 jar:chrome/elemhidehelper.jar!/skin/
-locale    elemhidehelper {{LOCALE}} jar:chrome/elemhidehelper.jar!/locale/{{LOCALE}}/
+content   elemhidehelper chrome/content/
+skin      elemhidehelper classic/1.0 chrome/skin/
+locale    elemhidehelper {{LOCALE}} chrome/locale/{{LOCALE}}/
 content   elemhidehelper-modules modules/
-
-# Component registration
-component {2d53b96c-1dd2-11b2-94ad-dedbdb99852f} components/Initializer.js
-contract @adblockplus.org/ehh/startup;1 {2d53b96c-1dd2-11b2-94ad-dedbdb99852f}
-category profile-after-change @adblockplus.org/ehh/startup;1 @adblockplus.org/ehh/startup;1
-
-# Hack to allow the icon to be accessed via chrome URL
-skin      elemhidehelper-icon classic/1.0 ./

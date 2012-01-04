@@ -30,8 +30,7 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
-let baseURI = Cc["@adblockplus.org/ehh/startup;1"].getService(Ci.nsIURI);
-Cu.import(baseURI.spec + "Prefs.jsm");
+Cu.import("chrome://elemhidehelper-modules/content/Prefs.jsm");
 
 // To be replaced when selection starts
 function E(id) {return null;}
@@ -79,7 +78,7 @@ var Aardvark =
     this.browser.contentWindow.focus();
   
     let doc = this.browser.contentDocument;
-    this.boxElem = doc.importNode(E("ehh-elementmarker").firstChild.cloneNode(true), true);
+    this.boxElem = doc.importNode(E("ehh-elementmarker").firstElementChild.cloneNode(true), true);
   
     this.initHelpBox();
   
@@ -155,7 +154,7 @@ var Aardvark =
   initHelpBox: function()
   {
     var helpBoxRows = E("ehh-helpbox-rows");
-    if (helpBoxRows.firstChild)
+    if (helpBoxRows.firstElementChild)
       return;
   
     // Help box hasn't been filled yet, need to do it now
@@ -641,8 +640,8 @@ var Aardvark =
     }
     sourceBox.hidePopup();
   
-    while (sourceBox.firstChild)
-      sourceBox.removeChild(sourceBox.firstChild);
+    while (sourceBox.firstElementChild)
+      sourceBox.removeChild(sourceBox.firstElementChild);
     this.getOuterHtmlFormatted(elem, sourceBox);
     this.commentElem = elem;
   
@@ -683,8 +682,8 @@ var Aardvark =
   
         var startTag = this.window.document.createElement("hbox");
         startTag.className = "elementStartTag";
-        if (!node.firstChild)
-          startTag.className += "elementEndTag";
+        if (!node.firstElementChild)
+          startTag.className += " elementEndTag";
   
         this.appendDescription(startTag, "<", null);
         this.appendDescription(startTag, node.tagName, "tagName");
@@ -700,12 +699,12 @@ var Aardvark =
           }
         }
   
-        this.appendDescription(startTag, node.firstChild ? ">" : " />", null);
+        this.appendDescription(startTag, node.firstElementChild ? ">" : " />", null);
         box.appendChild(startTag);
   
-        if (node.firstChild)
+        if (node.firstElementChild)
         {
-          for (var child = node.firstChild; child; child = child.nextSibling)
+          for (var child = node.firstElementChild; child; child = child.nextElementSibling)
             this.getOuterHtmlFormatted(child, box);
   
           var endTag = this.window.document.createElement("hbox");

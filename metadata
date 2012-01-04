@@ -2,10 +2,11 @@
 id=elemhidehelper@adblockplus.org
 basename=elemhidehelper
 branchname=ELEMENT_HIDING_HELPER
-version=1.1.5a
+version=1.2a
 author=Wladimir Palant
-icon=chrome://elemhidehelper-icon/skin/icon.png
 about=chrome://elemhidehelper/content/about.xul
+restartless=true
+nojar=true
 
 [contributors]
 1=Rob Brown
@@ -19,8 +20,8 @@ fr=http://adblockplus.org/fr/elemhidehelper
 ko=http://adblockplus.org/ko/elemhidehelper
 
 [compat]
-firefox=3.6.13/12.0a1
-thunderbird=3.1.7/12.0a1
-seamonkey=2.1/2.9a1
+firefox=8.0/12.0a1
+thunderbird=8.0/12.0a1
+seamonkey=2.5/2.9a1
 #songbird=1.9.0a/1.11.0a
 conkeror=0.1/100.0

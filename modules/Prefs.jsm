@@ -29,12 +29,12 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
+Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
 const prefRoot = "extensions.elemhidehelper.";
 
-let prefService = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
-let branch = prefService.getBranch(prefRoot);
+let branch = Services.prefs.getBranch(prefRoot);
 
 var Prefs =
 {
@@ -42,9 +42,11 @@ var Prefs =
 
   startup: function()
   {
+    if (this.initialized)
+      return;
     this.initialized = true;
 
-    let defaultBranch = prefService.getDefaultBranch(prefRoot);
+    let defaultBranch = Services.prefs.getDefaultBranch(prefRoot);
     for each (let name in defaultBranch.getChildList("", {}))
     {
       let type = defaultBranch.getPrefType(name);
@@ -75,7 +77,7 @@ var Prefs =
     }
 
     // Preferences used to be stored in Adblock Plus branch, import
-    let importBranch = prefService.getBranch("extensions.adblockplus.");
+    let importBranch = Services.prefs.getBranch("extensions.adblockplus.");
     if (importBranch.prefHasUserValue("ehh-selectelement_key") && importBranch.getPrefType("ehh-selectelement_key") == Ci.nsIPrefBranch.PREF_STRING)
     {
       Prefs.selectelement_key = importBranch.getCharPref("ehh-selectelement_key");
@@ -85,6 +87,23 @@ var Prefs =
     {
       Prefs.showhelp = importBranch.getBoolPref("ehh.showhelp");
       importBranch.clearUserPref("ehh.showhelp");
+    }
+  },
+
+  shutdown: function()
+  {
+    if (!this.initialized)
+      return;
+    this.initialized = false;
+
+    try
+    {
+      branch.QueryInterface(Ci.nsIPrefBranch2)
+            .removeObserver("", PrefsPrivate);
+    }
+    catch (e)
+    {
+      Cu.reportError(e);
     }
   }
 };
