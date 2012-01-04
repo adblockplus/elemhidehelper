@@ -74,6 +74,11 @@
   -moz-border-radius: 4px;
 }
 
+#ehh-viewsource
+{
+  max-width: none;
+}
+
 #ehh-viewsource description,
 #ehh-viewsource hbox,
 #ehh-viewsource vbox
