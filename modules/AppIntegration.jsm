@@ -144,7 +144,7 @@ var WindowObserver =
         window.document.documentElement.appendChild(window.document.importNode(this.overlay[id], true));
     for (let i = 0; i < this.overlay._processing.length; i++)
     {
-      let node = window.document.importNode(this.overlay._processing[i]);
+      let node = window.document.importNode(this.overlay._processing[i], true);
       node.data += ' class="elemhidehelper-node"';
       window.document.insertBefore(node, window.document.firstChild);
     }
