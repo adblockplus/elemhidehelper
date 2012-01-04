@@ -36,8 +36,7 @@ var stylesheetURL;
 var previewStyle = null;
 var doc;
 
-let baseURI = Cc["@adblockplus.org/ehh/startup;1"].getService(Ci.nsIURI);
-Cu.import(baseURI.spec + "Prefs.jsm");
+Cu.import("chrome://elemhidehelper-modules/content/Prefs.jsm");
 
 let abpURL = Cc["@adblockplus.org/abp/public;1"].getService(Ci.nsIURI);
 Cu.import(abpURL.spec);

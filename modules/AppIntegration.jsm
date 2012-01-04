@@ -29,16 +29,25 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
-let baseURI = Cc["@adblockplus.org/ehh/startup;1"].getService(Ci.nsIURI);
-Cu.import(baseURI.spec + "Aardvark.jsm");
-Cu.import(baseURI.spec + "Prefs.jsm");
+Cu.import("resource://gre/modules/Services.jsm");
+Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
 var AppIntegration =
 {
+  initialized: false,
   elementMarkerClass: null,
+  styleURI: null,
 
   startup: function()
   {
+    if (this.initialized)
+      return;
+    this.initialized = true;
+
+    Cu.import("chrome://elemhidehelper-modules/content/Aardvark.jsm");
+    Cu.import("chrome://elemhidehelper-modules/content/Prefs.jsm");
+    Prefs.startup();
+
     // Use random marker class
     let rnd = [];
     let offset = "a".charCodeAt(0);
@@ -48,60 +57,212 @@ var AppIntegration =
     this.elementMarkerClass = String.fromCharCode.apply(String, rnd);
 
     // Load CSS asynchronously
-    try
+    let request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIJSXMLHttpRequest);
+    request.open("GET", "chrome://elemhidehelper/content/elementmarker.css");
+    request.overrideMimeType("text/plain");
+    request.addEventListener("load", function()
     {
-      let request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIJSXMLHttpRequest);
-      request.open("GET", "chrome://elemhidehelper/content/elementmarker.css");
-      request.overrideMimeType("text/plain");
+      if (!this.initialized)
+        return;
 
-      let me = this;
-      request.onload = function()
-      {
-        let data = request.responseText.replace(/%%CLASS%%/g, me.elementMarkerClass);
-        let styleService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
-        let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
-        let url = ioService.newURI("data:text/css," + encodeURIComponent(data), null, null);
-        styleService.loadAndRegisterSheet(url, Ci.nsIStyleSheetService.USER_SHEET);
-      }
-      request.send(null);
-    }
-    catch (e)
+      let data = request.responseText.replace(/%%CLASS%%/g, this.elementMarkerClass);
+      let styleService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+      this.styleURI = Services.io.newURI("data:text/css," + encodeURIComponent(data), null, null);
+      styleService.loadAndRegisterSheet(this.styleURI, Ci.nsIStyleSheetService.USER_SHEET);
+    }.bind(this), false);
+    request.send(null);
+
+    // Load overlay asynchonously and start attaching to windows once done
+    let request2 = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIJSXMLHttpRequest);
+    request2.open("GET", "chrome://elemhidehelper/content/overlay.xul");
+    request2.addEventListener("load", function()
     {
-      Cu.reportError(e);
+      if (!this.initialized)
+        return;
+
+      WindowObserver.overlay = {__proto__: null, "_processing": []};
+      for (let child = request2.responseXML.documentElement.firstElementChild; child; child = child.nextElementSibling)
+        if (child.hasAttribute("id"))
+          WindowObserver.overlay[child.getAttribute("id")] = child;
+      for (let child = request2.responseXML.firstChild; child; child = child.nextSibling)
+        if (child.nodeType == child.PROCESSING_INSTRUCTION_NODE)
+          WindowObserver.overlay._processing.push(child);
+      WindowObserver.startup();
+    }.bind(this), false);
+    request2.send(null);
+  },
+
+  shutdown: function()
+  {
+    if (!this.initialized)
+      return;
+    this.initialized = false;
+
+    if (this.styleURI)
+    {
+      let styleService = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
+      styleService.unregisterSheet(this.styleURI, Ci.nsIStyleSheetService.USER_SHEET);
+      this.styleURI = null;
+    }
+
+    Prefs.shutdown();
+    Aardvark.quit();
+    WindowObserver.shutdown();
+
+    Cu.unload("chrome://elemhidehelper-modules/content/Aardvark.jsm");
+    Cu.unload("chrome://elemhidehelper-modules/content/Prefs.jsm");
+  }
+};
+
+var WindowObserver =
+{
+  initialized: false,
+
+  overlay: null,
+
+  startup: function()
+  {
+    if (this.initialized)
+      return;
+    this.initialized = true;
+
+    let e = Services.ww.getWindowEnumerator();
+    while (e.hasMoreElements())
+    {
+      let window = e.getNext().QueryInterface(Ci.nsIDOMWindow);
+      if (window.document.readyState == "complete")
+        this.applyToWindow(window);
+      else
+        this.observe(window, "domwindowopened", null);
+    }
+
+    Services.ww.registerNotification(this);
+  },
+
+  shutdown: function()
+  {
+    if (!this.initialized)
+      return;
+    this.initialized = false;
+
+    let e = Services.ww.getWindowEnumerator();
+    while (e.hasMoreElements())
+      this.removeFromWindow(e.getNext().QueryInterface(Ci.nsIDOMWindow));
+
+    Services.ww.unregisterNotification(this);
+  },
+
+  applyToWindow: function(window)
+  {
+    if (!window.document.getElementById("abp-hooks"))
+      return;
+
+    for (let id in this.overlay)
+      if (id != "_processing")
+        window.document.documentElement.appendChild(window.document.importNode(this.overlay[id], true));
+    for (let i = 0; i < this.overlay._processing.length; i++)
+    {
+      let node = window.document.importNode(this.overlay._processing[i]);
+      node.data += ' class="elemhidehelper-node"';
+      window.document.insertBefore(node, window.document.firstChild);
+    }
+
+    window._ehhWrapper = new WindowWrapper(window);
+  },
+
+  removeFromWindow: function(window)
+  {
+    if (!window._ehhWrapper)
+      return;
+
+    window._ehhWrapper.shutdown();
+    delete window._ehhWrapper;
+
+    let remove = [];
+    for (let id in this.overlay)
+    {
+      if (id != "_processing")
+      {
+        let element = window.document.getElementById(id);
+        if (element)
+          remove.push(element);
+      }
+    }
+
+    for (let child = window.document.firstChild; child; child = child.nextSibling)
+      if (child.nodeType == child.PROCESSING_INSTRUCTION_NODE && child.data.indexOf("elemhidehelper-node") >= 0)
+        remove.push(child);
+
+    for (let i = 0; i < remove.length; i++)
+      remove[i].parentNode.removeChild(remove[i]);
+  },
+
+  get menuItem()
+  {
+    let stringBundle = Services.strings.createBundle("chrome://elemhidehelper/locale/global.properties");
+    let result = [stringBundle.GetStringFromName("selectelement.label"), stringBundle.GetStringFromName("stopselection.label")];
+
+    delete this.menuItem;
+    this.__defineGetter__("menuItem", function() result);
+    return this.menuItem;
+  },
+
+  observe: function(subject, topic, data)
+  {
+    if (topic == "domwindowopened")
+    {
+      let window = subject.QueryInterface(Ci.nsIDOMWindow);
+      window.addEventListener("load", function()
+      {
+        window.setTimeout(function()
+        {
+          if (this.initialized)
+            this.applyToWindow(window);
+        }.bind(this), 0);
+      }.bind(this), false);
     }
   },
 
-  addWindow: function(wnd)
-  {
-    new WindowWrapper(wnd);
-  }
+  QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
 };
 
 function WindowWrapper(wnd)
 {
   this.window = wnd;
+  this.browser = this.E("abp-hooks").getBrowser();
 
-  this.E("ehh-elementmarker").firstChild.className = AppIntegration.elementMarkerClass;
+  this.popupShowingHandler = this.popupShowingHandler.bind(this);
+  this.popupHidingHandler = this.popupHidingHandler.bind(this);
+  this.keyPressHandler = this.keyPressHandler.bind(this);
+  this.toggleSelection = this.toggleSelection.bind(this);
+  this.hideTooltips = this.hideTooltips.bind(this);
+  this.stopSelection = this.stopSelection.bind(this);
 
-  this.registerEventListeners();
-  this.configureKeys();
+  this.E("ehh-elementmarker").firstElementChild.setAttribute("class", AppIntegration.elementMarkerClass);
+
+  this.startup();
 }
 WindowWrapper.prototype =
 {
   window: null,
+  browser: null,
 
-  _bindMethod: function(method)
+  startup: function()
   {
-    let me = this;
-    return function() method.apply(me, arguments);
+    this.window.addEventListener("popupshowing", this.popupShowingHandler, false);
+    this.window.addEventListener("popuphiding", this.popupHidingHandler, false);
+    this.window.addEventListener("keypress", this.keyPressHandler, false);
+    this.window.addEventListener("blur", this.hideTooltips, true);
+    this.browser.addEventListener("select", this.stopSelection, false);
   },
 
-  get browser()
+  shutdown: function()
   {
-    let hooks = this.E("abp-hooks");
-    let browser = (hooks ? hooks.getBrowser() : null);
-    this.__defineGetter__("browser", function() browser);
-    return this.browser;
+    this.window.removeEventListener("popupshowing", this.popupShowingHandler, false);
+    this.window.removeEventListener("popuphiding", this.popupHidingHandler, false);
+    this.window.removeEventListener("keypress", this.keyPressHandler, false);
+    this.window.removeEventListener("blur", this.hideTooltips, true);
+    this.browser.removeEventListener("select", this.stopSelection, false);
   },
 
   E: function(id)
@@ -111,174 +272,82 @@ WindowWrapper.prototype =
     return this.E(id);
   },
 
-  registerEventListeners: function()
+  key: undefined,
+
+  popupShowingHandler: function(event)
   {
-    for each (let [id, event, handler] in this.eventHandlers)
-    {
-      handler = this._bindMethod(handler);
-
-      let element = this.E(id);
-      if (element)
-        element.addEventListener(event, handler, false);
-    }
-
-    this.window.addEventListener("blur", this._bindMethod(this.hideTooltips), true);
-    this.browser.addEventListener("select", this._bindMethod(this.stopSelection), false);
-  },
-
-  configureKeys: function()
-  {
-    let validModifiers =
-    {
-      accel: "accel",
-      ctrl: "control",
-      control: "control",
-      shift: "shift",
-      alt: "alt",
-      meta: "meta",
-      __proto__: null
-    };
-
-    try
-    {
-      let accelKey = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch).getIntPref("ui.key.accelKey");
-      if (accelKey == Ci.nsIDOMKeyEvent.DOM_VK_CONTROL)
-        validModifiers.ctrl = validModifiers.control = "accel";
-      else if (accelKey == Ci.nsIDOMKeyEvent.DOM_VK_ALT)
-        validModifiers.alt = "accel";
-      else if (accelKey == Ci.nsIDOMKeyEvent.DOM_VK_META)
-        validModifiers.meta = "accel";
-    }
-    catch(e)
-    {
-      Cu.reportError(e);
-    }
-
-    // Find which hotkeys are already taken, convert them to canonical form
-    let existing = {};
-    let keys = this.window.document.getElementsByTagName("key");
-    for (let i = 0; i < keys.length; i++)
-    {
-      let key = keys[i];
-      let keyChar = key.getAttribute("key");
-      let keyCode = key.getAttribute("keycode");
-      if (!keyChar && !keyCode)
-        continue;
-
-      let modifiers = [];
-      let seenModifier = {__proto__: null};
-      let keyModifiers = key.getAttribute("modifiers");
-      if (keyModifiers)
-      {
-        for each (let modifier in keyModifiers.match(/\w+/g))
-        {
-          modifier = modifier.toLowerCase();
-          if (!(modifier in validModifiers))
-            continue;
-
-          modifier = validModifiers[modifier];
-          if (modifier in seenModifier)
-            continue;
-
-          seenModifier[modifier] = true;
-          modifiers.push(modifier);
-        }
-        modifiers.sort();
-
-        let canonical = modifiers.concat([(keyChar || keyCode).toUpperCase()]).join(" ");
-        existing[canonical] = true;
-      }
-    }
-
-    // Define our keys
-    for (let pref in Prefs)
-    {
-      if (/_key$/.test(pref) && typeof Prefs[pref] == "string")
-      {
-        try
-        {
-          this.configureKey(RegExp.leftContext, Prefs[pref], validModifiers, existing);
-        }
-        catch (e)
-        {
-          Cu.reportError(e);
-        }
-      }
-    }
-  },
-
-  configureKey: function(id, value, validModifiers, existing)
-  {
-    let command = this.E("ehh-command-" + id);
-    if (!command)
+    let popup = event.target;
+    if (!/^(abp-(?:toolbar|status|menuitem)-)popup$/.test(popup.id))
       return;
 
-    for each (let variant in value.split(/\s*,\s*/))
-    {
-      if (!variant)
-        continue;
+    let enabled = Aardvark.canSelect(this.browser);
+    let running = (enabled && this.browser == Aardvark.browser);
 
-      let modifiers = [];
-      let seenModifier = {__proto__: null};
-      let keychar = null;
-      let keycode = null;
-      for each (let part in variant.split(/\s+/))
-      {
-        if (part.toLowerCase() in validModifiers)
-        {
-          if (part in seenModifier)
-            continue;
-  
-          seenModifier[part] = true;
-          modifiers.push(validModifiers[part.toLowerCase()]);
-        }
-        else if (part.length == 1)
-          keychar = part.toUpperCase();
-        else if ("DOM_VK_" + part.toUpperCase() in Ci.nsIDOMKeyEvent)
-          keycode = "VK_" + part.toUpperCase();
-      }
-    
-      if (!keychar && !keycode)
-        continue;
+    let [labelStart, labelStop] = WindowObserver.menuItem;
+    let item = popup.ownerDocument.createElement("menuitem");
+    item.setAttribute("label", running ? labelStop : labelStart);
+    item.setAttribute("class", "elemhidehelper-item");
+    if (!enabled)
+      item.setAttribute("disabled", "true");
 
-      modifiers.sort();
-      let canonical = modifiers.concat([keychar || keycode]).join(" ");
-      if (canonical in existing)
-        continue;
+    if (typeof this.key == "undefined")
+      this.configureKey(event.currentTarget);
+    if (this.key && this.key.text)
+      item.setAttribute("acceltext", this.key.text);
 
-      let element = this.window.document.createElement("key");
-      element.setAttribute("id", "ehh-key-" + id);
-      element.setAttribute("command", "ehh-command-" + id);
-      if (keychar)
-        element.setAttribute("key", keychar);
-      else
-        element.setAttribute("keycode", keycode);
-      element.setAttribute("modifiers", modifiers.join(","));
-  
-      this.E("abp-keyset").appendChild(element);
+    item.addEventListener("command", this.toggleSelection, false);
+
+    let insertBefore = null;
+    for (let child = popup.firstChild; child; child = child.nextSibling)
+      if (/-options$/.test(child.id))
+        insertBefore = child;
+    popup.insertBefore(item, insertBefore);
+  },
+
+  popupHidingHandler: function(event)
+  {
+    let popup = event.target;
+    if (!/^(abp-(?:toolbar|status|menuitem)-)popup$/.test(popup.id))
       return;
-    }
+
+    let items = popup.getElementsByClassName("elemhidehelper-item");
+    if (items.length)
+      items[0].parentNode.removeChild(items[0]);
+  },
+
+  keyPressHandler: function(event)
+  {
+    if (typeof this.key == "undefined")
+      this.configureKey(event.currentTarget);
+
+    if (event.defaultPrevented || !this.key)
+      return;
+    if (this.key.shift != event.shiftKey || this.key.alt != event.altKey)
+      return;
+    if (this.key.meta != event.metaKey || this.key.control != event.ctrlKey)
+      return;
+
+    if (this.key.char && (!event.charCode || String.fromCharCode(event.charCode).toUpperCase() != this.key.char))
+      return;
+    else if (this.key.code && (!event.keyCode || event.keyCode != this.key.code))
+      return;
+
+    event.preventDefault();
+    this.toggleSelection();
+  },
+
+  configureKey: function(window)
+  {
+    let variants = Prefs.selectelement_key;
+    let scope = {};
+    Services.scriptloader.loadSubScript("chrome://elemhidehelper/content/keySelector.js", scope);
+    this.key = scope.selectKey(window, variants);
   },
 
   hideTooltips: function()
   {
     if (Aardvark.window == this.window)
       Aardvark.hideTooltips();
-  },
-
-  fillPopup: function(event)
-  {
-    // Submenu being opened - ignore
-    if (!/^(abp-(?:toolbar|status|menuitem)-)popup$/.test(event.target.getAttribute("id")))
-      return;
-    let prefix = RegExp.$1;
-  
-    let enabled = Aardvark.canSelect(this.browser);
-    let running = (enabled && this.browser == Aardvark.browser);
-  
-    this.E("ehh-command-selectelement2").setAttribute("disabled", !enabled);
-    this.E(prefix + "ehh-selectelement").hidden = running;
-    this.E(prefix + "ehh-stopselection").hidden = !running;
   },
 
   toggleSelection: function()
@@ -299,13 +368,3 @@ WindowWrapper.prototype =
     Aardvark.quit();
   }
 };
-
-WindowWrapper.prototype.eventHandlers = [
-  ["abp-status-popup", "popupshowing", WindowWrapper.prototype.fillPopup],
-  ["abp-toolbar-popup", "popupshowing", WindowWrapper.prototype.fillPopup],
-  ["abp-menuitem-popup", "popupshowing", WindowWrapper.prototype.fillPopup],
-  ["ehh-command-selectelement", "command", WindowWrapper.prototype.toggleSelection],
-  ["ehh-command-selectelement2", "command", WindowWrapper.prototype.toggleSelection],
-];
-
-AppIntegration.startup();
