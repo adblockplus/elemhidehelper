@@ -477,12 +477,16 @@ function fillAttributes(nodeData) {
   while(list.firstChild)
     list.removeChild(list.firstChild);
 
+  let xblBasic = "url(chrome://elemhidehelper/content/attribute.xml#attributeBasic)";
+  let xblAdvanced = "url(chrome://elemhidehelper/content/attribute.xml#attributeAdvanced)";
+
   // Add tag name entry
   var node = document.createElement("attribute");
   node.attr = nodeData.tagName;
   node.setAttribute("notextbox", "true");
   node.setAttribute("checked", nodeData.tagName.checked);
   node.setAttribute("label", list.getAttribute("_labeltagname") + " " + nodeData.tagName.value);
+  node.style.MozBinding = xblBasic;
   list.appendChild(node);
 
   // Add first/last child entries
@@ -492,6 +496,7 @@ function fillAttributes(nodeData) {
     node.setAttribute("notextbox", "true");
     node.setAttribute("checked", nodeData.firstChild.checked);
     node.setAttribute("label", list.getAttribute("_labelfirstchild"));
+    node.style.MozBinding = xblBasic;
     list.appendChild(node);
   }
   if (advancedMode && "lastChild" in nodeData) {
@@ -500,6 +505,7 @@ function fillAttributes(nodeData) {
     node.setAttribute("notextbox", "true");
     node.setAttribute("checked", nodeData.lastChild.checked);
     node.setAttribute("label", list.getAttribute("_labellastchild"));
+    node.style.MozBinding = xblBasic;
     list.appendChild(node);
   }
 
@@ -512,6 +518,7 @@ function fillAttributes(nodeData) {
     node.setAttribute("checked", attr.checked);
     node.setAttribute("label", attr.name + ": " + attr.value);
     node.setAttribute("value", attr.selected);
+    node.style.MozBinding = advancedMode ? xblAdvanced : xblBasic;
     list.appendChild(node);
   }
 
@@ -522,6 +529,7 @@ function fillAttributes(nodeData) {
     node.setAttribute("checked", nodeData.customCSS.checked);
     node.setAttribute("label", list.getAttribute("_labelcustom"));
     node.setAttribute("value", nodeData.customCSS.selected);
+    node.style.MozBinding = xblAdvanced;
     list.appendChild(node);
   }
 }
