@@ -28,9 +28,6 @@ function startup(params, reason)
 
 function shutdown(params, reason)
 {
-  if (Services.vc.compare(Services.appinfo.platformVersion, "10.0") < 0)
-    Components.manager.removeBootstrappedManifestLocation(params.installPath);
-
   AppIntegration.shutdown();
   Cu.unload("chrome://elemhidehelper-modules/content/AppIntegration.jsm");
 
@@ -45,4 +42,7 @@ function shutdown(params, reason)
       break;
     helperWnd.close();
   }
+
+  if (Services.vc.compare(Services.appinfo.platformVersion, "10.0") < 0)
+    Components.manager.removeBootstrappedManifestLocation(params.installPath);
 }
