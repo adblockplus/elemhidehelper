@@ -212,10 +212,10 @@ function init() {
 
   fillDomains(domainData);
   fillNodes(nodeData);
+  setAdvancedMode(document.documentElement.getAttribute("advancedMode") == "true");
+  updateExpression();
 
   setTimeout(function() {
-    setAdvancedMode(document.documentElement.getAttribute("advancedMode") == "true");
-    updateExpression();
     document.getElementById("domainGroup").selectedItem.focus();
     if (document.getElementById("preview").checked)
       togglePreview(true);
