@@ -33,7 +33,6 @@ treechildren::-moz-tree-row(anchor, selected-false)
 
 attribute
 {
-  -moz-binding: url(chrome://elemhidehelper/content/attribute.xml#attributeBasic);
   padding: 5px;
 }
 attribute vbox
@@ -43,10 +42,6 @@ attribute vbox
 attribute[selected="true"] vbox
 {
   border: 1px dotted ThreeDDarkShadow;
-}
-dialog[advancedMode=true] attribute:not([notextbox])
-{
-  -moz-binding: url(chrome://elemhidehelper/content/attribute.xml#attributeAdvanced);
 }
 dialog[advancedMode=true] attribute:not([notextbox]) .checkbox-label-box
 {
