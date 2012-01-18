@@ -18,6 +18,7 @@ var stylesheetURL;
 var previewStyle = null;
 var doc;
 
+Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("chrome://elemhidehelper-modules/content/Prefs.jsm");
 
 let abpURL = Cc["@adblockplus.org/abp/public;1"].getService(Ci.nsIURI);
@@ -477,8 +478,12 @@ function fillAttributes(nodeData) {
   while(list.firstChild)
     list.removeChild(list.firstChild);
 
-  let xblBasic = "url(chrome://elemhidehelper/content/attribute.xml#attributeBasic)";
-  let xblAdvanced = "url(chrome://elemhidehelper/content/attribute.xml#attributeAdvanced)";
+  // Work-around for bug 719180 - don't access XBL binding via its chrome:// address
+  let chromeRegistry = Cc["@mozilla.org/chrome/chrome-registry;1"]
+                         .getService(Ci.nsIChromeRegistry);
+  let xblURL = chromeRegistry.convertChromeURL(Services.io.newURI("chrome://elemhidehelper/content/attribute.xml", null, null)).spec;
+  let xblBasic = "url(" + xblURL + "#attributeBasic)";
+  let xblAdvanced = "url(" + xblURL + "#attributeAdvanced)";
 
   // Add tag name entry
   var node = document.createElement("attribute");

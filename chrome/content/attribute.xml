@@ -27,7 +27,7 @@
     </handlers>
   </binding>
 
-  <binding id="attributeAdvanced" extends="chrome://elemhidehelper/content/attribute.xml#attributeBasic">
+  <binding id="attributeAdvanced" extends="#attributeBasic">
     <content>
       <xul:checkbox anonid="checkbox" xbl:inherits="checked"/>
       <xul:vbox flex="1">
