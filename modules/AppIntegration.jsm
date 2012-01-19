@@ -70,6 +70,7 @@ var AppIntegration =
         if (child.nodeType == child.PROCESSING_INSTRUCTION_NODE)
           WindowObserver.overlay._processing.push(child);
       WindowObserver.startup();
+      InspectorObserver.startup();
     }.bind(this), false);
     request2.send(null);
   },
@@ -90,6 +91,7 @@ var AppIntegration =
     Prefs.shutdown();
     Aardvark.quit();
     WindowObserver.shutdown();
+    InspectorObserver.shutdown();
 
     Cu.unload("chrome://elemhidehelper-modules/content/Aardvark.jsm");
     Cu.unload("chrome://elemhidehelper-modules/content/Prefs.jsm");
@@ -203,6 +205,67 @@ var WindowObserver =
         }.bind(this), 0);
       }.bind(this), false);
     }
+  },
+
+  QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
+};
+
+var InspectorObserver =
+{
+  initialized: false,
+
+  startup: function()
+  {
+    if (this.initialized)
+      return;
+    this.initialized = true;
+
+    Services.obs.addObserver(this, "inspector-opened", true);
+  },
+
+  shutdown: function()
+  {
+    if (!this.initialized)
+      return;
+    this.initialized = false;
+
+    Services.obs.removeObserver(this, "inspector-opened");
+  },
+
+  get inspectorButton()
+  {
+    let stringBundle = Services.strings.createBundle("chrome://elemhidehelper/locale/global.properties");
+    let result = [stringBundle.GetStringFromName("inspector.button.label"), stringBundle.GetStringFromName("inspector.button.accesskey"), stringBundle.GetStringFromName("inspector.button.tooltiptext")];
+
+    delete this.inspectorButton;
+    this.__defineGetter__("inspectorButton", function() result);
+    return this.inspectorButton;
+  },
+
+  observe: function(subject, topic, data)
+  {
+    if (topic != "inspector-opened")
+      return;
+
+    let InspectorUI = subject.wrappedJSObject;
+    let hooks = InspectorUI.chromeDoc.getElementById("abp-hooks");
+    if (!hooks || !Aardvark.canSelect(hooks.getBrowser()))
+      return;
+
+    let [label, accesskey, tooltiptext] = this.inspectorButton;
+    InspectorUI.registerTool({
+      id: "abp-elemhide",
+      label: label,
+      accesskey: accesskey,
+      tooltiptext: tooltiptext,
+      get isOpen() false,
+      show: function(selection)
+      {
+        InspectorUI.chromeWin.openDialog("chrome://elemhidehelper/content/composer.xul", "_blank",
+                                         "chrome,centerscreen,resizable,dialog=no", selection);
+        InspectorUI.closeInspectorUI();
+      }
+    });
   },
 
   QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
