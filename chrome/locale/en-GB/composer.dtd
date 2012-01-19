@@ -1,7 +1,7 @@
 <!ENTITY dialog.title "Compose element hiding rule">
 <!ENTITY groupDisabled.warning "The filter group &quot;?1?&quot; that this filter will be added to is currently disabled.
-  You can still add the filter but it will not be applied unless you enable the filter group
-  in Adblock Plus preferences.">
+	You can still add the filter but it will not be applied unless you enable the filter group
+	in Adblock Plus preferences.">
 <!ENTITY accept.label "Add filter rule">
 <!ENTITY advanced.label "Advanced view">
 <!ENTITY basic.label "Basic view">

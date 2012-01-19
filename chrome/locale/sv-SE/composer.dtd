@@ -1,16 +1,21 @@
-<!ENTITY dialog.title "Tillverka regler för att gömma komponenter">
+<!ENTITY dialog.title "Skapa filterregel för att dölja element">
+<!ENTITY groupDisabled.warning "
+	Filtergruppen &quot;?1?&quot; som detta filter kommer att läggas till i är för närvarande inaktiverat.
+	Du kan fortfarande lägga till filtret, men det kommer inte att tillämpas förrän du aktiverar filtergruppen
+	i Adblock Plus inställningar.
+">
 <!ENTITY accept.label "Lägg till filterregel">
 <!ENTITY advanced.label "Avancerat">
 <!ENTITY basic.label "Standard">
 <!ENTITY expression.label "Filterregel">
-<!ENTITY preview.label "Förhandsvisa">
+<!ENTITY preview.label "Förhandsgranska">
 <!ENTITY domain.label "Knyt till domän">
-<!ENTITY domain.none.label "Varje domän (rekommenderas ej)">
+<!ENTITY domain.none.label "Alla domäner (rekommenderas inte)">
 <!ENTITY nodes-tree.node.label "Nod">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
+<!ENTITY nodes-tree.id.label "ID">
+<!ENTITY nodes-tree.class.label "Klass">
 <!ENTITY attributes.label "Kräver attribut">
 <!ENTITY attributes.tagname.label "Taggnamn:">
-<!ENTITY attributes.firstchild.label "Första instans">
-<!ENTITY attributes.lastchild.label "Sista instans">
+<!ENTITY attributes.firstchild.label "Första underordnade">
+<!ENTITY attributes.lastchild.label "Sista underordnade">
 <!ENTITY attributes.custom.label "Egen CSS:">
