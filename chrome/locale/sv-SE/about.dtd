@@ -1,0 +1,14 @@
+<!ENTITY dialog.title "Om Element Hiding Helper">
+<!ENTITY version.title "Version">
+<!ENTITY description "
+	Element Hiding Helper är en följeslagare till Adblock Plus som gör det lättare
+	att skapa regler för att dölja webbsideelement. Du markerar helt enkelt det
+	element du vill skall döljas väljer därefter vilka av elementets attribut som
+	skall räknas in när samma element skall döljas i framtiden. Klicka på
+	&quot;Lägg till filterregel&quot; så skapas elementdöljningsregeln och den läggs
+	automatiskt till i Adblock Plus filterlista.
+">
+<!ENTITY homepage.label "Element Hiding Helpers webbplats:">
+<!ENTITY author.label "Skapat av:">
+<!ENTITY contributors.label "Medarbetare:">
+<!ENTITY translators.label "Översättare:">
