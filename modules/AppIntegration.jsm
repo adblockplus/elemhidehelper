@@ -183,7 +183,8 @@ var WindowObserver =
 
   get menuItem()
   {
-    let stringBundle = Services.strings.createBundle("chrome://elemhidehelper/locale/global.properties");
+    // Randomize URI to work around bug 719376
+    let stringBundle = Services.strings.createBundle("chrome://elemhidehelper/locale/global.properties?" + Math.random());
     let result = [stringBundle.GetStringFromName("selectelement.label"), stringBundle.GetStringFromName("stopselection.label")];
 
     delete this.menuItem;
@@ -234,7 +235,8 @@ var InspectorObserver =
 
   get inspectorButton()
   {
-    let stringBundle = Services.strings.createBundle("chrome://elemhidehelper/locale/global.properties");
+    // Randomize URI to work around bug 719376
+    let stringBundle = Services.strings.createBundle("chrome://elemhidehelper/locale/global.properties?" + Math.random());
     let result = [stringBundle.GetStringFromName("inspector.button.label"), stringBundle.GetStringFromName("inspector.button.accesskey"), stringBundle.GetStringFromName("inspector.button.tooltiptext")];
 
     delete this.inspectorButton;
