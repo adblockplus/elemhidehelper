@@ -124,6 +124,8 @@ function getTextForKey(/**Object*/ keyData) /**String*/
   }
 }
 
+exports.selectKey = selectKey;
+
 /**
  * Selects a keyboard shortcut variant that isn't already taken in the window,
  * parses it into an object.
