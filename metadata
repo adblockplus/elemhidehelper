@@ -17,7 +17,11 @@ de=http://adblockplus.org/de/elemhidehelper
 en=http://adblockplus.org/en/elemhidehelper
 es=http://adblockplus.org/es/elemhidehelper
 fr=http://adblockplus.org/fr/elemhidehelper
+he=http://adblockplus.org/he/elemhidehelper
 ko=http://adblockplus.org/ko/elemhidehelper
+ru=http://adblockplus.org/ru/elemhidehelper
+zh-CN=http://adblockplus.org/zh_CN/elemhidehelper
+zh-TW=http://adblockplus.org/zh_TW/elemhidehelper
 
 [compat]
 firefox=8.0/12.0a1
