@@ -9,6 +9,9 @@ const Ci = Components.interfaces;
 const Cu = Components.utils;
 
 Cu.import("resource://gre/modules/Services.jsm");
+Cu.import("resource://gre/modules/XPCOMUtils.jsm");
+
+let addonData = null;
 
 function install(params, reason) {}
 function uninstall(params, reason) {}
@@ -18,18 +21,19 @@ function startup(params, reason)
   if (Services.vc.compare(Services.appinfo.platformVersion, "10.0") < 0)
     Components.manager.addBootstrappedManifestLocation(params.installPath);
 
+  addonData = params;
+  Services.obs.addObserver(RequireObserver, "elemhidehelper-require", true);
+
   let scope = {};
   Services.scriptloader.loadSubScript("chrome://elemhidehelper/content/prefLoader.js", scope);
   scope.loadDefaultPrefs(params.installPath);
 
-  Cu.import("chrome://elemhidehelper-modules/content/AppIntegration.jsm");
-  AppIntegration.startup();
+  require("appIntegration").AppIntegration.init();
 }
 
 function shutdown(params, reason)
 {
-  AppIntegration.shutdown();
-  Cu.unload("chrome://elemhidehelper-modules/content/AppIntegration.jsm");
+  require("appIntegration").AppIntegration.shutdown();
 
   let aboutWnd = Services.wm.getMostRecentWindow("ehh:about");
   if (aboutWnd)
@@ -43,6 +47,48 @@ function shutdown(params, reason)
     helperWnd.close();
   }
 
+  Services.obs.removeObserver(RequireObserver, "elemhidehelper-require");
+  addonData = null;
+  require.scopes = {__proto__: null};
+
   if (Services.vc.compare(Services.appinfo.platformVersion, "10.0") < 0)
     Components.manager.removeBootstrappedManifestLocation(params.installPath);
 }
+
+function require(module)
+{
+  let scopes = require.scopes;
+  if (!(module in scopes))
+  {
+    if (module == "info")
+    {
+      scopes[module] = {};
+      scopes[module].exports =
+      {
+        addonID: addonData.id,
+        addonVersion: addonData.version,
+        addonRoot: addonData.resourceURI.spec,
+      };
+    }
+    else
+    {
+      scopes[module] = {require: require, exports: {}};
+      Services.scriptloader.loadSubScript(addonData.resourceURI.spec + module + ".js", scopes[module]);
+    }
+  }
+  return scopes[module].exports;
+}
+require.scopes = {__proto__: null};
+
+let RequireObserver =
+{
+  observe: function(subject, topic, data)
+  {
+    if (topic == "elemhidehelper-require")
+    {
+      subject.wrappedJSObject.exports = require(data);
+    }
+  },
+
+  QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
+};

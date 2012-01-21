@@ -4,61 +4,19 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-const Cr = Components.results;
-const Cu = Components.utils;
+let {addonID, addonVersion, addonRoot} = require("info");
 
-try
-{
-  Cu.import("resource://gre/modules/AddonManager.jsm");
-}
-catch (e) {}
-
-let addonID = "elemhidehelper@adblockplus.org";
-
-function E(id) document.getElementById(id);
+Cu.import("resource://gre/modules/AddonManager.jsm");
 
 function init()
 {
-  let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
-  if (typeof AddonManager != "undefined")
-  {
-    let addon = AddonManager.getAddonByID(addonID, function(addon)
-    {
-      loadInstallManifest(addon.getResourceURI("install.rdf"), addon.name, addon.homepageURL);
-    });
-  }
-  else
-  {
-    let extensionManager = Cc["@mozilla.org/extensions/manager;1"].getService(Ci.nsIExtensionManager);
-    let rdf = Cc["@mozilla.org/rdf/rdf-service;1"].getService(Ci.nsIRDFService);
-    let root = rdf.GetResource("urn:mozilla:item:" + addonID);
-
-    function emResource(prop)
-    {
-      return rdf.GetResource("http://www.mozilla.org/2004/em-rdf#" + prop);
-    }
-  
-    function getTarget(prop)
-    {
-      let target = extensionManager.datasource.GetTarget(root, emResource(prop), true);
-      if (target)
-        return target.QueryInterface(Ci.nsIRDFLiteral).Value;
-      else
-        return null;
-    }
-    
-    let installLocation = extensionManager.getInstallLocation(addonID);
-    let installManifestFile = installLocation.getItemFile(addonID, "install.rdf");
-    loadInstallManifest(ioService.newFileURI(installManifestFile), getTarget("name"), getTarget("homepageURL"));
-  }
+  AddonManager.getAddonByID(addonID, loadInstallManifest);
 }
 
-function loadInstallManifest(installManifestURI, name, homepage)
+function loadInstallManifest(addon)
 {
   let rdf = Cc["@mozilla.org/rdf/rdf-service;1"].getService(Ci.nsIRDFService);
-  let ds = rdf.GetDataSource(installManifestURI.spec);
+  let ds = rdf.GetDataSource(addonRoot + "install.rdf");
   let root = rdf.GetResource("urn:mozilla:install-manifest");
 
   function emResource(prop)
@@ -77,8 +35,8 @@ function loadInstallManifest(installManifestURI, name, homepage)
 
   function dataSourceLoaded()
   {
-    setExtensionData(name, getTargets("version")[0],
-                     homepage, getTargets("creator"),
+    setExtensionData(addon.name, addonVersion,
+                     addon.homepageURL, getTargets("creator"),
                      getTargets("contributor"), getTargets("translator"));
   }
 
@@ -130,8 +88,7 @@ function setExtensionData(name, version, homepage, authors, contributors, transl
 
 function loadInBrowser(url)
 {
-  let windowMediator = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator);
-  let enumerator = windowMediator.getZOrderDOMWindowEnumerator(null, true);
+  let enumerator = Services.wm.getZOrderDOMWindowEnumerator(null, true);
   if (!enumerator.hasMoreElements())
   {
     // On Linux the list returned will be empty, see bug 156333. Fall back to random order.
@@ -154,7 +111,6 @@ function loadInBrowser(url)
   else
   {
     let protocolService = Cc["@mozilla.org/uriloader/external-protocol-service;1"].getService(Ci.nsIExternalProtocolService);
-    let ioService = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
-    protocolService.loadURI(ioService.newURI(url, null, null), null);
+    protocolService.loadURI(Services.io.newURI(url, null, null), null);
   }
 }

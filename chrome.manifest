@@ -1,4 +1,3 @@
 content   elemhidehelper chrome/content/
 skin      elemhidehelper classic/1.0 chrome/skin/
 locale    elemhidehelper {{LOCALE}} chrome/locale/{{LOCALE}}/
-content   elemhidehelper-modules modules/
