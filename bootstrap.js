@@ -24,10 +24,6 @@ function startup(params, reason)
   addonData = params;
   Services.obs.addObserver(RequireObserver, "elemhidehelper-require", true);
 
-  let scope = {};
-  Services.scriptloader.loadSubScript("chrome://elemhidehelper/content/prefLoader.js", scope);
-  scope.loadDefaultPrefs(params.installPath);
-
   require("appIntegration").AppIntegration.init();
 }
 

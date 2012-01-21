@@ -11,42 +11,164 @@ const Cu = Components.utils;
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
-let prefRoot = null;
-let branch = null;
+let {addonRoot} = require("info");
 
 let Prefs = exports.Prefs =
 {
-  init: function(root)
-  {
-    if (prefRoot)
-      return;
-    prefRoot = root;
-    branch = Services.prefs.getBranch(prefRoot);
+  branch: null,
+  ignorePrefChanges: false,
 
-    let defaultBranch = Services.prefs.getDefaultBranch(prefRoot);
-    for each (let name in defaultBranch.getChildList("", {}))
+  init: function(branchName)
+  {
+    if (this.branch)
+      return;
+    this.branch = Services.prefs.getBranch(branchName);
+
+    /**
+     * Sets up getter/setter on Prefs object for preference.
+     */
+    function defineProperty(/**String*/ name, defaultValue, /**Function*/ readFunc, /**Function*/ writeFunc)
     {
-      let type = defaultBranch.getPrefType(name);
-      switch (type)
+      let value = defaultValue;
+      this["_update_" + name] = function()
       {
-        case Ci.nsIPrefBranch.PREF_INT:
-          defineIntegerProperty(name);
-          break;
-        case Ci.nsIPrefBranch.PREF_BOOL:
-          defineBooleanProperty(name);
-          break;
-        case Ci.nsIPrefBranch.PREF_STRING:
-          defineStringProperty(name);
-          break;
-      }
-      if ("_update_" + name in PrefsPrivate)
-        PrefsPrivate["_update_" + name]();
+        try
+        {
+          value = readFunc.call(this);
+        }
+        catch(e)
+        {
+          Cu.reportError(e);
+        }
+      };
+      Prefs.__defineGetter__(name, function() value);
+      Prefs.__defineSetter__(name, function(newValue)
+      {
+        if (value == newValue)
+          return value;
+
+        try
+        {
+          this.ignorePrefChanges = true;
+          writeFunc.call(this, newValue);
+          value = newValue;
+        }
+        catch(e)
+        {
+          Cu.reportError(e);
+        }
+        finally
+        {
+          this.ignorePrefChanges = false;
+        }
+        return value;
+      });
+      this["_update_" + name]();
     }
 
+    /**
+     * Sets up getter/setter on Prefs object for an integer preference.
+     */
+    function defineIntegerProperty(/**String*/ name)
+    {
+      defineProperty.call(this, name, 0,
+                          function() this.branch.getIntPref(name),
+                          function(newValue) this.branch.setIntPref(name, newValue));
+    }
+
+    /**
+     * Sets up getter/setter on Prefs object for a boolean preference.
+     */
+    function defineBooleanProperty(/**String*/ name)
+    {
+      defineProperty.call(this, name, false,
+                          function() this.branch.getBoolPref(name),
+                          function(newValue) this.branch.setBoolPref(name, newValue));
+    }
+
+    /**
+     * Sets up getter/setter on Prefs object for a string preference.
+     */
+    function defineStringProperty(/**String*/ name)
+    {
+      defineProperty.call(this, name, "",
+                          function() this.branch.getComplexValue(name, Ci.nsISupportsString).data,
+                          function(newValue)
+                          {
+                            let str = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
+                            str.data = newValue;
+                            this.branch.setComplexValue(name, Ci.nsISupportsString, str);
+                          });
+    }
+
+    /**
+     * Sets up getter/setter on Prefs object for a JSON-encoded preference.
+     */
+    function defineJSONProperty(/**String*/ name)
+    {
+      defineProperty.call(this, name, "",
+                          function() JSON.parse(this.branch.getComplexValue(name, Ci.nsISupportsString).data),
+                          function(newValue)
+                          {
+                            let str = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
+                            str.data = JSON.stringify(newValue);
+                            this.branch.setComplexValue(name, Ci.nsISupportsString, str);
+                          });
+    }
+
+    // Load default preferences and set up properties for them
+    let defaultBranch = Services.prefs.getDefaultBranch(branchName);
+    let scope =
+    {
+      pref: function(pref, value)
+      {
+        if (pref.substr(0, branchName.length) != branchName)
+        {
+          Cu.reportError(new Error("Ignoring default preference " + pref + ", wrong branch."));
+          return;
+        }
+        pref = pref.substr(branchName.length);
+
+        switch(typeof value)
+        {
+          case "boolean":
+          {
+            defaultBranch.setBoolPref(pref, value);
+            defineBooleanProperty.call(Prefs, pref);
+            break;
+          }
+          case "number":
+          {
+            defaultBranch.setIntPref(pref, value);
+            defineIntegerProperty.call(Prefs, pref);
+            break;
+          }
+          case "string":
+          {
+            let str = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
+            str.data = value;
+            defaultBranch.setComplexValue(pref, Ci.nsISupportsString, str);
+            defineStringProperty.call(Prefs, pref);
+            break;
+          }
+          case "object":
+          {
+            let str = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
+            str.data = JSON.stringify(value);
+            defaultBranch.setComplexValue(pref, Ci.nsISupportsString, str);
+            defineJSONProperty.call(Prefs, pref);
+            break;
+          }
+        }
+      }
+    };
+    Services.scriptloader.loadSubScript(addonRoot + "defaults/preferences/prefs.js", scope);
+
+    // Add preference change observer
     try
     {
-      branch.QueryInterface(Ci.nsIPrefBranch2)
-            .addObserver("", PrefsPrivate, true);
+      this.branch.QueryInterface(Ci.nsIPrefBranch2)
+                 .addObserver("", this, true);
     }
     catch (e)
     {
@@ -69,108 +191,29 @@ let Prefs = exports.Prefs =
 
   shutdown: function()
   {
-    if (!prefRoot)
+    if (!this.branch)
       return;
-    prefRoot = null;
 
     try
     {
-      branch.QueryInterface(Ci.nsIPrefBranch2)
-            .removeObserver("", PrefsPrivate);
+      this.branch.QueryInterface(Ci.nsIPrefBranch2)
+                 .removeObserver("", this);
     }
     catch (e)
     {
       Cu.reportError(e);
     }
-    branch = null;
-  }
-};
-
-let PrefsPrivate =
-{
-  ignorePrefChanges: false,
+    this.branch = null;
+  },
 
   observe: function(subject, topic, data)
   {
-    if (PrefsPrivate.ignorePrefChanges || topic != "nsPref:changed")
+    if (this.ignorePrefChanges || topic != "nsPref:changed")
       return;
 
-    if ("_update_" + data in PrefsPrivate)
-      PrefsPrivate["_update_" + data]();
+    if ("_update_" + data in this)
+      this["_update_" + data]();
   },
 
   QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
-}
-
-/**
- * Sets up getter/setter on Prefs object for preference.
- */
-function defineProperty(/**String*/ name, defaultValue, /**Function*/ readFunc, /**Function*/ writeFunc)
-{
-  let value = defaultValue;
-  PrefsPrivate["_update_" + name] = function()
-  {
-    try
-    {
-      value = readFunc();
-    }
-    catch(e)
-    {
-      Cu.reportError(e);
-    }
-  }
-  Prefs.__defineGetter__(name, function() value);
-  Prefs.__defineSetter__(name, function(newValue)
-  {
-    if (value == newValue)
-      return value;
-
-    try
-    {
-      PrefsPrivate.ignorePrefChanges = true;
-      writeFunc(newValue);
-      value = newValue;
-    }
-    catch(e)
-    {
-      Cu.reportError(e);
-    }
-    finally
-    {
-      PrefsPrivate.ignorePrefChanges = false;
-    }
-    return value;
-  });
-}
-
-/**
- * Sets up getter/setter on Prefs object for an integer preference.
- */
-function defineIntegerProperty(/**String*/ name)
-{
-  defineProperty(name, 0, function() branch.getIntPref(name),
-                          function(newValue) branch.setIntPref(name, newValue));
-}
-
-/**
- * Sets up getter/setter on Prefs object for a boolean preference.
- */
-function defineBooleanProperty(/**String*/ name)
-{
-  defineProperty(name, false, function() branch.getBoolPref(name),
-                              function(newValue) branch.setBoolPref(name, newValue));
-}
-
-/**
- * Sets up getter/setter on Prefs object for a string preference.
- */
-function defineStringProperty(/**String*/ name)
-{
-  defineProperty(name, "", function() branch.getComplexValue(name, Ci.nsISupportsString).data,
-    function(newValue)
-    {
-      let str = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
-      str.data = newValue;
-      branch.setComplexValue(name, Ci.nsISupportsString, str);
-    });
-}
+};
