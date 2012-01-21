@@ -26,7 +26,10 @@ let AppIntegration = exports.AppIntegration =
       return;
     this.initialized = true;
 
-    Prefs.init("extensions.elemhidehelper.");
+    Prefs.init("extensions.elemhidehelper.", {
+      "extensions.adblockplus.ehh-selectelement_key": "selectelement_key",
+      "extensions.adblockplus.ehh.showhelp": "showhelp"
+    });
 
     // Use random marker class
     let rnd = [];

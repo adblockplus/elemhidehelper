@@ -18,7 +18,7 @@ let Prefs = exports.Prefs =
   branch: null,
   ignorePrefChanges: false,
 
-  init: function(branchName)
+  init: function(branchName, migrate)
   {
     if (this.branch)
       return;
@@ -34,7 +34,7 @@ let Prefs = exports.Prefs =
       {
         try
         {
-          value = readFunc.call(this);
+          value = readFunc(this.branch, name);
         }
         catch(e)
         {
@@ -50,7 +50,7 @@ let Prefs = exports.Prefs =
         try
         {
           this.ignorePrefChanges = true;
-          writeFunc.call(this, newValue);
+          writeFunc(this.branch, name, newValue);
           value = newValue;
         }
         catch(e)
@@ -66,58 +66,15 @@ let Prefs = exports.Prefs =
       this["_update_" + name]();
     }
 
-    /**
-     * Sets up getter/setter on Prefs object for an integer preference.
-     */
-    function defineIntegerProperty(/**String*/ name)
-    {
-      defineProperty.call(this, name, 0,
-                          function() this.branch.getIntPref(name),
-                          function(newValue) this.branch.setIntPref(name, newValue));
-    }
-
-    /**
-     * Sets up getter/setter on Prefs object for a boolean preference.
-     */
-    function defineBooleanProperty(/**String*/ name)
-    {
-      defineProperty.call(this, name, false,
-                          function() this.branch.getBoolPref(name),
-                          function(newValue) this.branch.setBoolPref(name, newValue));
-    }
-
-    /**
-     * Sets up getter/setter on Prefs object for a string preference.
-     */
-    function defineStringProperty(/**String*/ name)
-    {
-      defineProperty.call(this, name, "",
-                          function() this.branch.getComplexValue(name, Ci.nsISupportsString).data,
-                          function(newValue)
-                          {
-                            let str = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
-                            str.data = newValue;
-                            this.branch.setComplexValue(name, Ci.nsISupportsString, str);
-                          });
-    }
-
-    /**
-     * Sets up getter/setter on Prefs object for a JSON-encoded preference.
-     */
-    function defineJSONProperty(/**String*/ name)
-    {
-      defineProperty.call(this, name, "",
-                          function() JSON.parse(this.branch.getComplexValue(name, Ci.nsISupportsString).data),
-                          function(newValue)
-                          {
-                            let str = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
-                            str.data = JSON.stringify(newValue);
-                            this.branch.setComplexValue(name, Ci.nsISupportsString, str);
-                          });
-    }
-
     // Load default preferences and set up properties for them
     let defaultBranch = Services.prefs.getDefaultBranch(branchName);
+    let typeMap =
+    {
+      boolean: [getBoolPref, setBoolPref],
+      number: [getIntPref, setIntPref],
+      string: [getCharPref, setCharPref],
+      object: [getJSONPref, setJSONPref]
+    };
     let scope =
     {
       pref: function(pref, value)
@@ -129,37 +86,9 @@ let Prefs = exports.Prefs =
         }
         pref = pref.substr(branchName.length);
 
-        switch(typeof value)
-        {
-          case "boolean":
-          {
-            defaultBranch.setBoolPref(pref, value);
-            defineBooleanProperty.call(Prefs, pref);
-            break;
-          }
-          case "number":
-          {
-            defaultBranch.setIntPref(pref, value);
-            defineIntegerProperty.call(Prefs, pref);
-            break;
-          }
-          case "string":
-          {
-            let str = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
-            str.data = value;
-            defaultBranch.setComplexValue(pref, Ci.nsISupportsString, str);
-            defineStringProperty.call(Prefs, pref);
-            break;
-          }
-          case "object":
-          {
-            let str = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
-            str.data = JSON.stringify(value);
-            defaultBranch.setComplexValue(pref, Ci.nsISupportsString, str);
-            defineJSONProperty.call(Prefs, pref);
-            break;
-          }
-        }
+        let [getter, setter] = typeMap[typeof value];
+        setter(defaultBranch, pref, value);
+        defineProperty.call(Prefs, pref, false, getter, setter);
       }
     };
     Services.scriptloader.loadSubScript(addonRoot + "defaults/preferences/prefs.js", scope);
@@ -175,17 +104,22 @@ let Prefs = exports.Prefs =
       Cu.reportError(e);
     }
 
-    // Preferences used to be stored in Adblock Plus branch, import
-    let importBranch = Services.prefs.getBranch("extensions.adblockplus.");
-    if (importBranch.prefHasUserValue("ehh-selectelement_key") && importBranch.getPrefType("ehh-selectelement_key") == Ci.nsIPrefBranch.PREF_STRING)
+    // Migrate preferences stored under outdated names
+    if (migrate)
     {
-      Prefs.selectelement_key = importBranch.getCharPref("ehh-selectelement_key");
-      importBranch.clearUserPref("ehh-selectelement_key");
-    }
-    if (importBranch.prefHasUserValue("ehh.showhelp") && importBranch.getPrefType("ehh.showhelp") == Ci.nsIPrefBranch.PREF_BOOL)
-    {
-      Prefs.showhelp = importBranch.getBoolPref("ehh.showhelp");
-      importBranch.clearUserPref("ehh.showhelp");
+      for (let oldName in migrate)
+      {
+        let newName = migrate[oldName];
+        if (newName in this && Services.prefs.prefHasUserValue(oldName))
+        {
+          let [getter, setter] = typeMap[typeof this[newName]];
+          try
+          {
+            this[newName] = getter(Services.prefs, oldName);
+          } catch(e) {}
+          Services.prefs.clearUserPref(oldName);
+        }
+      }
     }
   },
 
@@ -217,3 +151,20 @@ let Prefs = exports.Prefs =
 
   QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
 };
+
+function getIntPref(branch, pref) branch.getIntPref(pref)
+function setIntPref(branch, pref, newValue) branch.setIntPref(pref, newValue)
+
+function getBoolPref(branch, pref) branch.getBoolPref(pref)
+function setBoolPref(branch, pref, newValue) branch.setBoolPref(pref, newValue)
+
+function getCharPref(branch, pref) branch.getComplexValue(pref, Ci.nsISupportsString).data
+function setCharPref(branch, pref, newValue)
+{
+  let str = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
+  str.data = newValue;
+  branch.setComplexValue(pref, Ci.nsISupportsString, str);
+}
+
+function getJSONPref(branch, pref) JSON.parse(getCharPref(branch, pref))
+function setJSONPref(branch, pref, newValue) setCharPref(branch, pref, JSON.stringify(newValue))
