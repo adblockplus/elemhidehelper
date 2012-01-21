@@ -380,10 +380,8 @@ WindowWrapper.prototype =
 
   configureKey: function(window)
   {
-    let variants = Prefs.selectelement_key;
-    let scope = {};
-    Services.scriptloader.loadSubScript("chrome://elemhidehelper/content/keySelector.js", scope);
-    this.key = scope.selectKey(window, variants);
+    this.key = require("keySelector").selectKey(window, Prefs.selectelement_key);
+    unrequire("keySelector");   // This module is used only once, release its scope
   },
 
   hideTooltips: function()

@@ -68,13 +68,18 @@ function require(module)
     }
     else
     {
-      scopes[module] = {require: require, exports: {}};
+      scopes[module] = {require: require, unrequire: unrequire, exports: {}};
       Services.scriptloader.loadSubScript(addonData.resourceURI.spec + module + ".js", scopes[module]);
     }
   }
   return scopes[module].exports;
 }
 require.scopes = {__proto__: null};
+
+function unrequire(module)
+{
+  delete require.scopes[module];
+}
 
 let RequireObserver =
 {
