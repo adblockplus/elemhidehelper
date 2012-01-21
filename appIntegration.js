@@ -4,31 +4,29 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-var EXPORTED_SYMBOLS = ["AppIntegration"];
-
 const Cc = Components.classes;
 const Ci = Components.interfaces;
-const Cr = Components.results;
 const Cu = Components.utils;
 
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
-var AppIntegration =
+let {Aardvark} = require("aardvark");
+let {Prefs} = require("prefs");
+
+let AppIntegration = exports.AppIntegration =
 {
   initialized: false,
   elementMarkerClass: null,
   styleURI: null,
 
-  startup: function()
+  init: function()
   {
     if (this.initialized)
       return;
     this.initialized = true;
 
-    Cu.import("chrome://elemhidehelper-modules/content/Aardvark.jsm");
-    Cu.import("chrome://elemhidehelper-modules/content/Prefs.jsm");
-    Prefs.startup();
+    Prefs.init("extensions.elemhidehelper.");
 
     // Use random marker class
     let rnd = [];
@@ -69,8 +67,8 @@ var AppIntegration =
       for (let child = request2.responseXML.firstChild; child; child = child.nextSibling)
         if (child.nodeType == child.PROCESSING_INSTRUCTION_NODE)
           WindowObserver.overlay._processing.push(child);
-      WindowObserver.startup();
-      InspectorObserver.startup();
+      WindowObserver.init();
+      InspectorObserver.init();
     }.bind(this), false);
     request2.send(null);
   },
@@ -92,19 +90,16 @@ var AppIntegration =
     Aardvark.quit();
     WindowObserver.shutdown();
     InspectorObserver.shutdown();
-
-    Cu.unload("chrome://elemhidehelper-modules/content/Aardvark.jsm");
-    Cu.unload("chrome://elemhidehelper-modules/content/Prefs.jsm");
   }
 };
 
-var WindowObserver =
+let WindowObserver =
 {
   initialized: false,
 
   overlay: null,
 
-  startup: function()
+  init: function()
   {
     if (this.initialized)
       return;
@@ -211,11 +206,11 @@ var WindowObserver =
   QueryInterface: XPCOMUtils.generateQI([Ci.nsISupportsWeakReference, Ci.nsIObserver])
 };
 
-var InspectorObserver =
+let InspectorObserver =
 {
   initialized: false,
 
-  startup: function()
+  init: function()
   {
     if (this.initialized)
       return;
@@ -287,14 +282,14 @@ function WindowWrapper(wnd)
 
   this.E("ehh-elementmarker").firstElementChild.setAttribute("class", AppIntegration.elementMarkerClass);
 
-  this.startup();
+  this.init();
 }
 WindowWrapper.prototype =
 {
   window: null,
   browser: null,
 
-  startup: function()
+  init: function()
   {
     this.window.addEventListener("popupshowing", this.popupShowingHandler, false);
     this.window.addEventListener("popuphiding", this.popupHidingHandler, false);

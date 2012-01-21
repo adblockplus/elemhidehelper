@@ -26,7 +26,8 @@
     buttonlabeldisclosure_on="&advanced.label;"
     buttonlabeldisclosure_off="&basic.label;"
     windowtype="ehh:composer">
-  <script type="application/x-javascript" src="composer.js"/>  
+  <script type="application/x-javascript;version=1.7" src="common.js"/>
+  <script type="application/x-javascript;version=1.7" src="composer.js"/>
   
   <description id="groupDisabledWarning" hidden="true">&groupDisabled.warning;</description>
 

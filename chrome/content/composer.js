@@ -4,22 +4,16 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-const Cr = Components.results;
-const Cu = Components.utils;
+let {Prefs} = require("prefs");
 
-var domainData;
-var nodeData;
-var selectedNode = null;
-var advancedMode = false;
-var treeView = null;
-var stylesheetURL;
-var previewStyle = null;
-var doc;
-
-Cu.import("resource://gre/modules/Services.jsm");
-Cu.import("chrome://elemhidehelper-modules/content/Prefs.jsm");
+let domainData;
+let nodeData;
+let selectedNode = null;
+let advancedMode = false;
+let treeView = null;
+let stylesheetURL;
+let previewStyle = null;
+let doc;
 
 let abpURL = Cc["@adblockplus.org/abp/public;1"].getService(Ci.nsIURI);
 Cu.import(abpURL.spec);

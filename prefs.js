@@ -4,29 +4,24 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-var EXPORTED_SYMBOLS = ["Prefs"];
-
 const Cc = Components.classes;
 const Ci = Components.interfaces;
-const Cr = Components.results;
 const Cu = Components.utils;
 
 Cu.import("resource://gre/modules/Services.jsm");
 Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
-const prefRoot = "extensions.elemhidehelper.";
+let prefRoot = null;
+let branch = null;
 
-let branch = Services.prefs.getBranch(prefRoot);
-
-var Prefs =
+let Prefs = exports.Prefs =
 {
-  initialized: false,
-
-  startup: function()
+  init: function(root)
   {
-    if (this.initialized)
+    if (prefRoot)
       return;
-    this.initialized = true;
+    prefRoot = root;
+    branch = Services.prefs.getBranch(prefRoot);
 
     let defaultBranch = Services.prefs.getDefaultBranch(prefRoot);
     for each (let name in defaultBranch.getChildList("", {}))
@@ -74,9 +69,9 @@ var Prefs =
 
   shutdown: function()
   {
-    if (!this.initialized)
+    if (!prefRoot)
       return;
-    this.initialized = false;
+    prefRoot = null;
 
     try
     {
@@ -87,10 +82,11 @@ var Prefs =
     {
       Cu.reportError(e);
     }
+    branch = null;
   }
 };
 
-var PrefsPrivate =
+let PrefsPrivate =
 {
   ignorePrefChanges: false,
 

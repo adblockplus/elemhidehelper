@@ -4,14 +4,11 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-var EXPORTED_SYMBOLS = ["Aardvark"];
-
 const Cc = Components.classes;
 const Ci = Components.interfaces;
-const Cr = Components.results;
 const Cu = Components.utils;
 
-Cu.import("chrome://elemhidehelper-modules/content/Prefs.jsm");
+let {Prefs} = require("prefs");
 
 // To be replaced when selection starts
 function E(id) {return null;}
@@ -20,7 +17,7 @@ function E(id) {return null;}
  * General element selection code *
  **********************************/
 
-var Aardvark =
+let Aardvark = exports.Aardvark =
 {
   window: null,
   browser: null,
@@ -74,10 +71,7 @@ var Aardvark =
 
   canSelect: function(browser)
   {
-    if (!Prefs.initialized)
-      return false;
-  
-    if (!browser || !browser.contentWindow || 
+    if (!browser || !browser.contentWindow ||
         !(browser.contentDocument instanceof Ci.nsIDOMHTMLDocument))
     {
       return false;
@@ -302,12 +296,6 @@ var Aardvark =
     }
   
     this.selectElement(newSelection);
-  },
-
-  bindMethod: function(method)
-  {
-    let me = this;
-    return function() method.apply(me, arguments);
   },
 
   appendDescription: function(node, value, className)
@@ -750,4 +738,4 @@ var Aardvark =
 // Makes sure event handlers like Aardvark.onKeyPress always have the correct
 // this pointer set.
 for each (let method in ["onMouseClick", "onMouseScroll", "onKeyPress", "onPageHide", "onMouseMove", "onAfterPaint"])
-  Aardvark[method] = Aardvark.bindMethod(Aardvark[method]);
+  Aardvark[method] = Aardvark[method].bind(Aardvark);
