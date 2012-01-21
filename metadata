@@ -2,7 +2,7 @@
 id=elemhidehelper@adblockplus.org
 basename=elemhidehelper
 branchname=ELEMENT_HIDING_HELPER
-version=1.2b
+version=1.2rc
 author=Wladimir Palant
 about=chrome://elemhidehelper/content/about.xul
 restartless=true
