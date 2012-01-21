@@ -14,7 +14,7 @@ Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 let {Aardvark} = require("aardvark");
 let {Prefs} = require("prefs");
 
-let AppIntegration = exports.AppIntegration =
+let Main = exports.Main =
 {
   initialized: false,
   elementMarkerClass: null,
@@ -283,7 +283,7 @@ function WindowWrapper(wnd)
   this.hideTooltips = this.hideTooltips.bind(this);
   this.stopSelection = this.stopSelection.bind(this);
 
-  this.E("ehh-elementmarker").firstElementChild.setAttribute("class", AppIntegration.elementMarkerClass);
+  this.E("ehh-elementmarker").firstElementChild.setAttribute("class", Main.elementMarkerClass);
 
   this.init();
 }
