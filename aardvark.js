@@ -4,10 +4,6 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-const Cu = Components.utils;
-
 let {Prefs} = require("prefs");
 
 // To be replaced when selection starts
