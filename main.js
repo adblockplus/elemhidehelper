@@ -13,6 +13,7 @@ Cu.import("resource://gre/modules/XPCOMUtils.jsm");
 
 let {Aardvark} = require("aardvark");
 let {Prefs} = require("prefs");
+let {KeySelector} = require("keySelector");
 
 let Main = exports.Main =
 {
@@ -337,8 +338,7 @@ WindowWrapper.prototype =
 
     if (typeof this.key == "undefined")
       this.configureKey(event.currentTarget);
-    if (this.key && this.key.text)
-      item.setAttribute("acceltext", this.key.text);
+    item.setAttribute("acceltext", KeySelector.getTextForKey(this.key));
 
     item.addEventListener("command", this.toggleSelection, false);
 
@@ -365,26 +365,16 @@ WindowWrapper.prototype =
     if (typeof this.key == "undefined")
       this.configureKey(event.currentTarget);
 
-    if (event.defaultPrevented || !this.key)
-      return;
-    if (this.key.shift != event.shiftKey || this.key.alt != event.altKey)
-      return;
-    if (this.key.meta != event.metaKey || this.key.control != event.ctrlKey)
-      return;
-
-    if (this.key.char && (!event.charCode || String.fromCharCode(event.charCode).toUpperCase() != this.key.char))
-      return;
-    else if (this.key.code && (!event.keyCode || event.keyCode != this.key.code))
-      return;
-
-    event.preventDefault();
-    this.toggleSelection();
+    if (KeySelector.matchesKey(event, this.key))
+    {
+      event.preventDefault();
+      this.toggleSelection();
+    }
   },
 
   configureKey: function(window)
   {
-    this.key = require("keySelector").selectKey(window, Prefs.selectelement_key);
-    unrequire("keySelector");   // This module is used only once, release its scope
+    this.key = new KeySelector(window).selectKey(Prefs.selectelement_key);
   },
 
   hideTooltips: function()
