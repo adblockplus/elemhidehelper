@@ -14,9 +14,6 @@ let {WindowWrapper} = require("windowWrapper");
 Prefs.migrate("extensions.adblockplus.ehh-selectelement_key", "selectelement_key");
 Prefs.migrate("extensions.adblockplus.ehh.showhelp", "showhelp");
 
-// Make sure to stop selection when we are uninstalled
-onShutdown.add(function() require("aardvark").Aardvark.quit());
-
 // Use random marker class
 let elementMarkerClass = null;
 {
