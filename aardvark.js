@@ -6,6 +6,9 @@
 
 let {Prefs} = require("prefs");
 
+// Make sure to stop selection when we are uninstalled
+onShutdown.add(function() Aardvark.quit());
+
 // To be replaced when selection starts
 function E(id) {return null;}
 
@@ -164,9 +167,13 @@ let Aardvark = exports.Aardvark =
 
   hideTooltips: function()
   {
-    E("ehh-helpbox").hidePopup();
-    E("ehh-commandlabel").hidePopup();
-    E("ehh-viewsource").hidePopup();
+    let tooltips = ["ehh-helpbox", "ehh-commandlabel", "ehh-viewsource"];
+    for (let i = 0; i < tooltips.length; i++)
+    {
+      let tooltip = E(tooltips[i]);
+      if (tooltip)
+        tooltip.hidePopup();
+    }
   },
 
   onMouseClick: function(event)
