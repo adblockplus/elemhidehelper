@@ -4,10 +4,6 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-const Cu = Components.utils;
-
 let {Aardvark} = require("aardvark");
 let {Prefs} = require("prefs");
 let {KeySelector} = require("keySelector");

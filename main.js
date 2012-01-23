@@ -4,21 +4,17 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-const Cu = Components.utils;
-
 Cu.import("resource://gre/modules/Services.jsm");
 
 let {Prefs} = require("prefs");
 let {WindowObserver} = require("windowObserver");
 let {WindowWrapper} = require("windowWrapper");
 
-Prefs.init("extensions.elemhidehelper.", {
-  "extensions.adblockplus.ehh-selectelement_key": "selectelement_key",
-  "extensions.adblockplus.ehh.showhelp": "showhelp"
-});
+// Check whether some preferences can still be found under their old locations
+Prefs.migrate("extensions.adblockplus.ehh-selectelement_key", "selectelement_key");
+Prefs.migrate("extensions.adblockplus.ehh.showhelp", "showhelp");
 
+// Make sure to stop selection when we are uninstalled
 onShutdown.add(function() require("aardvark").Aardvark.quit());
 
 // Use random marker class
