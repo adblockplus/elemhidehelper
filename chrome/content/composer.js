@@ -11,7 +11,7 @@ let nodeData;
 let selectedNode = null;
 let advancedMode = false;
 let treeView = null;
-let stylesheetURL;
+let stylesheetData;
 let previewStyle = null;
 let doc;
 
@@ -356,7 +356,7 @@ function updateExpression()
       curData = null;
   }
 
-  stylesheetURL = "data:text/css;charset=utf-8," + encodeURIComponent(expression + "{display: none !important;}");
+  stylesheetData = expression + "{display: none !important;}";
   expression = domainData.selected + "##" + expression;
 
   document.getElementById("expression").value = expression;
@@ -366,7 +366,7 @@ function updateExpression()
     tree.treeBoxObject.invalidateRow(tree.view.selection.currentIndex);
 
   if (previewStyle)
-    previewStyle.setAttribute("href", stylesheetURL);
+    previewStyle.textContent = stylesheetData;
 }
 
 function escapeChar(dummy, match)
@@ -536,12 +536,11 @@ function fillAttributes(nodeData) {
 function togglePreview(preview) {
   if (preview) {
     if (!previewStyle || !previewStyle.parentNode) {
-      previewStyle = doc.createElementNS("http://www.w3.org/1999/xhtml", "link");
-      previewStyle.setAttribute("rel", "stylesheet");
+      previewStyle = doc.createElementNS("http://www.w3.org/1999/xhtml", "style");
       previewStyle.setAttribute("type", "text/css");
       doc.documentElement.appendChild(previewStyle);
     }
-    previewStyle.setAttribute("href", stylesheetURL);
+    previewStyle.textContent = stylesheetData;
   }
   else {
     if (previewStyle && previewStyle.parentNode)
