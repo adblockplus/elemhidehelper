@@ -31,19 +31,19 @@ treechildren::-moz-tree-row(anchor, selected-false)
   background-color: #FFC0C0;
 }
 
-attribute
+.attribute
 {
   padding: 5px;
 }
-attribute vbox
+.attribute > checkbox:focus + vbox
 {
-  border: 1px solid transparent;
+  outline: 1px dotted ThreeDDarkShadow;
 }
-attribute[selected="true"] vbox
+.attribute .label
 {
-  border: 1px dotted ThreeDDarkShadow;
+  -moz-user-focus: ignore;
 }
-dialog[advancedMode=true] attribute:not([notextbox]) .checkbox-label-box
+.attribute.advanced .checkbox-label-box
 {
   display: none;
 }
