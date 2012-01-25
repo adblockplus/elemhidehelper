@@ -1,5 +1,5 @@
 <!ENTITY dialog.title "要素の非表示ルール">
-<!ENTITY groupDisabled.warning "フィルターグループ &quot;?1?&quot; は追加されましたが、フィルター機能は現在無効化されているために使用できません。フィルターを追加する事はできますが、Adblock Plus の設定でグループフィルターを有効にしない限り適用されません。">
+<!ENTITY groupDisabled.warning "フィルタグループ &quot;?1?&quot; は追加されましたが、フィルタ機能は現在無効化されているために使用できません。フィルタを追加する事はできますが、Adblock Plus の設定でグループフィルタを有効にしない限り適用されません。">
 <!ENTITY accept.label "要素の非表示ルールを追加">
 <!ENTITY advanced.label "詳細表示">
 <!ENTITY basic.label "標準表示">
