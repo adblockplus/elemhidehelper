@@ -39,6 +39,18 @@
     </hbox>
   </vbox>
 
+  <hbox id="basicAttributeTemplate" class="attribute basic" hidden="true">
+    <checkbox class="checkbox" oncommand="toggleAttr(this);"/>
+  </hbox>
+
+  <hbox id="advancedAttributeTemplate" class="attribute advanced" hidden="true">
+    <checkbox class="checkbox" oncommand="toggleAttr(this);"/>
+    <vbox flex="1">
+      <label class="label" onclick="this.parentNode.previousSibling.click();"/>
+      <textbox class="textbox" oninput="setSelectedAttrValue(this);"/>
+    </vbox>
+  </hbox>
+
   <hbox id="choices" flex="1">
     <groupbox id="domain" orient="vertical">
       <caption label="&domain.label;"/>

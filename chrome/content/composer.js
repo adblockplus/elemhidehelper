@@ -465,70 +465,79 @@ function fillNodes(nodeData) {
     body.appendChild(curContainer.firstChild);
 }
 
-function fillAttributes(nodeData) {
+function createAttribute(template, attr, text, value)
+{
+  template = E(template == "basic" ? "basicAttributeTemplate" : "advancedAttributeTemplate");
+
+  let result = template.cloneNode(true);
+  result.removeAttribute("id");
+  result.removeAttribute("hidden");
+  result.attr = attr;
+
+  let checkbox = result.getElementsByClassName("checkbox")[0];
+  checkbox.setAttribute("checked", attr.checked);
+  checkbox.attr = attr;
+
+  let label = result.getElementsByClassName("label");
+  if (label.length)
+  {
+    label = label[0];
+    label.setAttribute("value", text);
+
+    let randID = "i" + String(Math.random()).replace(/\D/g, "");
+    checkbox.setAttribute("id", randID);
+    label.setAttribute("control", randID);
+  }
+  else
+    checkbox.setAttribute("label", text);
+
+  let textbox = result.getElementsByClassName("textbox");
+  if (textbox.length)
+  {
+    textbox = textbox[0];
+    textbox.setAttribute("value", value);
+    textbox.attr = attr;
+  }
+
+  return result;
+}
+
+function fillAttributes(nodeData)
+{
   selectedNode = nodeData;
 
-  var list = document.getElementById("attributes-list");
+  let list = document.getElementById("attributes-list");
   while(list.firstChild)
     list.removeChild(list.firstChild);
 
-  // Work-around for bug 719180 - don't access XBL binding via its chrome:// address
-  let chromeRegistry = Cc["@mozilla.org/chrome/chrome-registry;1"]
-                         .getService(Ci.nsIChromeRegistry);
-  let xblURL = chromeRegistry.convertChromeURL(Services.io.newURI("chrome://elemhidehelper/content/attribute.xml", null, null)).spec;
-  let xblBasic = "url(" + xblURL + "#attributeBasic)";
-  let xblAdvanced = "url(" + xblURL + "#attributeAdvanced)";
-
   // Add tag name entry
-  var node = document.createElement("attribute");
-  node.attr = nodeData.tagName;
-  node.setAttribute("notextbox", "true");
-  node.setAttribute("checked", nodeData.tagName.checked);
-  node.setAttribute("label", list.getAttribute("_labeltagname") + " " + nodeData.tagName.value);
-  node.style.MozBinding = xblBasic;
+  let node = createAttribute("basic", nodeData.tagName, list.getAttribute("_labeltagname") + " " + nodeData.tagName.value);
   list.appendChild(node);
 
   // Add first/last child entries
-  if (advancedMode && "firstChild" in nodeData) {
-    node = document.createElement("attribute");
-    node.attr = nodeData.firstChild;
-    node.setAttribute("notextbox", "true");
-    node.setAttribute("checked", nodeData.firstChild.checked);
-    node.setAttribute("label", list.getAttribute("_labelfirstchild"));
-    node.style.MozBinding = xblBasic;
+  if (advancedMode && "firstChild" in nodeData)
+  {
+    node = createAttribute("basic", nodeData.firstChild, list.getAttribute("_labelfirstchild"));
     list.appendChild(node);
   }
-  if (advancedMode && "lastChild" in nodeData) {
-    node = document.createElement("attribute");
-    node.attr = nodeData.lastChild;
-    node.setAttribute("notextbox", "true");
-    node.setAttribute("checked", nodeData.lastChild.checked);
-    node.setAttribute("label", list.getAttribute("_labellastchild"));
-    node.style.MozBinding = xblBasic;
+  if (advancedMode && "lastChild" in nodeData)
+  {
+    node = createAttribute("basic", nodeData.lastChild, list.getAttribute("_labellastchild"));
     list.appendChild(node);
   }
 
   // Add attribute entries
-  for (var i = 0; i < nodeData.attributes.length; i++) {
-    var attr = nodeData.attributes[i];
-
-    node = document.createElement("attribute");
-    node.attr = attr;
-    node.setAttribute("checked", attr.checked);
-    node.setAttribute("label", attr.name + ": " + attr.value);
-    node.setAttribute("value", attr.selected);
-    node.style.MozBinding = advancedMode ? xblAdvanced : xblBasic;
+  for (let i = 0; i < nodeData.attributes.length; i++)
+  {
+    let attr = nodeData.attributes[i];
+    node = createAttribute(advancedMode ? "advanced" : "basic", attr, attr.name + ": " + attr.value, attr.selected);
     list.appendChild(node);
   }
 
-  if (advancedMode) {
+  if (advancedMode)
+  {
     // Add custom CSS entry
-    node = document.createElement("attribute");
-    node.attr = nodeData.customCSS;
-    node.setAttribute("checked", nodeData.customCSS.checked);
-    node.setAttribute("label", list.getAttribute("_labelcustom"));
-    node.setAttribute("value", nodeData.customCSS.selected);
-    node.style.MozBinding = xblAdvanced;
+    node = createAttribute("advanced", nodeData.customCSS, list.getAttribute("_labelcustom"), nodeData.customCSS.selected);
     list.appendChild(node);
   }
 }
