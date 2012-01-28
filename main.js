@@ -14,6 +14,15 @@ let {WindowWrapper} = require("windowWrapper");
 Prefs.migrate("extensions.adblockplus.ehh-selectelement_key", "selectelement_key");
 Prefs.migrate("extensions.adblockplus.ehh.showhelp", "showhelp");
 
+// Window types to attach to
+let knownWindowTypes =
+{
+  "navigator:browser": true,
+  "mail:3pane": true,
+  "mail:messageWindow": true,
+  __proto__: null
+};
+
 // Use random marker class
 let elementMarkerClass = null;
 {
@@ -57,18 +66,16 @@ request.addEventListener("load", function(event)
   new WindowObserver({
     applyToWindow: function(window)
     {
-      window.setTimeout(function()
-      {
-        if (onShutdown.done || !window.document.getElementById("abp-hooks"))
-          return;
+      let type = window.document.documentElement.getAttribute("windowtype");
+      if (!(type in knownWindowTypes) || window._ehhWrapper)
+        return;
 
-        window.document.documentElement.appendChild(overlay.cloneNode(true));
+      window.document.documentElement.appendChild(overlay.cloneNode(true));
 
-        let style = window.document.createProcessingInstruction("xml-stylesheet", 'class="elemhidehelper-node" href="chrome://elemhidehelper/skin/overlay.css" type="text/css"');
-        window.document.insertBefore(style, window.document.firstChild);
+      let style = window.document.createProcessingInstruction("xml-stylesheet", 'class="elemhidehelper-node" href="chrome://elemhidehelper/skin/overlay.css" type="text/css"');
+      window.document.insertBefore(style, window.document.firstChild);
 
-        window._ehhWrapper = new WindowWrapper(window, elementMarkerClass);
-      }, 0);
+      window._ehhWrapper = new WindowWrapper(window, elementMarkerClass);
     },
 
     removeFromWindow: function(window)

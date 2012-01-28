@@ -50,6 +50,7 @@ let Aardvark = exports.Aardvark =
     this.browser.addEventListener("DOMMouseScroll", this.onMouseScroll, true);
     this.browser.addEventListener("keypress", this.onKeyPress, true);
     this.browser.addEventListener("mousemove", this.onMouseMove, true);
+    this.browser.addEventListener("select", this.quit, false);
     this.browser.contentWindow.addEventListener("pagehide", this.onPageHide, true);
   
     this.browser.contentWindow.focus();
@@ -542,6 +543,7 @@ let Aardvark = exports.Aardvark =
     this.browser.removeEventListener("DOMMouseScroll", this.onMouseScroll, true);
     this.browser.removeEventListener("keypress", this.onKeyPress, true);
     this.browser.removeEventListener("mousemove", this.onMouseMove, true);
+    this.browser.removeEventListener("select", this.quit, false);
     this.browser.contentWindow.removeEventListener("pagehide", this.onPageHide, true);
 
     this.anchorElem = null;
@@ -740,5 +742,5 @@ let Aardvark = exports.Aardvark =
 
 // Makes sure event handlers like Aardvark.onKeyPress always have the correct
 // this pointer set.
-for each (let method in ["onMouseClick", "onMouseScroll", "onKeyPress", "onPageHide", "onMouseMove", "onAfterPaint"])
+for each (let method in ["onMouseClick", "onMouseScroll", "onKeyPress", "onPageHide", "onMouseMove", "onAfterPaint", "quit"])
   Aardvark[method] = Aardvark[method].bind(Aardvark);

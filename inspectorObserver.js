@@ -28,12 +28,12 @@ let InspectorObserver =
 
   observe: function(subject, topic, data)
   {
-    if (topic != "inspector-opened")
+    if (topic != "inspector-opened" || !("@adblockplus.org/abp/public;1" in Cc))
       return;
 
     let InspectorUI = subject.wrappedJSObject;
-    let hooks = InspectorUI.chromeDoc.getElementById("abp-hooks");
-    if (!hooks || !require("aardvark").Aardvark.canSelect(hooks.getBrowser()))
+    let window = InspectorUI.chromeWin;
+    if (!window._ehhWrapper || !require("aardvark").Aardvark.canSelect(window._ehhWrapper.browser))
       return;
 
     let [label, accesskey, tooltiptext] = this.inspectorButton;
