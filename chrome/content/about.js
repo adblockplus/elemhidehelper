@@ -79,38 +79,10 @@ function setExtensionData(name, version, homepage, authors, contributors, transl
   E("title").value = name;
   E("version").value = version;
   E("homepage").value = homepage;
+  E("homepage").setAttribute("href", homepage);
   E("authors").textContent = authors.join(", ");
   E("contributors").textContent = contributors.join(", ");
   E("translators").textContent = translators.join(", ");
 
   E("mainBox").setAttribute("loaded", "true");
-}
-
-function loadInBrowser(url)
-{
-  let enumerator = Services.wm.getZOrderDOMWindowEnumerator(null, true);
-  if (!enumerator.hasMoreElements())
-  {
-    // On Linux the list returned will be empty, see bug 156333. Fall back to random order.
-    enumerator = windowMediator.getEnumerator(null);
-  }
-  let abpHooks = null;
-  while (enumerator.hasMoreElements())
-  {
-    let window = enumerator.getNext().QueryInterface(Ci.nsIDOMWindow);
-    abpHooks = window.document.getElementById("abp-hooks");
-    if (abpHooks && abpHooks.addTab)
-    {
-      window.focus();
-      break;
-    }
-  }
-
-  if (abpHooks && abpHooks.addTab)
-    abpHooks.addTab(url);
-  else
-  {
-    let protocolService = Cc["@mozilla.org/uriloader/external-protocol-service;1"].getService(Ci.nsIExternalProtocolService);
-    protocolService.loadURI(Services.io.newURI(url, null, null), null);
-  }
 }

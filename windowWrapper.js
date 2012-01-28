@@ -24,14 +24,12 @@ exports.WindowWrapper = WindowWrapper;
 function WindowWrapper(wnd, elementMarkerClass)
 {
   this.window = wnd;
-  this.browser = this.E("abp-hooks").getBrowser();
 
   this.popupShowingHandler = this.popupShowingHandler.bind(this);
   this.popupHidingHandler = this.popupHidingHandler.bind(this);
   this.keyPressHandler = this.keyPressHandler.bind(this);
   this.toggleSelection = this.toggleSelection.bind(this);
   this.hideTooltips = this.hideTooltips.bind(this);
-  this.stopSelection = this.stopSelection.bind(this);
 
   this.E("ehh-elementmarker").firstElementChild.setAttribute("class", elementMarkerClass);
 
@@ -40,7 +38,18 @@ function WindowWrapper(wnd, elementMarkerClass)
 WindowWrapper.prototype =
 {
   window: null,
-  browser: null,
+
+  get browser()
+  {
+    if ("gBrowser" in this.window)
+      return this.window.gBrowser;            // Firefox / SeaMonkey browser
+    else if (typeof this.window.getBrowser == "function")
+      return this.window.getBrowser();        // Thunderbird
+    else if (typeof this.window.getMessageBrowser == "function")
+      return this.window.getMessageBrowser(); // SeaMonkey mail
+
+    throw new Error("Failed to find browser element in this application");
+  },
 
   init: function()
   {
@@ -48,7 +57,6 @@ WindowWrapper.prototype =
     this.window.addEventListener("popuphiding", this.popupHidingHandler, false);
     this.window.addEventListener("keypress", this.keyPressHandler, false);
     this.window.addEventListener("blur", this.hideTooltips, true);
-    this.browser.addEventListener("select", this.stopSelection, false);
   },
 
   shutdown: function()
@@ -57,7 +65,6 @@ WindowWrapper.prototype =
     this.window.removeEventListener("popuphiding", this.popupHidingHandler, false);
     this.window.removeEventListener("keypress", this.keyPressHandler, false);
     this.window.removeEventListener("blur", this.hideTooltips, true);
-    this.browser.removeEventListener("select", this.stopSelection, false);
   },
 
   E: function(id)
@@ -134,19 +141,9 @@ WindowWrapper.prototype =
 
   toggleSelection: function()
   {
-    if (this.browser == Aardvark.browser)
-      this.stopSelection();
+    if ("@adblockplus.org/abp/public;1" in Cc && this.browser != Aardvark.browser)
+      Aardvark.start(this);
     else
-      this.startSelection();
-  },
-
-  startSelection: function()
-  {
-    Aardvark.start(this);
-  },
-
-  stopSelection: function()
-  {
-    Aardvark.quit();
+      Aardvark.quit();
   }
 };
