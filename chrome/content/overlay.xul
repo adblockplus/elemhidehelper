@@ -4,38 +4,34 @@
    - version 2.0 (the "License"). You can obtain a copy of the License at
    - http://mozilla.org/MPL/2.0/. -->
 
-<?xml-stylesheet href="chrome://elemhidehelper/skin/overlay.css" type="text/css"?>
-
 <!DOCTYPE overlay SYSTEM "chrome://elemhidehelper/locale/overlay.dtd">
 
-<overlay id="ehh-overlay"
+<popupset id="ehh-popupset"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     xmlns:html="http://www.w3.org/1999/xhtml">
-  <popupset id="ehh-popupset">
-    <tooltip id="ehh-helpbox" noautohide="true" orient="vertical">
-      <description id="ehh-helpbox-title" value="&helpbox.title;"/>
+  <tooltip id="ehh-helpbox" noautohide="true" orient="vertical">
+    <description id="ehh-helpbox-title" value="&helpbox.title;"/>
 
-      <grid flex="1">
-        <columns>
-          <column/>
-          <column flex="1"/>
-        </columns>
-        <rows id="ehh-helpbox-rows"/>
-      </grid>
-    </tooltip>
-    <tooltip id="ehh-commandlabel" noautohide="true">
-      <hbox align="center">
-        <description id="ehh-commandlabel-key"/>
-        <description id="ehh-commandlabel-alternativeKey"/>
-        <description id="ehh-commandlabel-label"/>
-      </hbox>
-    </tooltip>
-    <tooltip id="ehh-viewsource" noautohide="true" orient="vertical"/>
-    <tooltip id="ehh-elementmarker">
-      <html:div>
-        <html:div class="border"/>
-        <html:div class="label"><html:span class="labelTag"/><html:span class="labelAddition"/></html:div>
-      </html:div>
-    </tooltip>
-  </popupset>
-</overlay>
+    <grid flex="1">
+      <columns>
+        <column/>
+        <column flex="1"/>
+      </columns>
+      <rows id="ehh-helpbox-rows"/>
+    </grid>
+  </tooltip>
+  <tooltip id="ehh-commandlabel" noautohide="true">
+    <hbox align="center">
+      <description id="ehh-commandlabel-key"/>
+      <description id="ehh-commandlabel-alternativeKey"/>
+      <description id="ehh-commandlabel-label"/>
+    </hbox>
+  </tooltip>
+  <tooltip id="ehh-viewsource" noautohide="true" orient="vertical"/>
+  <tooltip id="ehh-elementmarker">
+    <html:div>
+      <html:div class="border"/>
+      <html:div class="label"><html:span class="labelTag"/><html:span class="labelAddition"/></html:div>
+    </html:div>
+  </tooltip>
+</popupset>

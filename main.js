@@ -50,13 +50,7 @@ request.addEventListener("load", function(event)
   if (onShutdown.done)
     return;
 
-  let overlay = {__proto__: null, "_processing": []};
-  for (let child = event.target.responseXML.documentElement.firstElementChild; child; child = child.nextElementSibling)
-    if (child.hasAttribute("id"))
-      overlay[child.getAttribute("id")] = child;
-  for (let child = event.target.responseXML.firstChild; child; child = child.nextSibling)
-    if (child.nodeType == child.PROCESSING_INSTRUCTION_NODE)
-      overlay._processing.push(child);
+  let overlay = event.target.responseXML.documentElement;
 
   // Initialization done, we can start up now
   require("inspectorObserver");
@@ -68,15 +62,10 @@ request.addEventListener("load", function(event)
         if (onShutdown.done || !window.document.getElementById("abp-hooks"))
           return;
 
-        for (let id in overlay)
-          if (id != "_processing")
-            window.document.documentElement.appendChild(window.document.importNode(overlay[id], true));
-        for (let i = 0; i < overlay._processing.length; i++)
-        {
-          let node = window.document.importNode(overlay._processing[i], true);
-          node.data += ' class="elemhidehelper-node"';
-          window.document.insertBefore(node, window.document.firstChild);
-        }
+        window.document.documentElement.appendChild(overlay.cloneNode(true));
+
+        let style = window.document.createProcessingInstruction("xml-stylesheet", 'class="elemhidehelper-node" href="chrome://elemhidehelper/skin/overlay.css" type="text/css"');
+        window.document.insertBefore(style, window.document.firstChild);
 
         window._ehhWrapper = new WindowWrapper(window, elementMarkerClass);
       }, 0);
@@ -90,23 +79,13 @@ request.addEventListener("load", function(event)
       window._ehhWrapper.shutdown();
       delete window._ehhWrapper;
 
-      let remove = [];
-      for (let id in overlay)
-      {
-        if (id != "_processing")
-        {
-          let element = window.document.getElementById(id);
-          if (element)
-            remove.push(element);
-        }
-      }
+      let element = window.document.getElementById(overlay.getAttribute("id"));
+      if (element)
+        element.parentNode.removeChild(element);
 
       for (let child = window.document.firstChild; child; child = child.nextSibling)
         if (child.nodeType == child.PROCESSING_INSTRUCTION_NODE && child.data.indexOf("elemhidehelper-node") >= 0)
-          remove.push(child);
-
-      for (let i = 0; i < remove.length; i++)
-        remove[i].parentNode.removeChild(remove[i]);
+          child.parentNode.removeChild(child);
     }
   });
 }, false);
