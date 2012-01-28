@@ -17,7 +17,6 @@
   onload="init()"
   buttons="accept">
 
-<script type="application/x-javascript;version=1.7" src="utils.js"/>
 <script type="application/x-javascript;version=1.7" src="common.js"/>
 <script type="application/x-javascript;version=1.7" src="about.js"/>
 
