@@ -382,19 +382,7 @@ let Aardvark = exports.Aardvark =
 
   getWindowSize: function(wnd)
   {
-    // Cannot use wnd.innerWidth/Height because they won't account for scrollbars
-    let doc = wnd.document;
-    let wndWidth = doc.documentElement.clientWidth;
-    let wndHeight = doc.documentElement.clientHeight;
-    if (doc.compatMode == "BackCompat") // clientHeight will be bogus in quirks mode
-      wndHeight = Math.max(doc.documentElement.offsetHeight, doc.body.offsetHeight) - wnd.scrollMaxY - 1;
-
-    // Failsafe: document size will be meaningless if all elements use absolute positioning
-    if (wndWidth <= 0)
-      wndWidth = wnd.innerWidth;
-    if (wndHeight <= 0)
-      wndHeight = wnd.innerHeight;
-    return [wndWidth, wndHeight];
+    return [wnd.innerWidth, wnd.innerHeight];
   },
 
   getElementPosition: function(element)
