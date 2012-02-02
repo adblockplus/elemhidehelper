@@ -82,6 +82,8 @@ WindowWrapper.prototype =
     if (!/^(abp-(?:toolbar|status|menuitem)-)popup$/.test(popup.id))
       return;
 
+    this.popupHiddenHandler(event);
+
     let enabled = Aardvark.canSelect(this.browser);
     let running = (enabled && this.browser == Aardvark.browser);
 
