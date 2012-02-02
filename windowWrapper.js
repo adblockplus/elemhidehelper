@@ -26,7 +26,7 @@ function WindowWrapper(wnd, elementMarkerClass)
   this.window = wnd;
 
   this.popupShowingHandler = this.popupShowingHandler.bind(this);
-  this.popupHidingHandler = this.popupHidingHandler.bind(this);
+  this.popupHiddenHandler = this.popupHiddenHandler.bind(this);
   this.keyPressHandler = this.keyPressHandler.bind(this);
   this.toggleSelection = this.toggleSelection.bind(this);
   this.hideTooltips = this.hideTooltips.bind(this);
@@ -54,7 +54,7 @@ WindowWrapper.prototype =
   init: function()
   {
     this.window.addEventListener("popupshowing", this.popupShowingHandler, false);
-    this.window.addEventListener("popuphiding", this.popupHidingHandler, false);
+    this.window.addEventListener("popuphidden", this.popupHiddenHandler, false);
     this.window.addEventListener("keypress", this.keyPressHandler, false);
     this.window.addEventListener("blur", this.hideTooltips, true);
   },
@@ -62,7 +62,7 @@ WindowWrapper.prototype =
   shutdown: function()
   {
     this.window.removeEventListener("popupshowing", this.popupShowingHandler, false);
-    this.window.removeEventListener("popuphiding", this.popupHidingHandler, false);
+    this.window.removeEventListener("popuphidden", this.popupHiddenHandler, false);
     this.window.removeEventListener("keypress", this.keyPressHandler, false);
     this.window.removeEventListener("blur", this.hideTooltips, true);
   },
@@ -105,14 +105,14 @@ WindowWrapper.prototype =
     popup.insertBefore(item, insertBefore);
   },
 
-  popupHidingHandler: function(event)
+  popupHiddenHandler: function(event)
   {
     let popup = event.target;
     if (!/^(abp-(?:toolbar|status|menuitem)-)popup$/.test(popup.id))
       return;
 
     let items = popup.getElementsByClassName("elemhidehelper-item");
-    if (items.length)
+    while (items.length)
       items[0].parentNode.removeChild(items[0]);
   },
 
