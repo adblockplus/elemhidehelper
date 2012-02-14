@@ -1,7 +1,0 @@
-<!ENTITY dialog.title "Element Hiding Helper hakkında">
-<!ENTITY version.title "Sürüm">
-<!ENTITY description "Element Hiding Helper bileşen gizleme kurallarını oluşturmayı kolaylaştırmayı sağlayan ve Adblock Plus'ın tamamlayıcısı olan bir eklentidir. Gizlenmesini istediğiniz bileşini seçin ve ileride bu bileşenin hangi özelliklerinin gizlenmesi gerektiğini belirleyin. Bileşen gizleme kuralı kendiliğinden üretilir ve eklenir.">
-<!ENTITY homepage.label "Element Hiding Helper ana sayfası:">
-<!ENTITY author.label "Yazar:">
-<!ENTITY contributors.label "Katkıda bulunanlar:">
-<!ENTITY translators.label "Çevirmenler:">

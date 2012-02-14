@@ -1,7 +1,0 @@
-<!ENTITY dialog.title "Sobre Element Hiding Helper">
-<!ENTITY version.title "Versão">
-<!ENTITY description "Element Hiding Helper é uma extensão para Adblock Plus, que permite criar regras mais fáceis. Basta selecionar o elemento desejado para ser escondido e depois escolher quais atributos deste elemento deve ser levado em conta quando escondê-lo no futuro. A regra será gerada e adicionada automaticamente.">
-<!ENTITY homepage.label "Site do Element Hiding Helper:">
-<!ENTITY author.label "Autor:">
-<!ENTITY contributors.label "Contribuidores:">
-<!ENTITY translators.label "Tradutores:">
