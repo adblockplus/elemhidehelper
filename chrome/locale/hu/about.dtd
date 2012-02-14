@@ -1,7 +1,0 @@
-<!ENTITY dialog.title "Element Hiding Helper - Súgó">
-<!ENTITY version.title "Vátozat">
-<!ENTITY description "Egyszerűen válassza ki az elemet, amelyet el kíván rejteni. Megadja az elem attribútumait, amelyek alapján a későbbiekben az elem elrejtődik. Az elrejtés szabálya automatikusan generálódik és hozzáadódik.">
-<!ENTITY homepage.label "Az Element Hiding Helper honlapja:">
-<!ENTITY author.label "Készítő:">
-<!ENTITY contributors.label "Közreműködők:">
-<!ENTITY translators.label "Fordítók:">

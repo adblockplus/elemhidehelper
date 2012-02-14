@@ -1,7 +1,0 @@
-<!ENTITY dialog.title "Σχετικά με το Element Hiding Helper">
-<!ENTITY version.title "Έκδοση">
-<!ENTITY description "Το Element Hiding Helper είναι ένα συμπληρωματικό πρόσθετο για το Adblock Plus με προορισμό την ευκολότερη δημιουργία κανόνων απόκρυψης στοιχείων. Απλά επιλέγετε το στοιχείο που θέλετε να φραγεί και επιλέξτε ποια χαρακτηριστικά αυτού θα ληφθούν υπόψη όταν κρυφτεί στο μέλλον. Ο κανόνας απόκρυψης στοιχείων δημιουργείται και προστίθεται στο Adblock Plus αυτόματα.">
-<!ENTITY homepage.label "Ιστοσελίδα του Element Hiding Helper">
-<!ENTITY author.label "Συγγραφέας:">
-<!ENTITY contributors.label "Συντελεστές:">
-<!ENTITY translators.label "Μεταφραστές:">

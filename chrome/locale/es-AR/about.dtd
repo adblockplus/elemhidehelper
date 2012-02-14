@@ -1,7 +1,0 @@
-<!ENTITY dialog.title "Acerca del Asistente ocultador de elementos">
-<!ENTITY version.title "Versión">
-<!ENTITY description "El Asistente ocultador de elementos es la compañía perfecta para Adblock Plus, el cual te ayuda a crear más fácilmente reglas para ocultar elementos. Simplemente elegí el elemento que querés ocultar y luego qué atributos deberían tomarse en cuenta, de ahora en más, al ocultar elementos. La regla de ocultación de elementos es generada y agregada automáticamente.">
-<!ENTITY homepage.label "Sitio web oficial del Asistente ocultador de elementos:">
-<!ENTITY author.label "Autor:">
-<!ENTITY contributors.label "Contribuyentes:">
-<!ENTITY translators.label "Traductores:">

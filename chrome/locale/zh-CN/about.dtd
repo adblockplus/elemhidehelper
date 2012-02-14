@@ -1,7 +1,0 @@
-<!ENTITY dialog.title "关于 Element Hiding Helper">
-<!ENTITY version.title "版本">
-<!ENTITY description "Element Hiding Helper 是 Adblock Plus 的一个辅助扩展, 可以让用户能更加简便的隐藏页面元素. 你只需要选中想隐藏的元素并设置应用的范围和属性, 规则就自动创建并添加了.">
-<!ENTITY homepage.label "Element Hiding Helper 主页:">
-<!ENTITY author.label "作者:">
-<!ENTITY contributors.label "贡献者:">
-<!ENTITY translators.label "翻译者:">

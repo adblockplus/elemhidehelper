@@ -1,7 +1,0 @@
-<!ENTITY dialog.title "Despre Element Hiding Helper">
-<!ENTITY version.title "Versiunea">
-<!ENTITY description "Element Hiding Helper este un supliment ajutător pentru Adblock Plus care uşurează crearea regulilor de ascundere. Nu trebuie decât să selectaţi elementul pe care doriţi să-l ascundeţi, apoi să alegeţi care atribute ale acestui element sunt suficiente pentru identificarea elementului. Regula de ascundere va fi generată automat.">
-<!ENTITY homepage.label "Pagina de start Element Hiding Helper:">
-<!ENTITY author.label "Autor:">
-<!ENTITY contributors.label "Contribuţii:">
-<!ENTITY translators.label "Traducători:">

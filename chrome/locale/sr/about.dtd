@@ -1,7 +1,0 @@
-<!ENTITY dialog.title "О додатку">
-<!ENTITY version.title "Верзија">
-<!ENTITY description "Element Hiding Helper је пратећи додатак за Adblock Plus, намењен лакшем прављењу правила за сакривање елемената. Једноставно изаберите елемент који желите да буде сакривен, па изаберите особине елемента који желите да сакријете у будућности. Правило за сакривање елемента се аутоматски ствара и додаје.">
-<!ENTITY homepage.label "Матична страница:">
-<!ENTITY author.label "Аутор:">
-<!ENTITY contributors.label "Помоћници:">
-<!ENTITY translators.label "Преводиоци:">
