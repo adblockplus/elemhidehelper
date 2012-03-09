@@ -267,7 +267,7 @@ function updateExpression()
 
           if (useFallback)
           {
-            var escapedValue = attr.selected.replace(/"/g, '\\"')
+            var escapedValue = attr.selected.replace(/(["\\])/g, '\\$1')
                                             .replace(/([\{\}])/g, escapeChar)
                                             .replace(/([^\S ])/g, escapeChar);
             expression += "[" + escapedName + op + '"' + escapedValue + '"' + "]";
