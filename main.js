@@ -35,7 +35,7 @@ let elementMarkerClass = null;
 }
 
 // Load CSS asynchronously
-let request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIJSXMLHttpRequest);
+let request = Cc["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance(Ci.nsIXMLHttpRequest);
 request.open("GET", "chrome://elemhidehelper/content/elementmarker.css");
 request.overrideMimeType("text/plain");
 request.addEventListener("load", function(event)
