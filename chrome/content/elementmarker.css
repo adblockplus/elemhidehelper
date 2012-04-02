@@ -34,7 +34,7 @@
   padding: 0px !important;
   visibility: visible !important;
   -moz-binding: none !important;
-  -moz-border-radius: 0px !important;
+  border-radius: 0px !important;
   -moz-user-focus: none !important;
   -moz-user-input: none !important;
   -moz-user-select: none !important;
@@ -62,8 +62,8 @@
   border-color: #000000 !important;
   border-width: 0px 2px 1px 2px !important;
   border-style: solid !important;
-  -moz-border-radius-bottomleft: 6px !important;
-  -moz-border-radius-bottomright: 6px !important;
+  border-bottom-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
   padding: 2px 5px !important;
   top: auto !important;
   left: auto !important;
@@ -77,7 +77,7 @@
   left: 5px !important;
   top: -25px !important;
   border-top-width: 1px !important;
-  -moz-border-radius: 6px !important;
+  border-radius: 6px !important;
 }
 
 .%%CLASS%% > .label > .labelTag,
