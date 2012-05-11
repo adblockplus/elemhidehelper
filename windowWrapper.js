@@ -74,8 +74,6 @@ WindowWrapper.prototype =
     return this.E(id);
   },
 
-  key: undefined,
-
   popupShowingHandler: function(event)
   {
     let popup = event.target;
