@@ -4,8 +4,6 @@ basename=elemhidehelper
 branchname=ELEMENT_HIDING_HELPER
 version=1.2.3a
 author=Wladimir Palant
-restartless=true
-nojar=true
 
 [contributors]
 1=Rob Brown
