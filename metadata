@@ -2,7 +2,7 @@
 id=elemhidehelper@adblockplus.org
 basename=elemhidehelper
 branchname=ELEMENT_HIDING_HELPER
-version=1.2.3
+version=1.2.4a
 author=Wladimir Palant
 
 [contributors]
