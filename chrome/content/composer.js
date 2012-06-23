@@ -391,9 +391,12 @@ function fillDomains(domainData) {
 
   var parts = domainData.value.split(".");
   if (parts[0] == "")
-    parts.splice(0, 1);
+    parts.shift();
 
   for (var i = 1; i <= parts.length; i++) {
+    if (parts[parts.length - i] == "")
+      continue;
+
     var curDomain = parts.slice(parts.length - i).join(".");
 
     node = document.createElement("radio");
