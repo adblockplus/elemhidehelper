@@ -1,0 +1,17 @@
+<!ENTITY dialog.title "חיבור כלל להסתרת רכיב">
+<!ENTITY groupDisabled.warning "קבוצת הסינון &quot;?1?&quot; שמסנן זה יתווסף אליו אינו זמין כעת. עדיין תוכל להוסיף את המסנן אך הוא לא יהיה מיושם אלא אם כן תפעיל את קבוצת הסינון במאפיינים של Adblock Lite.">
+<!ENTITY accept.label "הוסף כלל להסתרת רכיב">
+<!ENTITY advanced.label "תצוגה מתקדמת">
+<!ENTITY basic.label "תצוגה בסיסית">
+<!ENTITY expression.label "כלל הסתרת רכיב">
+<!ENTITY preview.label "תצוגה מקדימה">
+<!ENTITY domain.label "אגד לקבוצת מחשבים">
+<!ENTITY domain.none.label "בכל תחום (לא מומלץ)">
+<!ENTITY nodes-tree.node.label "צומת">
+<!ENTITY nodes-tree.id.label "מזהה">
+<!ENTITY nodes-tree.class.label "מחלקה">
+<!ENTITY attributes.label "דורש תכונות">
+<!ENTITY attributes.tagname.label "שם תג:">
+<!ENTITY attributes.firstchild.label "תוצאה ראשונה של רכיב ב־CSS">
+<!ENTITY attributes.lastchild.label "תוצאה אחרונה של רכיב ב־CSS">
+<!ENTITY attributes.custom.label "גליון סגנונות מדורג (CSS) מותאם אישית:">
