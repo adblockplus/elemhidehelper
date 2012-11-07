@@ -1,4 +1,7 @@
-<!ENTITY dialog.title "Composa la norma per amagar">
+<!ENTITY dialog.title "Composa la norma d'omissió d'elements">
+<!ENTITY groupDisabled.warning "El grup de filtres &quot;?1?&quot; el qual serà afegit aquest filtre actualment està desactivat.
+	Encara pots afegir el filtre però no serà aplicat excepte que activis el grup de filtres
+	En les preferències d'AdBlock Plus.">
 <!ENTITY accept.label "Afegeix norma de filtre">
 <!ENTITY advanced.label "Vista avançada">
 <!ENTITY basic.label "Vista bàsica">
@@ -8,7 +11,7 @@
 <!ENTITY domain.none.label "qualsevol domini (no recomanat)">
 <!ENTITY nodes-tree.node.label "Node">
 <!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
+<!ENTITY nodes-tree.class.label "clase">
 <!ENTITY attributes.label "Requereix atributs">
 <!ENTITY attributes.tagname.label "Nom de l'etiqueta:">
 <!ENTITY attributes.firstchild.label "Primer atrib">

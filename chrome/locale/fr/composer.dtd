@@ -7,7 +7,7 @@
 <!ENTITY preview.label "Aperçu">
 <!ENTITY domain.label "Associé au domaine">
 <!ENTITY domain.none.label "Tout domaine (non recommandé)">
-<!ENTITY nodes-tree.node.label "Noeud">
+<!ENTITY nodes-tree.node.label "Nœud">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
 <!ENTITY attributes.label "Attributs requis">
