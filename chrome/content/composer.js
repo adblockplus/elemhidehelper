@@ -555,8 +555,17 @@ function togglePreview(preview) {
     previewStyle.textContent = stylesheetData;
   }
   else {
-    if (previewStyle && previewStyle.parentNode)
-      previewStyle.parentNode.removeChild(previewStyle);
+    try
+    {
+      if (previewStyle && previewStyle.parentNode)
+        previewStyle.parentNode.removeChild(previewStyle);
+    }
+    catch (e)
+    {
+      // if the window was closed (reloaded) we end up with dead object reference
+      // https://bugzilla.mozilla.org/show_bug.cgi?id=695480
+      // just ignore this case
+    }
     previewStyle = null;
   }
 }
