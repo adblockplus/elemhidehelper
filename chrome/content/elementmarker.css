@@ -32,6 +32,7 @@
   opacity: 1 !important;
   outline: none !important;
   padding: 0px !important;
+  text-indent: 0px !important;
   visibility: visible !important;
   -moz-binding: none !important;
   border-radius: 0px !important;
@@ -102,7 +103,6 @@
   line-height: normal !important;
   text-align: start !important;
   text-decoration: none !important;
-  text-indent: 0px !important;
   text-shadow: none !important;
   text-transform: none !important;
   text-transform: none !important;
