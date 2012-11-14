@@ -30,8 +30,8 @@
   <tooltip id="ehh-viewsource" noautohide="true" orient="vertical"/>
   <tooltip id="ehh-elementmarker">
     <html:div>
-      <html:div class="border"/>
-      <html:div class="label"><html:span class="labelTag"/><html:span class="labelAddition"/></html:div>
+      <html:div class="ehh-border"/>
+      <html:div class="ehh-label"><html:span class="ehh-labelTag"/><html:span class="ehh-labelAddition"/></html:div>
     </html:div>
   </tooltip>
 </popupset>

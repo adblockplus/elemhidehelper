@@ -7,10 +7,10 @@
 @namespace url("http://www.w3.org/1999/xhtml");
 
 .%%CLASS%%,
-.%%CLASS%% > .label,
-.%%CLASS%% > .label > .labelTag,
-.%%CLASS%% > .label > .labelAddition,
-.%%CLASS%% > .border
+.%%CLASS%% > .ehh-label,
+.%%CLASS%% > .ehh-label > .ehh-labelTag,
+.%%CLASS%% > .ehh-label > .ehh-labelAddition,
+.%%CLASS%% > .ehh-border
 {
   display: block !important;
   position: static !important;
@@ -49,14 +49,14 @@
   height: auto !important;
 }
 
-.%%CLASS%% > .border
+.%%CLASS%% > .ehh-border
 {
   border: 2px solid #ff0000 !important;
   top: auto !important;
   left: auto !important;
 }
 
-.%%CLASS%% > .label
+.%%CLASS%% > .ehh-label
 {
   float: left !important;
   background-color: #fff0cc !important;
@@ -72,7 +72,7 @@
   height: auto !important;
 }
 
-.%%CLASS%% > .label.onTop
+.%%CLASS%% > .ehh-label.onTop
 {
   position: relative !important;
   left: 5px !important;
@@ -81,8 +81,8 @@
   border-radius: 6px !important;
 }
 
-.%%CLASS%% > .label > .labelTag,
-.%%CLASS%% > .label > .labelAddition
+.%%CLASS%% > .ehh-label > .ehh-labelTag,
+.%%CLASS%% > .ehh-label > .ehh-labelAddition
 {
   display: inline !important;
   font-family: Arial !important;
@@ -110,7 +110,7 @@
   word-spacing: 0px !important;
 }
 
-.%%CLASS%% > .label > .labelTag
+.%%CLASS%% > .ehh-label > .ehh-labelTag
 {
   font-weight: bold !important;
 }
