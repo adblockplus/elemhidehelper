@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "Συγγραφή κανόνα απόκρυψης στοιχείου">
-<!ENTITY groupDisabled.warning "Η ομάδα φίλτρων &quot;?1?&quot; στην οποία αυτό το φίλτρο θα προστεθεί είναι απενεργοποιημένη. Μπορείτε να προσθέσετε το φίλτρο αλλά αυτό δεν θα εφαρμοστεί μέχρι να ενεργοποιήσετε την ομάδα φίλτρων από τις προτιμήσεις του Adblock Plus.">
-<!ENTITY accept.label "Προσθήκη κανόνα φίλτρου">
-<!ENTITY advanced.label "Λεπτομερής προβολή">
-<!ENTITY basic.label "Βασική προβολή">
-<!ENTITY expression.label "Κανόνας φίλτρου">
 <!ENTITY preview.label "Προεπισκόπηση">
-<!ENTITY domain.label "Προσκόλληση στον τομέα">
-<!ENTITY domain.none.label "Οποιοδήποτε (δεν προτείνεται)">
-<!ENTITY nodes-tree.node.label "Κόμβος">
-<!ENTITY nodes-tree.id.label "αναγνωριστικό">
-<!ENTITY nodes-tree.class.label "κλάση">
-<!ENTITY attributes.label "Απαίτηση ιδιοτήτων">
-<!ENTITY attributes.tagname.label "Ετικέτα:">
-<!ENTITY attributes.firstchild.label "Πρώτος απόγονος">
+<!ENTITY accept.label "Προσθήκη κανόνα φίλτρου">
 <!ENTITY attributes.lastchild.label "Τελευταίος απόγονος">
+<!ENTITY expression.label "Κανόνας φίλτρου">
+<!ENTITY domain.label "Προσκόλληση στον τομέα">
+<!ENTITY nodes-tree.id.label "αναγνωριστικό">
+<!ENTITY groupDisabled.warning "Η ομάδα φίλτρων &quot;?1?&quot; στην οποία αυτό το φίλτρο θα προστεθεί είναι απενεργοποιημένη. Μπορείτε να προσθέσετε το φίλτρο αλλά αυτό δεν θα εφαρμοστεί μέχρι να ενεργοποιήσετε την ομάδα φίλτρων από τις προτιμήσεις του Adblock Plus.">
+<!ENTITY nodes-tree.class.label "κλάση">
+<!ENTITY advanced.label "Λεπτομερής προβολή">
+<!ENTITY attributes.tagname.label "Ετικέτα:">
+<!ENTITY domain.none.label "Οποιοδήποτε (δεν προτείνεται)">
+<!ENTITY dialog.title "Συγγραφή κανόνα απόκρυψης στοιχείου">
+<!ENTITY basic.label "Βασική προβολή">
+<!ENTITY attributes.label "Απαίτηση ιδιοτήτων">
+<!ENTITY attributes.firstchild.label "Πρώτος απόγονος">
 <!ENTITY attributes.custom.label "Προσαρμοσμένο CSS:">
+<!ENTITY nodes-tree.node.label "Κόμβος">

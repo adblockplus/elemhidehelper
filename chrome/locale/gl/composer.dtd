@@ -1,16 +1,15 @@
-<!ENTITY dialog.title "Compor regra de ocultamento de elementos">
-<!ENTITY accept.label "Engadie regra de filtro">
-<!ENTITY advanced.label "Vista avanzada">
-<!ENTITY basic.label "Vista básica">
-<!ENTITY expression.label "Regra de filtro">
 <!ENTITY preview.label "Vista previa">
-<!ENTITY domain.label "Obrigar a dominio">
-<!ENTITY domain.none.label "Calquera dominio (non recomendado)">
-<!ENTITY nodes-tree.node.label "Nodo">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "clase">
-<!ENTITY attributes.label "Requirir atributos">
-<!ENTITY attributes.tagname.label "Nome da etiqueta:">
-<!ENTITY attributes.firstchild.label "Primeiro fillo">
+<!ENTITY accept.label "Engadie regra de filtro">
 <!ENTITY attributes.lastchild.label "Último fillo">
+<!ENTITY expression.label "Regra de filtro">
+<!ENTITY domain.label "Obrigar a dominio">
+<!ENTITY nodes-tree.class.label "clase">
+<!ENTITY advanced.label "Vista avanzada">
+<!ENTITY attributes.tagname.label "Nome da etiqueta:">
+<!ENTITY domain.none.label "Calquera dominio (non recomendado)">
+<!ENTITY dialog.title "Compor regra de ocultamento de elementos">
+<!ENTITY basic.label "Vista básica">
+<!ENTITY attributes.label "Requirir atributos">
+<!ENTITY attributes.firstchild.label "Primeiro fillo">
 <!ENTITY attributes.custom.label "CSS personalizado">
+<!ENTITY nodes-tree.node.label "Nodo">

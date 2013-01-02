@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "Tworzenie reguł ukrywania elementów">
-<!ENTITY groupDisabled.warning "Grupa filtru „?1?”, do której ten filtr ma być dodany jest obecnie wyłączona. Możesz dodać do niej ten filtr, ale nie będzie on działał do czasu włączenia grupy w ustawieniach Adblock Plusa.">
-<!ENTITY accept.label "Dodaj regułę filtru">
-<!ENTITY advanced.label "Widok zaawansowany">
-<!ENTITY basic.label "Widok podstawowy">
-<!ENTITY expression.label "Reguła filtru">
 <!ENTITY preview.label "Podgląd">
-<!ENTITY domain.label "Przypisz do domeny">
-<!ENTITY domain.none.label "wszystkie domeny (nie zalecane)">
-<!ENTITY nodes-tree.node.label "Węzeł">
-<!ENTITY nodes-tree.id.label "ID">
-<!ENTITY nodes-tree.class.label "Klasa">
-<!ENTITY attributes.label "Atrybuty">
-<!ENTITY attributes.tagname.label "nazwa znacznika -">
-<!ENTITY attributes.firstchild.label "pierwszy potomek">
+<!ENTITY accept.label "Dodaj regułę filtru">
 <!ENTITY attributes.lastchild.label "ostatni potomek">
+<!ENTITY expression.label "Reguła filtru">
+<!ENTITY domain.label "Przypisz do domeny">
+<!ENTITY nodes-tree.id.label "ID">
+<!ENTITY groupDisabled.warning "Grupa filtru „?1?”, do której ten filtr ma być dodany jest obecnie wyłączona. Możesz dodać do niej ten filtr, ale nie będzie on działał do czasu włączenia grupy w ustawieniach Adblock Plusa.">
+<!ENTITY nodes-tree.class.label "Klasa">
+<!ENTITY advanced.label "Widok zaawansowany">
+<!ENTITY attributes.tagname.label "nazwa znacznika -">
+<!ENTITY domain.none.label "wszystkie domeny (nie zalecane)">
+<!ENTITY dialog.title "Tworzenie reguł ukrywania elementów">
+<!ENTITY basic.label "Widok podstawowy">
+<!ENTITY attributes.label "Atrybuty">
+<!ENTITY attributes.firstchild.label "pierwszy potomek">
 <!ENTITY attributes.custom.label "własny CSS">
+<!ENTITY nodes-tree.node.label "Węzeł">

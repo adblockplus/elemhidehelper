@@ -1,16 +1,13 @@
-<!ENTITY dialog.title "Sammensæt elementskjulningsregel">
-<!ENTITY accept.label "Tilføj filterregel">
-<!ENTITY advanced.label "Avanceret visning">
-<!ENTITY basic.label "Basisvisning">
-<!ENTITY expression.label "Filterregel">
 <!ENTITY preview.label "Forhåndsvisning">
-<!ENTITY domain.label "Bind til domæne">
-<!ENTITY domain.none.label "Ethvert domæne (anbefales ikke)">
-<!ENTITY nodes-tree.node.label "Node">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Kræver attributter">
-<!ENTITY attributes.tagname.label "Tag navn:">
-<!ENTITY attributes.firstchild.label "Første underliggende">
+<!ENTITY accept.label "Tilføj filterregel">
 <!ENTITY attributes.lastchild.label "Sidste underliggende">
+<!ENTITY expression.label "Filterregel">
+<!ENTITY domain.label "Bind til domæne">
+<!ENTITY attributes.tagname.label "Tag navn:">
+<!ENTITY advanced.label "Avanceret visning">
+<!ENTITY domain.none.label "Ethvert domæne (anbefales ikke)">
+<!ENTITY dialog.title "Sammensæt elementskjulningsregel">
+<!ENTITY basic.label "Basisvisning">
+<!ENTITY attributes.firstchild.label "Første underliggende">
 <!ENTITY attributes.custom.label "Brugertilpasset CSS:">
+<!ENTITY attributes.label "Kræver attributter">

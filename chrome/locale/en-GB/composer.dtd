@@ -1,19 +1,19 @@
-<!ENTITY dialog.title "Compose element hiding rule">
+<!ENTITY preview.label "Preview">
+<!ENTITY accept.label "Add filter rule">
+<!ENTITY attributes.lastchild.label "Last child">
+<!ENTITY expression.label "Filter rule">
+<!ENTITY domain.label "Bind to domain">
+<!ENTITY nodes-tree.id.label "id">
 <!ENTITY groupDisabled.warning "The filter group &quot;?1?&quot; that this filter will be added to is currently disabled.
 	You can still add the filter but it will not be applied unless you enable the filter group
 	in Adblock Plus preferences.">
-<!ENTITY accept.label "Add filter rule">
-<!ENTITY advanced.label "Advanced view">
-<!ENTITY basic.label "Basic view">
-<!ENTITY expression.label "Filter rule">
-<!ENTITY preview.label "Preview">
-<!ENTITY domain.label "Bind to domain">
-<!ENTITY domain.none.label "Any domain (not recommended)">
-<!ENTITY nodes-tree.node.label "Node">
-<!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Require attributes">
+<!ENTITY advanced.label "Advanced view">
 <!ENTITY attributes.tagname.label "Tag name:">
+<!ENTITY domain.none.label "Any domain (not recommended)">
+<!ENTITY dialog.title "Compose element hiding rule">
+<!ENTITY basic.label "Basic view">
+<!ENTITY attributes.label "Require attributes">
 <!ENTITY attributes.firstchild.label "First child">
-<!ENTITY attributes.lastchild.label "Last child">
 <!ENTITY attributes.custom.label "Custom CSS:">
+<!ENTITY nodes-tree.node.label "Node">

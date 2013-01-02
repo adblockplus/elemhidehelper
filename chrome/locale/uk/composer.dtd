@@ -1,17 +1,16 @@
-<!ENTITY dialog.title "Додати правило фільтрування Adblock Plus">
-<!ENTITY groupDisabled.warning "Група фільтрів «?1?», до якої буде додано цей фільтр, наразі вимкнена. Ви все одно можете додати фільтр, але він не буде застосований доки ви не увімкнете цю групу фільтрів у налаштуваннях Adblock Plus.">
-<!ENTITY accept.label "Додати фільтр">
-<!ENTITY advanced.label "Складний вигляд">
-<!ENTITY basic.label "Простий вигляд">
-<!ENTITY expression.label "Правило фільтрування">
 <!ENTITY preview.label "Переглянути">
-<!ENTITY domain.label "Прив’язати до домену">
-<!ENTITY domain.none.label "Будь-який домен (не рекомендовано)">
-<!ENTITY nodes-tree.node.label "Вузол">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "клас">
-<!ENTITY attributes.label "Вимагає атрибутів">
-<!ENTITY attributes.tagname.label "Ім’я теґу:">
-<!ENTITY attributes.firstchild.label "Перший нащадок">
+<!ENTITY accept.label "Додати фільтр">
 <!ENTITY attributes.lastchild.label "Останній нащадок">
+<!ENTITY expression.label "Правило фільтрування">
+<!ENTITY domain.label "Прив’язати до домену">
+<!ENTITY groupDisabled.warning "Група фільтрів «?1?», до якої буде додано цей фільтр, наразі вимкнена. Ви все одно можете додати фільтр, але він не буде застосований доки ви не увімкнете цю групу фільтрів у налаштуваннях Adblock Plus.">
+<!ENTITY nodes-tree.class.label "клас">
+<!ENTITY advanced.label "Складний вигляд">
+<!ENTITY attributes.tagname.label "Ім’я теґу:">
+<!ENTITY domain.none.label "Будь-який домен (не рекомендовано)">
+<!ENTITY dialog.title "Додати правило фільтрування Adblock Plus">
+<!ENTITY basic.label "Простий вигляд">
+<!ENTITY attributes.label "Вимагає атрибутів">
+<!ENTITY attributes.firstchild.label "Перший нащадок">
 <!ENTITY attributes.custom.label "Власний CSS:">
+<!ENTITY nodes-tree.node.label "Вузол">

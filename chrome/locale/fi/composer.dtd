@@ -1,16 +1,15 @@
-<!ENTITY dialog.title "Täytä elementin piilotussääntö">
-<!ENTITY accept.label "Lisää suodatin">
-<!ENTITY advanced.label "Lisänäkymä">
-<!ENTITY basic.label "Perusnäkymä">
-<!ENTITY expression.label "Suodatinsääntö">
 <!ENTITY preview.label "Esikatselu">
-<!ENTITY domain.label "Liitä verkkonimeen">
-<!ENTITY domain.none.label "kaikkiin verkkonimiin (ei suositeltua)">
-<!ENTITY nodes-tree.node.label "Kohta">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "luokka">
-<!ENTITY attributes.label "Vaadi attribuutit">
-<!ENTITY attributes.tagname.label "Nimike:">
-<!ENTITY attributes.firstchild.label "Ensimmäinen">
+<!ENTITY accept.label "Lisää suodatin">
 <!ENTITY attributes.lastchild.label "Viimeinen">
+<!ENTITY expression.label "Suodatinsääntö">
+<!ENTITY domain.label "Liitä verkkonimeen">
+<!ENTITY nodes-tree.class.label "luokka">
+<!ENTITY advanced.label "Lisänäkymä">
+<!ENTITY attributes.tagname.label "Nimike:">
+<!ENTITY domain.none.label "kaikkiin verkkonimiin (ei suositeltua)">
+<!ENTITY dialog.title "Täytä elementin piilotussääntö">
+<!ENTITY basic.label "Perusnäkymä">
+<!ENTITY attributes.label "Vaadi attribuutit">
+<!ENTITY attributes.firstchild.label "Ensimmäinen">
 <!ENTITY attributes.custom.label "Oma CSS:">
+<!ENTITY nodes-tree.node.label "Kohta">

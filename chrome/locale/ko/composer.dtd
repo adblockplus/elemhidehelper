@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "필터 작성">
-<!ENTITY groupDisabled.warning "&quot;?1?&quot; 필터 그룹의 사용 중지 : 필터 추가 가능 + 필터 적용 중지">
-<!ENTITY accept.label "추가">
-<!ENTITY advanced.label "고급 보기">
-<!ENTITY basic.label "기본 보기">
-<!ENTITY expression.label "새 필터">
 <!ENTITY preview.label "미리보기">
-<!ENTITY domain.label "도메인 지정">
-<!ENTITY domain.none.label "모든 도메인 (권장 안 함)">
-<!ENTITY nodes-tree.node.label "노드">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "속성 지정">
-<!ENTITY attributes.tagname.label "태그 이름 :">
-<!ENTITY attributes.firstchild.label "첫 번째 자식">
+<!ENTITY accept.label "추가">
 <!ENTITY attributes.lastchild.label "마지막 자식">
+<!ENTITY expression.label "새 필터">
+<!ENTITY domain.label "도메인 지정">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "&quot;?1?&quot; 필터 그룹의 사용 중지 : 필터 추가 가능 + 필터 적용 중지">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY advanced.label "고급 보기">
+<!ENTITY attributes.tagname.label "태그 이름 :">
+<!ENTITY domain.none.label "모든 도메인 (권장 안 함)">
+<!ENTITY dialog.title "필터 작성">
+<!ENTITY basic.label "기본 보기">
+<!ENTITY attributes.label "속성 지정">
+<!ENTITY attributes.firstchild.label "첫 번째 자식">
 <!ENTITY attributes.custom.label "사용자 지정 CSS">
+<!ENTITY nodes-tree.node.label "노드">

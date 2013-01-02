@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "Création de filtres pour masquer des éléments">
-<!ENTITY groupDisabled.warning "Le groupe de filtres &quot;?1?&quot; auquel ce filtre sera ajouté est actuellement désactivé. Vous pouvez cependant l'ajouter mais il ne sera pas appliqué tant que vous n'aurez pas activé le groupe de filtres  dans les préférences d'Adblock Plus.">
-<!ENTITY accept.label "Ajouter le filtre">
-<!ENTITY advanced.label "Affichage avancé">
-<!ENTITY basic.label "Affichage basique">
-<!ENTITY expression.label "Filtre">
 <!ENTITY preview.label "Aperçu">
-<!ENTITY domain.label "Associé au domaine">
-<!ENTITY domain.none.label "Tout domaine (non recommandé)">
-<!ENTITY nodes-tree.node.label "Nœud">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Attributs requis">
-<!ENTITY attributes.tagname.label "Nom de la balise :">
-<!ENTITY attributes.firstchild.label "Premier élément enfant">
+<!ENTITY accept.label "Ajouter le filtre">
 <!ENTITY attributes.lastchild.label "Dernier élément enfant">
-<!ENTITY attributes.custom.label "CSS personnalisée :">
+<!ENTITY expression.label "Filtre">
+<!ENTITY domain.label "Associé au domaine">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "Le groupe de filtres &quot;?1?&quot; auquel ce filtre sera ajouté est actuellement désactivé. Vous pouvez cependant l'ajouter mais il ne sera pas appliqué tant que vous n'aurez pas activé le groupement de filtres  dans les préférences d'Adblock Plus.">
+<!ENTITY nodes-tree.class.label "classe">
+<!ENTITY advanced.label "Affichage avancé">
+<!ENTITY attributes.tagname.label "Nom de la balise :">
+<!ENTITY domain.none.label "Tout domaine (non recommandé)">
+<!ENTITY dialog.title "Création de filtres pour masquer des éléments">
+<!ENTITY basic.label "Affichage basique">
+<!ENTITY attributes.label "Attributs requis">
+<!ENTITY attributes.firstchild.label "Premier élément enfant">
+<!ENTITY attributes.custom.label "CSS personnalisé :">
+<!ENTITY nodes-tree.node.label "Nœud">

@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "Redactar regla ocultadora de elementos">
-<!ENTITY groupDisabled.warning "El grupo de filtros &quot;?1?&quot; en el que se va a agregar este filtro, está actualmente deshabilitado. Podés agregar el filtro de todas maneras, pero no será aplicado a menos que habilites el grupo de filtros en las preferencias de Adblock Plus.">
-<!ENTITY accept.label "Agregar regla de filtros">
-<!ENTITY advanced.label "Vista avanzada">
-<!ENTITY basic.label "Vista básica">
-<!ENTITY expression.label "Regla de filtro">
 <!ENTITY preview.label "Previsualización">
-<!ENTITY domain.label "Unido al dominio">
-<!ENTITY domain.none.label "Cualquier dominio (no recomendado)">
-<!ENTITY nodes-tree.node.label "Nodo">
-<!ENTITY nodes-tree.id.label "identificación">
-<!ENTITY nodes-tree.class.label "clase">
-<!ENTITY attributes.label "Requiere atributos">
-<!ENTITY attributes.tagname.label "Nombre de etiqueta:">
-<!ENTITY attributes.firstchild.label "Primer hijo">
+<!ENTITY accept.label "Agregar regla de filtros">
 <!ENTITY attributes.lastchild.label "Último hijo">
+<!ENTITY expression.label "Regla de filtro">
+<!ENTITY domain.label "Unido al dominio">
+<!ENTITY nodes-tree.id.label "identificación">
+<!ENTITY groupDisabled.warning "El grupo de filtros &quot;?1?&quot; en el que se va a agregar este filtro, está actualmente deshabilitado. Podés agregar el filtro de todas maneras, pero no será aplicado a menos que habilités el grupo de filtros en las preferencias de Adblock Plus.">
+<!ENTITY nodes-tree.class.label "clase">
+<!ENTITY advanced.label "Vista avanzada">
+<!ENTITY attributes.tagname.label "Nombre de etiqueta:">
+<!ENTITY domain.none.label "Cualquier dominio (no recomendado)">
+<!ENTITY dialog.title "Redactar regla ocultadora de elementos">
+<!ENTITY basic.label "Vista básica">
+<!ENTITY attributes.label "Requiere atributos">
+<!ENTITY attributes.firstchild.label "Primer hijo">
 <!ENTITY attributes.custom.label "CSS personalizado:">
+<!ENTITY nodes-tree.node.label "Nodo">

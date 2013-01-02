@@ -1,0 +1,17 @@
+<!ENTITY preview.label "Pśeglěd">
+<!ENTITY accept.label "Pšawidło za chowanje elementa pśidaś">
+<!ENTITY attributes.lastchild.label "Slědne góle">
+<!ENTITY expression.label "Pšawidło za chowanje elementa">
+<!ENTITY domain.label "Na domenu wězaś">
+<!ENTITY nodes-tree.id.label "ID">
+<!ENTITY groupDisabled.warning "Toś ta filtrowa kupka &quot;?1?&quot;, kótarejž se toś ten filter pśidawa, jo tuchylu znjemóžnjona. Móžoš hyšći filter pśidaś, ale njebuźo se nałožowaś, snaźkuli zmóžnjaš filtrowu kupku w nastajenjach Adblock Plus.">
+<!ENTITY nodes-tree.class.label "klasa">
+<!ENTITY advanced.label "Rozšyrjony naglěd">
+<!ENTITY attributes.tagname.label "Mě elementa:">
+<!ENTITY domain.none.label "Někaka domena (njepśiraźujo se)">
+<!ENTITY dialog.title "Pšawidło za chowanje elementa pisaś">
+<!ENTITY basic.label "Zakładny naglěd">
+<!ENTITY attributes.label "Atributy pominaś">
+<!ENTITY attributes.firstchild.label "Prědne góle">
+<!ENTITY attributes.custom.label "Swójski CSS:">
+<!ENTITY nodes-tree.node.label "Suk">

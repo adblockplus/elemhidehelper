@@ -1,21 +1,19 @@
-<!ENTITY dialog.title             "Regel zum Verstecken des Elements zusammenstellen">
-<!ENTITY groupDisabled.warning    "
-  Die Filtergruppe &quot;?1?&quot;, in die dieser Filter eingefügt wird, ist derzeit deaktiviert.
+<!ENTITY preview.label "Vorschau">
+<!ENTITY accept.label "Filterregel hinzufügen">
+<!ENTITY attributes.lastchild.label "Letzter Kindsknoten">
+<!ENTITY expression.label "Filterregel">
+<!ENTITY domain.label "An Domain-Namen binden">
+<!ENTITY nodes-tree.id.label "ID">
+<!ENTITY groupDisabled.warning "Die Filtergruppe &quot;?1?&quot;, in die dieser Filter eingefügt wird, ist derzeit deaktiviert.
   Sie können den Filter trotzdem hinzufügen, dieser wird jedoch erst angewandt,
-  wenn Sie diese Filtergruppe in den Einstellungen von Adblock Plus aktivieren.
-">
-<!ENTITY accept.label             "Filterregel hinzufügen">
-<!ENTITY advanced.label           "Erweiterte Ansicht">
-<!ENTITY basic.label              "Standardansicht">
-<!ENTITY expression.label         "Filterregel">
-<!ENTITY preview.label            "Vorschau">
-<!ENTITY domain.label             "An Domain-Namen binden">
-<!ENTITY domain.none.label        "Alle Domains (nicht empfohlen)">
-<!ENTITY nodes-tree.node.label    "Knoten">
-<!ENTITY nodes-tree.id.label      "id">
-<!ENTITY nodes-tree.class.label   "class">
-<!ENTITY attributes.label         "Benötigte Attribute">
+  wenn Sie diese Filtergruppe in den Einstellungen von Adblock Plus aktivieren.">
+<!ENTITY nodes-tree.class.label "Klasse">
+<!ENTITY advanced.label "Erweiterte Ansicht">
 <!ENTITY attributes.tagname.label "Knotenname:">
-<!ENTITY attributes.firstchild.label  "Erster Kindsknoten">
-<!ENTITY attributes.lastchild.label   "Letzter Kindsknoten">
-<!ENTITY attributes.custom.label  "Zusätzlicher CSS-Ausdruck:">
+<!ENTITY domain.none.label "Alle Domains (nicht empfohlen)">
+<!ENTITY dialog.title "Regel zum Verstecken des Elements zusammenstellen">
+<!ENTITY basic.label "Standardansicht">
+<!ENTITY attributes.label "Benötigte Attribute">
+<!ENTITY attributes.firstchild.label "Erster Kindsknoten">
+<!ENTITY attributes.custom.label "Zusätzlicher CSS-Ausdruck:">
+<!ENTITY nodes-tree.node.label "Knoten">

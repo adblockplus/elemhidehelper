@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "הלחנת חוק הסתרת אלמנט">
-<!ENTITY groupDisabled.warning "קבוצת הסינון &quot;?1?&quot; שמסנן זה יוסיף מנוטרלת כרגע. ניתן עדיין להוסיף את המסנן אבל הוא לא יוחל אלא אם תאפשר קבוצת הסינון בהעדפות Adblock Plus.">
-<!ENTITY accept.label "הוספת חוק סינון">
-<!ENTITY advanced.label "תצוגה מתקדמת">
-<!ENTITY basic.label "תצוגה בסיסית">
-<!ENTITY expression.label "חוק סינון">
 <!ENTITY preview.label "תצוגה מקדימה">
-<!ENTITY domain.label "קשר למתחם">
-<!ENTITY domain.none.label "כל מתחם (לא מומלץ)">
-<!ENTITY nodes-tree.node.label "צומת">
-<!ENTITY nodes-tree.id.label "זהות">
-<!ENTITY nodes-tree.class.label "מחלקה">
-<!ENTITY attributes.label "דורש תכונות">
-<!ENTITY attributes.tagname.label "שם התווית:">
-<!ENTITY attributes.firstchild.label "ילד ראשון">
+<!ENTITY accept.label "הוספת חוק סינון">
 <!ENTITY attributes.lastchild.label "ילד אחרון">
+<!ENTITY expression.label "חוק סינון">
+<!ENTITY domain.label "קשר למתחם">
+<!ENTITY nodes-tree.id.label "זהות">
+<!ENTITY groupDisabled.warning "קבוצת הסינון &quot;?1?&quot; שמסנן זה יוסיף מנוטרלת כרגע. ניתן עדיין להוסיף את המסנן אבל הוא לא יוחל אלא אם תאפשר קבוצת הסינון בהעדפות Adblock Plus.">
+<!ENTITY nodes-tree.class.label "מחלקה">
+<!ENTITY advanced.label "תצוגה מתקדמת">
+<!ENTITY attributes.tagname.label "שם התווית:">
+<!ENTITY domain.none.label "כל מתחם (לא מומלץ)">
+<!ENTITY dialog.title "הלחנת חוק הסתרת אלמנט">
+<!ENTITY basic.label "תצוגה בסיסית">
+<!ENTITY attributes.label "דורש תכונות">
+<!ENTITY attributes.firstchild.label "ילד ראשון">
 <!ENTITY attributes.custom.label "CSS מותאם:">
+<!ENTITY nodes-tree.node.label "צומת">

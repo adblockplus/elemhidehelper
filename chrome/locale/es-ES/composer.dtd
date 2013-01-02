@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "Componer regla de ocultación de elementos">
-<!ENTITY groupDisabled.warning "El grupo de filtros &quot;?1?&quot; al que se añadirá este filtro está desactivado. Puede añadir el filtro pero no se aplicará a menos que active el grupo de filtros en las preferencias de Adblock Plus.">
-<!ENTITY accept.label "Añadir filtro">
-<!ENTITY advanced.label "Vista avanzada">
-<!ENTITY basic.label "Vista básica">
-<!ENTITY expression.label "Filtro">
 <!ENTITY preview.label "Vista previa">
-<!ENTITY domain.label "Vincular a un dominio web">
-<!ENTITY domain.none.label "Cualquier dominio web (no recomendable)">
-<!ENTITY nodes-tree.node.label "Nodo">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Atributos requeridos">
-<!ENTITY attributes.tagname.label "Nombre de etiqueta (tag):">
-<!ENTITY attributes.firstchild.label "Primer hijo">
+<!ENTITY accept.label "Añadir filtro">
 <!ENTITY attributes.lastchild.label "Último hijo">
+<!ENTITY expression.label "Filtro">
+<!ENTITY domain.label "Vincular a un dominio web">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "El grupo de filtros &quot;?1?&quot; al que se añadirá este filtro está desactivado. Puede añadir el filtro pero no se aplicará a menos que active el grupo de filtros en las preferencias de Adblock Plus.">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY advanced.label "Vista avanzada">
+<!ENTITY attributes.tagname.label "Nombre de etiqueta (tag):">
+<!ENTITY domain.none.label "Cualquier dominio web (no recomendable)">
+<!ENTITY dialog.title "Componer regla de ocultación de elementos">
+<!ENTITY basic.label "Vista básica">
+<!ENTITY attributes.label "Atributos requeridos">
+<!ENTITY attributes.firstchild.label "Primer hijo">
 <!ENTITY attributes.custom.label "CSS personalizado:">
+<!ENTITY nodes-tree.node.label "Nodo">

@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "สร้างกฎการซ่อนส่วนประกอบ">
-<!ENTITY groupDisabled.warning "กลุ่มตัวกรอง &quot;?1?&quot; ว่าตัวกรองนี้จะเพิ่มเข้ามาในสถานะปิดการใช้งาน คุณยังคงเพิ่มตัวกรองได้แต่จะไม่ใช้งานจนกว่าคุณจะเปิดใช้งานกลุ่มตัวกรองในการตั้งค่า Adblock Plus">
-<!ENTITY accept.label "เพิ่มกฎตัวกรอง">
-<!ENTITY advanced.label "มุมมองระดับสูง">
-<!ENTITY basic.label "มุมมองพื้นฐาน">
-<!ENTITY expression.label "กฎตัวกรอง">
 <!ENTITY preview.label "แสดงตัวอย่าง">
-<!ENTITY domain.label "ยึดเหนี่ยวกับโอเมน">
-<!ENTITY domain.none.label "โดเมนใดก็ได้(ไม่แนะนำ)">
-<!ENTITY nodes-tree.node.label "สถานีเชื่อมโยง">
-<!ENTITY nodes-tree.id.label "หมายเลข">
-<!ENTITY nodes-tree.class.label "กลุ่ม">
-<!ENTITY attributes.label "ต้องการลักษณะ">
-<!ENTITY attributes.tagname.label "ชื่อป้ายระบุ:">
-<!ENTITY attributes.firstchild.label "ลูกแรก">
+<!ENTITY accept.label "เพิ่มกฎตัวกรอง">
 <!ENTITY attributes.lastchild.label "ลูกสุดท้าย">
+<!ENTITY expression.label "กฎตัวกรอง">
+<!ENTITY domain.label "ยึดเหนี่ยวกับโอเมน">
+<!ENTITY nodes-tree.id.label "หมายเลข">
+<!ENTITY groupDisabled.warning "กลุ่มตัวกรอง &quot;?1?&quot; ว่าตัวกรองนี้จะเพิ่มเข้ามาในสถานะปิดการใช้งาน คุณยังคงเพิ่มตัวกรองได้แต่จะไม่ใช้งานจนกว่าคุณจะเปิดใช้งานกลุ่มตัวกรองในการตั้งค่า Adblock Plus">
+<!ENTITY nodes-tree.class.label "กลุ่ม">
+<!ENTITY advanced.label "มุมมองระดับสูง">
+<!ENTITY attributes.tagname.label "ชื่อป้ายระบุ:">
+<!ENTITY domain.none.label "โดเมนใดก็ได้(ไม่แนะนำ)">
+<!ENTITY dialog.title "สร้างกฎการซ่อนส่วนประกอบ">
+<!ENTITY basic.label "มุมมองพื้นฐาน">
+<!ENTITY attributes.label "ต้องการลักษณะ">
+<!ENTITY attributes.firstchild.label "ลูกแรก">
 <!ENTITY attributes.custom.label "ซีเอสเอสกำหนดเอง:">
+<!ENTITY nodes-tree.node.label "สถานีเชื่อมโยง">

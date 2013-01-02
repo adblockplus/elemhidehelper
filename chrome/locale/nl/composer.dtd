@@ -1,17 +1,14 @@
-<!ENTITY dialog.title "Regel voor verbergen van elementen opstellen">
-<!ENTITY groupDisabled.warning "De filtergroep ‘?1?’ waaraan dit filter wordt toegevoegd is momenteel uitgeschakeld. U kunt het filter nog steeds toevoegen, maar het wordt niet toegepast tenzij u de filtergroep in de Adblock Plus-voorkeuren inschakelt.">
-<!ENTITY accept.label "Filterregel toevoegen">
-<!ENTITY advanced.label "Geavanceerde weergave">
-<!ENTITY basic.label "Basisweergave">
-<!ENTITY expression.label "Filterregel">
 <!ENTITY preview.label "Voorbeeld">
-<!ENTITY domain.label "Aan domein koppelen">
-<!ENTITY domain.none.label "Elk domein (niet aanbevolen)">
-<!ENTITY nodes-tree.node.label "Node">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Attributen vereisen">
-<!ENTITY attributes.tagname.label "Tagnaam:">
-<!ENTITY attributes.firstchild.label "Eerste afgeleide">
+<!ENTITY accept.label "Filterregel toevoegen">
 <!ENTITY attributes.lastchild.label "Laatste afgeleide">
+<!ENTITY expression.label "Filterregel">
+<!ENTITY domain.label "Aan domein koppelen">
+<!ENTITY groupDisabled.warning "De filtergroep ‘?1?’ waaraan dit filter wordt toegevoegd is momenteel uitgeschakeld. U kunt het filter nog steeds toevoegen, maar het wordt niet toegepast tenzij u de filtergroep in de Adblock Plus-voorkeuren inschakelt.">
+<!ENTITY attributes.tagname.label "Tagnaam:">
+<!ENTITY advanced.label "Geavanceerde weergave">
+<!ENTITY domain.none.label "Elk domein (niet aanbevolen)">
+<!ENTITY dialog.title "Regel voor verbergen van elementen opstellen">
+<!ENTITY basic.label "Basisweergave">
+<!ENTITY attributes.firstchild.label "Eerste afgeleide">
 <!ENTITY attributes.custom.label "Aangepaste CSS:">
+<!ENTITY attributes.label "Attributen vereisen">

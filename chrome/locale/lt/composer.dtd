@@ -1,19 +1,19 @@
-<!ENTITY dialog.title "Sukurti elementų paslėpimo taisyklę">
-<!ENTITY groupDisabled.warning "	Šiuo metu filtrų grupė &quot;?1?&quot; į kurią bus įdėtas šis filtras yra išjungta. 
+<!ENTITY preview.label "Peržiūra">
+<!ENTITY accept.label "Pridėti elemento slėpimo taisyklę">
+<!ENTITY attributes.lastchild.label "Paskutinysis „child“ elementas">
+<!ENTITY expression.label "Elemento slėpimo taisyklė">
+<!ENTITY domain.label "Susieti su domenu">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "Šiuo metu filtrų grupė &quot;?1?&quot; į kurią bus įdėtas šis filtras yra išjungta. 
 Jūs vistiek galite pridėti filtrą, bet jis nebus pritaikytas, nebent Adblock Plus 
 nustatymuose įgalinsite šią filtrų grupę.">
-<!ENTITY accept.label "Pridėti elemento slėpimo taisyklę">
-<!ENTITY advanced.label "Sudėtingesnis vaizdas">
-<!ENTITY basic.label "Įprastas vaizdas">
-<!ENTITY expression.label "Elemento slėpimo taisyklė">
-<!ENTITY preview.label "Peržiūra">
-<!ENTITY domain.label "Susieti su domenu">
-<!ENTITY domain.none.label "Bet kokiu domenu (nerekomenduojama)">
-<!ENTITY nodes-tree.node.label "Mazgas">
-<!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "klasė">
-<!ENTITY attributes.label "Reikalauti savybių">
+<!ENTITY advanced.label "Sudėtingesnis vaizdas">
 <!ENTITY attributes.tagname.label "Žymės vardas:">
+<!ENTITY domain.none.label "Bet kokiu domenu (nerekomenduojama)">
+<!ENTITY dialog.title "Sukurti elementų paslėpimo taisyklę">
+<!ENTITY basic.label "Įprastas vaizdas">
+<!ENTITY attributes.label "Reikalauti savybių">
 <!ENTITY attributes.firstchild.label "Pirmasis „child“ elementas">
-<!ENTITY attributes.lastchild.label "Paskutinysis „child“ elementas">
 <!ENTITY attributes.custom.label "Pasirinktinis CSS:">
+<!ENTITY nodes-tree.node.label "Mazgas">
