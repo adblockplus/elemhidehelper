@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "Prawidło za chowanje elementa spisać">
-<!ENTITY groupDisabled.warning "Tuta filtrowa skupina &quot;?1?&quot;, kotrejž so tutón filter přidawa, je tuchwilu znjemóžnjena. Móžeš hišće filter přidać, ale njebudźe so nałožować, chibazo zmóžnješ filtrowu skupinu w nastajenjach Adblock Plus.">
-<!ENTITY accept.label "Prawidło za chowanje elementa přidać">
-<!ENTITY advanced.label "Rozšěrjeny apohlad">
-<!ENTITY basic.label "Zakładny napohlad">
-<!ENTITY expression.label "Prawidło za chowanje elementa">
 <!ENTITY preview.label "Přehlad">
+<!ENTITY accept.label "Prawidło za chowanje elementa přidać">
+<!ENTITY attributes.lastchild.label "Poslednje dźěćo">
+<!ENTITY expression.label "Prawidło za chowanje elementa">
 <!ENTITY domain.label "Na domenu wjazać">
-<!ENTITY domain.none.label "Někajka domena (njeporuča so)">
-<!ENTITY nodes-tree.node.label "Suk">
 <!ENTITY nodes-tree.id.label "ID">
+<!ENTITY groupDisabled.warning "Tuta filtrowa skupina &quot;?1?&quot;, kotrejž so tutón filter přidawa, je tuchwilu znjemóžnjena. Móžeš hišće filter přidać, ale njebudźe so nałožować, chibazo zmóžnješ filtrowu skupinu w nastajenjach Adblock Plus.">
 <!ENTITY nodes-tree.class.label "klasa">
-<!ENTITY attributes.label "Atributy požadać">
+<!ENTITY advanced.label "Rozšěrjeny napohlad">
 <!ENTITY attributes.tagname.label "Mjeno elementa:">
-<!ENTITY attributes.firstchild.label "Prěnje dźěćo:">
-<!ENTITY attributes.lastchild.label "Poslednje dźěćo:">
-<!ENTITY attributes.custom.label "SWójski CSS:">
+<!ENTITY domain.none.label "Někajka domena (njeporuča so)">
+<!ENTITY dialog.title "Prawidło za chowanje elementa spisać">
+<!ENTITY basic.label "Zakładny napohlad">
+<!ENTITY attributes.label "Atributy požadać">
+<!ENTITY attributes.firstchild.label "Prěnje dźěćo">
+<!ENTITY attributes.custom.label "Swójski CSS:">
+<!ENTITY nodes-tree.node.label "Suk">

@@ -1,17 +1,14 @@
-<!ENTITY dialog.title "Vytvořit pravidlo pro skrývání elementu">
-<!ENTITY groupDisabled.warning "Skupina filtrů &quot;?1?&quot;, do které bude tento filtr přidán, je v tuto chvíli zakázána. Filtr můžete přidat, ale nebude použit, dokud nepovolíte skupinu v Předvolbách Adblock Plus.">
-<!ENTITY accept.label "Přidat pravidlo">
-<!ENTITY advanced.label "Rozšířené rozhraní">
-<!ENTITY basic.label "Základní rozhraní">
-<!ENTITY expression.label "Pravidlo">
 <!ENTITY preview.label "Náhled">
-<!ENTITY domain.label "Pro doménu">
-<!ENTITY domain.none.label "Jakákoli doména (nedoporučuje se)">
-<!ENTITY nodes-tree.node.label "Node">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Požadované atributy">
-<!ENTITY attributes.tagname.label "Jméno tagu:">
-<!ENTITY attributes.firstchild.label "První potomek">
+<!ENTITY accept.label "Přidat pravidlo">
 <!ENTITY attributes.lastchild.label "Poslední potomek">
+<!ENTITY expression.label "Pravidlo">
+<!ENTITY domain.label "Pro doménu">
+<!ENTITY groupDisabled.warning "Skupina filtrů &quot;?1?&quot;, do které bude tento filtr přidán, je v tuto chvíli zakázána. Filtr můžete přidat, ale nebude použit, dokud nepovolíte skupinu v Předvolbách Adblock Plus.">
+<!ENTITY attributes.tagname.label "Jméno tagu:">
+<!ENTITY advanced.label "Rozšířené rozhraní">
+<!ENTITY domain.none.label "Jakákoli doména (nedoporučuje se)">
+<!ENTITY dialog.title "Vytvořit pravidlo pro skrývání elementu">
+<!ENTITY basic.label "Základní rozhraní">
+<!ENTITY attributes.firstchild.label "První potomek">
 <!ENTITY attributes.custom.label "Vlastní CSS:">
+<!ENTITY attributes.label "Požadované atributy">

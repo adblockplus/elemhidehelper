@@ -1,21 +1,17 @@
-<!ENTITY dialog.title "Composizione della regola per nascondere elementi">
-<!ENTITY groupDisabled.warning "
-	Il gruppo di filtri &quot;?1?&quot; al quale bisognerebbe aggiungere il filtro è attualmente 
-	disattivato. È comunque possibile aggiungere il filtro, ma questo verrà applicato solo dopo 
-	la riattivazione del gruppo di filtri nella finestra della impostazioni di Adblock Plus
-">
-<!ENTITY accept.label "Aggiungi regola del filtro">
-<!ENTITY advanced.label "Avanzate &gt;&gt;">
-<!ENTITY basic.label "&lt;&lt; Generali">
-<!ENTITY expression.label "Regola del filtro">
 <!ENTITY preview.label "Anteprima">
-<!ENTITY domain.label "Legame con il dominio">
-<!ENTITY domain.none.label "qualsiasi dominio (non raccomandato)">
-<!ENTITY nodes-tree.node.label "Nodo">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Attributi richiesti">
-<!ENTITY attributes.tagname.label "Nome del tag:">
-<!ENTITY attributes.firstchild.label "Primo elemento figlio">
+<!ENTITY accept.label "Aggiungi regola del filtro">
 <!ENTITY attributes.lastchild.label "Ultimo elemento figlio">
+<!ENTITY expression.label "Regola del filtro">
+<!ENTITY domain.label "Legame con il dominio">
+<!ENTITY groupDisabled.warning "Il gruppo di filtri &quot;?1?&quot; al quale bisognerebbe aggiungere il filtro è attualmente 
+	disattivato. È comunque possibile aggiungere il filtro, ma questo verrà applicato solo dopo 
+	la riattivazione del gruppo di filtri nella finestra della impostazioni di Adblock Plus">
+<!ENTITY attributes.tagname.label "Nome del tag:">
+<!ENTITY advanced.label "Avanzate &gt;&gt;">
+<!ENTITY domain.none.label "qualsiasi dominio (non raccomandato)">
+<!ENTITY dialog.title "Composizione della regola per nascondere elementi">
+<!ENTITY basic.label "&lt;&lt; Generali">
+<!ENTITY attributes.label "Attributi richiesti">
+<!ENTITY attributes.firstchild.label "Primo elemento figlio">
 <!ENTITY attributes.custom.label "CSS personalizzato:">
+<!ENTITY nodes-tree.node.label "Nodo">

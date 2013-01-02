@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "Sestavi pravila za skrivanje elementov">
-<!ENTITY groupDisabled.warning "Filtrirna skupina &quot;?1?&quot; h kateri dodajate trenutno pravilo je onemogočena. Vseeno lahko dodate nov filter, vendar ne bo upoštevan, dokler ne omogočite skupino v Adblock Plus nastavitvah.">
-<!ENTITY accept.label "Dodaj pravilo filtriranja">
-<!ENTITY advanced.label "Napredni pogled">
-<!ENTITY basic.label "Osnovni pogled">
-<!ENTITY expression.label "Pravilo filtriranja">
 <!ENTITY preview.label "Predogled">
-<!ENTITY domain.label "Veži na domeno">
-<!ENTITY domain.none.label "Katerakoli domena (ni priporočljivo)">
-<!ENTITY nodes-tree.node.label "Vozel">
-<!ENTITY nodes-tree.id.label "oznaka">
-<!ENTITY nodes-tree.class.label "razred">
-<!ENTITY attributes.label "Zahtevaj atribute">
-<!ENTITY attributes.tagname.label "Ime oznake:">
-<!ENTITY attributes.firstchild.label "Prvi dedovani">
+<!ENTITY accept.label "Dodaj pravilo filtriranja">
 <!ENTITY attributes.lastchild.label "Zadnji dedovani">
+<!ENTITY expression.label "Pravilo filtriranja">
+<!ENTITY domain.label "Veži na domeno">
+<!ENTITY nodes-tree.id.label "oznaka">
+<!ENTITY groupDisabled.warning "Filtrirna skupina &quot;?1?&quot; h kateri dodajate trenutno pravilo je onemogočena. Vseeno lahko dodate nov filter, vendar ne bo upoštevan, dokler ne omogočite skupino v Adblock Plus nastavitvah.">
+<!ENTITY nodes-tree.class.label "razred">
+<!ENTITY advanced.label "Napredni pogled">
+<!ENTITY attributes.tagname.label "Ime oznake:">
+<!ENTITY domain.none.label "Katerakoli domena (ni priporočljivo)">
+<!ENTITY dialog.title "Sestavi pravila za skrivanje elementov">
+<!ENTITY basic.label "Osnovni pogled">
+<!ENTITY attributes.label "Zahtevaj atribute">
+<!ENTITY attributes.firstchild.label "Prvi dedovani">
 <!ENTITY attributes.custom.label "Prikrojen CSS:">
+<!ENTITY nodes-tree.node.label "Vozel">

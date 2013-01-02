@@ -1,17 +1,15 @@
-<!ENTITY dialog.title "Compose element hiding rule">
-<!ENTITY groupDisabled.warning "O filtro do grupo &quot;?1?&quot; que esse filtro irá adicionar está desabilitado. Você pode adicionar o filtro mas não será possível aplicar se o filtro do grupo não estiver habilitado nas preferências do Adblock Plus.">
+<!ENTITY preview.label "Pré visualização">
 <!ENTITY accept.label "Adicionar regra de filtro">
+<!ENTITY attributes.lastchild.label "Último filho">
+<!ENTITY expression.label "Regra de filtro">
+<!ENTITY domain.label "Associar ao domínio">
+<!ENTITY groupDisabled.warning "O filtro do grupo &quot;?1?&quot; que esse filtro irá adicionar está desabilitado. Você pode adicionar o filtro mas não será possível aplicar se o filtro do grupo não estiver habilitado nas preferências do Adblock Plus.">
+<!ENTITY nodes-tree.class.label "classe">
+<!ENTITY attributes.tagname.label "Nome da tag:">
+<!ENTITY domain.none.label "Qualquer domínio (não recomendado)">
 <!ENTITY advanced.label "Visualização avançada">
 <!ENTITY basic.label "Visualização Básica">
-<!ENTITY expression.label "Regra de filtro">
-<!ENTITY preview.label "Pré visualização">
-<!ENTITY domain.label "Associar ao domínio">
-<!ENTITY domain.none.label "Qualquer domínio (não recomendado)">
-<!ENTITY nodes-tree.node.label "Nó">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "classe">
 <!ENTITY attributes.label "Atributos requeridos">
-<!ENTITY attributes.tagname.label "Nome da tag:">
 <!ENTITY attributes.firstchild.label "Primeiro filho">
-<!ENTITY attributes.lastchild.label "Último filho">
 <!ENTITY attributes.custom.label "CSS Padrão:">
+<!ENTITY nodes-tree.node.label "Nó">

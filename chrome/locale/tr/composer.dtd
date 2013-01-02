@@ -1,17 +1,15 @@
-<!ENTITY dialog.title "Öğe gizleme kuralı yaz">
-<!ENTITY groupDisabled.warning "Bu süzgecin ekleneceğin &quot;?1?&quot; süzgeç grubu şu an devre dışı. Yine de süzgeci ekleyebilirsiniz, ancak Adblock Plus tercihlerinden bu süzgeç grubunu etkinleştirmedikçe uygulanmayacak.">
-<!ENTITY accept.label "Süzme kuralı ekle">
-<!ENTITY advanced.label "Gelişmiş görünüm">
-<!ENTITY basic.label "Temel görünüm">
-<!ENTITY expression.label "Süzme kuralı">
 <!ENTITY preview.label "Önizleme">
-<!ENTITY domain.label "Alan adına bağlama">
-<!ENTITY domain.none.label "Herhangi bir alan adı (önerilmez)">
-<!ENTITY nodes-tree.node.label "Düğüm">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Nitelik gereklilikleri">
-<!ENTITY attributes.tagname.label "Etiket adı:">
-<!ENTITY attributes.firstchild.label "İlk çocuk">
+<!ENTITY accept.label "Süzme kuralı ekle">
 <!ENTITY attributes.lastchild.label "Son çocuk">
+<!ENTITY expression.label "Süzme kuralı">
+<!ENTITY domain.label "Alan adına bağlama">
+<!ENTITY groupDisabled.warning "Bu süzgecin ekleneceğin &quot;?1?&quot; süzgeç grubu şu an devre dışı. Yine de süzgeci ekleyebilirsiniz, ancak Adblock Plus tercihlerinden bu süzgeç grubunu etkinleştirmedikçe uygulanmayacak.">
+<!ENTITY attributes.tagname.label "Etiket adı:">
+<!ENTITY advanced.label "Gelişmiş görünüm">
+<!ENTITY domain.none.label "Herhangi bir alan adı (önerilmez)">
+<!ENTITY dialog.title "Öğe gizleme kuralı yaz">
+<!ENTITY basic.label "Temel görünüm">
+<!ENTITY attributes.label "Nitelik gereklilikleri">
+<!ENTITY attributes.firstchild.label "İlk çocuk">
 <!ENTITY attributes.custom.label "Özel CSS:">
+<!ENTITY nodes-tree.node.label "Düğüm">

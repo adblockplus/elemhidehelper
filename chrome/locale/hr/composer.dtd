@@ -1,16 +1,19 @@
-<!ENTITY dialog.title "Složite pravilo skrivanja elemenata">
-<!ENTITY accept.label "Dodaj pravilo filtra">
-<!ENTITY advanced.label "Napredni pogled">
-<!ENTITY basic.label "Osnovni pogled">
-<!ENTITY expression.label "Pravilo filtra">
 <!ENTITY preview.label "Pregled">
-<!ENTITY domain.label "Poveži na domenu">
-<!ENTITY domain.none.label "Bilo koja domena (nije preporučljivo)">
-<!ENTITY nodes-tree.node.label "Član">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Potrebni atributi">
-<!ENTITY attributes.tagname.label "Naziv oznake:">
-<!ENTITY attributes.firstchild.label "Prvi izdanak">
+<!ENTITY accept.label "Dodaj pravilo filtra">
 <!ENTITY attributes.lastchild.label "Zadnji izdanak">
+<!ENTITY expression.label "Pravilo filtra">
+<!ENTITY domain.label "Poveži na domenu">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "Grupi filtera &quot;?1?&quot; će biti dodan ovaj filter koji će trenutno biti onemogućen.
+  Još uvijek možete dodati filter ali neće biti primjenjen dok ne omogućite grupu filtera
+  u Adblock Plus Postavkama filtera.">
+<!ENTITY nodes-tree.class.label "klasa">
+<!ENTITY advanced.label "Napredni pogled">
+<!ENTITY attributes.tagname.label "Naziv oznake:">
+<!ENTITY domain.none.label "Bilo koja domena (nije preporučljivo)">
+<!ENTITY dialog.title "Složite pravilo skrivanja elemenata">
+<!ENTITY basic.label "Osnovni pogled">
+<!ENTITY attributes.label "Potrebna svojstva">
+<!ENTITY attributes.firstchild.label "Prvi izdanak">
 <!ENTITY attributes.custom.label "Prilagođeni CSS:">
+<!ENTITY nodes-tree.node.label "Čvorište">

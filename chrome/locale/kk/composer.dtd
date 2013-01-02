@@ -1,17 +1,17 @@
-<!ENTITY dialog.title "Элементті жасыру ережесін құрастыру">
-<!ENTITY groupDisabled.warning "Бұл фильтр қосылатын &quot;?1?&quot; фильтрлер тобы қазір сөндірулі тұр. Оны қоса аласыз, бірақ Adblock Plus баптауларында ол фильтр тобы іске қоспасаңыз, ол қолданылмайды.">
-<!ENTITY accept.label "Фильтр ережесін қосу">
-<!ENTITY advanced.label "Кеңейтілген көрінісі">
-<!ENTITY basic.label "Негізгі көрінісі">
-<!ENTITY expression.label "Фильтр ережесі">
 <!ENTITY preview.label "Алдын-ала қарау">
-<!ENTITY domain.label "Доменмен байланыстыру">
-<!ENTITY domain.none.label "Кез-келген домен (ұсынылмайды)">
-<!ENTITY nodes-tree.node.label "Торап">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Керек атрибуттар">
-<!ENTITY attributes.tagname.label "Тег аты:">
-<!ENTITY attributes.firstchild.label "Біріншілік қатысты домен">
+<!ENTITY accept.label "Фильтр ережесін қосу">
 <!ENTITY attributes.lastchild.label "Соңғы қатысты домен">
+<!ENTITY expression.label "Фильтр ережесі">
+<!ENTITY domain.label "Доменмен байланыстыру">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "Бұл фильтр қосылатын &quot;?1?&quot; фильтрлер тобы қазір сөндірулі тұр. Оны қоса аласыз, бірақ Adblock Plus баптауларында ол фильтр тобы іске қоспасаңыз, ол қолданылмайды.">
+<!ENTITY nodes-tree.class.label "class">
+<!ENTITY advanced.label "Кеңейтілген көрінісі">
+<!ENTITY attributes.tagname.label "Тег аты:">
+<!ENTITY domain.none.label "Кез-келген домен (ұсынылмайды)">
+<!ENTITY dialog.title "Элементті жасыру ережесін құрастыру">
+<!ENTITY basic.label "Негізгі көрінісі">
+<!ENTITY attributes.label "Керек атрибуттар">
+<!ENTITY attributes.firstchild.label "Біріншілік қатысты домен">
 <!ENTITY attributes.custom.label "Пайдаланушы CSS:">
+<!ENTITY nodes-tree.node.label "Торап">

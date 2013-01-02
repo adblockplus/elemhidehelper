@@ -1,17 +1,13 @@
-<!ENTITY dialog.title "Compunere regulă de ascundere a unui element">
-<!ENTITY groupDisabled.warning "Grupul de filtre în care acest filtru este adăugat (&quot;?1?&quot;) este inactiv. Filtrul va fi adăugat, dar nu va fi aplicat până nu veţi reactiva grupul în meniul Prefenrinţe.">
-<!ENTITY accept.label "Adaugă regulă">
-<!ENTITY advanced.label "Mod avansat">
-<!ENTITY basic.label "Mod simplificat">
-<!ENTITY expression.label "Regulă de filtrare">
 <!ENTITY preview.label "Previzualizează">
+<!ENTITY accept.label "Adaugă regulă">
+<!ENTITY expression.label "Regulă de filtrare">
 <!ENTITY domain.label "Asociază unui domeniu">
-<!ENTITY domain.none.label "Oricărui domeniu (nerecomandat)">
-<!ENTITY nodes-tree.node.label "Nod">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY nodes-tree.class.label "class">
-<!ENTITY attributes.label "Atribute pentru filtrare">
+<!ENTITY groupDisabled.warning "Grupul de filtre în care acest filtru este adăugat (&quot;?1?&quot;) este inactiv. Filtrul va fi adăugat, dar nu va fi aplicat până nu veţi reactiva grupul în meniul Prefenrinţe.">
 <!ENTITY attributes.tagname.label "Nume tag:">
-<!ENTITY attributes.firstchild.label "First child">
-<!ENTITY attributes.lastchild.label "Last child">
+<!ENTITY advanced.label "Mod avansat">
+<!ENTITY domain.none.label "Oricărui domeniu (nerecomandat)">
+<!ENTITY dialog.title "Compunere regulă de ascundere a unui element">
+<!ENTITY basic.label "Mod simplificat">
+<!ENTITY attributes.label "Atribute pentru filtrare">
 <!ENTITY attributes.custom.label "Cod CSS particularizat:">
+<!ENTITY nodes-tree.node.label "Nod">
