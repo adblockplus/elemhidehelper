@@ -20,7 +20,7 @@ zh-CN=http://adblockplus.org/zh_CN/elemhidehelper
 zh-TW=http://adblockplus.org/zh_TW/elemhidehelper
 
 [compat]
-firefox=16.0/32.0
-thunderbird=16.0/32.0
-seamonkey=2.13/2.29
+firefox=20.0/32.0
+thunderbird=20.0/32.0
+seamonkey=2.17/2.29
 conkeror=0.1/100.0
