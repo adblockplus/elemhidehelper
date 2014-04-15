@@ -1,0 +1,18 @@
+/*
+ * This Source Code is subject to the terms of the Mozilla Public License
+ * version 2.0 (the "License"). You can obtain a copy of the License at
+ * http://mozilla.org/MPL/2.0/.
+ */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+#ehh-inspector-toolbarbutton
+{
+  list-style-image: url("chrome://adblockplus/skin/abp-status-16.png");
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+}
+
+#ehh-inspector-toolbarbutton > image
+{
+  filter: none;
+}
