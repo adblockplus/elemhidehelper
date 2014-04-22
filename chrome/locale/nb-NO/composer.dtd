@@ -1,16 +1,9 @@
-<!ENTITY dialog.title "Lag regel for skjuling av element">
-<!ENTITY accept.label "Legg til filterregel">
-<!ENTITY advanced.label "Avansert visning">
-<!ENTITY basic.label "Vanlig visning">
-<!ENTITY expression.label "Filterregel">
 <!ENTITY preview.label "Forhåndsvisning">
-<!ENTITY domain.label "Bind til domene">
-<!ENTITY domain.none.label "Uansett domene (ikke anbefalt)">
-<!ENTITY nodes-tree.node.label "Node">
+<!ENTITY domain.label "Knytt til domene">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY nodes-tree.class.label "klasse">
-<!ENTITY attributes.label "Krever følgende egenskaper">
-<!ENTITY attributes.tagname.label "Navn på merkelapp:">
-<!ENTITY attributes.firstchild.label "Første underelement">
-<!ENTITY attributes.lastchild.label "Siste underelement">
+<!ENTITY domain.none.label "Hvilket som helst domene (ikke anbefalt)">
+<!ENTITY advanced.label "Avansert visning">
+<!ENTITY basic.label "Grunnleggende visning">
 <!ENTITY attributes.custom.label "Egendefinert CSS:">
+<!ENTITY nodes-tree.node.label "Node">

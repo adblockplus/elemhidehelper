@@ -1,16 +1,16 @@
 <!ENTITY preview.label "پيش ديد">
-<!ENTITY accept.label "اضافه قانون صافی">
+<!ENTITY accept.label "اضافه کردن قانون پنهان سازی">
 <!ENTITY attributes.lastchild.label "بچه آخر">
-<!ENTITY expression.label "قانون صافی">
-<!ENTITY domain.label "مقید به دومین">
+<!ENTITY expression.label "قانون پنهان سازی">
+<!ENTITY domain.label "اتصال دادن به دامنه">
 <!ENTITY nodes-tree.id.label "نشانی‌">
-<!ENTITY groupDisabled.warning "فیلتر گروه &quot;?1?&quot; که این فیلتر به آن اضافه خواهد شد در حال حاضر فعال نیست. شما هنوز میتوانید فیلتر را اضافه کنید اما افزودن آن اعمال نخواهد شد مگر اینکه شما این گروه را قادر بسازید در ادبلاک ترجلیهات.">
+<!ENTITY groupDisabled.warning "فیلتر گروه &quot;?1?&quot; که این فیلتر به آن اضافه خواهد شد در حال حاضر فعال نیست. شما هنوز میتوانید فیلتر را اضافه کنید اما افزودن آن اعمال نخواهد شد مگر اینکه شما این گروه فیلتر را در تنظیمات Adblock Plus فعال کنید.">
 <!ENTITY nodes-tree.class.label "گروه">
-<!ENTITY advanced.label "دیده پیشرفته">
+<!ENTITY advanced.label "نمای  پیشرفته نرم افزار">
 <!ENTITY attributes.tagname.label "اسم علامت">
-<!ENTITY domain.none.label "(هر دومین (توصیه نمی‌شود">
+<!ENTITY domain.none.label "هر دامنه ای (توصیه نمی شود)">
 <!ENTITY dialog.title "نوشت قانون پنهان کردن">
-<!ENTITY basic.label "دیده اساسی‌">
+<!ENTITY basic.label "نمای اساسی">
 <!ENTITY attributes.label "نشان را مستلزم کن">
 <!ENTITY attributes.firstchild.label "بچه اول">
 <!ENTITY attributes.custom.label "سفارشی CSS">

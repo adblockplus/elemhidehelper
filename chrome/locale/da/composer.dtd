@@ -3,11 +3,14 @@
 <!ENTITY attributes.lastchild.label "Sidste underliggende">
 <!ENTITY expression.label "Filterregel">
 <!ENTITY domain.label "Bind til domæne">
-<!ENTITY attributes.tagname.label "Tag navn:">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY nodes-tree.class.label "klasse">
 <!ENTITY advanced.label "Avanceret visning">
+<!ENTITY attributes.tagname.label "Tag navn:">
 <!ENTITY domain.none.label "Ethvert domæne (anbefales ikke)">
 <!ENTITY dialog.title "Sammensæt elementskjulningsregel">
 <!ENTITY basic.label "Basisvisning">
+<!ENTITY attributes.label "Kræver attributter">
 <!ENTITY attributes.firstchild.label "Første underliggende">
 <!ENTITY attributes.custom.label "Brugertilpasset CSS:">
-<!ENTITY attributes.label "Kræver attributter">
+<!ENTITY nodes-tree.node.label "Node">

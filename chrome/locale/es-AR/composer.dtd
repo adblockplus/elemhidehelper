@@ -4,7 +4,7 @@
 <!ENTITY expression.label "Regla de filtro">
 <!ENTITY domain.label "Unido al dominio">
 <!ENTITY nodes-tree.id.label "identificación">
-<!ENTITY groupDisabled.warning "El grupo de filtros &quot;?1?&quot; en el que se va a agregar este filtro, está actualmente deshabilitado. Podés agregar el filtro de todas maneras, pero no será aplicado a menos que habilités el grupo de filtros en las preferencias de Adblock Plus.">
+<!ENTITY groupDisabled.warning "El grupo de filtros &quot;?1?&quot; en el que se va a agregar este filtro, está actualmente deshabilitado. Podés agregar el filtro de todos modos, pero no será aplicado a menos que habilités el grupo de filtros en las preferencias de Adblock Plus.">
 <!ENTITY nodes-tree.class.label "clase">
 <!ENTITY advanced.label "Vista avanzada">
 <!ENTITY attributes.tagname.label "Nombre de etiqueta:">

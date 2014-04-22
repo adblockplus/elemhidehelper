@@ -3,11 +3,15 @@
 <!ENTITY attributes.lastchild.label "Viimeinen">
 <!ENTITY expression.label "Suodatinsääntö">
 <!ENTITY domain.label "Liitä verkkonimeen">
+<!ENTITY nodes-tree.id.label "tunnus">
+<!ENTITY groupDisabled.warning "Suodatinryhmä &quot;?1?&quot;, johon tämä suodatin lisätään, ei ole tällä hetkellä käytössä.
+  Voit silti lisätä suodattimen, mutta sitä ei oteta käyttöön, ellet ota suodatinryhmää käyttöön
+  Adblock Plus:n asetuksissa.">
 <!ENTITY nodes-tree.class.label "luokka">
 <!ENTITY advanced.label "Lisänäkymä">
 <!ENTITY attributes.tagname.label "Nimike:">
-<!ENTITY domain.none.label "kaikkiin verkkonimiin (ei suositeltua)">
-<!ENTITY dialog.title "Täytä elementin piilotussääntö">
+<!ENTITY domain.none.label "kaikkiin verkkonimiin (ei suositella)">
+<!ENTITY dialog.title "Kirjoita suodatin">
 <!ENTITY basic.label "Perusnäkymä">
 <!ENTITY attributes.label "Vaadi attribuutit">
 <!ENTITY attributes.firstchild.label "Ensimmäinen">

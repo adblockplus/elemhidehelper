@@ -3,11 +3,13 @@
 <!ENTITY attributes.lastchild.label "Son çocuk">
 <!ENTITY expression.label "Süzme kuralı">
 <!ENTITY domain.label "Alan adına bağlama">
+<!ENTITY nodes-tree.id.label "id">
 <!ENTITY groupDisabled.warning "Bu süzgecin ekleneceğin &quot;?1?&quot; süzgeç grubu şu an devre dışı. Yine de süzgeci ekleyebilirsiniz, ancak Adblock Plus tercihlerinden bu süzgeç grubunu etkinleştirmedikçe uygulanmayacak.">
-<!ENTITY attributes.tagname.label "Etiket adı:">
+<!ENTITY nodes-tree.class.label "class">
 <!ENTITY advanced.label "Gelişmiş görünüm">
+<!ENTITY attributes.tagname.label "Etiket adı:">
 <!ENTITY domain.none.label "Herhangi bir alan adı (önerilmez)">
-<!ENTITY dialog.title "Öğe gizleme kuralı yaz">
+<!ENTITY dialog.title "Öge gizleme kuralı yaz">
 <!ENTITY basic.label "Temel görünüm">
 <!ENTITY attributes.label "Nitelik gereklilikleri">
 <!ENTITY attributes.firstchild.label "İlk çocuk">

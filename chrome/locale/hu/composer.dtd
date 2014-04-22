@@ -7,7 +7,7 @@
 <!ENTITY groupDisabled.warning "A(z) &quot;?1?&quot; szűrőcsoport jelenleg le van tiltva. Hozzáadhatja a szűrőt, de adig nem lesz használatban, amíg a szűrőcsoport nincs engedélyezve az Adblock Plus beállításaiban.">
 <!ENTITY nodes-tree.class.label "osztály">
 <!ENTITY advanced.label "Haladó megjelenítés">
-<!ENTITY attributes.tagname.label "Jelzőnév:">
+<!ENTITY attributes.tagname.label "Címke:">
 <!ENTITY domain.none.label "Tetszőleges webhely (nem javasolt)">
 <!ENTITY dialog.title "Elemhez tartozó elrejtési szabály létrehozása">
 <!ENTITY basic.label "Alapvető megjelenítés">

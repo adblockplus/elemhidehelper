@@ -3,12 +3,15 @@
 <!ENTITY attributes.lastchild.label "Laatste afgeleide">
 <!ENTITY expression.label "Filterregel">
 <!ENTITY domain.label "Aan domein koppelen">
+<!ENTITY nodes-tree.id.label "id">
 <!ENTITY groupDisabled.warning "De filtergroep ‘?1?’ waaraan dit filter wordt toegevoegd is momenteel uitgeschakeld. U kunt het filter nog steeds toevoegen, maar het wordt niet toegepast tenzij u de filtergroep in de Adblock Plus-voorkeuren inschakelt.">
-<!ENTITY attributes.tagname.label "Tagnaam:">
+<!ENTITY nodes-tree.class.label "klasse">
 <!ENTITY advanced.label "Geavanceerde weergave">
+<!ENTITY attributes.tagname.label "Tagnaam:">
 <!ENTITY domain.none.label "Elk domein (niet aanbevolen)">
 <!ENTITY dialog.title "Regel voor verbergen van elementen opstellen">
 <!ENTITY basic.label "Basisweergave">
+<!ENTITY attributes.label "Attributen vereist">
 <!ENTITY attributes.firstchild.label "Eerste afgeleide">
 <!ENTITY attributes.custom.label "Aangepaste CSS:">
-<!ENTITY attributes.label "Attributen vereisen">
+<!ENTITY nodes-tree.node.label "node">

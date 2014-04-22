@@ -3,6 +3,8 @@
 <!ENTITY attributes.lastchild.label "الابن الأخير">
 <!ENTITY expression.label "قاعدة فلتر">
 <!ENTITY domain.label "تثبيت للنطاق">
+<!ENTITY nodes-tree.id.label "معرف">
+<!ENTITY groupDisabled.warning "مجموعة عوامل تصفية &quot;?1?&quot; أنه سيتم إضافة عامل التصفية هذا إلى معطل حاليا.   يمكنك لا يزال إضافة عامل التصفية ولكن أنها لن تطبق إلا إذا كنت تمكين تصفية المجموعة في تفضيلات زائد.">
 <!ENTITY nodes-tree.class.label "فئة (class)">
 <!ENTITY advanced.label "عرض متقدم">
 <!ENTITY attributes.tagname.label "اسم الوسم (Tag)">

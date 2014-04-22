@@ -1,13 +1,17 @@
-<!ENTITY preview.label "Previzualizează">
-<!ENTITY accept.label "Adaugă regulă">
-<!ENTITY expression.label "Regulă de filtrare">
+<!ENTITY preview.label "Previzualizare">
+<!ENTITY accept.label "Adaugă regula">
+<!ENTITY attributes.lastchild.label "Ultimul element copil">
+<!ENTITY expression.label "Regulă de ascundere a elementului">
 <!ENTITY domain.label "Asociază unui domeniu">
-<!ENTITY groupDisabled.warning "Grupul de filtre în care acest filtru este adăugat (&quot;?1?&quot;) este inactiv. Filtrul va fi adăugat, dar nu va fi aplicat până nu veţi reactiva grupul în meniul Prefenrinţe.">
-<!ENTITY attributes.tagname.label "Nume tag:">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "Grupul de filtre &quot;?1?&quot; în care acest filtru va fi adăugat este momentan dezactivat. Puteți adăuga oricum filtrul, dar el nu va fi aplicat până când activați grupul de filtre din meniul de preferințe al Adblock Plus.">
+<!ENTITY nodes-tree.class.label "clasă">
 <!ENTITY advanced.label "Mod avansat">
+<!ENTITY attributes.tagname.label "Nume tag:">
 <!ENTITY domain.none.label "Oricărui domeniu (nerecomandat)">
 <!ENTITY dialog.title "Compunere regulă de ascundere a unui element">
 <!ENTITY basic.label "Mod simplificat">
 <!ENTITY attributes.label "Atribute pentru filtrare">
+<!ENTITY attributes.firstchild.label "Primul element copil">
 <!ENTITY attributes.custom.label "Cod CSS particularizat:">
 <!ENTITY nodes-tree.node.label "Nod">

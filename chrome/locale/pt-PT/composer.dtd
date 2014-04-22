@@ -1,15 +1,17 @@
-<!ENTITY preview.label "Prever">
+<!ENTITY preview.label "Pré-visualização">
 <!ENTITY accept.label "Adicionar regra de filtro">
 <!ENTITY attributes.lastchild.label "Último dependente">
 <!ENTITY expression.label "Regra de filtro">
 <!ENTITY domain.label "Associar ao domínio">
-<!ENTITY groupDisabled.warning "O grupo de filtros &quot;?1?&quot; ao qual este filtro será adicionado está actualmente desactivado. Pode adicionar o filtro, no entanto, este não será aplicado até que o grupo de filtros seja activado nas preferências do Adblock Plus.">
-<!ENTITY attributes.tagname.label "Nome da etiqueta:">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "O grupo de filtros &quot;?1?&quot; ao qual este filtro será adicionado está inativo. Pode adicionar o filtro mas este não será aplicado até que o grupo de filtros seja ativado nas preferências do Adblock Plus.">
+<!ENTITY nodes-tree.class.label "classe">
 <!ENTITY advanced.label "Vista avançada">
+<!ENTITY attributes.tagname.label "Nome da etiqueta:">
 <!ENTITY domain.none.label "Qualquer domínio (não recomendado)">
 <!ENTITY dialog.title "Criar regra para ocultar elementos">
 <!ENTITY basic.label "Vista básica">
 <!ENTITY attributes.label "Requer atributos">
 <!ENTITY attributes.firstchild.label "Primeiro dependente">
 <!ENTITY attributes.custom.label "CSS personalizado:">
-<!ENTITY nodes-tree.node.label "Nodo">
+<!ENTITY nodes-tree.node.label "Nó">
