@@ -9,7 +9,7 @@
 <!ENTITY advanced.label "Pokročilý náhľad">
 <!ENTITY attributes.tagname.label "Názov značky:">
 <!ENTITY domain.none.label "Ľubovoľná doména (neodporúčané)">
-<!ENTITY dialog.title "Vytvoriť skryté pravidlo prvku">
+<!ENTITY dialog.title "Vytvoriť pravidlo pre skrývanie prvkov">
 <!ENTITY basic.label "Základný náhľad">
 <!ENTITY attributes.label "Požadované hodnoty">
 <!ENTITY attributes.firstchild.label "Prvý objekt">

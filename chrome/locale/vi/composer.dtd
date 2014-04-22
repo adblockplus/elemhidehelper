@@ -3,8 +3,11 @@
 <!ENTITY attributes.lastchild.label "Thuộc tính con cuối cùng">
 <!ENTITY expression.label "Quy luật lọc">
 <!ENTITY domain.label "Gắn với tên miền">
-<!ENTITY attributes.tagname.label "Tên tag:">
+<!ENTITY nodes-tree.id.label "định danh">
+<!ENTITY groupDisabled.warning "Nhóm lọc &quot;?1?&quot; mà bộ lọc hiện tại thêm vào bị vô hiệu. Bạn vẫn có thể thêm bộ lọc nhưng không được áp dụng trừ khi bạn kích hoạt nhóm lọc trong tùy chỉnh Adblock Plus.">
+<!ENTITY nodes-tree.class.label "lớp">
 <!ENTITY advanced.label "Hiển thị nâng cao">
+<!ENTITY attributes.tagname.label "Tên thẻ:">
 <!ENTITY domain.none.label "Bất kì tên miền nào (không khuyến khích)">
 <!ENTITY dialog.title "Soạn quy luật ẩn phần tử">
 <!ENTITY basic.label "Hiển thị cơ bản">

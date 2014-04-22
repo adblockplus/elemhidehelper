@@ -1,0 +1,15 @@
+<!ENTITY preview.label "समीक्षा ">
+<!ENTITY accept.label "तत्वों को छुपाने के नियम जोड़ें ">
+<!ENTITY attributes.lastchild.label "आखिरी पुत्र">
+<!ENTITY expression.label "तत्वों को छुपाने के नियम ">
+<!ENTITY domain.label "डोमेन से जोड़ें ">
+<!ENTITY nodes-tree.id.label "आईडी ">
+<!ENTITY nodes-tree.class.label "कक्षा ">
+<!ENTITY advanced.label "उन्नत दृश्य ">
+<!ENTITY attributes.tagname.label "टैग का नाम:">
+<!ENTITY domain.none.label "कोई भी डोमेन (अनुशंसित नहीं)">
+<!ENTITY dialog.title "तत्वों को छुपाने के नियम तय करें ">
+<!ENTITY basic.label "बुनियादी दृश्य ">
+<!ENTITY attributes.firstchild.label "पहला पुत्र ">
+<!ENTITY attributes.custom.label "संसोधित सी एस एस:">
+<!ENTITY nodes-tree.node.label "नोड">

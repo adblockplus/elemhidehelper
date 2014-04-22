@@ -1,17 +1,18 @@
 <!ENTITY preview.label "Преглед">
-<!ENTITY accept.label "Додај правило о филтеру">
-<!ENTITY attributes.lastchild.label "Последњи наследник">
-<!ENTITY expression.label "Правило о филтеру">
-<!ENTITY domain.label "Закачи за домен">
-<!ENTITY nodes-tree.id.label "ид">
-<!ENTITY groupDisabled.warning "Група филтера „?1?” у који ће овај фиклтер бити додат је тренутно онемогућена. Можете да га додате, али неће бити примењен, осим ако не омогућите ову групу у подешавањима.">
-<!ENTITY nodes-tree.class.label "врста">
-<!ENTITY advanced.label "Напредни изглед">
+<!ENTITY accept.label "Додај правило о сакривању елемената">
+<!ENTITY attributes.lastchild.label "Последња подређена ставка">
+<!ENTITY expression.label "Правило о сакривању елемената">
+<!ENTITY domain.label "Повежи с доменом">
+<!ENTITY nodes-tree.id.label "ID">
+<!ENTITY groupDisabled.warning "Група филтера „?1?“ у коју ће овај филтер бити додат је тренутно онемогућена.
+  Можете га додати, али неће имати ефекта све док не омогућите ову групу у поставкама Adblock Plus-а.">
+<!ENTITY nodes-tree.class.label "класа">
+<!ENTITY advanced.label "Напредни приказ">
 <!ENTITY attributes.tagname.label "Име ознаке:">
-<!ENTITY domain.none.label "Било који домен (није препоручљиво)">
-<!ENTITY dialog.title "Састави правило о сакривању делова">
-<!ENTITY basic.label "Једноставан изглед">
+<!ENTITY domain.none.label "Сваки домен (не препоручује се)">
+<!ENTITY dialog.title "Састављање правила о сакривању елемената">
+<!ENTITY basic.label "Основни приказ">
 <!ENTITY attributes.label "Потребне особине">
-<!ENTITY attributes.firstchild.label "Први наследник">
+<!ENTITY attributes.firstchild.label "Прва подређена ставка">
 <!ENTITY attributes.custom.label "Прилагођени CSS:">
 <!ENTITY nodes-tree.node.label "Чвор">

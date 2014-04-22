@@ -1,15 +1,19 @@
 <!ENTITY preview.label "Parashikim">
 <!ENTITY accept.label "Shto rregull filtri">
-<!ENTITY attributes.lastchild.label "Fëmija i fundit">
+<!ENTITY attributes.lastchild.label "Pjella e fundit">
 <!ENTITY expression.label "Rregull filtri">
 <!ENTITY domain.label "Lidhe tek domejni">
-<!ENTITY nodes-tree.class.label "klasa">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "Grupi Filtri &quot;?1?&quot; se ky filtër do të shtohet në është i aktivizuar i paaftë.
+Ju ende mund të shtoni filter por kjo nuk do të zbatohet nëse ju përshtatni grupin filtrin
+në preferencat AdBlock Plus.">
+<!ENTITY nodes-tree.class.label "klasë">
 <!ENTITY advanced.label "Pamje e përparuar">
 <!ENTITY attributes.tagname.label "Emri etiketues:">
 <!ENTITY domain.none.label "Çdo domejn (nuk rekomandohet)">
 <!ENTITY dialog.title "Harto rregull për fshehje elementi">
-<!ENTITY basic.label "Pamje kryesore">
-<!ENTITY attributes.label "Kërko atribute">
-<!ENTITY attributes.firstchild.label "Fëmija i parë">
-<!ENTITY attributes.custom.label "CSS me porosi:">
+<!ENTITY basic.label "Pamje themelor">
+<!ENTITY attributes.label "Kërko atributet">
+<!ENTITY attributes.firstchild.label "Pjella e parë">
+<!ENTITY attributes.custom.label "CSS  e personalizuar:">
 <!ENTITY nodes-tree.node.label "Nyje">

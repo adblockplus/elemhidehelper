@@ -4,6 +4,8 @@
 <!ENTITY expression.label "Iragazki araua">
 <!ENTITY domain.label "Batu domeinu batera">
 <!ENTITY nodes-tree.id.label "id-a">
+<!ENTITY groupDisabled.warning "Iragazki hau &quot;?1?&quot; iragazki taldera gehituko da, baina talde hau desgaituta dago.
+Iragazkia gehitu dezakezu oraindik ere, baina ez du eraginik izango iragazki taldea gaitu ezean Adblock Plus hobespenetan.">
 <!ENTITY nodes-tree.class.label "klasea">
 <!ENTITY advanced.label "Ikuspegi hedatua">
 <!ENTITY attributes.tagname.label "Etiketa izena:">
@@ -12,5 +14,5 @@
 <!ENTITY basic.label "Ikuspegi soila">
 <!ENTITY attributes.label "Beharrezko atributua">
 <!ENTITY attributes.firstchild.label "Lehen kumea">
-<!ENTITY attributes.custom.label "CSS pertsonlizatua:">
+<!ENTITY attributes.custom.label "CSS pertsonalizatua:">
 <!ENTITY nodes-tree.node.label "Nodoa">

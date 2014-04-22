@@ -1,17 +1,17 @@
 <!ENTITY preview.label "プレビュー">
-<!ENTITY accept.label "要素非表示ルールを追加">
-<!ENTITY attributes.lastchild.label "Last child">
-<!ENTITY expression.label "要素非表示ルール">
-<!ENTITY domain.label "ドメイン制限">
+<!ENTITY accept.label "要素の非表示フィルターを追加">
+<!ENTITY attributes.lastchild.label "最後の子要素">
+<!ENTITY expression.label "要素の非表示フィルター">
+<!ENTITY domain.label "対象にするドメイン">
 <!ENTITY nodes-tree.id.label "id">
-<!ENTITY groupDisabled.warning "追加先のフィルタグループ &quot;?1?&quot; は現在無効なので、Adblock Plus の設定でフィルタグループを再度有効にするまで作成したフィルタは適用されません。">
+<!ENTITY groupDisabled.warning "追加先のフィルターグループ &amp;quot;?1?&amp;quot; は現在無効化されています。このフィルターは追加されますが、適用するには Adblock Plus の設定でフィルターグループを有効にしてください。">
 <!ENTITY nodes-tree.class.label "class">
 <!ENTITY advanced.label "詳細表示">
-<!ENTITY attributes.tagname.label "タグ名:">
+<!ENTITY attributes.tagname.label "タグ:">
 <!ENTITY domain.none.label "ドメイン制限なし (非推奨)">
-<!ENTITY dialog.title "要素非表示ルールを作成">
-<!ENTITY basic.label "基本表示">
-<!ENTITY attributes.label "属性条件">
-<!ENTITY attributes.firstchild.label "First child">
+<!ENTITY dialog.title "要素の非表示フィルターを作成">
+<!ENTITY basic.label "標準設定">
+<!ENTITY attributes.label "非表示にする条件">
+<!ENTITY attributes.firstchild.label "最初の子要素">
 <!ENTITY attributes.custom.label "自作 CSS:">
 <!ENTITY nodes-tree.node.label "ノード">

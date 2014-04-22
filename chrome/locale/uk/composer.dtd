@@ -3,14 +3,15 @@
 <!ENTITY attributes.lastchild.label "Останній нащадок">
 <!ENTITY expression.label "Правило фільтрування">
 <!ENTITY domain.label "Прив’язати до домену">
+<!ENTITY nodes-tree.id.label "iдентифiкатор">
 <!ENTITY groupDisabled.warning "Група фільтрів «?1?», до якої буде додано цей фільтр, наразі вимкнена. Ви все одно можете додати фільтр, але він не буде застосований доки ви не увімкнете цю групу фільтрів у налаштуваннях Adblock Plus.">
 <!ENTITY nodes-tree.class.label "клас">
-<!ENTITY advanced.label "Складний вигляд">
+<!ENTITY advanced.label "Розширений вигляд">
 <!ENTITY attributes.tagname.label "Ім’я теґу:">
 <!ENTITY domain.none.label "Будь-який домен (не рекомендовано)">
 <!ENTITY dialog.title "Додати правило фільтрування Adblock Plus">
 <!ENTITY basic.label "Простий вигляд">
-<!ENTITY attributes.label "Вимагає атрибутів">
+<!ENTITY attributes.label "Необхiднi атрибути">
 <!ENTITY attributes.firstchild.label "Перший нащадок">
 <!ENTITY attributes.custom.label "Власний CSS:">
 <!ENTITY nodes-tree.node.label "Вузол">

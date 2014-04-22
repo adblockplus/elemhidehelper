@@ -3,6 +3,10 @@
 <!ENTITY attributes.lastchild.label "Viimane laps">
 <!ENTITY expression.label "Filtri reegel">
 <!ENTITY domain.label "Seo domeeniga">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "Filtrite grupp &quot;?1?&quot;, kuhu see filter lisatakse on praegu keelatud.
+  Sa võid küll filtri lisada, kuid seda ei rakendata enne, kui see filtrite grupp Adblock Plus
+  sätetes on lubatud.">
 <!ENTITY nodes-tree.class.label "klass">
 <!ENTITY advanced.label "Arenenud vaade">
 <!ENTITY attributes.tagname.label "Märksõna nimi:">
