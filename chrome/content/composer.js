@@ -110,21 +110,18 @@ function createPropertyProxy(obj, orig, key) {
   }
 }
 
-var atomService = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
-var selectedAtom = atomService.getAtom("selected-false");
-var anchorAtom = atomService.getAtom("anchor");
-
-function TreeView_getRowProperties(row, properties) {
-  if (!this.selection.isSelected(row))
-    properties.AppendElement(selectedAtom);
+function TreeView_getRowProperties(row) {
+  let properties = "selected-" + this.selection.isSelected(row);
 
   var item = this.getItemAtIndex(row);
   if (item && (item.nodeData.expression != "*" || item.nodeData == nodeData))
-    properties.AppendElement(anchorAtom);
+    properties += " anchor";
+
+  return properties;
 }
 
-function TreeView_getCellProperties(row, col, properties) {
-  this.getRowProperties(row, properties);
+function TreeView_getCellProperties(row, col) {
+  this.getRowProperties(row);
 }
 
 /*********************
