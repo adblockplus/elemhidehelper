@@ -1,7 +1,7 @@
 <!ENTITY preview.label "Aperçu">
-<!ENTITY accept.label "Ajouter le filtre">
+<!ENTITY accept.label "Ajouter la règle de filtrage">
 <!ENTITY attributes.lastchild.label "Dernier élément enfant">
-<!ENTITY expression.label "Filtre">
+<!ENTITY expression.label "Règle de filtrage">
 <!ENTITY domain.label "Associé au domaine">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY groupDisabled.warning "Le groupe de filtres &quot;?1?&quot; auquel ce filtre sera ajouté est actuellement désactivé. Vous pouvez cependant l'ajouter mais il ne sera pas appliqué tant que vous n'aurez pas activé le groupe de filtres  dans les préférences d'Adblock Plus.">
@@ -9,7 +9,7 @@
 <!ENTITY advanced.label "Affichage avancé">
 <!ENTITY attributes.tagname.label "Nom de la balise :">
 <!ENTITY domain.none.label "Tout domaine (non recommandé)">
-<!ENTITY dialog.title "Création de filtres pour masquer des éléments">
+<!ENTITY dialog.title "Création de règles de filtrage">
 <!ENTITY basic.label "Affichage basique">
 <!ENTITY attributes.label "Attributs requis">
 <!ENTITY attributes.firstchild.label "Premier élément enfant">
