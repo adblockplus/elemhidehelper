@@ -8,16 +8,16 @@ author=Wladimir Palant
 1=Rob Brown
 
 [homepage]
-default=http://adblockplus.org/elemhidehelper
-de=http://adblockplus.org/de/elemhidehelper
-en=http://adblockplus.org/en/elemhidehelper
-es=http://adblockplus.org/es/elemhidehelper
-fr=http://adblockplus.org/fr/elemhidehelper
-he=http://adblockplus.org/he/elemhidehelper
-ko=http://adblockplus.org/ko/elemhidehelper
-ru=http://adblockplus.org/ru/elemhidehelper
-zh-CN=http://adblockplus.org/zh_CN/elemhidehelper
-zh-TW=http://adblockplus.org/zh_TW/elemhidehelper
+default=https://adblockplus.org/elemhidehelper
+de=https://adblockplus.org/de/elemhidehelper
+en=https://adblockplus.org/en/elemhidehelper
+es=https://adblockplus.org/es/elemhidehelper
+fr=https://adblockplus.org/fr/elemhidehelper
+he=https://adblockplus.org/he/elemhidehelper
+ko=https://adblockplus.org/ko/elemhidehelper
+ru=https://adblockplus.org/ru/elemhidehelper
+zh-CN=https://adblockplus.org/zh_CN/elemhidehelper
+zh-TW=https://adblockplus.org/zh_TW/elemhidehelper
 
 [compat]
 firefox=22.0/37.0
