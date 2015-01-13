@@ -4,8 +4,8 @@
 <!ENTITY expression.label "Süzme kuralı">
 <!ENTITY domain.label "Alan adına bağlama">
 <!ENTITY nodes-tree.id.label "id">
-<!ENTITY groupDisabled.warning "Bu süzgecin ekleneceğin &quot;?1?&quot; süzgeç grubu şu an devre dışı. Yine de süzgeci ekleyebilirsiniz, ancak Adblock Plus tercihlerinden bu süzgeç grubunu etkinleştirmedikçe uygulanmayacak.">
-<!ENTITY nodes-tree.class.label "class">
+<!ENTITY groupDisabled.warning "Bu süzgecin ekleneceği &quot;?1?&quot; süzgeç grubu şu anda devre dışı. Yine de süzgeci ekleyebilirsiniz, ancak Adblock Plus tercihlerinden bu süzgeç grubunu etkinleştirmedikçe aktif olmayacaktır.">
+<!ENTITY nodes-tree.class.label "sınıf">
 <!ENTITY advanced.label "Gelişmiş görünüm">
 <!ENTITY attributes.tagname.label "Etiket adı:">
 <!ENTITY domain.none.label "Herhangi bir alan adı (önerilmez)">
@@ -13,5 +13,5 @@
 <!ENTITY basic.label "Temel görünüm">
 <!ENTITY attributes.label "Nitelik gereklilikleri">
 <!ENTITY attributes.firstchild.label "İlk çocuk">
-<!ENTITY attributes.custom.label "Özel CSS:">
+<!ENTITY attributes.custom.label "Kendi tanımladığınız CSS:">
 <!ENTITY nodes-tree.node.label "Düğüm">

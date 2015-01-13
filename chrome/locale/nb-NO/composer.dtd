@@ -1,9 +1,19 @@
 <!ENTITY preview.label "Forhåndsvisning">
+<!ENTITY accept.label "Legg til regel for å skule elementer">
+<!ENTITY attributes.lastchild.label "Siste barn">
+<!ENTITY expression.label "Regel for å skjule elementer">
 <!ENTITY domain.label "Knytt til domene">
 <!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "Filtergruppen &quot;?1?&quot; som dette filteret vil bli lagt til er deaktivert.
+  Du kan likevel legge til filteret, men det vil ikke bli brukt med mindre du aktiverer filtergruppen 
+  i valgpanelet til Adblock Plus.">
 <!ENTITY nodes-tree.class.label "klasse">
-<!ENTITY domain.none.label "Hvilket som helst domene (ikke anbefalt)">
 <!ENTITY advanced.label "Avansert visning">
+<!ENTITY attributes.tagname.label "Merkelappnavn:">
+<!ENTITY domain.none.label "Hvilket som helst domene (ikke anbefalt)">
+<!ENTITY dialog.title "Lag regel for å skjule elementer">
 <!ENTITY basic.label "Grunnleggende visning">
+<!ENTITY attributes.label "Krev attributter">
+<!ENTITY attributes.firstchild.label "Første barn">
 <!ENTITY attributes.custom.label "Egendefinert CSS:">
 <!ENTITY nodes-tree.node.label "Node">

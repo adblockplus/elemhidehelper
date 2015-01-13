@@ -1,7 +1,7 @@
 <!ENTITY preview.label "预览">
 <!ENTITY accept.label "添加规则">
 <!ENTITY attributes.lastchild.label "最后的子节点">
-<!ENTITY expression.label "规则">
+<!ENTITY expression.label "原始规则">
 <!ENTITY domain.label "规则应用到">
 <!ENTITY nodes-tree.id.label "id">
 <!ENTITY groupDisabled.warning "规则将要添加到的组 &quot;?1?&quot; 当前是禁用的, 你仍可继续添加, 但只有在 Adblock Plus选项中启用后, 规则才会生效.">

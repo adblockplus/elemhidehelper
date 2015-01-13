@@ -4,9 +4,8 @@
 <!ENTITY expression.label "Rregull filtri">
 <!ENTITY domain.label "Lidhe tek domejni">
 <!ENTITY nodes-tree.id.label "id">
-<!ENTITY groupDisabled.warning "Grupi Filtri &quot;?1?&quot; se ky filtër do të shtohet në është i aktivizuar i paaftë.
-Ju ende mund të shtoni filter por kjo nuk do të zbatohet nëse ju përshtatni grupin filtrin
-në preferencat AdBlock Plus.">
+<!ENTITY groupDisabled.warning "Grupi Filtri &quot;?1?&quot; se ky filtër do të shtohet në është i aktivizuar i paaftë.	
+Ju ende mund të shtoni filter por kjo nuk do të zbatohet nëse ju përshtatni grupin filtrin në preferencat AdBlock Plus.">
 <!ENTITY nodes-tree.class.label "klasë">
 <!ENTITY advanced.label "Pamje e përparuar">
 <!ENTITY attributes.tagname.label "Emri etiketues:">

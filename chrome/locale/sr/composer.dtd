@@ -12,7 +12,7 @@
 <!ENTITY domain.none.label "Сваки домен (не препоручује се)">
 <!ENTITY dialog.title "Састављање правила о сакривању елемената">
 <!ENTITY basic.label "Основни приказ">
-<!ENTITY attributes.label "Потребне особине">
+<!ENTITY attributes.label "Потребни атрибути">
 <!ENTITY attributes.firstchild.label "Прва подређена ставка">
 <!ENTITY attributes.custom.label "Прилагођени CSS:">
 <!ENTITY nodes-tree.node.label "Чвор">

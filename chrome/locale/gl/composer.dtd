@@ -3,6 +3,8 @@
 <!ENTITY attributes.lastchild.label "Último fillo">
 <!ENTITY expression.label "Regra de filtro">
 <!ENTITY domain.label "Obrigar a dominio">
+<!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "O grupo de filtros &quot;?1?&quot; ao que se engadirá este filtro está desactivado. Podes, aínda así, engadir o filtro, mais non se aplicará a menos que actives o grupo de filtros na configuración de Adblock Plus.">
 <!ENTITY nodes-tree.class.label "clase">
 <!ENTITY advanced.label "Vista avanzada">
 <!ENTITY attributes.tagname.label "Nome da etiqueta:">
