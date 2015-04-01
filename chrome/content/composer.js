@@ -101,11 +101,10 @@ function createPropertyProxy(obj, orig, key) {
     };
   }
   else {
-    obj.__defineGetter__(key, function() {
-      return orig[key];
-    });
-    obj.__defineSetter__(key, function(value) {
-      orig[key] = value;
+    Object.defineProperty(obj, key, {
+      get: () => orig[key],
+      set: value => { orig[key] = value; },
+      enumerable: true
     });
   }
 }
@@ -249,12 +248,9 @@ function updateExpression()
             expression += "#" + escapeName(attr.selected).replace(/^([^a-zA-Z\\])/, escapeChar).replace(/\\(\s)$/, escapeChar);
           else if (attr.name == "class" && /\S/.test(attr.selected))
           {
-            let knownClasses = {};
-            for each (let cls in attr.value.split(/\s+/))
-              knownClasses[cls] = true;
-
-            let classes = attr.selected.split(/\s+/).filter(function(cls) cls != "");
-            if (classes.every(function(cls) knownClasses.hasOwnProperty(cls)))
+            let knownClasses = new Set(attr.value.split(/\s+/));
+            let classes = attr.selected.split(/\s+/).filter(cls => cls != "");
+            if (classes.every(cls => knownClasses.has(cls)))
               expression += "." + classes.map(escapeName).join(".");
             else
               useFallback = true;
