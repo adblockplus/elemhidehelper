@@ -1,0 +1,8 @@
+{
+  "defaults": {
+    "selectelement_key": "Accel Shift K, Accel Shift S, Accel Shift F3",
+    "showhelp": true,
+    "acceptlocalfiles": false,
+    "composer_defaultDomain": 3
+  }
+}
