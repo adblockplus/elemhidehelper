@@ -19,51 +19,6 @@ let abpURL = Cc["@adblockplus.org/abp/public;1"].getService(Ci.nsIURI);
 Cu.import(abpURL.spec);
 
 /*******************
- * NodeData object *
- *******************/
-
-function NodeData(node, parentNode) {
-  this.tagName = {value: node.tagName, checked: false};
-
-  if (typeof parentNode == "undefined")
-    parentNode = (node.parentNode && node.parentNode.nodeType == node.ELEMENT_NODE ? new NodeData(node.parentNode) : null);
-  this.parentNode = parentNode;
-
-  var prevSibling = node.previousSibling;
-  while (prevSibling && prevSibling.nodeType != node.ELEMENT_NODE)
-    prevSibling = prevSibling.previousSibling;
-  this.prevSibling = (prevSibling ? new NodeData(prevSibling, this.parentNode) : null);
-
-  if (parentNode && !prevSibling)
-    this.firstChild = {checked: false};
-
-  var nextSibling = node.nextSibling;
-  while (nextSibling && nextSibling.nodeType != node.ELEMENT_NODE)
-    nextSibling = nextSibling.nextSibling;
-  if (parentNode && !nextSibling)
-    this.lastChild = {checked: false};
-
-  this.attributes = [];
-  for (var i = 0; i < node.attributes.length; i++) {
-    var attribute = node.attributes[i];
-    var data = {name: attribute.name, value: attribute.value, selected: attribute.value, checked: false};
-    if (data.name == "id" || data.name == "class")
-      this.attributes.unshift(data);
-    else
-      this.attributes.push(data);
-  }
-
-  if (this.attributes.length >= 2 && this.attributes[1].name == "id") {
-    // Make sure ID attribute comes first
-    var tmp = this.attributes[1];
-    this.attributes[1] = this.attributes[0];
-    this.attributes[0] = tmp;
-  }
-
-  this.customCSS = {selected: "", checked: false};
-}
-
-/*******************
  * TreeView object *
  *******************/
 
@@ -127,10 +82,10 @@ function TreeView_getCellProperties(row, col) {
  * General functions *
  *********************/
 
-function init() {
-  var element = window.arguments[0];
-  doc = element.ownerDocument;
-  var wnd = doc.defaultView;
+function init()
+{
+  nodeData = window.arguments[0];
+  let host = window.arguments[1];
 
   // Check whether element hiding group is disabled
   let subscription = AdblockPlus.getSubscription("~eh~");
@@ -142,7 +97,6 @@ function init() {
     warning.hidden = false;
   }
 
-  nodeData = new NodeData(element);
   nodeData.tagName.checked = true;
   if (nodeData.attributes.length > 0)
   {
@@ -169,7 +123,6 @@ function init() {
     }
   }
 
-  let domain = wnd.location.hostname;
   let selectedDomain;
   switch (Prefs.composer_defaultDomain)
   {
@@ -181,7 +134,7 @@ function init() {
       {
         // EffectiveTLDService will throw for IP addresses, just go to the next case then
         let effectiveTLD = Cc["@mozilla.org/network/effective-tld-service;1"].getService(Ci.nsIEffectiveTLDService);
-        selectedDomain = effectiveTLD.getPublicSuffixFromHost(domain);
+        selectedDomain = effectiveTLD.getPublicSuffixFromHost(host);
         break;
       } catch (e) {}
     case 2:
@@ -189,17 +142,17 @@ function init() {
       {
         // EffectiveTLDService will throw for IP addresses, just go to the next case then
         let effectiveTLD = Cc["@mozilla.org/network/effective-tld-service;1"].getService(Ci.nsIEffectiveTLDService);
-        selectedDomain = effectiveTLD.getBaseDomainFromHost(domain);
+        selectedDomain = effectiveTLD.getBaseDomainFromHost(host);
         break;
       } catch (e) {}
     case 3:
-      selectedDomain = domain.replace(/^www\./, "");
+      selectedDomain = host.replace(/^www\./, "");
       break;
     default:
-      selectedDomain = domain;
+      selectedDomain = host;
       break;
   }
-  domainData = {value: domain, selected: selectedDomain};
+  domainData = {value: host, selected: selectedDomain};
 
   fillDomains(domainData);
   fillNodes(nodeData);
@@ -242,7 +195,7 @@ function updateExpression()
             op = "^=";
           else if (attr.value.substr(attr.value.length - attr.selected.length) == attr.selected)
             op = "$=";
-  
+
           let useFallback = false;
           if (attr.name == "id" && op == "=")
             expression += "#" + escapeName(attr.selected).replace(/^([^a-zA-Z\\])/, escapeChar).replace(/\\(\s)$/, escapeChar);
