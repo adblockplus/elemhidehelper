@@ -10,10 +10,11 @@
 
   let rand = Components.stack.filename.replace(/.*\?/, "");
   let module = "chrome://elemhidehelper/content/actor.jsm?" + rand;
-  let {shutdown, getNodeInfo} = Cu.import(module, {});
+  let {shutdown, getNodeInfo, togglePreview, forgetNode} = Cu.import(module, {});
 
   addMessageListener("ElemHideHelper:Shutdown", onShutdown);
   addMessageListener("ElemHideHelper:GetNodeInfo", onGetNodeInfo);
+  addMessageListener("ElemHideHelper:Preview", onTogglePreview);
 
   function onShutdown()
   {
@@ -21,11 +22,19 @@
     Cu.unload(module);
     removeMessageListener("ElemHideHelper:Shutdown", onShutdown);
     removeMessageListener("ElemHideHelper:GetNodeInfo", onGetNodeInfo);
+    removeMessageListener("ElemHideHelper:Preview", onTogglePreview);
   }
 
   function onGetNodeInfo(message)
   {
-    let info = getNodeInfo(message.objects.element);
-    message.objects.callback(info.nodeData, info.host);
+    let nodeInfo = getNodeInfo(message.objects.element);
+    message.objects.callback(JSON.stringify(nodeInfo));
+  }
+
+  function onTogglePreview(message)
+  {
+    togglePreview(message.data.nodeID, message.data.stylesheetData);
+    if (message.data.forgetNode)
+      forgetNode(message.data.nodeID);
   }
 })();

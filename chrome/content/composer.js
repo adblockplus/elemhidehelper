@@ -8,12 +8,12 @@ let {Prefs} = require("prefs");
 
 let domainData;
 let nodeData;
+let nodeID;
 let selectedNode = null;
 let advancedMode = false;
 let treeView = null;
 let stylesheetData;
 let previewStyle = null;
-let doc;
 
 let abpURL = Cc["@adblockplus.org/abp/public;1"].getService(Ci.nsIURI);
 Cu.import(abpURL.spec);
@@ -84,8 +84,8 @@ function TreeView_getCellProperties(row, col) {
 
 function init()
 {
-  nodeData = window.arguments[0];
-  let host = window.arguments[1];
+  let host;
+  ({host, nodeData, nodeID} = window.arguments[0]);
 
   // Check whether element hiding group is disabled
   let subscription = AdblockPlus.getSubscription("~eh~");
@@ -311,8 +311,8 @@ function updateExpression()
   if (tree.view && tree.view.selection)
     tree.treeBoxObject.invalidateRow(tree.view.selection.currentIndex);
 
-  if (previewStyle)
-    previewStyle.textContent = stylesheetData;
+  if (document.getElementById("preview").checked)
+    togglePreview(true);
 }
 
 function escapeChar(dummy, match)
@@ -491,29 +491,13 @@ function fillAttributes(nodeData)
   }
 }
 
-function togglePreview(preview) {
-  if (preview) {
-    if (!previewStyle || !previewStyle.parentNode) {
-      previewStyle = doc.createElementNS("http://www.w3.org/1999/xhtml", "style");
-      previewStyle.setAttribute("type", "text/css");
-      doc.documentElement.appendChild(previewStyle);
-    }
-    previewStyle.textContent = stylesheetData;
-  }
-  else {
-    try
-    {
-      if (previewStyle && previewStyle.parentNode)
-        previewStyle.parentNode.removeChild(previewStyle);
-    }
-    catch (e)
-    {
-      // if the window was closed (reloaded) we end up with dead object reference
-      // https://bugzilla.mozilla.org/show_bug.cgi?id=695480
-      // just ignore this case
-    }
-    previewStyle = null;
-  }
+function togglePreview(preview, forgetNode)
+{
+  Services.mm.broadcastAsyncMessage("ElemHideHelper:Preview", {
+    nodeID: nodeID,
+    stylesheetData: preview ? stylesheetData : null,
+    forgetNode: !!forgetNode
+  });
 }
 
 function changeDomain(node) {

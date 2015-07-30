@@ -12,10 +12,10 @@
 <dialog id="ehh-composer"
     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
     title="&dialog.title;"
-    onload="init()"
+    onload="init();"
     ondialogaccept="addExpression();"
     ondialogdisclosure="setAdvancedMode(!advancedMode);"
-    onunload="togglePreview(false);"
+    onunload="togglePreview(false, true);"
     buttons="accept,cancel,disclosure"
     width="600px"
     height="400px"
@@ -28,7 +28,7 @@
     windowtype="ehh:composer">
   <script type="application/x-javascript;version=1.7" src="common.js"/>
   <script type="application/x-javascript;version=1.7" src="composer.js"/>
-  
+
   <description id="groupDisabledWarning" hidden="true">&groupDisabled.warning;</description>
 
   <vbox id="expressionBox">
