@@ -4,13 +4,20 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-let EXPORTED_SYMBOLS = ["shutdown", "getNodeInfo"];
+let EXPORTED_SYMBOLS = ["shutdown", "getNodeInfo", "togglePreview",
+                        "forgetNode"];
 
 const Ci = Components.interfaces;
 const Cu = Components.utils;
 
 let {console} = Cu.import("resource://gre/modules/devtools/Console.jsm", {});
 let {DebuggerServer} = Cu.import("resource://gre/modules/devtools/dbg-server.jsm", {});
+let {Services} = Cu.import("resource://gre/modules/Services.jsm", {});
+
+let processID = Services.appinfo.processID;
+let maxNodeID = 0;
+let nodes = new Map();
+
 let name = "elemhidehelper";
 let actor = {
   constructorFun: Actor,
@@ -26,8 +33,19 @@ let shutdown = (function()
   return function()
   {
     if (!executed)
-      DebuggerServer.removeTabActor(actor);
-    executed = true;
+    {
+      executed = true;
+      try
+      {
+        DebuggerServer.removeTabActor(actor);
+      }
+      catch (e)
+      {
+        // The call above will throw in the content process despite succeeding,
+        // see https://bugzilla.mozilla.org/show_bug.cgi?id=1189780.
+        Cu.reportError(e);
+      }
+    }
   }
 })();
 
@@ -40,28 +58,31 @@ Actor.prototype = {
     nodeinfo: function(request, connection)
     {
       let nodeActor = connection.getActor(request.nodeActor);
-      if (!nodeActor || !nodeActor.rawNode ||
-          nodeActor.rawNode.nodeType != Ci.nsIDOMNode.ELEMENT_NODE)
-      {
-        return {};
-      }
-
-      return getNodeInfo(nodeActor.rawNode);
+      return getNodeInfo(nodeActor ? nodeActor.rawNode: null);
     }
   }
 };
 
 function getNodeInfo(node)
 {
-  return {
-    host: node.ownerDocument.defaultView.location.hostname,
-    nodeData: getNodeData(node)
-  };
+  let nodeData = getNodeData(node);
+  if (nodeData)
+  {
+    let nodeID = processID + "-" + (++maxNodeID);
+    nodes.set(nodeID, {document: node.ownerDocument, style: null});
+    return {
+      host: node.ownerDocument.defaultView.location.hostname,
+      nodeData: nodeData,
+      nodeID: nodeID
+    };
+  }
+
+  return {};
 }
 
 function getNodeData(node, parentNode)
 {
-  if (!node)
+  if (!node || node.nodeType != Ci.nsIDOMNode.ELEMENT_NODE)
     return null;
 
   let result = {};
@@ -107,4 +128,44 @@ function getNodeData(node, parentNode)
 
   result.customCSS = {selected: "", checked: false};
   return result;
+}
+
+function togglePreview(nodeID, stylesheetData)
+{
+  let context = nodes.get(nodeID);
+  if (!context)
+    return;
+
+  if (stylesheetData)
+  {
+    if (!context.style || !context.style.parentNode)
+    {
+      context.style = context.document.createElementNS(
+          "http://www.w3.org/1999/xhtml", "style");
+      context.style.setAttribute("type", "text/css");
+      context.document.documentElement.appendChild(context.style);
+    }
+    context.style.textContent = stylesheetData;
+  }
+  else
+  {
+    try
+    {
+      if (context.style && context.style.parentNode)
+        context.style.parentNode.removeChild(context.style);
+      context.style = null;
+    }
+    catch (e)
+    {
+      // If the window was closed (reloaded) we end up with a dead object
+      // reference (https://bugzilla.mozilla.org/show_bug.cgi?id=695480). Just
+      // forget this node then.
+      forgetNode(nodeID);
+    }
+  }
+}
+
+function forgetNode(nodeID)
+{
+  nodes.delete(nodeID);
 }
