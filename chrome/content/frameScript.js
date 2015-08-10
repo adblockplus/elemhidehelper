@@ -28,7 +28,8 @@
   function onGetNodeInfo(message)
   {
     let nodeInfo = getNodeInfo(message.objects.element);
-    message.objects.callback(JSON.stringify(nodeInfo));
+    nodeInfo.messageId = message.data;
+    sendAsyncMessage("ElemHideHelper:GetNodeInfo:Response", nodeInfo);
   }
 
   function onTogglePreview(message)
