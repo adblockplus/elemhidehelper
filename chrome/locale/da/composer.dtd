@@ -4,6 +4,9 @@
 <!ENTITY expression.label "Filterregel">
 <!ENTITY domain.label "Bind til domæne">
 <!ENTITY nodes-tree.id.label "id">
+<!ENTITY groupDisabled.warning "Filter gruppen &quot;?1?&quot; at dette filter vil blive tilføjet til deaktiverede filtre.
+  Du kan stadig tilføje filtret, men det vil ikke blive brugt med mindre du aktiverer filtergruppen
+  i Adblock Plus indstillinger.">
 <!ENTITY nodes-tree.class.label "klasse">
 <!ENTITY advanced.label "Avanceret visning">
 <!ENTITY attributes.tagname.label "Tag navn:">

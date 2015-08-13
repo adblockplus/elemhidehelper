@@ -1,17 +1,17 @@
 <!ENTITY preview.label "Преглед">
-<!ENTITY accept.label "Добавяне на правило за скриване">
+<!ENTITY accept.label "Добавяне на правило за филтриране">
 <!ENTITY attributes.lastchild.label "Последен наследник">
 <!ENTITY expression.label "Правило за филтриране">
-<!ENTITY domain.label "Свързване към домейн">
+<!ENTITY domain.label "Сдвояване с домейн">
 <!ENTITY nodes-tree.id.label "идентификатор">
-<!ENTITY groupDisabled.warning "Филтриращата група &quot;?1?&quot;, към която този филтър ще бъде добавен в момента е изключена. Може да добавите филтъра, но той няма да бъде приложен, докато групата не бъде включена от настройките на Adblock Plus.">
+<!ENTITY groupDisabled.warning "Филтриращата група &quot;?1?&quot;, към която този филтър ще бъде добавен в момента не е активна. Може да добавите филтъра, но той няма да бъде използван, докато групата не бъде включена от настройките на Adblock Plus.">
 <!ENTITY nodes-tree.class.label "клас">
 <!ENTITY advanced.label "Разширен изглед">
-<!ENTITY attributes.tagname.label "Име на етикет:">
+<!ENTITY attributes.tagname.label "Тип на елемнта:">
 <!ENTITY domain.none.label "Всеки домейн (не се препоръчва)">
 <!ENTITY dialog.title "Съставяне на правило за скриване на елемент">
 <!ENTITY basic.label "Основен изглед">
 <!ENTITY attributes.label "Изисква атрибути">
 <!ENTITY attributes.firstchild.label "Първи наследник">
 <!ENTITY attributes.custom.label "Потребителски CSS:">
-<!ENTITY nodes-tree.node.label "Възел">
+<!ENTITY nodes-tree.node.label "Елемент">

@@ -1,17 +1,17 @@
 <!ENTITY preview.label "Podgląd">
-<!ENTITY accept.label "Dodaj regułę filtru">
-<!ENTITY attributes.lastchild.label "ostatni potomek">
-<!ENTITY expression.label "Reguła filtru">
+<!ENTITY accept.label "Dodaj regułę ukrywania elementu">
+<!ENTITY attributes.lastchild.label "Ostatni potomek">
+<!ENTITY expression.label "Reguła ukrywania elementu">
 <!ENTITY domain.label "Przypisz do domeny">
-<!ENTITY nodes-tree.id.label "ID">
-<!ENTITY groupDisabled.warning "Grupa filtru „?1?”, do której ten filtr ma być dodany jest obecnie wyłączona. Możesz dodać do niej ten filtr, ale nie będzie on działał do czasu włączenia grupy w ustawieniach Adblock Plusa.">
+<!ENTITY nodes-tree.id.label "Identyfikator">
+<!ENTITY groupDisabled.warning "Grupa filtru „?1?”, do której ten filtr ma być dodany jest obecnie wyłączona.  Możesz dodać do niej ten filtr, ale nie będzie on działał do czasu włączenia grupy  w ustawieniach Adblocka Plus.">
 <!ENTITY nodes-tree.class.label "Klasa">
 <!ENTITY advanced.label "Widok zaawansowany">
-<!ENTITY attributes.tagname.label "nazwa znacznika -">
-<!ENTITY domain.none.label "wszystkie domeny (nie zalecane)">
-<!ENTITY dialog.title "Tworzenie reguł ukrywania elementów">
+<!ENTITY attributes.tagname.label "Nazwa znacznika:">
+<!ENTITY domain.none.label "dowolnej (nie zalecane)">
+<!ENTITY dialog.title "Tworzenie reguł ukrywania elementu">
 <!ENTITY basic.label "Widok podstawowy">
-<!ENTITY attributes.label "Atrybuty">
-<!ENTITY attributes.firstchild.label "pierwszy potomek">
-<!ENTITY attributes.custom.label "własny CSS">
+<!ENTITY attributes.label "Wymagają atrybuty">
+<!ENTITY attributes.firstchild.label "Pierwszy potomek">
+<!ENTITY attributes.custom.label "Własny kod CSS:">
 <!ENTITY nodes-tree.node.label "Węzeł">

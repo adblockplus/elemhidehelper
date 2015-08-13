@@ -1,16 +1,18 @@
-<!ENTITY preview.label "Pré-visualização">
-<!ENTITY accept.label "Adicionar regra de filtro">
+<!ENTITY preview.label "Pré-visualizar">
+<!ENTITY accept.label "Adicionar regra de ocultação de elemento">
 <!ENTITY attributes.lastchild.label "Último dependente">
-<!ENTITY expression.label "Regra de filtro">
+<!ENTITY expression.label "Regra de Ocultação de Elemento">
 <!ENTITY domain.label "Associar ao domínio">
-<!ENTITY nodes-tree.id.label "id">
-<!ENTITY groupDisabled.warning "O grupo de filtros &quot;?1?&quot; ao qual este filtro será adicionado está inativo. Pode adicionar o filtro mas este não será aplicado até que o grupo de filtros seja ativado nas preferências do Adblock Plus.">
+<!ENTITY nodes-tree.id.label "Id.">
+<!ENTITY groupDisabled.warning "O grupo de filtros &quot;?1?&quot; em que este filtro irá ser adicionado está desativado.
+  Ainda pode adicionar o filtro mas este não será aplicado até que ative o grupo de filtros
+  nas preferências do Adblock Plus.">
 <!ENTITY nodes-tree.class.label "classe">
-<!ENTITY advanced.label "Vista avançada">
-<!ENTITY attributes.tagname.label "Nome da etiqueta:">
+<!ENTITY advanced.label "Visualização Avançada">
+<!ENTITY attributes.tagname.label "Nome a atribuir:">
 <!ENTITY domain.none.label "Qualquer domínio (não recomendado)">
-<!ENTITY dialog.title "Criar regra para ocultar elementos">
-<!ENTITY basic.label "Vista básica">
+<!ENTITY dialog.title "Criar regra de ocultação de elementos">
+<!ENTITY basic.label "Visualização Básica">
 <!ENTITY attributes.label "Requer atributos">
 <!ENTITY attributes.firstchild.label "Primeiro dependente">
 <!ENTITY attributes.custom.label "CSS personalizado:">
