@@ -493,7 +493,9 @@ function fillAttributes(nodeData)
 
 function togglePreview(preview, forgetNode)
 {
-  Services.mm.broadcastAsyncMessage("ElemHideHelper:Preview", {
+  let messageManager = Cc["@mozilla.org/globalmessagemanager;1"]
+    .getService(Ci.nsIMessageBroadcaster);
+  messageManager.broadcastAsyncMessage("ElemHideHelper:Preview", {
     nodeID: nodeID,
     stylesheetData: preview ? stylesheetData : null,
     forgetNode: !!forgetNode
