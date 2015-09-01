@@ -1,4 +1,4 @@
-<!ENTITY preview.label "Предпросмотр">
+<!ENTITY preview.label "Предварительный просмотр">
 <!ENTITY accept.label "Добавить фильтр">
 <!ENTITY attributes.lastchild.label "Последний дочерний узел">
 <!ENTITY expression.label "Фильтр">
