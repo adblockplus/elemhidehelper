@@ -19,4 +19,7 @@ function require(module)
   return result.exports;
 }
 
-function E(id) document.getElementById(id);
+function E(id)
+{
+  return document.getElementById(id);
+}
