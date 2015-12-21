@@ -4,9 +4,6 @@
  * http://mozilla.org/MPL/2.0/.
  */
 
-let EXPORTED_SYMBOLS = ["shutdown", "getNodeInfo", "togglePreview",
-                        "forgetNode"];
-
 const Ci = Components.interfaces;
 const Cu = Components.utils;
 
@@ -25,29 +22,46 @@ let actor = {
   name: name
 };
 
+addMessageListener("ElemHideHelper:Shutdown", onShutdown);
+addMessageListener("ElemHideHelper:GetNodeInfo", onGetNodeInfo);
+addMessageListener("ElemHideHelper:Preview", onTogglePreview);
+
 DebuggerServer.addTabActor(actor, name);
 
-var shutdown = (function()
+function onShutdown()
 {
-  let executed = false;
-  return function()
+  removeMessageListener("ElemHideHelper:Shutdown", onShutdown);
+  removeMessageListener("ElemHideHelper:GetNodeInfo", onGetNodeInfo);
+  removeMessageListener("ElemHideHelper:Preview", onTogglePreview);
+
+  try
   {
-    if (!executed)
-    {
-      executed = true;
-      try
-      {
-        DebuggerServer.removeTabActor(actor);
-      }
-      catch (e)
-      {
-        // The call above will throw in the content process despite succeeding,
-        // see https://bugzilla.mozilla.org/show_bug.cgi?id=1189780.
-        Cu.reportError(e);
-      }
-    }
+    DebuggerServer.removeTabActor(actor);
   }
-})();
+  catch (e)
+  {
+    // The call above will throw in the content process despite succeeding,
+    // see https://bugzilla.mozilla.org/show_bug.cgi?id=1189780.
+    Cu.reportError(e);
+  }
+}
+
+function onGetNodeInfo(message)
+{
+  if (Cu.isCrossProcessWrapper(message.objects.element))
+    return;
+
+  let nodeInfo = getNodeInfo(message.objects.element);
+  nodeInfo.messageId = message.data;
+  sendAsyncMessage("ElemHideHelper:GetNodeInfo:Response", nodeInfo);
+}
+
+function onTogglePreview(message)
+{
+  togglePreview(message.data.nodeID, message.data.stylesheetData);
+  if (message.data.forgetNode)
+    forgetNode(message.data.nodeID);
+}
 
 function Actor(connection, tabActor)
 {
