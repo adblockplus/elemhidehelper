@@ -19,7 +19,15 @@
   function onShutdown()
   {
     shutdown();
-    Cu.unload(module);
+    try
+    {
+      Cu.unload(module);
+    }
+    catch (e)
+    {
+      Cu.reportError(e);
+    }
+
     removeMessageListener("ElemHideHelper:Shutdown", onShutdown);
     removeMessageListener("ElemHideHelper:GetNodeInfo", onGetNodeInfo);
     removeMessageListener("ElemHideHelper:Preview", onTogglePreview);

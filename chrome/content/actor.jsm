@@ -27,7 +27,7 @@ let actor = {
 
 DebuggerServer.addTabActor(actor, name);
 
-let shutdown = (function()
+var shutdown = (function()
 {
   let executed = false;
   return function()
