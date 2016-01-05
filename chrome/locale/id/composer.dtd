@@ -7,11 +7,11 @@
 <!ENTITY groupDisabled.warning "Penyaring grup &quot;?1?&quot; yang mana filter ini akan ditambahkan ke sedang dinonaktifkan. Anda masih dapat menambahkan penyaring namun itu tidak akan diterapkan kecuali Anda mengaktifkan penyaring grup di preferensi Adblock Plus.">
 <!ENTITY nodes-tree.class.label "kelas">
 <!ENTITY advanced.label "Tampilan lanjutan">
-<!ENTITY attributes.tagname.label "Nama tag:">
+<!ENTITY attributes.tagname.label "Label nama:">
 <!ENTITY domain.none.label "Domain apapun (tidak disarankan)">
 <!ENTITY dialog.title "Membuat aturan penyembunyian elemen">
 <!ENTITY basic.label "Tampilan dasar">
 <!ENTITY attributes.label "Memerlukan atribut">
 <!ENTITY attributes.firstchild.label "Anak pertama">
-<!ENTITY attributes.custom.label "Ubahsuaian CSS:">
+<!ENTITY attributes.custom.label "Sesuaikan CSS:">
 <!ENTITY nodes-tree.node.label "Titik">
