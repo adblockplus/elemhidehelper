@@ -10,7 +10,7 @@ let domainData;
 let nodeData;
 let nodeID;
 let selectedNode = null;
-let advancedMode = false;
+var advancedMode = false;
 let treeView = null;
 let stylesheetData;
 let previewStyle = null;
