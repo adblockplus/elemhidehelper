@@ -7,8 +7,29 @@
 const Ci = Components.interfaces;
 const Cu = Components.utils;
 
-let {console} = Cu.import("resource://gre/modules/devtools/Console.jsm", {});
-let {DebuggerServer} = Cu.import("resource://gre/modules/devtools/dbg-server.jsm", {});
+let console;
+try
+{
+  // Gecko 44+
+  ({console} = Cu.import("resource://gre/modules/Console.jsm", {}));
+}
+catch (e)
+{
+  ({console} = Cu.import("resource://gre/modules/devtools/Console.jsm", {}));
+}
+
+let DebuggerServer;
+try
+{
+  // Firefox 44+
+  let {require} = Cu.import("resource://devtools/shared/Loader.jsm", {});
+  ({DebuggerServer} = require("devtools/server/main"));
+}
+catch (e)
+{
+  ({DebuggerServer} = Cu.import("resource://gre/modules/devtools/dbg-server.jsm", {}));
+}
+
 let {Services} = Cu.import("resource://gre/modules/Services.jsm", {});
 
 let processID = Services.appinfo.processID;
