@@ -12,6 +12,24 @@
   -moz-image-region: rect(0px, 16px, 16px, 0px);
 }
 
+@media screen and (min-resolution: 1.5dppx)
+{
+  #ehh-inspector-toolbarbutton
+  {
+    list-style-image: url("chrome://adblockplus/skin/abp-status.png");
+    -moz-image-region: rect(0px, 24px, 24px, 0px);
+  }
+}
+
+@media screen and (min-resolution: 2dppx)
+{
+  #ehh-inspector-toolbarbutton
+  {
+    list-style-image: url("chrome://adblockplus/skin/abp-status-32.png");
+    -moz-image-region: rect(0px, 32px, 32px, 0px);
+  }
+}
+
 #ehh-inspector-toolbarbutton > image
 {
   filter: none;
