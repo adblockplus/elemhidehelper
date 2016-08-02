@@ -1,7 +1,7 @@
 [general]
 id=elemhidehelper@adblockplus.org
 basename=elemhidehelper
-version=1.3.8
+version=1.3.9
 author=Wladimir Palant
 needMultiprocessShims=false
 
