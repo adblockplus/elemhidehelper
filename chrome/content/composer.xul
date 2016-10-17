@@ -15,7 +15,6 @@
     onload="init();"
     ondialogaccept="addExpression();"
     ondialogdisclosure="setAdvancedMode(!advancedMode);"
-    onunload="togglePreview(false, true);"
     buttons="accept,cancel,disclosure"
     width="600px"
     height="400px"

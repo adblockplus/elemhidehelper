@@ -12,8 +12,8 @@ let nodeID;
 let selectedNode = null;
 var advancedMode = false;
 let treeView = null;
+let ruleAdded = false;
 let stylesheetData;
-let previewStyle = null;
 
 let abpURL = Cc["@adblockplus.org/abp/public;1"].getService(Ci.nsIURI);
 Cu.import(abpURL.spec);
@@ -571,6 +571,10 @@ function updateNodeSelection() {
 function addExpression()
 {
   AdblockPlus.addPatterns([document.getElementById("expression").value]);
-
-  togglePreview(false);
+  ruleAdded = true;
 }
+
+window.addEventListener("unload", () =>
+{
+  togglePreview(ruleAdded, true);
+});
