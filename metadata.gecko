@@ -3,7 +3,6 @@ id=elemhidehelper@adblockplus.org
 basename=elemhidehelper
 version=1.3.10
 author=Wladimir Palant
-needMultiprocessShims=false
 
 [contributors]
 1=Rob Brown
