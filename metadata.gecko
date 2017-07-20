@@ -21,6 +21,6 @@ zh-TW=https://adblockplus.org/zh_TW/elemhidehelper
 
 [compat]
 firefox=38.0/*
-thunderbird=38.0/54.0
+thunderbird=38.0/57.0
 seamonkey=2.35/*
 conkeror=0.1/*
